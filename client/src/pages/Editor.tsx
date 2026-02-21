@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
 import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload } from 'lucide-react';
@@ -198,19 +198,44 @@ export default function Editor() {
 }
 
 function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpdate: (g: SynonymGroup) => void, onDelete: () => void }) {
+  const [localWords, setLocalWords] = useState<string[]>(group.words);
+  const [localLang, setLocalLang] = useState(group.language);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setLocalWords(group.words);
+    setLocalLang(group.language);
+  }, [group.id]);
+
+  const saveDebounced = useCallback((updated: SynonymGroup) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      onUpdate(updated);
+    }, 600);
+  }, [onUpdate]);
+
   const handleWordChange = (idx: number, val: string) => {
-    const newWords = [...group.words];
+    const newWords = [...localWords];
     newWords[idx] = val;
-    onUpdate({ ...group, words: newWords });
+    setLocalWords(newWords);
+    saveDebounced({ ...group, language: localLang, words: newWords });
   };
   
   const removeWord = (idx: number) => {
-    const newWords = group.words.filter((_, i) => i !== idx);
-    onUpdate({ ...group, words: newWords });
+    const newWords = localWords.filter((_, i) => i !== idx);
+    setLocalWords(newWords);
+    onUpdate({ ...group, language: localLang, words: newWords });
   };
 
   const addWord = () => {
-    onUpdate({ ...group, words: [...group.words, ''] });
+    const newWords = [...localWords, ''];
+    setLocalWords(newWords);
+    onUpdate({ ...group, language: localLang, words: newWords });
+  };
+
+  const handleLangChange = (val: string) => {
+    setLocalLang(val);
+    onUpdate({ ...group, language: val, words: localWords });
   };
 
   return (
@@ -218,8 +243,8 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-4">
           <Select 
-            value={group.language} 
-            onValueChange={(val: string) => onUpdate({ ...group, language: val })}
+            value={localLang} 
+            onValueChange={handleLangChange}
           >
             <SelectTrigger className="w-[120px] bg-zinc-950 border-zinc-800 text-zinc-300">
               <SelectValue />
@@ -240,7 +265,7 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
       </div>
 
       <div className="space-y-3">
-        {group.words.map((word, idx) => (
+        {localWords.map((word, idx) => (
           <div key={idx} className="flex gap-3">
             <Input 
               value={word} 
@@ -248,7 +273,7 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
               placeholder="Enter an expression..."
               className="bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white"
             />
-            <Button variant="ghost" size="icon" onClick={() => removeWord(idx)} disabled={group.words.length === 1} className="text-zinc-500 hover:text-white">
+            <Button variant="ghost" size="icon" onClick={() => removeWord(idx)} disabled={localWords.length === 1} className="text-zinc-500 hover:text-white">
               <Trash2 className="w-4 h-4" />
             </Button>
           </div>
