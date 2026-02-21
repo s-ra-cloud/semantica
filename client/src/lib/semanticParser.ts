@@ -90,9 +90,9 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     'thing': ['something', 'anything', 'nothing', 'everything'],
     'things': ['somethings'],
     'objects': ['combination of objects', 'combinations of objects'],
-    'forme': ['forme de l\'objet'],
+    'forme': ['forme de l\'objet', 'sa forme'],
     'objet': ['forme de l\'objet'],
-    'form': ['form of the object'],
+    'form': ['form of the object', 'its form'],
     'object': ['form of the object'],
   };
 
