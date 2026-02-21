@@ -68,7 +68,7 @@ function splitMathBlocks(text: string): TextChunk[] {
   return chunks;
 }
 
-function parsePlainText(text: string, offset: number, semanticGroups: SynonymGroup[], logicGroups: SynonymGroup[]): Segment[] {
+function parsePlainText(text: string, offset: number, semanticGroups: SynonymGroup[], logicGroups: SynonymGroup[], excludedWords?: string[]): Segment[] {
   const matches: { index: number; length: number; word: string; group: SynonymGroup; matchType: 'semantic' | 'logic' }[] = [];
 
   logicGroups.forEach(group => {
@@ -113,6 +113,7 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
           const isPartOfCompound = exclusions.some(compound => surrounding.includes(compound));
           if (isPartOfCompound) continue;
         }
+        if (excludedWords && excludedWords.some(ew => ew.toLowerCase() === m[0].toLowerCase())) continue;
         matches.push({ index: m.index, length: m[0].length, word: m[0], group, matchType: 'semantic' });
       }
     });
@@ -171,18 +172,25 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
   return segments;
 }
 
-export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
+const propositionExclusions: Record<string, string[]> = {
+  'fr:2.0122': ['forme'],
+};
+
+export function parseSemantic(text: string, groups: SynonymGroup[], propositionId?: string, language?: string): Segment[] {
   const normalizedText = text.replace(/\u00A0/g, ' ');
   const semanticGroups = groups.filter(g => g.type === 'semantic');
   const logicGroups = groups.filter(g => g.type === 'logic');
   const mathLogicGroups = groups.filter(g => g.type === 'math-logic');
+
+  const excludeKey = propositionId && language ? `${language}:${propositionId}` : undefined;
+  const excludedWords = excludeKey ? propositionExclusions[excludeKey] : undefined;
 
   const chunks = splitMathBlocks(normalizedText);
   const segments: Segment[] = [];
 
   for (const chunk of chunks) {
     if (chunk.kind === 'plain') {
-      segments.push(...parsePlainText(chunk.content, chunk.start, semanticGroups, logicGroups));
+      segments.push(...parsePlainText(chunk.content, chunk.start, semanticGroups, logicGroups, excludedWords));
     } else {
       const matchedGroup = mathLogicGroups.find(g => g.words[0] === chunk.content);
       if (matchedGroup) {

@@ -112,9 +112,9 @@ export default function Home() {
     
     return rawData.map(prop => ({
       ...prop,
-      segments: parseSemantic(prop.content, activeGroups)
+      segments: parseSemantic(prop.content, activeGroups, prop.id, language)
     }));
-  }, [rawData, activeGroups]);
+  }, [rawData, activeGroups, language]);
 
   const toggleCollapse = (id: string) => {
     setCollapsed(prev => {
