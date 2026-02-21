@@ -83,9 +83,9 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
   });
 
   const compoundExclusions: Record<string, string[]> = {
-    'chose': ['quelque chose', 'état de choses', 'états de choses'],
+    'chose': ['quelque chose', 'état de chose', 'états de chose', 'état de choses', 'états de choses'],
     'choses': ['quelques choses', 'état de choses', 'états de choses'],
-    'de chose': ['état de choses', 'états de choses'],
+    'de chose': ['état de chose', 'états de chose', 'état de choses', 'états de choses'],
     'de choses': ['état de choses', 'états de choses'],
     'thing': ['something', 'anything', 'nothing', 'everything'],
     'things': ['somethings'],
