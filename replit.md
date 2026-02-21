@@ -28,9 +28,9 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend (Express + Node.js)
 - **Framework**: Express.js running on Node.js with TypeScript (via tsx)
-- **API**: RESTful CRUD endpoints under `/api/synonym-groups` for managing synonym/expression groups
+- **API**: RESTful CRUD endpoints under `/api/synonym-groups` for managing synonym/expression groups; `/api/feedback` for user feedback submissions
 - **Database**: PostgreSQL via `pg` driver, with Drizzle ORM for query building and schema management
-- **Schema**: Single table `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en' or 'fr'), `words` (text array), `type` (text, 'semantic' or 'logic')
+- **Schema**: Two tables — `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en' or 'fr'), `words` (text array), `type` (text, 'semantic' or 'logic'); `feedback` with columns: `id` (serial PK), `proposition_id` (text), `language` (text), `message` (text), `created_at` (timestamp)
 - **Storage Pattern**: Interface-based storage layer (`IStorage`) implemented by `DatabaseStorage` class
 
 ### Data Flow

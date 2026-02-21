@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertSynonymGroupSchema } from "@shared/schema";
+import { insertSynonymGroupSchema, insertFeedbackSchema } from "@shared/schema";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -41,6 +41,20 @@ export async function registerRoutes(
     const deleted = await storage.deleteSynonymGroup(id);
     if (!deleted) return res.status(404).json({ message: "Not found" });
     res.status(204).send();
+  });
+
+  app.get("/api/feedback", async (_req, res) => {
+    const entries = await storage.getFeedback();
+    res.json(entries);
+  });
+
+  app.post("/api/feedback", async (req, res) => {
+    const parsed = insertFeedbackSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: parsed.error.message });
+    }
+    const entry = await storage.createFeedback(parsed.data);
+    res.status(201).json(entry);
   });
 
   return httpServer;

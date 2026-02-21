@@ -1,6 +1,6 @@
-import { type SynonymGroup, type InsertSynonymGroup, synonymGroups } from "@shared/schema";
+import { type SynonymGroup, type InsertSynonymGroup, synonymGroups, type Feedback, type InsertFeedback, feedback } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getSynonymGroups(): Promise<SynonymGroup[]>;
@@ -8,6 +8,8 @@ export interface IStorage {
   createSynonymGroup(group: InsertSynonymGroup): Promise<SynonymGroup>;
   updateSynonymGroup(id: number, group: InsertSynonymGroup): Promise<SynonymGroup | undefined>;
   deleteSynonymGroup(id: number): Promise<boolean>;
+  getFeedback(): Promise<Feedback[]>;
+  createFeedback(entry: InsertFeedback): Promise<Feedback>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -33,6 +35,15 @@ export class DatabaseStorage implements IStorage {
   async deleteSynonymGroup(id: number): Promise<boolean> {
     const [deleted] = await db.delete(synonymGroups).where(eq(synonymGroups.id, id)).returning();
     return !!deleted;
+  }
+
+  async getFeedback(): Promise<Feedback[]> {
+    return db.select().from(feedback).orderBy(desc(feedback.createdAt));
+  }
+
+  async createFeedback(entry: InsertFeedback): Promise<Feedback> {
+    const [created] = await db.insert(feedback).values(entry).returning();
+    return created;
   }
 }
 
