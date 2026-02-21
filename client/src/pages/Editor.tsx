@@ -147,6 +147,7 @@ export default function Editor() {
         
         <p className="text-zinc-400 mb-6 max-w-2xl">
           Define groups of interchangeable expressions. When any word in a group is found in the Tractatus text, it will become interactive and can be swapped with other words in the same group.
+          <span className="text-zinc-500 ml-1" data-testid="text-total-expressions">({synonymGroups.length} expressions)</span>
         </p>
 
         <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
