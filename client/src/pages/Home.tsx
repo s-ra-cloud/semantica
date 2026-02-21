@@ -352,8 +352,10 @@ export default function Home() {
               <Code className="w-3.5 h-3.5" />
               {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
             </button>
-            <p className="text-xs text-zinc-600">
-              {language === 'en' ? 'Licensed under the' : 'Sous licence'}{' '}
+            <p className="text-xs text-zinc-600 mb-1">
+              {language === 'en'
+                ? 'The first version of Semantica used an ad hoc BERT model and was registered IDDN FR.001.130034.000.S.C.2022.000.31235 on 23/05/2022. This version uses a completely new architecture and is published under the'
+                : 'La première version de Semantica utilisait un modèle BERT ad hoc et a été enregistrée IDDN FR.001.130034.000.S.C.2022.000.31235 le 23/05/2022. Cette version utilise une architecture entièrement nouvelle et est publiée sous la'}{' '}
               <a
                 href="https://www.gnu.org/licenses/gpl-3.0.en.html"
                 target="_blank"
