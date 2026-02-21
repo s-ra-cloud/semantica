@@ -9441,7 +9441,7 @@ export const tractatusFrench: Proposition[] = [
     "segments": [
       {
         "type": "text",
-        "content": "Cequine dit rien d'autre que ceci : chaque proposition est le résultat d'applications successives de l'opération [math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] à des propositions élémentaires."
+        "content": "Ce qui ne dit rien d'autre que ceci : chaque proposition est le résultat d'applications successives de l'opération [math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] à des propositions élémentaires."
       }
     ]
   },
