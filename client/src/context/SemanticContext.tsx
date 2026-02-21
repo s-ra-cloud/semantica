@@ -63,6 +63,22 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
         language: 'fr',
         words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu'],
       });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['the thought', 'the logical picture of the facts'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['la pensée', "l'image logique des faits"],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['names', 'simple signs'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['noms', 'signes simples'],
+      });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
   });
