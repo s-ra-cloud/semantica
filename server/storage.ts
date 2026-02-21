@@ -200,7 +200,7 @@ export async function seedDatabaseIfEmpty() {
     ['[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math]', 'all values of ξ'],
     ['[math]\\displaystyle{ [ \\bar{p}, \\bar{\\xi}, N (\\bar{\\xi}) ] }[/math]', '[all propositions, variable, joint denial] — general truth-function form'],
     ['[math]\\displaystyle{ \\Omega \' (\\bar{\\eta}) }[/math]', 'successive application of operation Ω to η'],
-    ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', 'general form of successive operation application'],
+    ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', 'general form of a proposition: result of successively applying joint denial N(ξ̄) to base propositions η̄'],
     ['[math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math]', 'Kn = total combinations of truth-values for n states of affairs'],
     ['[math]\\displaystyle{ \\sum_{\\kappa=0}^{K_n} \\binom{K_n}{\\kappa} = L_n }[/math]', 'Ln = total possible truth-functions for n propositions'],
   ];
@@ -211,7 +211,7 @@ export async function seedDatabaseIfEmpty() {
     ['[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math]', 'toutes les valeurs de ξ'],
     ['[math]\\displaystyle{ [ \\bar{p}, \\bar{\\xi}, N (\\bar{\\xi}) ] }[/math]', '[toutes les propositions, variable, négation conjointe] — forme générale de la fonction de vérité'],
     ['[math]\\displaystyle{ \\Omega \' (\\bar{\\eta}) }[/math]', "application successive de l'opération Ω à η"],
-    ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', "forme générale de l'application successive d'opérations"],
+    ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', "forme générale d'une proposition : résultat de l'application successive de la négation conjointe N(ξ̄) à des propositions de départ η̄"],
   ];
 
   const allGroups: InsertSynonymGroup[] = [
