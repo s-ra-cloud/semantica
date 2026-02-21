@@ -77,11 +77,19 @@ export default function Home() {
   const handleFeedbackSubmit = async () => {
     if (!feedbackMessage.trim()) return;
     if (feedbackPropId.trim() && !allIds.includes(feedbackPropId.trim())) {
-      setFeedbackPropError(
-        language === 'en'
-          ? "You are a liar! Such proposition does not exist! Unless maybe you just made a mistake, in that case we're very sorry to have been doubting you..."
-          : "Menteur ! Cette proposition n'existe pas ! Sauf si vous avez juste fait une erreur, dans ce cas nous sommes vraiment désolés d'avoir douté de vous..."
-      );
+      if (feedbackPropId.trim() === '3.6') {
+        setFeedbackPropError(
+          language === 'en'
+            ? "You are a liar! Such proposition does not exist! Unless maybe you just made a mistake, in that case we're very sorry to have been doubting you..."
+            : "Menteur ! Cette proposition n'existe pas ! Sauf si vous avez juste fait une erreur, dans ce cas nous sommes vraiment désolés d'avoir douté de vous..."
+        );
+      } else {
+        setFeedbackPropError(
+          language === 'en'
+            ? "This proposition does not exist in the Tractatus."
+            : "Cette proposition n'existe pas dans le Tractatus."
+        );
+      }
       return;
     }
     setFeedbackPropError('');
