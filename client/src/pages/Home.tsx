@@ -45,6 +45,7 @@ export default function Home() {
   const [jumpTo, setJumpTo] = useState('');
   const [feedbackSending, setFeedbackSending] = useState(false);
   const [feedbackSent, setFeedbackSent] = useState(false);
+  const [feedbackPropError, setFeedbackPropError] = useState('');
   const { synonymGroups } = useSemantic();
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
@@ -74,6 +75,15 @@ export default function Home() {
 
   const handleFeedbackSubmit = async () => {
     if (!feedbackMessage.trim()) return;
+    if (feedbackPropId.trim() && !allIds.includes(feedbackPropId.trim())) {
+      setFeedbackPropError(
+        language === 'en'
+          ? "You are a liar! Such proposition does not exist! Unless maybe you just made a mistake, in that case we're very sorry to have been doubting you..."
+          : "Menteur ! Cette proposition n'existe pas ! Sauf si vous avez juste fait une erreur, dans ce cas nous sommes vraiment désolés d'avoir douté de vous..."
+      );
+      return;
+    }
+    setFeedbackPropError('');
     setFeedbackSending(true);
     try {
       await fetch('/api/feedback', {
@@ -91,6 +101,7 @@ export default function Home() {
         setFeedbackPropId('');
         setFeedbackMessage('');
         setFeedbackSent(false);
+        setFeedbackPropError('');
       }, 2000);
     } catch {
       // silently fail
@@ -182,10 +193,14 @@ export default function Home() {
                     type="text"
                     placeholder={language === 'en' ? "Proposition number (e.g. 3.141)" : "Num\u00e9ro de proposition (ex. 3.141)"}
                     value={feedbackPropId}
-                    onChange={(e) => setFeedbackPropId(e.target.value)}
-                    className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-3 focus:outline-none focus:border-green-500/50"
+                    onChange={(e) => { setFeedbackPropId(e.target.value); setFeedbackPropError(''); }}
+                    className={`w-full bg-zinc-800 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-1 focus:outline-none ${feedbackPropError ? 'border-red-500/70' : 'border-zinc-700 focus:border-green-500/50'}`}
                     data-testid="input-feedback-prop"
                   />
+                  {feedbackPropError && (
+                    <p className="text-red-400 text-xs mb-2 italic" data-testid="text-feedback-prop-error">{feedbackPropError}</p>
+                  )}
+                  {!feedbackPropError && <div className="mb-2" />}
                   <textarea
                     placeholder={language === 'en' ? "Describe the issue..." : "D\u00e9crivez le probl\u00e8me..."}
                     value={feedbackMessage}
