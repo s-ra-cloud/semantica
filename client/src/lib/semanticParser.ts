@@ -51,7 +51,14 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     group.words.forEach(word => {
       const trimmed = word.trim();
       if (!trimmed) return;
-      const regex = new RegExp(`\\b(${trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'gi');
+      const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const hasApostrophe = trimmed.includes("'") || trimmed.includes("\u2019");
+      let regex: RegExp;
+      if (hasApostrophe) {
+        regex = new RegExp(`(?<![a-zA-Zàâäéèêëïîôùûüÿçæœ])${escaped}(?![a-zA-Zàâäéèêëïîôùûüÿçæœ])`, 'gi');
+      } else {
+        regex = new RegExp(`\\b(${escaped})\\b`, 'gi');
+      }
       let m;
       while ((m = regex.exec(text)) !== null) {
         matches.push({ index: m.index, length: m[0].length, word: m[0], group, matchType: 'semantic' });

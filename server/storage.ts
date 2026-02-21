@@ -80,6 +80,8 @@ export async function seedDatabaseIfEmpty() {
     { language: 'fr', words: ['ce qui a lieu', 'le fait', "la subsistance d'états de choses"], type: 'semantic' },
     { language: 'fr', words: ['objets', 'entités', 'choses'], type: 'semantic' },
     { language: 'fr', words: ['objet', 'entité', 'chose'], type: 'semantic' },
+    { language: 'fr', words: ["d'objet", "d'entité", "de chose"], type: 'semantic' },
+    { language: 'fr', words: ["d'objets", "d'entités", "de choses"], type: 'semantic' },
   ];
 
   const logicPairsEn: [string, string][] = [
