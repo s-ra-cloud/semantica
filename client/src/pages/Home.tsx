@@ -297,6 +297,7 @@ export default function Home() {
                 <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
                 <a href="https://www.cggg.fr/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-cggg">Centre Gilles-Gaston Granger</a>
                 <span className="text-zinc-400 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction française'}</span>
+                <span className="text-zinc-400 leading-relaxed">David Stern</span>
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
                 <span className="text-zinc-500 italic">{language === 'en' ? 'With the special help of:' : 'Avec l\'aide spéciale de :'}</span>
                 <span className="text-zinc-400">SATT Sud Est</span>
@@ -402,9 +403,15 @@ export default function Home() {
             </div>
             <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
               {language === 'en' ? (
-                <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
+                <>
+                  <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
+                  <p className="mt-2">Text provided by <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">CC BY-SA 4.0</a>. Connexions to external texts provided by <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Archives</a> and the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">LEGACY project</a>.</p>
+                </>
               ) : (
-                <p>Traduction fran&ccedil;aise de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
+                <>
+                  <p>Traduction fran&ccedil;aise de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
+                  <p className="mt-2">Texte fourni par <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a>. Connexions aux textes externes fournies par <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">les Archives Wittgenstein</a> et le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">projet LEGACY</a>.</p>
+                </>
               )}
             </div>
           </div>
