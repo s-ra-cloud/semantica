@@ -7,6 +7,26 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  app.get("/api/synonym-groups/export", async (_req, res) => {
+    const groups = await storage.getSynonymGroups();
+    const exportData = groups.map(({ id, ...rest }) => rest);
+    res.setHeader('Content-Disposition', 'attachment; filename="semantica-expressions.json"');
+    res.setHeader('Content-Type', 'application/json');
+    res.json(exportData);
+  });
+
+  app.post("/api/synonym-groups/import", async (req, res) => {
+    const { password, groups } = req.body;
+    if (password !== 'Trismegiste') {
+      return res.status(403).json({ message: "Invalid password" });
+    }
+    if (!Array.isArray(groups)) {
+      return res.status(400).json({ message: "Invalid data: groups must be an array" });
+    }
+    const result = await storage.replaceAllSynonymGroups(groups);
+    res.json({ message: `Imported ${result.length} expression groups`, count: result.length });
+  });
+
   app.get("/api/synonym-groups", async (_req, res) => {
     const groups = await storage.getSynonymGroups();
     res.json(groups);

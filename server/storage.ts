@@ -8,6 +8,7 @@ export interface IStorage {
   createSynonymGroup(group: InsertSynonymGroup): Promise<SynonymGroup>;
   updateSynonymGroup(id: number, group: InsertSynonymGroup): Promise<SynonymGroup | undefined>;
   deleteSynonymGroup(id: number): Promise<boolean>;
+  replaceAllSynonymGroups(groups: InsertSynonymGroup[]): Promise<SynonymGroup[]>;
   getFeedback(): Promise<Feedback[]>;
   createFeedback(entry: InsertFeedback): Promise<Feedback>;
 }
@@ -35,6 +36,14 @@ export class DatabaseStorage implements IStorage {
   async deleteSynonymGroup(id: number): Promise<boolean> {
     const [deleted] = await db.delete(synonymGroups).where(eq(synonymGroups.id, id)).returning();
     return !!deleted;
+  }
+
+  async replaceAllSynonymGroups(groups: InsertSynonymGroup[]): Promise<SynonymGroup[]> {
+    return await db.transaction(async (tx) => {
+      await tx.delete(synonymGroups);
+      if (groups.length === 0) return [];
+      return tx.insert(synonymGroups).values(groups).returning();
+    });
   }
 
   async getFeedback(): Promise<Feedback[]> {

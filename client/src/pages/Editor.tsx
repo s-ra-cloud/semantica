@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
-import { Plus, Trash2, ArrowLeft, RotateCcw, Lock } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload, Code } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function Editor() {
-  const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults } = useSemantic();
+  const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch } = useSemantic();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,49 @@ export default function Editor() {
     if (confirm("Are you sure you want to reset to default expressions? All custom expressions will be lost.")) {
       resetDefaults();
     }
+  };
+
+  const handleExport = () => {
+    window.open('/api/synonym-groups/export', '_blank');
+  };
+
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const groups = JSON.parse(text);
+      if (!Array.isArray(groups)) {
+        setImportStatus('Error: file must contain a JSON array');
+        return;
+      }
+
+      if (!confirm(`This will replace all ${synonymGroups.length} current expressions with ${groups.length} from the file. Continue?`)) {
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      const res = await fetch('/api/synonym-groups/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: 'Trismegiste', groups }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        setImportStatus(`Error: ${err.message}`);
+      } else {
+        const result = await res.json();
+        setImportStatus(`Imported ${result.count} expression groups`);
+        refetch();
+      }
+    } catch {
+      setImportStatus('Error: invalid JSON file');
+    }
+
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    setTimeout(() => setImportStatus(null), 4000);
   };
 
   if (!isAuthenticated) {
@@ -93,9 +138,44 @@ export default function Editor() {
           </Button>
         </div>
         
-        <p className="text-zinc-400 mb-8 max-w-2xl">
-          Define groups of interchangeable expressions. When any word in a group is found in the Tractatus text, it will become interactive and can be swapped with other words in the same group. This allows for a deeper structural reading of the text.
+        <p className="text-zinc-400 mb-6 max-w-2xl">
+          Define groups of interchangeable expressions. When any word in a group is found in the Tractatus text, it will become interactive and can be swapped with other words in the same group.
         </p>
+
+        <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
+          <Button variant="outline" onClick={handleExport} className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-export-db">
+            <Download className="w-4 h-4 mr-2" /> Export DB
+          </Button>
+          <label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={handleImport}
+              className="hidden"
+              data-testid="input-import-file"
+            />
+            <Button variant="outline" className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50 cursor-pointer" onClick={() => fileInputRef.current?.click()} data-testid="btn-import-db">
+              <Upload className="w-4 h-4 mr-2" /> Import DB
+            </Button>
+          </label>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-download-code" onClick={(e) => {
+              e.preventDefault();
+              const a = document.createElement('a');
+              a.href = '/api/synonym-groups/export';
+              a.download = 'semantica-expressions.json';
+              a.click();
+            }}>
+              <Code className="w-4 h-4 mr-2" /> Download Code
+            </Button>
+          </a>
+          {importStatus && (
+            <span className={`text-xs ${importStatus.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
+              {importStatus}
+            </span>
+          )}
+        </div>
 
         <div className="space-y-6">
           {synonymGroups.map(group => (
