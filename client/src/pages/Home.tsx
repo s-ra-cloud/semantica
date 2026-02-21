@@ -5,7 +5,7 @@ import { SemanticWord } from '@/components/SemanticWord';
 import { LogicWord } from '@/components/LogicWord';
 import { MathLogicWord } from '@/components/MathLogicWord';
 import { MathText } from '@/components/MathText';
-import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
+import { tractatusEnglishRaw, tractatusFrenchRaw, tractatusGermanRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic, Segment } from '@/lib/semanticParser';
 import { applyGrammarAdaptations } from '@/lib/grammarAdaptations';
@@ -88,7 +88,7 @@ function PropositionSegments({ segments, propositionId, language }: { segments: 
 }
 
 export default function Home() {
-  const [language, setLanguage] = useState<'en' | 'fr'>('en');
+  const [language, setLanguage] = useState<'en' | 'fr' | 'de'>('en');
   const [showTeam, setShowTeam] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
@@ -103,7 +103,7 @@ export default function Home() {
   const [openAnnotation, setOpenAnnotation] = useState<string | null>(null);
   const { synonymGroups } = useSemantic();
 
-  const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
+  const rawData = language === 'en' ? tractatusEnglishRaw : language === 'de' ? tractatusGermanRaw : tractatusFrenchRaw;
   const activeGroups = useMemo(() => synonymGroups.filter(g => g.language === language), [synonymGroups, language]);
   const allIds = useMemo(() => rawData?.map(p => p.id) || [], [rawData]);
 
@@ -133,15 +133,19 @@ export default function Home() {
     if (feedbackPropId.trim() && !allIds.includes(feedbackPropId.trim())) {
       if (feedbackPropId.trim() === '3.6') {
         setFeedbackPropError(
-          language === 'en'
-            ? "You are a liar! Such proposition does not exist! Unless maybe you just made a mistake, in that case we're very sorry to have been doubting you..."
-            : "Menteur ! Cette proposition n'existe pas ! Sauf si vous avez juste fait une erreur, dans ce cas nous sommes vraiment désolés d'avoir douté de vous..."
+          language === 'fr'
+            ? "Menteur ! Cette proposition n'existe pas ! Sauf si vous avez juste fait une erreur, dans ce cas nous sommes vraiment désolés d'avoir douté de vous..."
+            : language === 'de'
+            ? "Lügner! Einen solchen Satz gibt es nicht! Es sei denn, Sie haben sich geirrt, in diesem Fall tut es uns sehr leid, an Ihnen gezweifelt zu haben..."
+            : "You are a liar! Such proposition does not exist! Unless maybe you just made a mistake, in that case we're very sorry to have been doubting you..."
         );
       } else {
         setFeedbackPropError(
-          language === 'en'
-            ? "This proposition does not exist in the Tractatus."
-            : "Cette proposition n'existe pas dans le Tractatus."
+          language === 'fr'
+            ? "Cette proposition n'existe pas dans le Tractatus."
+            : language === 'de'
+            ? "Dieser Satz existiert nicht im Tractatus."
+            : "This proposition does not exist in the Tractatus."
         );
       }
       return;
@@ -197,12 +201,13 @@ export default function Home() {
           >
             FR
           </button>
-          <span
-            className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-zinc-800 text-zinc-700 font-medium cursor-default"
+          <button
+            onClick={() => setLanguage('de')}
+            className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border transition-colors font-medium ${language === 'de' ? 'text-white border-white/30 bg-white/10' : 'text-zinc-500 border-zinc-700 hover:text-zinc-300'}`}
             data-testid="btn-lang-de-mobile"
           >
             DE
-          </span>
+          </button>
         </div>
         <span className="text-[10px] uppercase tracking-widest text-amber-500/80 border border-amber-500/30 rounded-full px-2.5 py-0.5 bg-amber-500/5 font-medium" data-testid="badge-beta">
           Beta
@@ -210,7 +215,7 @@ export default function Home() {
         <button
           onClick={() => setShowParticles(!showParticles)}
           className="w-8 h-8 rounded-full border border-zinc-700 hover:border-zinc-500 flex items-center justify-center transition-colors text-zinc-500 hover:text-zinc-300"
-          title={showParticles ? (language === 'en' ? 'Hide particles' : 'Masquer les particules') : (language === 'en' ? 'Show particles' : 'Afficher les particules')}
+          title={showParticles ? (language === 'fr' ? 'Masquer les particules' : language === 'de' ? 'Partikel ausblenden' : 'Hide particles') : (language === 'fr' ? 'Afficher les particules' : language === 'de' ? 'Partikel anzeigen' : 'Show particles')}
           data-testid="btn-toggle-particles"
         >
           {showParticles ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -218,7 +223,7 @@ export default function Home() {
         <button
           onClick={() => setShowFeedback(true)}
           className="w-8 h-8 rounded-full border border-zinc-700 hover:border-green-500/50 flex items-center justify-center transition-colors text-zinc-500 hover:text-green-400"
-          title={language === 'en' ? 'Report a mistake' : 'Signaler une erreur'}
+          title={language === 'fr' ? 'Signaler une erreur' : language === 'de' ? 'Fehler melden' : 'Report a mistake'}
           data-testid="btn-feedback"
         >
           <MessageSquare className="w-3.5 h-3.5" />
@@ -242,19 +247,19 @@ export default function Home() {
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 max-w-md w-full"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-white font-display font-medium">{language === 'en' ? 'Report a Mistake' : 'Signaler une erreur'}</h3>
+                <h3 className="text-white font-display font-medium">{language === 'fr' ? 'Signaler une erreur' : language === 'de' ? 'Fehler melden' : 'Report a Mistake'}</h3>
                 <button onClick={() => setShowFeedback(false)} className="text-zinc-500 hover:text-white" data-testid="btn-close-feedback">
                   <X className="w-4 h-4" />
                 </button>
               </div>
               {feedbackSent ? (
-                <p className="text-green-400 text-sm py-4">{language === 'en' ? 'Thank you for your feedback!' : 'Merci pour votre retour\u00a0!'}</p>
+                <p className="text-green-400 text-sm py-4">{language === 'fr' ? 'Merci pour votre retour\u00a0!' : language === 'de' ? 'Vielen Dank für Ihr Feedback!' : 'Thank you for your feedback!'}</p>
               ) : (
                 <>
-                  <p className="text-zinc-500 text-xs mb-4">{language === 'en' ? "Found a missing or incorrect substitution? Let us know and we'll fix it." : 'Vous avez trouv\u00e9 une substitution manquante ou incorrecte\u00a0? Faites-le nous savoir.'}</p>
+                  <p className="text-zinc-500 text-xs mb-4">{language === 'fr' ? 'Vous avez trouvé une substitution manquante ou incorrecte\u00a0? Faites-le nous savoir.' : language === 'de' ? 'Eine fehlende oder falsche Substitution gefunden? Lassen Sie es uns wissen.' : "Found a missing or incorrect substitution? Let us know and we'll fix it."}</p>
                   <input
                     type="text"
-                    placeholder={language === 'en' ? "Proposition number (e.g. 3.141)" : "Num\u00e9ro de proposition (ex. 3.141)"}
+                    placeholder={language === 'fr' ? "Numéro de proposition (ex. 3.141)" : language === 'de' ? "Satznummer (z.B. 3.141)" : "Proposition number (e.g. 3.141)"}
                     value={feedbackPropId}
                     onChange={(e) => { setFeedbackPropId(e.target.value); setFeedbackPropError(''); }}
                     className={`w-full bg-zinc-800 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-1 focus:outline-none ${feedbackPropError ? 'border-red-500/70' : 'border-zinc-700 focus:border-green-500/50'}`}
@@ -265,7 +270,7 @@ export default function Home() {
                   )}
                   {!feedbackPropError && <div className="mb-2" />}
                   <textarea
-                    placeholder={language === 'en' ? "Describe the issue..." : "D\u00e9crivez le probl\u00e8me..."}
+                    placeholder={language === 'fr' ? "Décrivez le problème..." : language === 'de' ? "Beschreiben Sie das Problem..." : "Describe the issue..."}
                     value={feedbackMessage}
                     onChange={(e) => setFeedbackMessage(e.target.value)}
                     className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-4 h-24 resize-none focus:outline-none focus:border-green-500/50"
@@ -277,7 +282,7 @@ export default function Home() {
                     className="w-full bg-green-600 hover:bg-green-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white text-sm font-medium py-2 rounded-lg transition-colors"
                     data-testid="btn-submit-feedback"
                   >
-                    {feedbackSending ? (language === 'en' ? 'Sending...' : 'Envoi...') : (language === 'en' ? 'Send Feedback' : 'Envoyer')}
+                    {feedbackSending ? (language === 'fr' ? 'Envoi...' : language === 'de' ? 'Wird gesendet...' : 'Sending...') : (language === 'fr' ? 'Envoyer' : language === 'de' ? 'Feedback senden' : 'Send Feedback')}
                   </button>
                 </>
               )}
@@ -295,7 +300,7 @@ export default function Home() {
               <path d="M5 25 L15 15" />
             </svg>
             <h1 className="font-display font-semibold text-white text-xl tracking-tight">Semantica</h1>
-            <p className="text-white text-xs leading-relaxed">{language === 'en' ? <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
+            <p className="text-white text-xs leading-relaxed">{language === 'fr' ? <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : language === 'de' ? <>Ein Projekt der Computational Humanities vom <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
           </div>
 
           <nav className="flex flex-col gap-2 font-medium text-sm">
@@ -313,19 +318,20 @@ export default function Home() {
             >
               Fran&ccedil;ais
             </button>
-            <span
-              className="text-zinc-500 cursor-default"
+            <button 
+              onClick={() => setLanguage('de')}
+              className={`text-left transition-colors ${language === 'de' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-lang-de"
             >
-              Deutsch <span className="text-zinc-500 text-xs">(coming soon)</span>
-            </span>
+              Deutsch
+            </button>
 
             <button
               onClick={() => { setShowTeam(!showTeam); setShowThanks(false); }}
               className={`text-left transition-colors flex items-center gap-1 ${showTeam ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-team"
             >
-              {language === 'en' ? 'Team' : '\u00c9quipe'}
+              {language === 'fr' ? '\u00c9quipe' : language === 'de' ? 'Team' : 'Team'}
               <ChevronDown className={`w-3 h-3 transition-transform ${showTeam ? 'rotate-180' : ''}`} />
             </button>
             {showTeam && (
@@ -343,7 +349,7 @@ export default function Home() {
               className={`text-left transition-colors flex items-center gap-1 ${showThanks ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-thanks"
             >
-              {language === 'en' ? 'Thanks' : 'Remerciements'}
+              {language === 'fr' ? 'Remerciements' : language === 'de' ? 'Danksagungen' : 'Thanks'}
               <ChevronDown className={`w-3 h-3 transition-transform ${showThanks ? 'rotate-180' : ''}`} />
             </button>
             {showThanks && (
@@ -351,10 +357,10 @@ export default function Home() {
                 <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-project">The Wittgenstein Project</a>
                 <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
                 <a href="https://www.cggg.fr/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-cggg">Centre Gilles-Gaston Granger</a>
-                <span className="text-zinc-400 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction française'}</span>
+                <span className="text-zinc-400 leading-relaxed">{language === 'fr' ? 'La fille de Gilles-Gaston Granger pour les droits de la traduction française' : language === 'de' ? 'Die Tochter von Gilles-Gaston Granger für die Rechte der französischen Übersetzung' : 'The daughter of Gilles-Gaston Granger for the rights of the French translation'}</span>
                 <span className="text-zinc-400 leading-relaxed">David Stern</span>
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
-                <span className="text-zinc-500 italic">{language === 'en' ? 'With the special help of:' : 'Avec l\'aide spéciale de :'}</span>
+                <span className="text-zinc-500 italic">{language === 'fr' ? 'Avec l\'aide spéciale de :' : language === 'de' ? 'Mit besonderer Hilfe von:' : 'With the special help of:'}</span>
                 <span className="text-zinc-400">SATT Sud Est</span>
                 <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
                 <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
@@ -362,10 +368,10 @@ export default function Home() {
               </div>
             )}
 
-            <a href="https://www.wittgensteinproject.org/w/index.php/Blog:How_to_Keep_Track_of_the_Wittgensteinian_World" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors text-xs underline underline-offset-2" data-testid="link-wittgenstein-blog">{language === 'en' ? 'How to keep track of the Wittgenstein World' : 'Comment suivre le monde wittgensteinien'}</a>
+            <a href="https://www.wittgensteinproject.org/w/index.php/Blog:How_to_Keep_Track_of_the_Wittgensteinian_World" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors text-xs underline underline-offset-2" data-testid="link-wittgenstein-blog">{language === 'fr' ? 'Comment suivre le monde wittgensteinien' : language === 'de' ? 'Die Wittgenstein-Welt im Blick behalten' : 'How to keep track of the Wittgenstein World'}</a>
 
             <div className="flex flex-col gap-1">
-              <label className="text-white text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
+              <label className="text-white text-xs">{language === 'fr' ? 'Aller à la proposition' : language === 'de' ? 'Zum Satz springen' : 'Jump to proposition'}</label>
               <input
                 type="text"
                 value={jumpTo}
@@ -391,7 +397,7 @@ export default function Home() {
                     setJumpTo('');
                   }
                 }}
-                placeholder={language === 'en' ? 'e.g. 4.21' : 'ex. 4.21'}
+                placeholder={language === 'fr' ? 'ex. 4.21' : 'e.g. 4.21'}
                 className="bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 w-full"
                 data-testid="input-jump-to"
               />
@@ -400,14 +406,14 @@ export default function Home() {
             <Link href="/editor">
               <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
-                {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
+                {language === 'fr' ? 'Base d\u2019expressions' : language === 'de' ? 'Ausdrucks-DB' : 'Expression DB'}
               </span>
             </Link>
 
             <Link href="/graph">
               <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer" data-testid="link-graph">
                 <GitBranch className="w-4 h-4" />
-                {language === 'en' ? 'Connexion Graph' : 'Graphe de connexions'}
+                {language === 'fr' ? 'Graphe de connexions' : language === 'de' ? 'Verbindungsgraph' : 'Connexion Graph'}
               </span>
             </Link>
 
@@ -432,12 +438,14 @@ export default function Home() {
               data-testid="btn-download-code"
             >
               <Code className="w-3.5 h-3.5" />
-              {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
+              {language === 'fr' ? 'Télécharger le code source' : language === 'de' ? 'Quellcode herunterladen' : 'Download Source Code'}
             </button>
             <p className="text-xs text-white mb-1">
-              {language === 'en'
-                ? 'The first version of Semantica used an ad hoc BERT model and was registered IDDN FR.001.130034.000.S.C.2022.000.31235 on 23/05/2022. This version uses a completely new architecture and is published under the'
-                : 'La première version de Semantica utilisait un modèle BERT ad hoc et a été enregistrée IDDN FR.001.130034.000.S.C.2022.000.31235 le 23/05/2022. Cette version utilise une architecture entièrement nouvelle et est publiée sous la'}{' '}
+              {language === 'fr'
+                ? 'La première version de Semantica utilisait un modèle BERT ad hoc et a été enregistrée IDDN FR.001.130034.000.S.C.2022.000.31235 le 23/05/2022. Cette version utilise une architecture entièrement nouvelle et est publiée sous la'
+                : language === 'de'
+                ? 'Die erste Version von Semantica verwendete ein ad hoc BERT-Modell und wurde am 23.05.2022 unter IDDN FR.001.130034.000.S.C.2022.000.31235 registriert. Diese Version verwendet eine völlig neue Architektur und wird unter der'
+                : 'The first version of Semantica used an ad hoc BERT model and was registered IDDN FR.001.130034.000.S.C.2022.000.31235 on 23/05/2022. This version uses a completely new architecture and is published under the'}{' '}
               <a
                 href="https://www.gnu.org/licenses/gpl-3.0.en.html"
                 target="_blank"
@@ -457,25 +465,36 @@ export default function Home() {
               Tractatus Logico-Philosophicus
             </h2>
             <p className="text-white text-sm mb-4">
-              {language === 'en' ? 'by Ludwig Wittgenstein' : 'par Ludwig Wittgenstein'}
+              {language === 'fr' ? 'par Ludwig Wittgenstein' : language === 'de' ? 'von Ludwig Wittgenstein' : 'by Ludwig Wittgenstein'}
             </p>
             <p className="text-white max-w-md text-sm leading-relaxed">
-              {language === 'en' ? <>Click on <span className="text-green-400">green</span> expressions to swap semantic equivalents, <span className="text-blue-400">blue</span> expressions to toggle logical notation, and <span className="text-purple-400">purple</span> boxes to discover connections to other philosophical texts.</> : <>Cliquez sur les expressions en <span className="text-green-400">vert</span> pour permuter des équivalents sémantiques, sur les expressions en <span className="text-blue-400">bleu</span> pour basculer en notation logique, et sur les encadrés <span className="text-purple-400">violets</span> pour découvrir des connexions à d'autres textes philosophiques.</>}
+              {language === 'fr' ? <>Cliquez sur les expressions en <span className="text-green-400">vert</span> pour permuter des équivalents sémantiques, sur les expressions en <span className="text-blue-400">bleu</span> pour basculer en notation logique, et sur les encadrés <span className="text-purple-400">violets</span> pour découvrir des connexions à d'autres textes philosophiques.</> : language === 'de' ? <>Klicken Sie auf <span className="text-green-400">grüne</span> Ausdrücke, um semantische Äquivalente auszutauschen, auf <span className="text-blue-400">blaue</span> Ausdrücke, um die logische Notation umzuschalten, und auf <span className="text-purple-400">violette</span> Kästen, um Verbindungen zu anderen philosophischen Texten zu entdecken.</> : <>Click on <span className="text-green-400">green</span> expressions to swap semantic equivalents, <span className="text-blue-400">blue</span> expressions to toggle logical notation, and <span className="text-purple-400">purple</span> boxes to discover connections to other philosophical texts.</>}
             </p>
+            {language === 'de' && (
+              <div className="mt-3 flex items-start gap-2 text-amber-500/90 text-xs max-w-md border border-amber-500/30 rounded-lg p-3 bg-amber-500/5">
+                <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                <p>Achtung: Die deutsche Version wurde noch nicht Korrektur gelesen. Es können Fehler im Text vorhanden sein. Bitte melden Sie Fehler über den Feedback-Button (<MessageSquare className="w-3 h-3 inline" />).</p>
+              </div>
+            )}
             <div className="mt-3 flex items-start gap-2 text-amber-500/70 text-xs max-w-md">
               <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-              <p>{language === 'en' ? <>There may still be mistakes in the substitutions that you can signal with the feedback button (<MessageSquare className="w-3 h-3 inline" />). We're adding new connexions to external texts every week.</> : <>Il peut encore y avoir des erreurs dans les substitutions que vous pouvez signaler avec le bouton de retour (<MessageSquare className="w-3 h-3 inline" />). Nous ajoutons de nouvelles connexions à des textes externes chaque semaine.</>}</p>
+              <p>{language === 'fr' ? <>Il peut encore y avoir des erreurs dans les substitutions que vous pouvez signaler avec le bouton de retour (<MessageSquare className="w-3 h-3 inline" />). Nous ajoutons de nouvelles connexions à des textes externes chaque semaine.</> : language === 'de' ? <>Es können noch Fehler in den Substitutionen vorhanden sein, die Sie mit dem Feedback-Button (<MessageSquare className="w-3 h-3 inline" />) melden können. Wir fügen jede Woche neue Verbindungen zu externen Texten hinzu.</> : <>There may still be mistakes in the substitutions that you can signal with the feedback button (<MessageSquare className="w-3 h-3 inline" />). We're adding new connexions to external texts every week.</>}</p>
             </div>
             <div className="mt-4 text-white text-xs leading-relaxed max-w-md italic">
-              {language === 'en' ? (
-                <>
-                  <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
-                  <p className="mt-2">Text provided by <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">CC BY-SA 4.0</a>. Connexions to external texts provided by <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Archives</a> and the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">LEGACY project</a>.</p>
-                </>
-              ) : (
+              {language === 'fr' ? (
                 <>
                   <p>Traduction fran&ccedil;aise de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
                   <p className="mt-2">Texte fourni par <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a>. Connexions aux textes externes fournies par <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">les Archives Wittgenstein</a> et le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">projet LEGACY</a>.</p>
+                </>
+              ) : language === 'de' ? (
+                <>
+                  <p>Deutscher Originaltext aus der Erstausgabe (1921/1922).</p>
+                  <p className="mt-2">Text bereitgestellt von <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a> unter <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">CC BY-SA 4.0</a>. Verbindungen zu externen Texten bereitgestellt von <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">den Wittgenstein-Archiven</a> und dem <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">LEGACY-Projekt</a>.</p>
+                </>
+              ) : (
+                <>
+                  <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
+                  <p className="mt-2">Text provided by <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Project</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">CC BY-SA 4.0</a>. Connexions to external texts provided by <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">The Wittgenstein Archives</a> and the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-zinc-400 transition-colors">LEGACY project</a>.</p>
                 </>
               )}
             </div>
@@ -526,7 +545,7 @@ export default function Home() {
                         {language === 'fr' && propositionDiagrams[proposition.id].afterTextFr && (
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextFr!} />
                         )}
-                        {language === 'en' && propositionDiagrams[proposition.id].afterTextEn && (
+                        {(language === 'en' || language === 'de') && propositionDiagrams[proposition.id].afterTextEn && (
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextEn!} />
                         )}
                       </>

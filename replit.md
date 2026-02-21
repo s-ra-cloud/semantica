@@ -2,7 +2,7 @@
 
 ## Overview
 
-Semantica is a web application for reading Wittgenstein's *Tractatus Logico-Philosophicus* in an interactive, semantically-enhanced way. It presents the text in both English and French, allowing users to click on highlighted words to see semantic alternatives (synonyms) or logic translations. The app features a collapsible tree structure matching the Tractatus's hierarchical numbering system, a 3D animated star sphere visualization, and a password-protected editor for managing synonym/expression groups stored in a PostgreSQL database.
+Semantica is a web application for reading Wittgenstein's *Tractatus Logico-Philosophicus* in an interactive, semantically-enhanced way. It presents the text in English, French, and German, allowing users to click on highlighted words to see semantic alternatives (synonyms) or logic translations. The app features a collapsible tree structure matching the Tractatus's hierarchical numbering system, a 3D animated star sphere visualization, and a password-protected editor for managing synonym/expression groups stored in a PostgreSQL database. The German version includes a prominent warning that it has not been proofread yet.
 
 ## User Preferences
 
@@ -32,7 +32,7 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Express.js running on Node.js with TypeScript (via tsx)
 - **API**: RESTful CRUD endpoints under `/api/synonym-groups` for managing synonym/expression groups; `/api/feedback` for user feedback submissions
 - **Database**: PostgreSQL via `pg` driver, with Drizzle ORM for query building and schema management
-- **Schema**: Two tables — `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en' or 'fr'), `words` (text array), `type` (text, 'semantic' or 'logic'); `feedback` with columns: `id` (serial PK), `proposition_id` (text), `language` (text), `message` (text), `created_at` (timestamp)
+- **Schema**: Two tables — `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en', 'fr', or 'de'), `words` (text array), `type` (text, 'semantic' or 'logic'); `feedback` with columns: `id` (serial PK), `proposition_id` (text), `language` (text), `message` (text), `created_at` (timestamp)
 - **Storage Pattern**: Interface-based storage layer (`IStorage`) implemented by `DatabaseStorage` class
 
 ### Data Flow
