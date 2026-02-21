@@ -72,6 +72,8 @@ export async function seedDatabaseIfEmpty() {
     { language: 'en', words: ['objects', 'entities', 'things'], type: 'semantic' },
     { language: 'en', words: ['substance', 'that which subsists independently of what is the case'], type: 'semantic' },
     { language: 'en', words: ['object', 'entity', 'thing'], type: 'semantic' },
+    { language: 'en', words: ['state of affairs', 'combination of objects'], type: 'semantic' },
+    { language: 'en', words: ['states of affairs', 'combinations of objects'], type: 'semantic' },
   ];
 
   const semanticGroupsFr: InsertSynonymGroup[] = [
@@ -87,6 +89,10 @@ export async function seedDatabaseIfEmpty() {
     { language: 'fr', words: ["l'objet", "l'entité", "la chose"], type: 'semantic' },
     { language: 'fr', words: ["un objet", "une entité", "une chose"], type: 'semantic' },
     { language: 'fr', words: ["d'un objet", "d'une entité", "d'une chose"], type: 'semantic' },
+    { language: 'fr', words: ['des états de choses', "des connexions d'objets"], type: 'semantic' },
+    { language: 'fr', words: ['les états de choses', "les connexions d'objets"], type: 'semantic' },
+    { language: 'fr', words: ["d'états de choses", "de connexions d'objets"], type: 'semantic' },
+    { language: 'fr', words: ['état de choses', "connexion d'objets"], type: 'semantic' },
   ];
 
   const logicPairsEn: [string, string][] = [
