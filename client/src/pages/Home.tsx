@@ -241,6 +241,7 @@ export default function Home() {
               <path d="M5 25 L15 15" />
             </svg>
             <h1 className="font-display font-semibold text-white text-xl tracking-tight">Semantica</h1>
+            <p className="text-zinc-500 text-xs leading-relaxed">{language === 'en' ? <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
           </div>
 
           <nav className="flex flex-col gap-2 font-medium text-sm">
@@ -303,8 +304,11 @@ export default function Home() {
                 <span className="text-zinc-400">SATT Sud Est</span>
                 <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
                 <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
+                <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-legacy-thanks">LEGACY project</a>
               </div>
             )}
+
+            <a href="https://www.wittgensteinproject.org/w/index.php/Blog:How_to_Keep_Track_of_the_Wittgensteinian_World" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors text-xs underline underline-offset-2" data-testid="link-wittgenstein-blog">{language === 'en' ? 'How to keep track of the Wittgenstein World' : 'Comment suivre le monde wittgensteinien'}</a>
 
             <div className="flex flex-col gap-1">
               <label className="text-zinc-500 text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
@@ -399,7 +403,7 @@ export default function Home() {
             </p>
             <div className="mt-3 flex items-start gap-2 text-amber-500/70 text-xs max-w-md">
               <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-              <p>{language === 'en' ? 'This is a beta version. There may still be mistakes in the substitutions.' : 'Ceci est une version b\u00eata. Il peut encore y avoir des erreurs dans les substitutions.'}</p>
+              <p>{language === 'en' ? <>There may still be mistakes in the substitutions that you can signal with the feedback button (<MessageSquare className="w-3 h-3 inline" />). We're adding new connexions to external texts every week.</> : <>Il peut encore y avoir des erreurs dans les substitutions que vous pouvez signaler avec le bouton de retour (<MessageSquare className="w-3 h-3 inline" />). Nous ajoutons de nouvelles connexions à des textes externes chaque semaine.</>}</p>
             </div>
             <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
               {language === 'en' ? (
