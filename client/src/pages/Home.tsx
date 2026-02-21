@@ -434,7 +434,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${proposition.id === '6.36111' ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={proposition.id === '6.36111' ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === '6.36111' ? null : '6.36111'); } : undefined} data-testid={proposition.id === '6.36111' ? 'btn-annotation-6.36111' : undefined}>
+                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
                     {proposition.segments.map((segment, idx) => {
                       if (segment.type === 'text') {
                         return <MathText key={idx} text={segment.content} />;
@@ -524,6 +524,78 @@ export default function Home() {
                                 </blockquote>
                                 <p className="text-xs text-purple-400/50 mt-2 text-right">
                                   <a href="https://legacy-um6p.1337.ma/projects/library/w94c6luruazo6ipkpisvj4on-immanuel-kant/ji2ahv5fpzgfhs1cs99a27ab" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors underline underline-offset-2" data-testid="link-legacy-source">
+                                    {language === 'en' ? 'Source: LEGACY Library' : 'Source\u00a0: Bibliothèque LEGACY'}
+                                  </a>
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+
+                    {proposition.id === '6.45' && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === '6.45' && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid="annotation-6.45">
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>This passage has been noted as an implicit neutral connection to <a href="#spinoza-passage" onClick={(e) => { e.preventDefault(); document.getElementById('spinoza-passage')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-spinoza-ethics"><em>Ethics</em></a> by Baruch Spinoza.</>
+                                    : <>Ce passage a été noté comme une connexion neutre implicite à l'<a href="#spinoza-passage" onClick={(e) => { e.preventDefault(); document.getElementById('spinoza-passage')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-spinoza-ethics"><em>Éthique</em></a> de Baruch Spinoza.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-2">
+                                  {language === 'en'
+                                    ? 'The contributor noted the similarity of ideas.'
+                                    : 'Le contributeur a noté la similarité des idées.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3 italic">
+                                  {language === 'en'
+                                    ? 'Comments: LW rarely uses Latin, and here he uses the specific Latin expression used by Spinoza.'
+                                    : 'Commentaires\u00a0: LW utilise rarement le latin, et ici il utilise l\u2019expression latine spécifique employée par Spinoza.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, University Mohammed VI Polytech, based on data collected by the Wittgenstein Archives.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Université Mohammed VI Polytechnique, sur la base des données collectées par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? <>You can discuss this connection and contribute to this collective work on the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-spinoza">LEGACY website</a>.</>
+                                    : <>Vous pouvez discuter de cette connexion et contribuer à ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-spinoza">site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+
+                              <div id="spinoza-passage" className="annotation-content mt-4 p-5 rounded-xl border border-purple-500/20 bg-purple-900/10 scroll-mt-24">
+                                <p className="text-xs text-purple-400/70 uppercase tracking-wider mb-2 font-medium">
+                                  {language === 'en' ? 'Baruch Spinoza — Ethics, Part II, Proposition XLIV, Corollary II' : 'Baruch Spinoza — Éthique, Partie II, Proposition XLIV, Corollaire II'}
+                                </p>
+                                <blockquote className="text-purple-200/80 text-sm leading-relaxed italic border-l-2 border-purple-500/30 pl-4">
+                                  {language === 'en'
+                                    ? <>
+                                        <p className="mb-2"><strong>Corollary II.</strong>—It is in the nature of reason to perceive things under a certain form of eternity (sub quâdam æternitatis specie).</p>
+                                        <p><strong>Proof.</strong>—It is in the nature of reason to regard things, not as contingent, but as necessary (II. xliv.). Reason perceives this necessity of things (II. xli.) truly—that is (I. Ax. vi.), as it is in itself. But (I. xvi.) this necessity of things is the very necessity of the eternal nature of God; therefore, it is in the nature of reason to regard things under this form of eternity. We may add that the bases of reason are the notions (II. xxxviii.), which answer to things common to all, and which (II. xxxvii.) do not answer to the essence of any particular thing: which must therefore be conceived without any relation to time, under a certain form of eternity.</p>
+                                      </>
+                                    : <>
+                                        <p className="mb-2"><strong>Corollaire II.</strong>—Il est dans la nature de la raison de percevoir les choses sous une certaine forme d'éternité (sub quâdam æternitatis specie).</p>
+                                        <p><strong>Démonstration.</strong>—Il est dans la nature de la raison de considérer les choses, non comme contingentes, mais comme nécessaires (II. xliv.). La raison perçoit cette nécessité des choses (II. xli.) véritablement, c'est-à-dire (I. Ax. vi.) comme elle est en soi. Mais (I. xvi.) cette nécessité des choses est la nécessité même de la nature éternelle de Dieu\u00a0; par conséquent, il est dans la nature de la raison de considérer les choses sous cette forme d'éternité. Ajoutons que les fondements de la raison sont les notions (II. xxxviii.) qui répondent aux choses communes à toutes, et qui (II. xxxvii.) ne répondent à l'essence d'aucune chose particulière\u00a0: elles doivent donc être conçues sans aucune relation au temps, sous une certaine forme d'éternité.</p>
+                                      </>
+                                  }
+                                </blockquote>
+                                <p className="text-xs text-purple-400/50 mt-2 text-right">
+                                  <a href="https://legacy-um6p.1337.ma/projects/library/u2okeerjjvq5vtxtsyvu1ptl-baruch-spinoza/uh2oonrmfp56dnl1tfjccs31" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors underline underline-offset-2" data-testid="link-legacy-source-spinoza">
                                     {language === 'en' ? 'Source: LEGACY Library' : 'Source\u00a0: Bibliothèque LEGACY'}
                                   </a>
                                 </p>
