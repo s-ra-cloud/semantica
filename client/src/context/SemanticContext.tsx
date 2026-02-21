@@ -1,53 +1,79 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
 
 export type SynonymGroup = {
-  id: string;
-  language: 'en' | 'fr';
+  id: number;
+  language: string;
   words: string[];
 };
 
-export const defaultSynonyms: SynonymGroup[] = [
-  { 
-    id: '1', 
-    language: 'en', 
-    words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case'] 
-  },
-  { 
-    id: '2', 
-    language: 'fr', 
-    words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu'] 
-  }
-];
-
 type SemanticContextType = {
   synonymGroups: SynonymGroup[];
-  setSynonymGroups: React.Dispatch<React.SetStateAction<SynonymGroup[]>>;
-  addGroup: (group: SynonymGroup) => void;
-  updateGroup: (id: string, group: SynonymGroup) => void;
-  deleteGroup: (id: string) => void;
+  isLoading: boolean;
+  addGroup: (group: Omit<SynonymGroup, 'id'>) => void;
+  updateGroup: (id: number, group: Omit<SynonymGroup, 'id'>) => void;
+  deleteGroup: (id: number) => void;
+  resetDefaults: () => void;
 };
 
 const SemanticContext = createContext<SemanticContextType | null>(null);
 
 export const SemanticProvider = ({ children }: { children: React.ReactNode }) => {
-  const [synonymGroups, setSynonymGroups] = useState<SynonymGroup[]>(() => {
-    const saved = localStorage.getItem('semantica_synonyms');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.error(e); }
-    }
-    return defaultSynonyms;
+  const queryClient = useQueryClient();
+
+  const { data: synonymGroups = [], isLoading } = useQuery<SynonymGroup[]>({
+    queryKey: ['/api/synonym-groups'],
   });
 
-  useEffect(() => {
-    localStorage.setItem('semantica_synonyms', JSON.stringify(synonymGroups));
-  }, [synonymGroups]);
+  const addMutation = useMutation({
+    mutationFn: async (group: Omit<SynonymGroup, 'id'>) => {
+      const res = await apiRequest('POST', '/api/synonym-groups', group);
+      return res.json();
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
+  });
 
-  const addGroup = (group: SynonymGroup) => setSynonymGroups(prev => [...prev, group]);
-  const updateGroup = (id: string, group: SynonymGroup) => setSynonymGroups(prev => prev.map(g => g.id === id ? group : g));
-  const deleteGroup = (id: string) => setSynonymGroups(prev => prev.filter(g => g.id !== id));
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, group }: { id: number; group: Omit<SynonymGroup, 'id'> }) => {
+      const res = await apiRequest('PUT', `/api/synonym-groups/${id}`, group);
+      return res.json();
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await apiRequest('DELETE', `/api/synonym-groups/${id}`);
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
+  });
+
+  const resetMutation = useMutation({
+    mutationFn: async () => {
+      // Delete all, then recreate defaults
+      for (const g of synonymGroups) {
+        await apiRequest('DELETE', `/api/synonym-groups/${g.id}`);
+      }
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu'],
+      });
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
+  });
+
+  const addGroup = (group: Omit<SynonymGroup, 'id'>) => addMutation.mutate(group);
+  const updateGroup = (id: number, group: Omit<SynonymGroup, 'id'>) => updateMutation.mutate({ id, group });
+  const deleteGroup = (id: number) => deleteMutation.mutate(id);
+  const resetDefaults = () => resetMutation.mutate();
 
   return (
-    <SemanticContext.Provider value={{ synonymGroups, setSynonymGroups, addGroup, updateGroup, deleteGroup }}>
+    <SemanticContext.Provider value={{ synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults }}>
       {children}
     </SemanticContext.Provider>
   );

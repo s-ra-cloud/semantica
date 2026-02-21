@@ -1,38 +1,39 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { type SynonymGroup, type InsertSynonymGroup, synonymGroups } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getSynonymGroups(): Promise<SynonymGroup[]>;
+  getSynonymGroup(id: number): Promise<SynonymGroup | undefined>;
+  createSynonymGroup(group: InsertSynonymGroup): Promise<SynonymGroup>;
+  updateSynonymGroup(id: number, group: InsertSynonymGroup): Promise<SynonymGroup | undefined>;
+  deleteSynonymGroup(id: number): Promise<boolean>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getSynonymGroups(): Promise<SynonymGroup[]> {
+    return db.select().from(synonymGroups);
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getSynonymGroup(id: number): Promise<SynonymGroup | undefined> {
+    const [group] = await db.select().from(synonymGroups).where(eq(synonymGroups.id, id));
+    return group;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async createSynonymGroup(group: InsertSynonymGroup): Promise<SynonymGroup> {
+    const [created] = await db.insert(synonymGroups).values(group).returning();
+    return created;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async updateSynonymGroup(id: number, group: InsertSynonymGroup): Promise<SynonymGroup | undefined> {
+    const [updated] = await db.update(synonymGroups).set(group).where(eq(synonymGroups.id, id)).returning();
+    return updated;
+  }
+
+  async deleteSynonymGroup(id: number): Promise<boolean> {
+    const [deleted] = await db.delete(synonymGroups).where(eq(synonymGroups.id, id)).returning();
+    return !!deleted;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

@@ -2,7 +2,7 @@ import { SynonymGroup } from '../context/SemanticContext';
 
 export type Segment =
   | { type: 'text'; content: string }
-  | { type: 'semantic'; original: string; alternatives: string[]; groupId: string };
+  | { type: 'semantic'; original: string; alternatives: string[]; groupId: number };
 
 export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
   const matches: { index: number; word: string; group: SynonymGroup }[] = [];

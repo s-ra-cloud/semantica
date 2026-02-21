@@ -5,10 +5,9 @@ import { Plus, Trash2, ArrowLeft, RotateCcw, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { defaultSynonyms } from '@/context/SemanticContext';
 
 export default function Editor() {
-  const { synonymGroups, addGroup, updateGroup, deleteGroup, setSynonymGroups } = useSemantic();
+  const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults } = useSemantic();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -25,7 +24,7 @@ export default function Editor() {
 
   const handleReset = () => {
     if (confirm("Are you sure you want to reset to default expressions? All custom expressions will be lost.")) {
-      setSynonymGroups(defaultSynonyms);
+      resetDefaults();
     }
   };
 
@@ -73,6 +72,14 @@ export default function Editor() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black text-zinc-300 flex items-center justify-center">
+        <p className="text-zinc-500">Loading expressions...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans p-6 md:p-12 selection:bg-green-500/30">
       <div className="max-w-4xl mx-auto">
@@ -92,11 +99,16 @@ export default function Editor() {
 
         <div className="space-y-6">
           {synonymGroups.map(group => (
-            <GroupEditor key={group.id} group={group} onUpdate={(g) => updateGroup(group.id, g)} onDelete={() => deleteGroup(group.id)} />
+            <GroupEditor 
+              key={group.id} 
+              group={group} 
+              onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words })} 
+              onDelete={() => deleteGroup(group.id)} 
+            />
           ))}
           
           <Button 
-            onClick={() => addGroup({ id: Date.now().toString(), language: 'en', words: [''] })}
+            onClick={() => addGroup({ language: 'en', words: [''] })}
             variant="outline" 
             className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
           >
@@ -130,7 +142,7 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
         <div className="flex items-center gap-4">
           <Select 
             value={group.language} 
-            onValueChange={(val: 'en'|'fr') => onUpdate({ ...group, language: val })}
+            onValueChange={(val: string) => onUpdate({ ...group, language: val })}
           >
             <SelectTrigger className="w-[120px] bg-zinc-950 border-zinc-800 text-zinc-300">
               <SelectValue />

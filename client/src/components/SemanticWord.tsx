@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface SemanticWordProps {
   original: string;
   alternatives: string[];
-  groupId: string;
+  groupId: number;
 }
 
 export function SemanticWord({ original, alternatives, groupId }: SemanticWordProps) {
