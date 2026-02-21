@@ -120,6 +120,12 @@ export default function Home() {
           >
             FR
           </button>
+          <span
+            className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-zinc-800 text-zinc-700 font-medium cursor-default"
+            data-testid="btn-lang-de-mobile"
+          >
+            DE
+          </span>
         </div>
         <span className="text-[10px] uppercase tracking-widest text-amber-500/80 border border-amber-500/30 rounded-full px-2.5 py-0.5 bg-amber-500/5 font-medium" data-testid="badge-beta">
           Beta
@@ -127,7 +133,7 @@ export default function Home() {
         <button
           onClick={() => setShowParticles(!showParticles)}
           className="w-8 h-8 rounded-full border border-zinc-700 hover:border-zinc-500 flex items-center justify-center transition-colors text-zinc-500 hover:text-zinc-300"
-          title={showParticles ? 'Hide particles' : 'Show particles'}
+          title={showParticles ? (language === 'en' ? 'Hide particles' : 'Masquer les particules') : (language === 'en' ? 'Show particles' : 'Afficher les particules')}
           data-testid="btn-toggle-particles"
         >
           {showParticles ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -135,7 +141,7 @@ export default function Home() {
         <button
           onClick={() => setShowFeedback(true)}
           className="w-8 h-8 rounded-full border border-zinc-700 hover:border-green-500/50 flex items-center justify-center transition-colors text-zinc-500 hover:text-green-400"
-          title="Report a mistake"
+          title={language === 'en' ? 'Report a mistake' : 'Signaler une erreur'}
           data-testid="btn-feedback"
         >
           <MessageSquare className="w-3.5 h-3.5" />
@@ -159,26 +165,26 @@ export default function Home() {
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 max-w-md w-full"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-white font-display font-medium">Report a Mistake</h3>
+                <h3 className="text-white font-display font-medium">{language === 'en' ? 'Report a Mistake' : 'Signaler une erreur'}</h3>
                 <button onClick={() => setShowFeedback(false)} className="text-zinc-500 hover:text-white" data-testid="btn-close-feedback">
                   <X className="w-4 h-4" />
                 </button>
               </div>
               {feedbackSent ? (
-                <p className="text-green-400 text-sm py-4">Thank you for your feedback!</p>
+                <p className="text-green-400 text-sm py-4">{language === 'en' ? 'Thank you for your feedback!' : 'Merci pour votre retour\u00a0!'}</p>
               ) : (
                 <>
-                  <p className="text-zinc-500 text-xs mb-4">Found a missing or incorrect substitution? Let us know and we'll fix it.</p>
+                  <p className="text-zinc-500 text-xs mb-4">{language === 'en' ? "Found a missing or incorrect substitution? Let us know and we'll fix it." : 'Vous avez trouv\u00e9 une substitution manquante ou incorrecte\u00a0? Faites-le nous savoir.'}</p>
                   <input
                     type="text"
-                    placeholder="Proposition number (e.g. 3.141)"
+                    placeholder={language === 'en' ? "Proposition number (e.g. 3.141)" : "Num\u00e9ro de proposition (ex. 3.141)"}
                     value={feedbackPropId}
                     onChange={(e) => setFeedbackPropId(e.target.value)}
                     className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-3 focus:outline-none focus:border-green-500/50"
                     data-testid="input-feedback-prop"
                   />
                   <textarea
-                    placeholder="Describe the issue..."
+                    placeholder={language === 'en' ? "Describe the issue..." : "D\u00e9crivez le probl\u00e8me..."}
                     value={feedbackMessage}
                     onChange={(e) => setFeedbackMessage(e.target.value)}
                     className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-4 h-24 resize-none focus:outline-none focus:border-green-500/50"
@@ -190,7 +196,7 @@ export default function Home() {
                     className="w-full bg-green-600 hover:bg-green-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white text-sm font-medium py-2 rounded-lg transition-colors"
                     data-testid="btn-submit-feedback"
                   >
-                    {feedbackSending ? 'Sending...' : 'Send Feedback'}
+                    {feedbackSending ? (language === 'en' ? 'Sending...' : 'Envoi...') : (language === 'en' ? 'Send Feedback' : 'Envoyer')}
                   </button>
                 </>
               )}
@@ -225,6 +231,12 @@ export default function Home() {
             >
               Fran&ccedil;ais
             </button>
+            <span
+              className="text-zinc-700 cursor-default"
+              data-testid="btn-lang-de"
+            >
+              Deutsch <span className="text-zinc-700 text-xs">(coming soon)</span>
+            </span>
             
             <div className="h-px w-8 bg-zinc-800 my-2"></div>
 
@@ -233,7 +245,7 @@ export default function Home() {
               className={`text-left transition-colors flex items-center gap-1 ${showTeam ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
               data-testid="btn-team"
             >
-              Team
+              {language === 'en' ? 'Team' : '\u00c9quipe'}
               <ChevronDown className={`w-3 h-3 transition-transform ${showTeam ? 'rotate-180' : ''}`} />
             </button>
             {showTeam && (
@@ -251,14 +263,14 @@ export default function Home() {
               className={`text-left transition-colors flex items-center gap-1 ${showThanks ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
               data-testid="btn-thanks"
             >
-              Thanks
+              {language === 'en' ? 'Thanks' : 'Remerciements'}
               <ChevronDown className={`w-3 h-3 transition-transform ${showThanks ? 'rotate-180' : ''}`} />
             </button>
             {showThanks && (
               <div className="flex flex-col gap-2 pl-2 text-xs text-zinc-400">
                 <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-project">The Wittgenstein Project</a>
                 <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
-                <span className="text-zinc-500 leading-relaxed">The daughter of Gilles-Gaston Granger for the rights of the French translation</span>
+                <span className="text-zinc-500 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction fran\u00e7aise'}</span>
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
                 <span className="text-zinc-500">SATT Sud Est</span>
                 <span className="text-zinc-500">Machina Research Network</span>
@@ -271,7 +283,7 @@ export default function Home() {
             <Link href="/editor">
               <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
-                Expression DB
+                {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
               </span>
             </Link>
           </nav>
@@ -283,18 +295,18 @@ export default function Home() {
               Tractatus Logico-Philosophicus
             </h2>
             <p className="text-zinc-400 text-sm mb-4">
-              by Ludwig Wittgenstein
+              {language === 'en' ? 'by Ludwig Wittgenstein' : 'par Ludwig Wittgenstein'}
             </p>
             <p className="text-zinc-500 max-w-md text-sm leading-relaxed">
-              Read the Tractatus in a new way. Click the highlighted expressions to explore the semantic structure of the propositions.
+              {language === 'en' ? 'Read the Tractatus in a new way. Click the highlighted expressions to explore the semantic structure of the propositions.' : 'Lisez le Tractatus d\u2019une nouvelle mani\u00e8re. Cliquez sur les expressions surlign\u00e9es pour explorer la structure s\u00e9mantique des propositions.'}
             </p>
             <div className="mt-3 flex items-start gap-2 text-amber-500/70 text-xs max-w-md">
               <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-              <p>This is a beta version. There may still be mistakes in the substitutions. A German version is coming soon.</p>
+              <p>{language === 'en' ? 'This is a beta version. There may still be mistakes in the substitutions.' : 'Ceci est une version b\u00eata. Il peut encore y avoir des erreurs dans les substitutions.'}</p>
             </div>
             <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
               {language === 'en' ? (
-                <p>Based on the C.K. Ogden translation (1922), revised by Frank P. Ramsey. We have replaced every occurrence of "atomic fact" with "state of affairs" to better reflect the original German "Sachverhalt."</p>
+                <p>C.K. Ogden and Ramsey translation (1922)</p>
               ) : (
                 <p>Traduction fran&ccedil;aise de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
               )}
@@ -387,10 +399,10 @@ export default function Home() {
                 data-testid="btn-download-code"
               >
                 <Code className="w-3.5 h-3.5" />
-                View Source Code
+                {language === 'en' ? 'View Source Code' : 'Voir le code source'}
               </button>
               <p>
-                Licensed under the{' '}
+                {language === 'en' ? 'Licensed under the' : 'Sous licence'}{' '}
                 <a
                   href="https://www.gnu.org/licenses/gpl-3.0.en.html"
                   target="_blank"
@@ -401,7 +413,7 @@ export default function Home() {
                   GNU General Public License v3.0
                 </a>
               </p>
-              <p className="text-zinc-700">Semantica &mdash; An interactive reading of the Tractatus Logico-Philosophicus</p>
+              <p className="text-zinc-700">Semantica &mdash; {language === 'en' ? 'An interactive reading of the Tractatus Logico-Philosophicus' : 'Une lecture interactive du Tractatus Logico-Philosophicus'}</p>
             </div>
           </footer>
         </main>
