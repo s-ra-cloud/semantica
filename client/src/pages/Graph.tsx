@@ -71,7 +71,7 @@ const connections: Connection[] = [
   },
   {
     propositionId: '6.45',
-    propositionText: 'The feeling of the world as a limited whole is the mystical feeling.',
+    propositionText: 'The contemplation of the world sub specie aeterni is its contemplation as a limited whole.',
     source: {
       id: 'spinoza',
       author: 'Baruch Spinoza',
