@@ -2,11 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import StarSphere from '@/components/StarSphere';
 import { SemanticWord } from '@/components/SemanticWord';
+import { MathText } from '@/components/MathText';
 import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
 import { Database, ChevronDown } from 'lucide-react';
+import 'katex/dist/katex.min.css';
 
 function isChildOf(childId: string, parentId: string): boolean {
   if (!parentId.includes('.')) {
@@ -20,10 +22,11 @@ function hasChildren(propId: string, allIds: string[]): boolean {
 }
 
 function isVisible(propId: string, collapsed: Set<string>): boolean {
-  for (const cId of collapsed) {
-    if (isChildOf(propId, cId)) return false;
-  }
-  return true;
+  let visible = true;
+  collapsed.forEach(cId => {
+    if (isChildOf(propId, cId)) visible = false;
+  });
+  return visible;
 }
 
 export default function Home() {
@@ -187,7 +190,7 @@ export default function Home() {
                   <div className="text-lg leading-relaxed text-zinc-300 transition-colors group-hover:text-white">
                     {proposition.segments.map((segment, idx) => {
                       if (segment.type === 'text') {
-                        return <span key={idx}>{segment.content}</span>;
+                        return <MathText key={idx} text={segment.content} />;
                       } else if (segment.type === 'semantic') {
                         return (
                           <SemanticWord 

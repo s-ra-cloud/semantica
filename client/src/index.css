@@ -93,3 +93,8 @@
   text-decoration-color: #f97316;
   background-color: rgba(249, 115, 22, 0.1);
 }
+
+.katex {
+  color: inherit;
+  font-size: 1em;
+}
