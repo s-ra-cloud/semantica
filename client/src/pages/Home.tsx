@@ -208,7 +208,7 @@ export default function Home() {
 
       <div className="container mx-auto px-6 md:px-12 py-12 md:py-24 relative z-10 flex flex-col md:flex-row gap-16 md:gap-24 min-h-screen">
         
-        <aside className="w-full md:w-48 flex flex-col shrink-0">
+        <aside className="w-full md:w-48 flex flex-col shrink-0 md:sticky md:top-24 md:self-start md:max-h-[calc(100vh-6rem)] md:overflow-y-auto">
           <div className="mb-16">
             <svg viewBox="0 0 40 40" className="w-8 h-8 text-white mb-2" fill="none" stroke="currentColor" strokeWidth="3">
               <path d="M10 20 L20 10 L30 20 L20 30 Z" />
