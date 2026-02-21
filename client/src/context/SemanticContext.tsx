@@ -12,7 +12,7 @@ export type SynonymGroup = {
 type SemanticContextType = {
   synonymGroups: SynonymGroup[];
   isLoading: boolean;
-  addGroup: (group: Omit<SynonymGroup, 'id'>) => void;
+  addGroup: (group: Omit<SynonymGroup, 'id'>) => Promise<void>;
   updateGroup: (id: number, group: Omit<SynonymGroup, 'id'>) => void;
   deleteGroup: (id: number) => void;
   resetDefaults: () => void;
@@ -267,7 +267,7 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
   });
 
-  const addGroup = (group: Omit<SynonymGroup, 'id'>) => addMutation.mutate(group);
+  const addGroup = async (group: Omit<SynonymGroup, 'id'>) => { await addMutation.mutateAsync(group); };
   const updateGroup = (id: number, group: Omit<SynonymGroup, 'id'>) => updateMutation.mutate({ id, group });
   const deleteGroup = (id: number) => deleteMutation.mutate(id);
   const resetDefaults = () => resetMutation.mutate();
