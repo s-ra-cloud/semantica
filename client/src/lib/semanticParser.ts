@@ -3,12 +3,37 @@ import { SynonymGroup } from '../context/SemanticContext';
 export type Segment =
   | { type: 'text'; content: string }
   | { type: 'semantic'; original: string; alternatives: string[]; groupId: number }
-  | { type: 'logic'; original: string; translation: string; groupId: number };
+  | { type: 'logic'; original: string; translation: string; groupId: number }
+  | { type: 'math-logic'; latex: string; rawMatch: string; translation: string; groupId: number };
 
-export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
-  const semanticGroups = groups.filter(g => g.type === 'semantic');
-  const logicGroups = groups.filter(g => g.type === 'logic');
+interface TextChunk {
+  kind: 'plain' | 'math';
+  content: string;
+  start: number;
+}
 
+function splitMathBlocks(text: string): TextChunk[] {
+  const chunks: TextChunk[] = [];
+  const mathRegex = /\[math\].*?\[\/math\]/g;
+  let lastIndex = 0;
+  let m;
+
+  while ((m = mathRegex.exec(text)) !== null) {
+    if (m.index > lastIndex) {
+      chunks.push({ kind: 'plain', content: text.substring(lastIndex, m.index), start: lastIndex });
+    }
+    chunks.push({ kind: 'math', content: m[0], start: m.index });
+    lastIndex = m.index + m[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    chunks.push({ kind: 'plain', content: text.substring(lastIndex), start: lastIndex });
+  }
+
+  return chunks;
+}
+
+function parsePlainText(text: string, offset: number, semanticGroups: SynonymGroup[], logicGroups: SynonymGroup[]): Segment[] {
   const matches: { index: number; length: number; word: string; group: SynonymGroup; matchType: 'semantic' | 'logic' }[] = [];
 
   logicGroups.forEach(group => {
@@ -82,6 +107,38 @@ export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
 
   if (lastIndex < text.length) {
     segments.push({ type: 'text', content: text.substring(lastIndex) });
+  }
+
+  return segments;
+}
+
+export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
+  const semanticGroups = groups.filter(g => g.type === 'semantic');
+  const logicGroups = groups.filter(g => g.type === 'logic');
+  const mathLogicGroups = groups.filter(g => g.type === 'math-logic');
+
+  const chunks = splitMathBlocks(text);
+  const segments: Segment[] = [];
+
+  for (const chunk of chunks) {
+    if (chunk.kind === 'plain') {
+      segments.push(...parsePlainText(chunk.content, chunk.start, semanticGroups, logicGroups));
+    } else {
+      const matchedGroup = mathLogicGroups.find(g => g.words[0] === chunk.content);
+      if (matchedGroup) {
+        const inner = chunk.content.replace(/^\[math\]/, '').replace(/\[\/math\]$/, '');
+        const latex = inner.replace(/\\displaystyle\s*/, '');
+        segments.push({
+          type: 'math-logic',
+          latex,
+          rawMatch: chunk.content,
+          translation: matchedGroup.words[1] || chunk.content,
+          groupId: matchedGroup.id
+        });
+      } else {
+        segments.push({ type: 'text', content: chunk.content });
+      }
+    }
   }
 
   return segments;

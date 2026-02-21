@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import StarSphere from '@/components/StarSphere';
 import { SemanticWord } from '@/components/SemanticWord';
 import { LogicWord } from '@/components/LogicWord';
+import { MathLogicWord } from '@/components/MathLogicWord';
 import { MathText } from '@/components/MathText';
 import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
@@ -213,6 +214,15 @@ export default function Home() {
                           <LogicWord
                             key={idx}
                             original={segment.original}
+                            translation={segment.translation}
+                            groupId={segment.groupId}
+                          />
+                        );
+                      } else if (segment.type === 'math-logic') {
+                        return (
+                          <MathLogicWord
+                            key={idx}
+                            latex={segment.latex}
                             translation={segment.translation}
                             groupId={segment.groupId}
                           />

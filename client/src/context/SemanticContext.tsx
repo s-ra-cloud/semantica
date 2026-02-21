@@ -227,6 +227,41 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
           type: 'logic',
         });
       }
+
+      const mathLogicPairsEn: [string, string][] = [
+        ['[math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math]', 'joint denial of all propositions ξ'],
+        ['[math]\\displaystyle{ N (\\bar{\\xi}) }[/math]', 'joint denial of all propositions ξ'],
+        ['[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math]', 'all values of ξ'],
+        ['[math]\\displaystyle{ [ \\bar{p}, \\bar{\\xi}, N (\\bar{\\xi}) ] }[/math]', '[all propositions, variable, joint denial] — general truth-function form'],
+        ['[math]\\displaystyle{ \\Omega \' (\\bar{\\eta}) }[/math]', 'successive application of operation Ω to η'],
+        ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', 'general form of successive operation application'],
+        ['[math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math]', 'Kn = total combinations of truth-values for n states of affairs'],
+        ['[math]\\displaystyle{ \\sum_{\\kappa=0}^{K_n} \\binom{K_n}{\\kappa} = L_n }[/math]', 'Ln = total possible truth-functions for n propositions'],
+      ];
+
+      const mathLogicPairsFr: [string, string][] = [
+        ['[math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math]', 'négation conjointe de toutes les propositions ξ'],
+        ['[math]\\displaystyle{ N (\\bar{\\xi}) }[/math]', 'négation conjointe de toutes les propositions ξ'],
+        ['[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math]', 'toutes les valeurs de ξ'],
+        ['[math]\\displaystyle{ [ \\bar{p}, \\bar{\\xi}, N (\\bar{\\xi}) ] }[/math]', '[toutes les propositions, variable, négation conjointe] — forme générale de la fonction de vérité'],
+        ['[math]\\displaystyle{ \\Omega \' (\\bar{\\eta}) }[/math]', 'application successive de l\'opération Ω à η'],
+        ['[math]\\displaystyle{ [\\bar{\\xi}, N(\\bar{\\xi})]\' (\\bar{\\eta}) (= [ \\bar{\\eta}, \\bar{\\xi}, N (\\bar{\\xi}) ]) }[/math]', 'forme générale de l\'application successive d\'opérations'],
+      ];
+
+      for (const [expr, trans] of mathLogicPairsEn) {
+        await apiRequest('POST', '/api/synonym-groups', {
+          language: 'en',
+          words: [expr, trans],
+          type: 'math-logic',
+        });
+      }
+      for (const [expr, trans] of mathLogicPairsFr) {
+        await apiRequest('POST', '/api/synonym-groups', {
+          language: 'fr',
+          words: [expr, trans],
+          type: 'math-logic',
+        });
+      }
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
   });

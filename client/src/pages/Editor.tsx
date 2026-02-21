@@ -153,8 +153,8 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
             </SelectContent>
           </Select>
           <div className="text-sm text-zinc-500 font-mono">ID: {group.id}</div>
-          <span className={`text-xs px-2 py-0.5 rounded-full ${group.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
-            {group.type === 'logic' ? 'Logic' : 'Semantic'}
+          <span className={`text-xs px-2 py-0.5 rounded-full ${group.type === 'math-logic' ? 'bg-purple-500/20 text-purple-400' : group.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
+            {group.type === 'math-logic' ? 'Math' : group.type === 'logic' ? 'Logic' : 'Semantic'}
           </span>
         </div>
         <Button variant="ghost" size="icon" onClick={onDelete} className="text-zinc-500 hover:text-red-400 hover:bg-red-400/10">
