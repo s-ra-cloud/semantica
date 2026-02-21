@@ -82,6 +82,7 @@ export async function seedDatabaseIfEmpty() {
     { language: 'fr', words: ['objet', 'entité', 'chose'], type: 'semantic' },
     { language: 'fr', words: ["d'objet", "d'entité", "de chose"], type: 'semantic' },
     { language: 'fr', words: ["d'objets", "d'entités", "de choses"], type: 'semantic' },
+    { language: 'fr', words: ["l'objet", "l'entité", "la chose"], type: 'semantic' },
   ];
 
   const logicPairsEn: [string, string][] = [
