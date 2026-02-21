@@ -1,5 +1,40 @@
 import { SynonymGroup } from '../context/SemanticContext';
 
+type PropositionTextOverride = {
+  original: string;
+  replacements: Record<string, string>;
+};
+
+const propositionOverrides: Record<string, PropositionTextOverride[]> = {
+  '1.1': [
+    {
+      original: ', non des ',
+      replacements: {
+        'la totalité des faits': ', non des ',
+        'le monde': ', non le monde.',
+        'tout ce qui a lieu': ", non tout ce qui a lieu.",
+        'tous les faits': ', non tous les faits.',
+        'la totalité de la réalité': ', non la totalité de la réalité.',
+      },
+    },
+  ],
+};
+
+const propositionOverridesEn: Record<string, PropositionTextOverride[]> = {
+  '1.1': [
+    {
+      original: ', not of ',
+      replacements: {
+        'the totality of facts': ', not of ',
+        'the world': ', not the world.',
+        'everything that is the case': ', not everything that is the case.',
+        'all the facts': ', not all the facts.',
+        'the totality of reality': ', not the totality of reality.',
+      },
+    },
+  ],
+};
+
 export type Segment =
   | { type: 'text'; content: string }
   | { type: 'semantic'; original: string; alternatives: string[]; groupId: number }
