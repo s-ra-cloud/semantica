@@ -105,6 +105,22 @@ export default function Home() {
       )}
 
       <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <div className="md:hidden flex items-center gap-1 mr-1">
+          <button
+            onClick={() => setLanguage('en')}
+            className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border transition-colors font-medium ${language === 'en' ? 'text-white border-white/30 bg-white/10' : 'text-zinc-500 border-zinc-700 hover:text-zinc-300'}`}
+            data-testid="btn-lang-en-mobile"
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setLanguage('fr')}
+            className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border transition-colors font-medium ${language === 'fr' ? 'text-white border-white/30 bg-white/10' : 'text-zinc-500 border-zinc-700 hover:text-zinc-300'}`}
+            data-testid="btn-lang-fr-mobile"
+          >
+            FR
+          </button>
+        </div>
         <span className="text-[10px] uppercase tracking-widest text-amber-500/80 border border-amber-500/30 rounded-full px-2.5 py-0.5 bg-amber-500/5 font-medium" data-testid="badge-beta">
           Beta
         </span>
