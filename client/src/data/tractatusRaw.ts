@@ -190,7 +190,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.061",
-    "content": "Atomic facts are independent of one another."
+    "content": "States of affairs are independent of one another."
   },
   {
     "id": "2.062",

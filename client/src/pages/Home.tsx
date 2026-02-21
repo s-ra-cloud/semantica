@@ -154,6 +154,13 @@ export default function Home() {
             <p className="text-zinc-500 max-w-md text-sm leading-relaxed">
               Read the Tractatus in a new way. Click the highlighted expressions to explore the semantic structure of the propositions.
             </p>
+            <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
+              {language === 'en' ? (
+                <p>Based on the C.K. Ogden translation (1922), revised by Frank P. Ramsey. We have replaced every occurrence of "atomic fact" with "state of affairs" to better reflect the original German "Sachverhalt."</p>
+              ) : (
+                <p>Traduction française de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
+              )}
+            </div>
           </div>
 
           <div className="space-y-8" key={language}>
