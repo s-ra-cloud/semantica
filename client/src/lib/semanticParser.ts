@@ -90,6 +90,10 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     'thing': ['something', 'anything', 'nothing', 'everything'],
     'things': ['somethings'],
     'objects': ['combination of objects', 'combinations of objects'],
+    'forme': ['forme de l\'objet'],
+    'objet': ['forme de l\'objet'],
+    'form': ['form of the object'],
+    'object': ['form of the object'],
   };
 
   semanticGroups.forEach(group => {
