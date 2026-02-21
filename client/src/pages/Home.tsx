@@ -304,12 +304,12 @@ export default function Home() {
                     {canCollapse && (
                       <button
                         onClick={() => toggleCollapse(proposition.id)}
-                        className="w-5 h-5 rounded-full border border-zinc-700 hover:border-zinc-500 flex items-center justify-center transition-colors"
+                        className="collapse-btn w-5 h-5 rounded-full border border-zinc-700 hover:border-zinc-500 flex items-center justify-center transition-colors"
                         data-testid={`collapse-${proposition.id}`}
                       >
                         <svg
                           viewBox="0 0 10 10"
-                          className={`w-2.5 h-2.5 text-zinc-500 transition-transform ${isCollapsed ? '-rotate-90' : ''}`}
+                          className={`w-2.5 h-2.5 text-zinc-500 transition-transform ${isCollapsed ? '-rotate-90' : 'rotate-90'}`}
                           fill="currentColor"
                         >
                           <polygon points="2,1 8,5 2,9" />
