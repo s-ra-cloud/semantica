@@ -176,7 +176,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-green-500/30 overflow-hidden relative">
       {showParticles && (
-        <div className="fixed top-1/2 right-[-30%] -translate-y-1/2 w-[150vw] h-[150vw] md:w-[800px] md:h-[800px] md:right-[-20%] opacity-60 pointer-events-none z-0">
+        <div className="fixed top-1/2 right-[-50%] -translate-y-1/2 w-[250vw] h-[250vw] md:w-[1200px] md:h-[1200px] md:right-[-30%] opacity-60 pointer-events-none z-0">
           <StarSphere />
         </div>
       )}
