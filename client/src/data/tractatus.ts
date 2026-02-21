@@ -5236,7 +5236,18 @@ export const tractatusEnglish: Proposition[] = [
       },
       {
         "type": "text",
-        "content": " sub specie aeterni is its contemplation as a limited whole."
+        "content": " sub specie aeterni is its contemplation as a limited whole.\nThe feeling of "
+      },
+      {
+        "type": "semantic",
+        "original": "the world",
+        "alternatives": [
+          "the totality of facts"
+        ]
+      },
+      {
+        "type": "text",
+        "content": " as a limited whole is the mystical feeling."
       }
     ]
   },
@@ -10576,7 +10587,18 @@ export const tractatusFrench: Proposition[] = [
       },
       {
         "type": "text",
-        "content": " sub specie æterni est sa saisie comme totalité bornée."
+        "content": " sub specie æterni est sa saisie comme totalité bornée.\nLe sentiment "
+      },
+      {
+        "type": "semantic",
+        "original": "du monde",
+        "alternatives": [
+          "de la totalité des faits"
+        ]
+      },
+      {
+        "type": "text",
+        "content": " comme totalité bornée est le Mystique."
       }
     ]
   },

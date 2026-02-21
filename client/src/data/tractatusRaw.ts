@@ -2074,7 +2074,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "6.45",
-    "content": "The contemplation of the world sub specie aeterni is its contemplation as a limited whole."
+    "content": "The contemplation of the world sub specie aeterni is its contemplation as a limited whole.\nThe feeling of the world as a limited whole is the mystical feeling."
   },
   {
     "id": "6.5",
@@ -4181,7 +4181,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.45",
-    "content": "La saisie du monde sub specie æterni est sa saisie comme totalité bornée."
+    "content": "La saisie du monde sub specie æterni est sa saisie comme totalité bornée.\nLe sentiment du monde comme totalité bornée est le Mystique."
   },
   {
     "id": "6.5",
