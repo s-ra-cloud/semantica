@@ -82,6 +82,13 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     }
   });
 
+  const compoundExclusions: Record<string, string[]> = {
+    'chose': ['quelque chose'],
+    'choses': ['quelques choses'],
+    'thing': ['something', 'anything', 'nothing', 'everything'],
+    'things': ['somethings'],
+  };
+
   semanticGroups.forEach(group => {
     group.words.forEach(word => {
       const trimmed = word.trim();
@@ -96,6 +103,13 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
       }
       let m;
       while ((m = regex.exec(text)) !== null) {
+        const lowerWord = trimmed.toLowerCase();
+        const exclusions = compoundExclusions[lowerWord];
+        if (exclusions) {
+          const surrounding = text.substring(Math.max(0, m.index - 20), m.index + m[0].length + 20).toLowerCase();
+          const isPartOfCompound = exclusions.some(compound => surrounding.includes(compound));
+          if (isPartOfCompound) continue;
+        }
         matches.push({ index: m.index, length: m[0].length, word: m[0], group, matchType: 'semantic' });
       }
     });
