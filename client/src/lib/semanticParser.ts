@@ -113,11 +113,12 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
 }
 
 export function parseSemantic(text: string, groups: SynonymGroup[]): Segment[] {
+  const normalizedText = text.replace(/\u00A0/g, ' ');
   const semanticGroups = groups.filter(g => g.type === 'semantic');
   const logicGroups = groups.filter(g => g.type === 'logic');
   const mathLogicGroups = groups.filter(g => g.type === 'math-logic');
 
-  const chunks = splitMathBlocks(text);
+  const chunks = splitMathBlocks(normalizedText);
   const segments: Segment[] = [];
 
   for (const chunk of chunks) {

@@ -36,8 +36,9 @@ Preferred communication style: Simple, everyday language.
 ### Data Flow
 1. Tractatus text is stored as static TypeScript data files (`tractatusRaw.ts`) containing raw propositions scraped from the Wittgenstein Project
 2. Synonym groups are fetched from the database via the API
-3. The `semanticParser` function dynamically parses raw text against active synonym groups to produce interactive segments
+3. The `semanticParser` function normalizes non-breaking spaces, splits at `[math]...[/math]` boundaries, then dynamically parses plain text against active synonym groups to produce interactive segments
 4. Groups are filtered by language to match the currently selected language
+5. EN and FR texts use different spacing conventions (EN: spaces after commas in `f(x, y)`, FR: no spaces `f(x,y)`); DB entries exist for both variants
 
 ### Build System
 - Development: Vite dev server with HMR, proxied through Express
