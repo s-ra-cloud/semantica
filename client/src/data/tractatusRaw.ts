@@ -34,19 +34,19 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2",
-    "content": "What is the case, the fact, is the existence of atomic facts."
+    "content": "What is the case, the fact, is the existence of states of affairs."
   },
   {
     "id": "2.01",
-    "content": "An atomic fact is a combination of objects (entities, things)."
+    "content": "A state of affairs is a combination of objects (entities, things)."
   },
   {
     "id": "2.011",
-    "content": "It is essential to a thing that it can be a constituent part of an atomic fact."
+    "content": "It is essential to a thing that it can be a constituent part of a state of affairs."
   },
   {
     "id": "2.012",
-    "content": "In logic nothing is accidental: if a thing can occur in an atomic fact the possibility of that atomic fact must already be prejudged in the thing."
+    "content": "In logic nothing is accidental: if a thing can occur in a state of affairs the possibility of that state of affairs must already be prejudged in the thing."
   },
   {
     "id": "2.0121",
@@ -54,11 +54,11 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0122",
-    "content": "The thing is independent, in so far as it can occur in all possible circumstances, but this form of independence is a form of connexion with the atomic fact, a form of dependence. (It is impossible for words to occur in two different ways, alone and in the proposition.)"
+    "content": "The thing is independent, in so far as it can occur in all possible circumstances, but this form of independence is a form of connexion with the state of affairs, a form of dependence. (It is impossible for words to occur in two different ways, alone and in the proposition.)"
   },
   {
     "id": "2.0123",
-    "content": "If I know an object, then I also know all the possibilities of its occurrence in atomic facts."
+    "content": "If I know an object, then I also know all the possibilities of its occurrence in states of affairs."
   },
   {
     "id": "2.01231",
@@ -66,11 +66,11 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0124",
-    "content": "If all objects are given, then thereby are all possible atomic facts also given."
+    "content": "If all objects are given, then thereby are all possible states of affairs also given."
   },
   {
     "id": "2.013",
-    "content": "Every thing is, as it were, in a space of possible atomic facts. I can think of this space as empty, but not of the thing without the space."
+    "content": "Every thing is, as it were, in a space of possible states of affairs. I can think of this space as empty, but not of the thing without the space."
   },
   {
     "id": "2.0131",
@@ -82,7 +82,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0141",
-    "content": "The possibility of its occurrence in atomic facts is the form of the object."
+    "content": "The possibility of its occurrence in states of affairs is the form of the object."
   },
   {
     "id": "2.02",
@@ -154,19 +154,19 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0272",
-    "content": "The configuration of the objects forms the atomic fact."
+    "content": "The configuration of the objects forms the state of affairs."
   },
   {
     "id": "2.03",
-    "content": "In the atomic fact objects hang one in another, like the links of a chain."
+    "content": "In the state of affairs objects hang one in another, like the links of a chain."
   },
   {
     "id": "2.031",
-    "content": "In the atomic fact the objects are combined in a definite way."
+    "content": "In the state of affairs the objects are combined in a definite way."
   },
   {
     "id": "2.032",
-    "content": "The way in which objects hang together in the atomic fact is the structure of the atomic fact."
+    "content": "The way in which objects hang together in the state of affairs is the structure of the state of affairs."
   },
   {
     "id": "2.033",
@@ -174,19 +174,19 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.034",
-    "content": "The structure of the fact consists of the structures of the atomic facts."
+    "content": "The structure of the fact consists of the structures of the states of affairs."
   },
   {
     "id": "2.04",
-    "content": "The totality of existent atomic facts is the world."
+    "content": "The totality of existent states of affairs is the world."
   },
   {
     "id": "2.05",
-    "content": "The totality of existent atomic facts also determines which atomic facts do not exist."
+    "content": "The totality of existent states of affairs also determines which states of affairs do not exist."
   },
   {
     "id": "2.06",
-    "content": "The existence and non-existence of atomic facts is the reality."
+    "content": "The existence and non-existence of states of affairs is the reality."
   },
   {
     "id": "2.061",
@@ -194,7 +194,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.062",
-    "content": "From the existence or non-existence of an atomic fact we cannot infer the existence or non-existence of another."
+    "content": "From the existence or non-existence of a state of affairs we cannot infer the existence or non-existence of another."
   },
   {
     "id": "2.063",
@@ -206,7 +206,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.11",
-    "content": "The picture presents the facts in logical space, the existence and non-existence of atomic facts."
+    "content": "The picture presents the facts in logical space, the existence and non-existence of states of affairs."
   },
   {
     "id": "2.12",
@@ -310,7 +310,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.201",
-    "content": "The picture depicts reality by representing a possibility of the existence and non-existence of atomic facts."
+    "content": "The picture depicts reality by representing a possibility of the existence and non-existence of states of affairs."
   },
   {
     "id": "2.202",
@@ -354,7 +354,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "3.001",
-    "content": "“An atomic fact is thinkable”—means: we can imagine it."
+    "content": "“A state of affairs is thinkable”—means: we can imagine it."
   },
   {
     "id": "3.01",
@@ -378,7 +378,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "3.0321",
-    "content": "We could present spatially an atomic fact which contradicted the laws of physics, but not one which contradicted the laws of geometry."
+    "content": "We could present spatially a state of affairs which contradicted the laws of physics, but not one which contradicted the laws of geometry."
   },
   {
     "id": "3.04",
@@ -738,7 +738,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.0311",
-    "content": "One name stands for one thing, and another for another thing, and they are connected together. And so the whole, like a living picture, presents the atomic fact."
+    "content": "One name stands for one thing, and another for another thing, and they are connected together. And so the whole, like a living picture, presents the state of affairs."
   },
   {
     "id": "4.0312",
@@ -798,7 +798,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.1",
-    "content": "A proposition presents the existence and non-existence of atomic facts."
+    "content": "A proposition presents the existence and non-existence of states of affairs."
   },
   {
     "id": "4.11",
@@ -858,7 +858,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.122",
-    "content": "We can speak in a certain sense of formal properties of objects and atomic facts, or of properties of the structure of facts, and in the same sense of formal relations and relations of structures."
+    "content": "We can speak in a certain sense of formal properties of objects and states of affairs, or of properties of the structure of facts, and in the same sense of formal relations and relations of structures."
   },
   {
     "id": "4.1221",
@@ -922,11 +922,11 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.2",
-    "content": "The sense of a proposition is its agreement and disagreement with the possibilities of the existence and non-existence of the atomic facts."
+    "content": "The sense of a proposition is its agreement and disagreement with the possibilities of the existence and non-existence of the states of affairs."
   },
   {
     "id": "4.21",
-    "content": "The simplest proposition, the elementary proposition, asserts the existence of an atomic fact."
+    "content": "The simplest proposition, the elementary proposition, asserts the existence of a state of affairs."
   },
   {
     "id": "4.211",
@@ -942,7 +942,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.2211",
-    "content": "Even if the world is infinitely complex, so that every fact consists of an infinite number of atomic facts and every atomic fact is composed of an infinite number of objects, even then there must be objects and atomic facts."
+    "content": "Even if the world is infinitely complex, so that every fact consists of an infinite number of states of affairs and every state of affairs is composed of an infinite number of objects, even then there must be objects and states of affairs."
   },
   {
     "id": "4.23",
@@ -966,7 +966,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.25",
-    "content": "If the elementary proposition is true, the atomic fact exists; if it is false the atomic fact does not exist."
+    "content": "If the elementary proposition is true, the state of affairs exists; if it is false the state of affairs does not exist."
   },
   {
     "id": "4.26",
@@ -974,7 +974,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.27",
-    "content": "With regard to the existence of n atomic facts there are [math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math] possibilities."
+    "content": "With regard to the existence of n states of affairs there are [math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math] possibilities."
   },
   {
     "id": "4.28",
@@ -982,7 +982,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.3",
-    "content": "The truth-possibilities of the elementary propositions mean the possibilities of the existence and non-existence of the atomic facts."
+    "content": "The truth-possibilities of the elementary propositions mean the possibilities of the existence and non-existence of the states of affairs."
   },
   {
     "id": "4.31",
