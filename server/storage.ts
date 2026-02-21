@@ -70,6 +70,7 @@ export async function seedDatabaseIfEmpty() {
     { language: 'en', words: ['names', 'simple signs'], type: 'semantic' },
     { language: 'en', words: ['what is the case', 'the fact', 'the existence of states of affairs'], type: 'semantic' },
     { language: 'en', words: ['objects', 'entities', 'things'], type: 'semantic' },
+    { language: 'en', words: ['substance', 'that which subsists independently of what is the case'], type: 'semantic' },
     { language: 'en', words: ['object', 'entity', 'thing'], type: 'semantic' },
   ];
 
@@ -80,6 +81,7 @@ export async function seedDatabaseIfEmpty() {
     { language: 'fr', words: ['ce qui a lieu', 'le fait', "la subsistance d'états de choses"], type: 'semantic' },
     { language: 'fr', words: ['objets', 'entités', 'choses'], type: 'semantic' },
     { language: 'fr', words: ['objet', 'entité', 'chose'], type: 'semantic' },
+    { language: 'fr', words: ['la substance', 'ce qui subsiste indépendamment de ce qui a lieu'], type: 'semantic' },
     { language: 'fr', words: ["d'objet", "d'entité", "de chose"], type: 'semantic' },
     { language: 'fr', words: ["d'objets", "d'entités", "de choses"], type: 'semantic' },
     { language: 'fr', words: ["l'objet", "l'entité", "la chose"], type: 'semantic' },
