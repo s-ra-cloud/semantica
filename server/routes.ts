@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage, seedDatabaseIfEmpty } from "./storage";
 import { insertSynonymGroupSchema, insertFeedbackSchema } from "@shared/schema";
 import archiver from "archiver";
 import path from "path";
@@ -10,6 +10,7 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  await seedDatabaseIfEmpty();
   app.get("/api/synonym-groups/export", async (_req, res) => {
     const groups = await storage.getSynonymGroups();
     const exportData = groups.map(({ id, ...rest }) => rest);
