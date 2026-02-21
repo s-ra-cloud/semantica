@@ -66,8 +66,15 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
 
   const validMatches = [];
   let currentEnd = 0;
+  const usedSemanticGroupIds = new Set<number>();
   for (const match of matches) {
     if (match.index >= currentEnd) {
+      if (match.matchType === 'semantic') {
+        if (usedSemanticGroupIds.has(match.group.id)) {
+          continue;
+        }
+        usedSemanticGroupIds.add(match.group.id);
+      }
       validMatches.push(match);
       currentEnd = match.index + match.length;
     }
