@@ -460,7 +460,7 @@ export default function Home() {
               {language === 'en' ? 'by Ludwig Wittgenstein' : 'par Ludwig Wittgenstein'}
             </p>
             <p className="text-white max-w-md text-sm leading-relaxed">
-              {language === 'en' ? 'Read the Tractatus in a new way. Click the highlighted expressions to explore the semantic structure of the propositions.' : 'Lisez le Tractatus d\u2019une nouvelle mani\u00e8re. Cliquez sur les expressions surlign\u00e9es pour explorer la structure s\u00e9mantique des propositions.'}
+              {language === 'en' ? <>Click on <span className="text-green-400">green</span> expressions to swap semantic equivalents, <span className="text-blue-400">blue</span> expressions to toggle logical notation, and <span className="text-purple-400">purple</span> boxes to discover connections to other philosophical texts.</> : <>Cliquez sur les expressions en <span className="text-green-400">vert</span> pour permuter des équivalents sémantiques, sur les expressions en <span className="text-blue-400">bleu</span> pour basculer en notation logique, et sur les encadrés <span className="text-purple-400">violets</span> pour découvrir des connexions à d'autres textes philosophiques.</>}
             </p>
             <div className="mt-3 flex items-start gap-2 text-amber-500/70 text-xs max-w-md">
               <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
