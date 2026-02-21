@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
-import { Plus, Trash2, ArrowLeft, RotateCcw } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, RotateCcw, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -9,12 +9,69 @@ import { defaultSynonyms } from '@/context/SemanticContext';
 
 export default function Editor() {
   const { synonymGroups, addGroup, updateGroup, deleteGroup, setSynonymGroups } = useSemantic();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'Trismegiste') {
+      setIsAuthenticated(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
 
   const handleReset = () => {
     if (confirm("Are you sure you want to reset to default expressions? All custom expressions will be lost.")) {
       setSynonymGroups(defaultSynonyms);
     }
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-black text-zinc-300 font-sans p-6 md:p-12 flex items-center justify-center selection:bg-green-500/30">
+        <div className="w-full max-w-sm p-8 border border-zinc-800 rounded-2xl bg-zinc-900/30 shadow-2xl">
+          <div className="flex flex-col items-center mb-8">
+            <div className="w-12 h-12 bg-zinc-800/50 rounded-full flex items-center justify-center mb-4">
+              <Lock className="w-6 h-6 text-zinc-400" />
+            </div>
+            <h1 className="text-2xl font-display font-medium text-white">Database Access</h1>
+            <p className="text-zinc-500 text-sm mt-2 text-center">Enter the password to edit expressions</p>
+          </div>
+          
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError(false);
+                }}
+                placeholder="Password"
+                className={`bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white h-12 ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : ''}`}
+                autoFocus
+              />
+              {error && <p className="text-red-400 text-xs mt-2">Incorrect password</p>}
+            </div>
+            <Button type="submit" className="w-full bg-white text-black hover:bg-zinc-200 h-12 text-sm font-medium">
+              Access Database
+            </Button>
+          </form>
+
+          <div className="mt-8 text-center">
+            <Link href="/">
+              <Button variant="ghost" className="text-zinc-500 hover:text-white">
+                <ArrowLeft className="w-4 h-4 mr-2" /> Back to Tractatus
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans p-6 md:p-12 selection:bg-green-500/30">
