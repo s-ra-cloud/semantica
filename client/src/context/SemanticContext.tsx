@@ -57,19 +57,19 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
       }
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
-        words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case'],
+        words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case', 'all the facts'],
       });
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
-        words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu'],
+        words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu', 'tous les faits'],
       });
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
-        words: ['the thought', 'the logical picture of the facts'],
+        words: ['the thought', 'the logical picture of the facts', 'the significant proposition'],
       });
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
-        words: ['la pensée', "l'image logique des faits"],
+        words: ['la pensée', "l'image logique des faits", 'la proposition pourvue de sens'],
       });
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
@@ -78,6 +78,30 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['noms', 'signes simples'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['what is the case', 'the fact', 'the existence of atomic facts'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['ce qui a lieu', 'le fait', "la subsistance d'états de choses"],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['objects', 'entities', 'things'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['objets', 'entités', 'choses'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'en',
+        words: ['object', 'entity', 'thing'],
+      });
+      await apiRequest('POST', '/api/synonym-groups', {
+        language: 'fr',
+        words: ['objet', 'entité', 'chose'],
       });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
