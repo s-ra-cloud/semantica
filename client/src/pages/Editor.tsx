@@ -102,13 +102,13 @@ export default function Editor() {
             <GroupEditor 
               key={group.id} 
               group={group} 
-              onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words })} 
+              onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words, type: g.type || 'semantic' })} 
               onDelete={() => deleteGroup(group.id)} 
             />
           ))}
           
           <Button 
-            onClick={() => addGroup({ language: 'en', words: [''] })}
+            onClick={() => addGroup({ language: 'en', words: [''], type: 'semantic' })}
             variant="outline" 
             className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
           >
@@ -153,6 +153,9 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
             </SelectContent>
           </Select>
           <div className="text-sm text-zinc-500 font-mono">ID: {group.id}</div>
+          <span className={`text-xs px-2 py-0.5 rounded-full ${group.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
+            {group.type === 'logic' ? 'Logic' : 'Semantic'}
+          </span>
         </div>
         <Button variant="ghost" size="icon" onClick={onDelete} className="text-zinc-500 hover:text-red-400 hover:bg-red-400/10">
           <Trash2 className="w-4 h-4" />

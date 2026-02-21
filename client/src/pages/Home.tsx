@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import StarSphere from '@/components/StarSphere';
 import { SemanticWord } from '@/components/SemanticWord';
+import { LogicWord } from '@/components/LogicWord';
 import { MathText } from '@/components/MathText';
 import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
@@ -197,6 +198,15 @@ export default function Home() {
                             key={idx}
                             original={segment.original}
                             alternatives={segment.alternatives}
+                            groupId={segment.groupId}
+                          />
+                        );
+                      } else if (segment.type === 'logic') {
+                        return (
+                          <LogicWord
+                            key={idx}
+                            original={segment.original}
+                            translation={segment.translation}
                             groupId={segment.groupId}
                           />
                         );

@@ -7,6 +7,7 @@ export const synonymGroups = pgTable("synonym_groups", {
   id: serial("id").primaryKey(),
   language: text("language").notNull().default("en"),
   words: text("words").array().notNull(),
+  type: text("type").notNull().default("semantic"),
 });
 
 export const insertSynonymGroupSchema = createInsertSchema(synonymGroups).omit({ id: true });
