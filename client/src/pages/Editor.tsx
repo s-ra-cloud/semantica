@@ -185,9 +185,10 @@ export default function Editor() {
           ))}
           
           <Button 
-            onClick={() => addGroup({ language: 'en', words: [''], type: 'semantic' })}
+            onClick={() => { addGroup({ language: 'en', words: [''], type: 'semantic' }); setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 300); }}
             variant="outline" 
             className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
+            data-testid="btn-add-group"
           >
             <Plus className="w-5 h-5 mr-2" /> Add New Expression Group
           </Button>
