@@ -65,7 +65,7 @@ export async function seedDatabaseIfEmpty() {
   console.log("Database empty, seeding default synonym groups...");
 
   const semanticGroupsEn: InsertSynonymGroup[] = [
-    { language: 'en', words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case', 'all the facts'], type: 'semantic' },
+    { language: 'en', words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case', 'all the facts', 'the totality of reality'], type: 'semantic' },
     { language: 'en', words: ['the thought', 'the logical picture of the facts', 'the significant proposition'], type: 'semantic' },
     { language: 'en', words: ['names', 'simple signs'], type: 'semantic' },
     { language: 'en', words: ['what is the case', 'the fact', 'the existence of states of affairs'], type: 'semantic' },
@@ -74,7 +74,7 @@ export async function seedDatabaseIfEmpty() {
   ];
 
   const semanticGroupsFr: InsertSynonymGroup[] = [
-    { language: 'fr', words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu', 'tous les faits'], type: 'semantic' },
+    { language: 'fr', words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu', 'tous les faits', 'la totalité de la réalité'], type: 'semantic' },
     { language: 'fr', words: ['la pensée', "l'image logique des faits", 'la proposition pourvue de sens'], type: 'semantic' },
     { language: 'fr', words: ['noms', 'signes simples'], type: 'semantic' },
     { language: 'fr', words: ['ce qui a lieu', 'le fait', "la subsistance d'états de choses"], type: 'semantic' },
