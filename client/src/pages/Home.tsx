@@ -8,14 +8,34 @@ import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
 import { Database, ChevronDown } from 'lucide-react';
 
+function isChildOf(childId: string, parentId: string): boolean {
+  if (!parentId.includes('.')) {
+    return childId.startsWith(parentId + '.');
+  }
+  return childId.startsWith(parentId) && childId.length > parentId.length;
+}
+
+function hasChildren(propId: string, allIds: string[]): boolean {
+  return allIds.some(id => isChildOf(id, propId));
+}
+
+function isVisible(propId: string, collapsed: Set<string>): boolean {
+  for (const cId of collapsed) {
+    if (isChildOf(propId, cId)) return false;
+  }
+  return true;
+}
+
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'fr'>('en');
   const [showTeam, setShowTeam] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
+  const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const { synonymGroups } = useSemantic();
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
   const activeGroups = useMemo(() => synonymGroups.filter(g => g.language === language), [synonymGroups, language]);
+  const allIds = useMemo(() => rawData?.map(p => p.id) || [], [rawData]);
 
   const parsedData = useMemo(() => {
     if (!rawData) return [];
@@ -25,6 +45,18 @@ export default function Home() {
       segments: parseSemantic(prop.content, activeGroups)
     }));
   }, [rawData, activeGroups]);
+
+  const toggleCollapse = (id: string) => {
+    setCollapsed(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-green-500/30 overflow-hidden relative">
@@ -121,36 +153,57 @@ export default function Home() {
           </div>
 
           <div className="space-y-8" key={language}>
-            {parsedData.map((proposition) => (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                key={proposition.id} 
-                className="flex gap-4 group"
-              >
-                <div className="font-mono text-xs text-zinc-600 pt-1 shrink-0 w-8">
-                  {proposition.id}
-                </div>
-                <div className="text-lg leading-relaxed text-zinc-300 transition-colors group-hover:text-white">
-                  {proposition.segments.map((segment, idx) => {
-                    if (segment.type === 'text') {
-                      return <span key={idx}>{segment.content}</span>;
-                    } else if (segment.type === 'semantic') {
-                      return (
-                        <SemanticWord 
-                          key={idx}
-                          original={segment.original}
-                          alternatives={segment.alternatives}
-                          groupId={segment.groupId}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
-                </div>
-              </motion.div>
-            ))}
+            {parsedData.map((proposition) => {
+              if (!isVisible(proposition.id, collapsed)) return null;
+              const canCollapse = hasChildren(proposition.id, allIds);
+              const isCollapsed = collapsed.has(proposition.id);
+
+              return (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  key={proposition.id} 
+                  className="flex gap-4 group"
+                >
+                  <div className="shrink-0 w-8 flex flex-col items-center gap-1">
+                    <span className="font-mono text-xs text-zinc-600 pt-1">{proposition.id}</span>
+                    {canCollapse && (
+                      <button
+                        onClick={() => toggleCollapse(proposition.id)}
+                        className="w-5 h-5 rounded-full border border-zinc-700 hover:border-zinc-500 flex items-center justify-center transition-colors"
+                        data-testid={`collapse-${proposition.id}`}
+                      >
+                        <svg
+                          viewBox="0 0 10 10"
+                          className={`w-2.5 h-2.5 text-zinc-500 transition-transform ${isCollapsed ? '-rotate-90' : ''}`}
+                          fill="currentColor"
+                        >
+                          <polygon points="2,1 8,5 2,9" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  <div className="text-lg leading-relaxed text-zinc-300 transition-colors group-hover:text-white">
+                    {proposition.segments.map((segment, idx) => {
+                      if (segment.type === 'text') {
+                        return <span key={idx}>{segment.content}</span>;
+                      } else if (segment.type === 'semantic') {
+                        return (
+                          <SemanticWord 
+                            key={idx}
+                            original={segment.original}
+                            alternatives={segment.alternatives}
+                            groupId={segment.groupId}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </main>
       </div>
