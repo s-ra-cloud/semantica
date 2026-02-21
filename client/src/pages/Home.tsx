@@ -13,10 +13,9 @@ export default function Home() {
   const { synonymGroups } = useSemantic();
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
-  const activeGroups = synonymGroups.filter(g => g.language === language);
+  const activeGroups = useMemo(() => synonymGroups.filter(g => g.language === language), [synonymGroups, language]);
 
   const parsedData = useMemo(() => {
-    // If the data isn't loaded yet (can happen during hot reloads before file exists), return empty
     if (!rawData) return [];
     
     return rawData.map(prop => ({
@@ -99,7 +98,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-8" key={language}>
             {parsedData.map((proposition) => (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}

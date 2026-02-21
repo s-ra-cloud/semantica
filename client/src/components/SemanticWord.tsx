@@ -11,6 +11,12 @@ interface SemanticWordProps {
 export function SemanticWord({ original, alternatives, groupId }: SemanticWordProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(original);
+  const [prevOriginal, setPrevOriginal] = useState(original);
+
+  if (original !== prevOriginal) {
+    setCurrentSelection(original);
+    setPrevOriginal(original);
+  }
   
   const isChanged = currentSelection !== original;
 
