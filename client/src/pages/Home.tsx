@@ -434,9 +434,30 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${proposition.id === '6.36111' ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={proposition.id === '6.36111' ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === '6.36111' ? null : '6.36111'); } : undefined} data-testid={proposition.id === '6.36111' ? 'btn-annotation-6.36111' : undefined}>
+                  <div className="text-lg leading-relaxed text-zinc-300 transition-colors group-hover:text-white">
                     {proposition.segments.map((segment, idx) => {
                       if (segment.type === 'text') {
+                        if (proposition.id === '6.36111') {
+                          const kantEN = 'The Kantian problem of the right and left hand which cannot be made to cover one another';
+                          const kantFR = "Le problème kantien de la main droite et de la main gauche, que l'on ne peut faire se recouvrir";
+                          const kantPhrase = segment.content.includes(kantEN) ? kantEN : segment.content.includes(kantFR) ? kantFR : null;
+                          if (kantPhrase) {
+                            const splitIdx = segment.content.indexOf(kantPhrase);
+                            const before = segment.content.substring(0, splitIdx);
+                            const after = segment.content.substring(splitIdx + kantPhrase.length);
+                            return (
+                              <span key={idx}>
+                                {before && <MathText text={before} />}
+                                <span
+                                  onClick={() => setOpenAnnotation(openAnnotation === '6.36111' ? null : '6.36111')}
+                                  className="inline border border-purple-500/40 bg-purple-500/10 rounded-md px-1.5 py-0.5 text-purple-200 cursor-pointer hover:bg-purple-500/20 hover:border-purple-500/60 transition-colors"
+                                  data-testid="btn-annotation-6.36111"
+                                >{kantPhrase}</span>
+                                {after && <MathText text={after} />}
+                              </span>
+                            );
+                          }
+                        }
                         return <MathText key={idx} text={segment.content} />;
                       } else if (segment.type === 'semantic') {
                         return (
