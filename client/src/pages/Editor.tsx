@@ -7,28 +7,59 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function Editor() {
-  const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch } = useSemantic();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch, authToken, setAuthToken } = useSemantic();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
   const [importStatus, setImportStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const isAuthenticated = !!authToken;
+
+  useEffect(() => {
+    if (authToken) {
+      fetch('/api/auth/verify', {
+        headers: { 'Authorization': `Bearer ${authToken}` },
+      }).then(res => {
+        if (!res.ok) setAuthToken(null);
+      }).catch(() => setAuthToken(null));
+    }
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'Trismegiste') {
-      setIsAuthenticated(true);
-      setShowLoginModal(false);
-      setError(false);
-      setPassword('');
-    } else {
+    setLoginLoading(true);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        const { token } = await res.json();
+        setAuthToken(token);
+        setShowLoginModal(false);
+        setError(false);
+        setPassword('');
+      } else {
+        setError(true);
+      }
+    } catch {
       setError(true);
+    } finally {
+      setLoginLoading(false);
     }
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
+  const handleLogout = async () => {
+    if (authToken) {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${authToken}` },
+      }).catch(() => {});
+    }
+    setAuthToken(null);
   };
 
   const handleReset = () => {
@@ -65,10 +96,12 @@ export default function Editor() {
         return;
       }
 
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
       const res = await fetch('/api/synonym-groups/import', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: 'Trismegiste', groups }),
+        headers,
+        body: JSON.stringify({ groups }),
       });
 
       if (!res.ok) {

@@ -12,7 +12,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend (React SPA)
 - **Framework**: React with TypeScript, bundled by Vite
-- **Routing**: Wouter (lightweight client-side router) with two pages: Home (`/`) and Editor (`/editor`)
+- **Routing**: Wouter (lightweight client-side router) with three pages: Home (`/`), Editor (`/editor`), and Connexion Graph (`/graph`)
 - **State Management**: React Query (`@tanstack/react-query`) for server state; React Context (`SemanticContext`) for sharing synonym group data across components
 - **UI Components**: shadcn/ui component library (new-york style) built on Radix UI primitives, styled with Tailwind CSS v4 (using `@tailwindcss/vite` plugin)
 - **Animations**: Framer Motion for word swap animations
@@ -46,7 +46,13 @@ Preferred communication style: Simple, everyday language.
 - Database migrations: `drizzle-kit push` for schema synchronization
 
 ### Authentication
-- The Editor page uses a simple client-side password check (hardcoded password: "Trismegiste") — not a secure auth system, just a basic gate for the admin interface
+- Server-side token-based authentication protects all mutating API endpoints (POST, PUT, DELETE on synonym-groups, import)
+- Admin password stored as `ADMIN_PASSWORD` environment secret (not in code)
+- Login endpoint (`POST /api/auth/login`) validates password and returns a random 32-byte hex token
+- Tokens are stored in-memory on the server with 24-hour TTL, and in `sessionStorage` on the client
+- Auth middleware (`requireAuth`) checks Bearer token on protected routes
+- Read-only endpoints (GET synonym-groups, feedback) remain publicly accessible
+- Logout endpoint (`POST /api/auth/logout`) invalidates the server-side token
 
 ## External Dependencies
 

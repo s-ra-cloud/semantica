@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 
@@ -12,6 +12,8 @@ export type SynonymGroup = {
 type SemanticContextType = {
   synonymGroups: SynonymGroup[];
   isLoading: boolean;
+  authToken: string | null;
+  setAuthToken: (token: string | null) => void;
   addGroup: (group: Omit<SynonymGroup, 'id'>) => Promise<void>;
   updateGroup: (id: number, group: Omit<SynonymGroup, 'id'>) => void;
   deleteGroup: (id: number) => void;
@@ -23,6 +25,21 @@ const SemanticContext = createContext<SemanticContextType | null>(null);
 
 export const SemanticProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
+  const [authToken, setAuthTokenState] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('admin_token');
+    }
+    return null;
+  });
+
+  const setAuthToken = useCallback((token: string | null) => {
+    setAuthTokenState(token);
+    if (token) {
+      sessionStorage.setItem('admin_token', token);
+    } else {
+      sessionStorage.removeItem('admin_token');
+    }
+  }, []);
 
   const { data: synonymGroups = [], isLoading } = useQuery<SynonymGroup[]>({
     queryKey: ['/api/synonym-groups'],
@@ -30,7 +47,7 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
 
   const addMutation = useMutation({
     mutationFn: async (group: Omit<SynonymGroup, 'id'>) => {
-      const res = await apiRequest('POST', '/api/synonym-groups', group);
+      const res = await apiRequest('POST', '/api/synonym-groups', group, authToken || undefined);
       return res.json();
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
@@ -38,7 +55,7 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
 
   const updateMutation = useMutation({
     mutationFn: async ({ id, group }: { id: number; group: Omit<SynonymGroup, 'id'> }) => {
-      const res = await apiRequest('PUT', `/api/synonym-groups/${id}`, group);
+      const res = await apiRequest('PUT', `/api/synonym-groups/${id}`, group, authToken || undefined);
       return res.json();
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
@@ -46,65 +63,65 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      await apiRequest('DELETE', `/api/synonym-groups/${id}`);
+      await apiRequest('DELETE', `/api/synonym-groups/${id}`, undefined, authToken || undefined);
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
   });
 
   const resetMutation = useMutation({
     mutationFn: async () => {
-      // Delete all, then recreate defaults
+      const token = authToken || undefined;
       for (const g of synonymGroups) {
-        await apiRequest('DELETE', `/api/synonym-groups/${g.id}`);
+        await apiRequest('DELETE', `/api/synonym-groups/${g.id}`, undefined, token);
       }
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['the world', 'the totality of facts', 'everything that is the case', 'all that is the case', 'all the facts'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['le monde', 'la totalité des faits', 'tout ce qui a lieu', 'tous les faits'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['the thought', 'the logical picture of the facts', 'the significant proposition'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['la pensée', "l'image logique des faits", 'la proposition pourvue de sens'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['names', 'simple signs'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['noms', 'signes simples'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['what is the case', 'the fact', 'the existence of atomic facts'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['ce qui a lieu', 'le fait', "la subsistance d'états de choses"],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['objects', 'entities', 'things'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['objets', 'entités', 'choses'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'en',
         words: ['object', 'entity', 'thing'],
-      });
+      }, token);
       await apiRequest('POST', '/api/synonym-groups', {
         language: 'fr',
         words: ['objet', 'entité', 'chose'],
-      });
+      }, token);
 
       const logicPairsEn: [string, string][] = [
         ['~p', 'not p'],
@@ -219,14 +236,14 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
           language: 'en',
           words: [expr, trans],
           type: 'logic',
-        });
+        }, token);
       }
       for (const [expr, trans] of logicPairsFr) {
         await apiRequest('POST', '/api/synonym-groups', {
           language: 'fr',
           words: [expr, trans],
           type: 'logic',
-        });
+        }, token);
       }
 
       const mathLogicPairsEn: [string, string][] = [
@@ -254,14 +271,14 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
           language: 'en',
           words: [expr, trans],
           type: 'math-logic',
-        });
+        }, token);
       }
       for (const [expr, trans] of mathLogicPairsFr) {
         await apiRequest('POST', '/api/synonym-groups', {
           language: 'fr',
           words: [expr, trans],
           type: 'math-logic',
-        });
+        }, token);
       }
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] }),
@@ -274,7 +291,7 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
   const refetch = () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] });
 
   return (
-    <SemanticContext.Provider value={{ synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch }}>
+    <SemanticContext.Provider value={{ synonymGroups, isLoading, authToken, setAuthToken, addGroup, updateGroup, deleteGroup, resetDefaults, refetch }}>
       {children}
     </SemanticContext.Provider>
   );
