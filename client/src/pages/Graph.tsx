@@ -190,10 +190,12 @@ export default function Graph() {
 
         <div className="mb-10 p-5 rounded-xl border border-zinc-800 bg-zinc-900/40 text-sm text-zinc-400 leading-relaxed max-w-2xl">
           <p>
-            This graph is a subset of The Great Conversation graph published on the{' '}
-            <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-green-400 underline underline-offset-2 hover:text-green-300" data-testid="link-legacy-graph">LEGACY project</a>
+            This graph is a subset of{' '}
+            <a href="https://legacy-um6p.1337.ma/projects/great-conversation" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-great-conversation">The Great Conversation</a>
+            {' '}graph published on the{' '}
+            <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-legacy-graph">LEGACY project</a>
             {' '}and uses data from that project as well as from the{' '}
-            <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="text-green-400 underline underline-offset-2 hover:text-green-300" data-testid="link-archives-graph">Wittgenstein Archives</a>.
+            <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-archives-graph">Wittgenstein Archives</a>.
             {' '}We are adding new connexions every week.
           </p>
           <div className="flex items-center gap-6 mt-4 text-xs">
