@@ -66,15 +66,8 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
 
   const validMatches = [];
   let currentEnd = 0;
-  const usedSemanticGroupIds = new Set<number>();
   for (const match of matches) {
     if (match.index >= currentEnd) {
-      if (match.matchType === 'semantic') {
-        if (usedSemanticGroupIds.has(match.group.id)) {
-          continue;
-        }
-        usedSemanticGroupIds.add(match.group.id);
-      }
       validMatches.push(match);
       currentEnd = match.index + match.length;
     }
@@ -97,16 +90,24 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
       });
     } else {
       const isCapitalized = match.word[0] === match.word[0].toUpperCase();
+      const otherMatchedWords = validMatches
+        .filter(m => m.matchType === 'semantic' && m.group.id === match.group.id && m !== match)
+        .map(m => m.word.toLowerCase());
       const alternatives = match.group.words
         .filter(w => w.toLowerCase() !== match.word.toLowerCase())
+        .filter(w => !otherMatchedWords.includes(w.toLowerCase()))
         .map(alt => isCapitalized ? alt.charAt(0).toUpperCase() + alt.slice(1) : alt.toLowerCase());
 
-      segments.push({
-        type: 'semantic',
-        original: match.word,
-        alternatives,
-        groupId: match.group.id
-      });
+      if (alternatives.length === 0) {
+        segments.push({ type: 'text', content: match.word });
+      } else {
+        segments.push({
+          type: 'semantic',
+          original: match.word,
+          alternatives,
+          groupId: match.group.id
+        });
+      }
     }
 
     lastIndex = match.index + match.length;
