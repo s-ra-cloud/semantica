@@ -5,16 +5,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface SemanticWordProps {
   original: string;
   alternatives: string[];
+  groupId: string;
   globalSelections: Record<string, string>;
-  setGlobalSelection: (original: string, selection: string) => void;
+  setGlobalSelection: (groupId: string, selection: string) => void;
 }
 
-export function SemanticWord({ original, alternatives, globalSelections, setGlobalSelection }: SemanticWordProps) {
+export function SemanticWord({ original, alternatives, groupId, globalSelections, setGlobalSelection }: SemanticWordProps) {
   const [isOpen, setIsOpen] = useState(false);
   
-  // Normalize key for global selection tracking
-  const key = original.toLowerCase();
-  const currentSelection = globalSelections[key] || original;
+  let currentSelection = original;
+  if (globalSelections[groupId]) {
+    const selectedLower = globalSelections[groupId].toLowerCase();
+    if (selectedLower === original.toLowerCase()) {
+      currentSelection = original;
+    } else {
+      const match = alternatives.find(a => a.toLowerCase() === selectedLower);
+      if (match) currentSelection = match;
+    }
+  }
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -45,7 +53,7 @@ export function SemanticWord({ original, alternatives, globalSelections, setGlob
         <div className="flex flex-col">
           <button
             onClick={() => {
-              setGlobalSelection(key, original);
+              setGlobalSelection(groupId, original);
               setIsOpen(false);
             }}
             className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
@@ -61,7 +69,7 @@ export function SemanticWord({ original, alternatives, globalSelections, setGlob
             <button
               key={alt}
               onClick={() => {
-                setGlobalSelection(key, alt);
+                setGlobalSelection(groupId, alt);
                 setIsOpen(false);
               }}
               className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${

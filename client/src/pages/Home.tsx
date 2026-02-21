@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import StarSphere from '@/components/StarSphere';
 import { SemanticWord } from '@/components/SemanticWord';
-import { tractatusEnglish, tractatusFrench } from '@/data/tractatus';
+import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
+import { useSemantic } from '@/context/SemanticContext';
+import { parseSemantic } from '@/lib/semanticParser';
+import { Link } from 'wouter';
+import { Database } from 'lucide-react';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'fr'>('en');
   const [globalSelections, setGlobalSelections] = useState<Record<string, string>>({});
+  const { synonymGroups } = useSemantic();
 
-  const setGlobalSelection = (original: string, selection: string) => {
+  const setGlobalSelection = (groupId: string, selection: string) => {
     setGlobalSelections(prev => ({
       ...prev,
-      [original]: selection
+      [groupId]: selection
     }));
   };
 
-  const data = language === 'en' ? tractatusEnglish : tractatusFrench;
+  const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
+  const activeGroups = synonymGroups.filter(g => g.language === language);
+
+  const parsedData = useMemo(() => {
+    // If the data isn't loaded yet (can happen during hot reloads before file exists), return empty
+    if (!rawData) return [];
+    
+    return rawData.map(prop => ({
+      ...prop,
+      segments: parseSemantic(prop.content, activeGroups)
+    }));
+  }, [rawData, activeGroups]);
 
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-green-500/30 overflow-hidden relative">
@@ -59,6 +75,15 @@ export default function Home() {
             <a href="#" className="text-zinc-500 hover:text-white transition-colors">Team</a>
             <a href="#" className="text-zinc-500 hover:text-white transition-colors">Writing</a>
             <a href="#" className="text-zinc-500 hover:text-white transition-colors">Products</a>
+
+            <div className="h-px w-8 bg-zinc-800 my-2"></div>
+
+            <Link href="/editor">
+              <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
+                <Database className="w-4 h-4" />
+                Expression DB
+              </span>
+            </Link>
           </nav>
 
           <div className="mt-auto pt-24 text-xs text-zinc-600 flex flex-col gap-2">
@@ -83,7 +108,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-8">
-            {data.map((proposition) => (
+            {parsedData.map((proposition) => (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -104,6 +129,7 @@ export default function Home() {
                           key={idx}
                           original={segment.original}
                           alternatives={segment.alternatives}
+                          groupId={segment.groupId}
                           globalSelections={globalSelections}
                           setGlobalSelection={setGlobalSelection}
                         />
