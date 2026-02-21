@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import StarSphere from '@/components/StarSphere';
 import { SemanticWord } from '@/components/SemanticWord';
@@ -7,7 +7,8 @@ import { MathLogicWord } from '@/components/MathLogicWord';
 import { MathText } from '@/components/MathText';
 import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
-import { parseSemantic } from '@/lib/semanticParser';
+import { parseSemantic, Segment } from '@/lib/semanticParser';
+import { applyGrammarAdaptations } from '@/lib/grammarAdaptations';
 import { Link } from 'wouter';
 import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen, GitBranch } from 'lucide-react';
 import { propositionDiagrams } from '@/components/TractatusDiagrams';
@@ -31,6 +32,59 @@ function isVisible(propId: string, collapsed: Set<string>): boolean {
     if (isChildOf(propId, cId)) visible = false;
   });
   return visible;
+}
+
+function PropositionSegments({ segments, propositionId, language }: { segments: Segment[]; propositionId: string; language: string }) {
+  const [swaps, setSwaps] = useState<Record<string, string>>({});
+
+  const handleSwap = useCallback((original: string, selected: string) => {
+    const key = original.toLowerCase();
+    const val = selected.toLowerCase();
+    setSwaps(prev => {
+      if (prev[key] === val) return prev;
+      return { ...prev, [key]: val };
+    });
+  }, []);
+
+  return (
+    <>
+      {segments.map((segment, idx) => {
+        if (segment.type === 'text') {
+          const adapted = applyGrammarAdaptations(segment.content, propositionId, language, swaps);
+          return <MathText key={idx} text={adapted} />;
+        } else if (segment.type === 'semantic') {
+          return (
+            <SemanticWord
+              key={idx}
+              original={segment.original}
+              alternatives={segment.alternatives}
+              groupId={segment.groupId}
+              onSwap={handleSwap}
+            />
+          );
+        } else if (segment.type === 'logic') {
+          return (
+            <LogicWord
+              key={idx}
+              original={segment.original}
+              translation={segment.translation}
+              groupId={segment.groupId}
+            />
+          );
+        } else if (segment.type === 'math-logic') {
+          return (
+            <MathLogicWord
+              key={idx}
+              latex={segment.latex}
+              translation={segment.translation}
+              groupId={segment.groupId}
+            />
+          );
+        }
+        return null;
+      })}
+    </>
+  );
 }
 
 export default function Home() {
@@ -461,39 +515,11 @@ export default function Home() {
                     )}
                   </div>
                   <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
-                    {proposition.segments.map((segment, idx) => {
-                      if (segment.type === 'text') {
-                        return <MathText key={idx} text={segment.content} />;
-                      } else if (segment.type === 'semantic') {
-                        return (
-                          <SemanticWord 
-                            key={idx}
-                            original={segment.original}
-                            alternatives={segment.alternatives}
-                            groupId={segment.groupId}
-                          />
-                        );
-                      } else if (segment.type === 'logic') {
-                        return (
-                          <LogicWord
-                            key={idx}
-                            original={segment.original}
-                            translation={segment.translation}
-                            groupId={segment.groupId}
-                          />
-                        );
-                      } else if (segment.type === 'math-logic') {
-                        return (
-                          <MathLogicWord
-                            key={idx}
-                            latex={segment.latex}
-                            translation={segment.translation}
-                            groupId={segment.groupId}
-                          />
-                        );
-                      }
-                      return null;
-                    })}
+                    <PropositionSegments
+                      segments={proposition.segments}
+                      propositionId={proposition.id}
+                      language={language}
+                    />
                     {propositionDiagrams[proposition.id] && (
                       <>
                         {propositionDiagrams[proposition.id].diagram({ isFrench: language === 'fr' })}

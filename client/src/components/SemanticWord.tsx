@@ -6,9 +6,10 @@ interface SemanticWordProps {
   original: string;
   alternatives: string[];
   groupId: number;
+  onSwap?: (original: string, selected: string) => void;
 }
 
-export function SemanticWord({ original, alternatives, groupId }: SemanticWordProps) {
+export function SemanticWord({ original, alternatives, groupId, onSwap }: SemanticWordProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(original);
   const [prevOriginal, setPrevOriginal] = useState(original);
@@ -51,6 +52,7 @@ export function SemanticWord({ original, alternatives, groupId }: SemanticWordPr
             onClick={() => {
               setCurrentSelection(original);
               setIsOpen(false);
+              onSwap?.(original, original);
             }}
             className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
               currentSelection === original 
@@ -67,6 +69,7 @@ export function SemanticWord({ original, alternatives, groupId }: SemanticWordPr
               onClick={() => {
                 setCurrentSelection(alt);
                 setIsOpen(false);
+                onSwap?.(original, alt);
               }}
               className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
                 currentSelection === alt 

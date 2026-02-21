@@ -20,11 +20,13 @@ Preferred communication style: Simple, everyday language.
 - **Design**: Dark theme (black background, green/teal accent colors), uses Inter and Space Grotesk fonts
 
 ### Key Frontend Components
-- **SemanticWord**: Clickable words that show a popover with synonym alternatives from the same group
+- **SemanticWord**: Clickable words that show a popover with synonym alternatives from the same group; accepts optional `onSwap` callback for grammar adaptation
 - **LogicWord**: Clickable words that toggle between original text and a logical translation
 - **MathText**: Renders inline LaTeX math expressions using KaTeX
 - **StarSphere**: Canvas-based 3D particle sphere animation on the homepage
+- **PropositionSegments**: Wrapper component (in Home.tsx) that renders proposition segments with grammar-aware text adaptation — when a semantic word swaps, dependent verbs/participles silently adapt (e.g., "Le monde est" → "Tous les faits sont")
 - **semanticParser**: Takes raw proposition text and synonym groups, produces segments (text, semantic, or logic) for rendering
+- **grammarAdaptations**: Data file (`client/src/lib/grammarAdaptations.ts`) defining per-proposition rules for verb/participle agreement when semantic words change gender/number (FR propositions 1, 1.1, 1.11, 1.12, 1.13, 2.063; EN propositions 1, 1.1, 1.11, 1.12, 1.13)
 
 ### Backend (Express + Node.js)
 - **Framework**: Express.js running on Node.js with TypeScript (via tsx)
