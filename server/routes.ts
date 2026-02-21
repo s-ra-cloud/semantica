@@ -2,6 +2,9 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertSynonymGroupSchema, insertFeedbackSchema } from "@shared/schema";
+import archiver from "archiver";
+import path from "path";
+import fs from "fs";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -25,6 +28,50 @@ export async function registerRoutes(
     }
     const result = await storage.replaceAllSynonymGroups(groups);
     res.json({ message: `Imported ${result.length} expression groups`, count: result.length });
+  });
+
+  app.get("/api/download-project", async (_req, res) => {
+    try {
+      const groups = await storage.getSynonymGroups();
+      const exportData = groups.map(({ id, ...rest }) => rest);
+
+      res.setHeader('Content-Disposition', 'attachment; filename="semantica-project.zip"');
+      res.setHeader('Content-Type', 'application/zip');
+
+      const archive = archiver('zip', { zlib: { level: 9 } });
+      archive.pipe(res);
+
+      const projectRoot = path.resolve(process.cwd());
+
+      const includeDirs = ['client/src', 'server', 'shared'];
+      const includeFiles = ['package.json', 'tsconfig.json', 'vite.config.ts', 'drizzle.config.ts', 'tailwind.config.ts'];
+
+      for (const dir of includeDirs) {
+        const dirPath = path.join(projectRoot, dir);
+        if (fs.existsSync(dirPath)) {
+          archive.directory(dirPath, dir);
+        }
+      }
+
+      for (const file of includeFiles) {
+        const filePath = path.join(projectRoot, file);
+        if (fs.existsSync(filePath)) {
+          archive.file(filePath, { name: file });
+        }
+      }
+
+      archive.append(JSON.stringify(exportData, null, 2), { name: 'database/expressions.json' });
+
+      const feedback = await storage.getFeedback();
+      archive.append(JSON.stringify(feedback, null, 2), { name: 'database/feedback.json' });
+
+      await archive.finalize();
+    } catch (err) {
+      console.error('Error creating project zip:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: 'Failed to create project archive' });
+      }
+    }
   });
 
   app.get("/api/synonym-groups", async (_req, res) => {

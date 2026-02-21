@@ -1574,7 +1574,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "5.5423",
-    "content": "To perceive a complex means to perceive that its constituents are combined in such and such a way."
+    "content": "To perceive a complex means to perceive that its constituents are combined in such and such a way.\n\nThis perhaps explains that the figure"
   },
   {
     "id": "5.55",
@@ -1974,7 +1974,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "6.36111",
-    "content": "The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane, and even in one-dimensional space; where the two congruent figures a and b cannot be made to cover one another without moving them out of this space. The right and left hand are in fact completely congruent. And the fact that they cannot be made to cover one another has nothing to do with it."
+    "content": "The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane, and even in one-dimensional space; where the two congruent figures a and b cannot be made to cover one another without"
   },
   {
     "id": "6.362",
@@ -3681,7 +3681,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.5423",
-    "content": "Percevoir un complexe signifie percevoir que ses éléments sont dans tel ou tel rapport."
+    "content": "Percevoir un complexe signifie percevoir que ses éléments sont dans tel ou tel rapport.\n\nCeci explique peut-être que la figure"
   },
   {
     "id": "5.55",
@@ -4081,7 +4081,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.36111",
-    "content": "Le problème kantien de la main droite et de la main gauche, que l'on ne peut faire se recouvrir, subsiste déjà dans le plan, et même dans un espace à une dimension"
+    "content": "Le problème kantien de la main droite et de la main gauche, que l'on ne peut faire se recouvrir, subsiste déjà dans le plan, et même dans un espace à une dimension ; où les deux figures congruentes a et b ne peuvent se recouvrir sans"
   },
   {
     "id": "6.362",

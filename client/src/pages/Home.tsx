@@ -10,6 +10,7 @@ import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
 import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code } from 'lucide-react';
+import { propositionDiagrams } from '@/components/TractatusDiagrams';
 import 'katex/dist/katex.min.css';
 
 function isChildOf(childId: string, parentId: string): boolean {
@@ -306,7 +307,7 @@ export default function Home() {
             </div>
             <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
               {language === 'en' ? (
-                <p>C.K. Ogden and Ramsey translation (1922)</p>
+                <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
               ) : (
                 <p>Traduction fran&ccedil;aise de Gilles-Gaston Granger, reproduite avec l'aimable autorisation de sa fille.</p>
               )}
@@ -379,6 +380,17 @@ export default function Home() {
                       }
                       return null;
                     })}
+                    {propositionDiagrams[proposition.id] && (
+                      <>
+                        {propositionDiagrams[proposition.id].diagram({ isFrench: language === 'fr' })}
+                        {language === 'fr' && propositionDiagrams[proposition.id].afterTextFr && (
+                          <span className="whitespace-pre-line">{propositionDiagrams[proposition.id].afterTextFr}</span>
+                        )}
+                        {language === 'en' && propositionDiagrams[proposition.id].afterTextEn && (
+                          <span className="whitespace-pre-line">{propositionDiagrams[proposition.id].afterTextEn}</span>
+                        )}
+                      </>
+                    )}
                   </div>
                 </motion.div>
               );
@@ -388,18 +400,27 @@ export default function Home() {
           <footer className="mt-24 mb-12 pt-8 border-t border-zinc-800/50">
             <div className="flex flex-col gap-4 text-xs text-zinc-600">
               <button
-                onClick={() => {
-                  const a = document.createElement('a');
-                  a.href = 'https://replit.com/@' + window.location.hostname.split('.')[0];
-                  a.target = '_blank';
-                  a.rel = 'noopener noreferrer';
-                  a.click();
+                onClick={async () => {
+                  try {
+                    const response = await fetch('/api/download-project');
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'semantica-project.zip';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                  } catch (err) {
+                    console.error('Download failed:', err);
+                  }
                 }}
                 className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors w-fit"
                 data-testid="btn-download-code"
               >
                 <Code className="w-3.5 h-3.5" />
-                {language === 'en' ? 'View Source Code' : 'Voir le code source'}
+                {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
               </button>
               <p>
                 {language === 'en' ? 'Licensed under the' : 'Sous licence'}{' '}
