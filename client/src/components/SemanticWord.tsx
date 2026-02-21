@@ -6,29 +6,19 @@ interface SemanticWordProps {
   original: string;
   alternatives: string[];
   groupId: string;
-  globalSelections: Record<string, string>;
-  setGlobalSelection: (groupId: string, selection: string) => void;
 }
 
-export function SemanticWord({ original, alternatives, groupId, globalSelections, setGlobalSelection }: SemanticWordProps) {
+export function SemanticWord({ original, alternatives, groupId }: SemanticWordProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentSelection, setCurrentSelection] = useState(original);
   
-  let currentSelection = original;
-  if (globalSelections[groupId]) {
-    const selectedLower = globalSelections[groupId].toLowerCase();
-    if (selectedLower === original.toLowerCase()) {
-      currentSelection = original;
-    } else {
-      const match = alternatives.find(a => a.toLowerCase() === selectedLower);
-      if (match) currentSelection = match;
-    }
-  }
+  const isChanged = currentSelection !== original;
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <span 
-          className="semantic-word font-medium" 
+          className={`semantic-word font-medium ${isChanged ? 'semantic-word-changed' : ''}`} 
           data-testid={`semantic-word-${original.replace(/\s+/g, '-')}`}
         >
           <AnimatePresence mode="popLayout" initial={false}>
@@ -53,12 +43,12 @@ export function SemanticWord({ original, alternatives, groupId, globalSelections
         <div className="flex flex-col">
           <button
             onClick={() => {
-              setGlobalSelection(groupId, original);
+              setCurrentSelection(original);
               setIsOpen(false);
             }}
             className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
               currentSelection === original 
-                ? 'bg-zinc-800 text-green-400' 
+                ? (isChanged ? 'bg-zinc-800 text-orange-400' : 'bg-zinc-800 text-green-400')
                 : 'text-zinc-300 hover:bg-zinc-800/50 hover:text-white'
             }`}
           >
@@ -69,12 +59,12 @@ export function SemanticWord({ original, alternatives, groupId, globalSelections
             <button
               key={alt}
               onClick={() => {
-                setGlobalSelection(groupId, alt);
+                setCurrentSelection(alt);
                 setIsOpen(false);
               }}
               className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
                 currentSelection === alt 
-                  ? 'bg-zinc-800 text-green-400' 
+                  ? 'bg-zinc-800 text-orange-400' 
                   : 'text-zinc-300 hover:bg-zinc-800/50 hover:text-white'
               }`}
             >

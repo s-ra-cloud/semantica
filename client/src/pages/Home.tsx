@@ -10,15 +10,7 @@ import { Database } from 'lucide-react';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'fr'>('en');
-  const [globalSelections, setGlobalSelections] = useState<Record<string, string>>({});
   const { synonymGroups } = useSemantic();
-
-  const setGlobalSelection = (groupId: string, selection: string) => {
-    setGlobalSelections(prev => ({
-      ...prev,
-      [groupId]: selection
-    }));
-  };
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
   const activeGroups = synonymGroups.filter(g => g.language === language);
@@ -130,8 +122,6 @@ export default function Home() {
                           original={segment.original}
                           alternatives={segment.alternatives}
                           groupId={segment.groupId}
-                          globalSelections={globalSelections}
-                          setGlobalSelection={setGlobalSelection}
                         />
                       );
                     }
