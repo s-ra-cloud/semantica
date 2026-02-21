@@ -2113,7 +2113,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
 export const tractatusFrenchRaw: RawProposition[] = [
   {
     "id": "1",
-    "content": "Le monde est tout ce qui a lieu[N]."
+    "content": "Le monde est tout ce qui a lieu."
   },
   {
     "id": "1.1",
