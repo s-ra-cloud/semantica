@@ -106,6 +106,29 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  // Prop 2.0122: "La chose est indépendante, en tant qu'elle peut se présenter..."
+  'fr:2.0122': [{
+    trigger: 'la chose',
+    deps: [
+      {
+        find: ' est indépendante',
+        replacements: {
+          'la chose': ' est indépendante',
+          'l\'objet': ' est indépendant',
+          'l\'entité': ' est indépendante',
+        }
+      },
+      {
+        find: 'qu\'elle',
+        replacements: {
+          'la chose': 'qu\'elle',
+          'l\'objet': 'qu\'il',
+          'l\'entité': 'qu\'elle',
+        }
+      }
+    ]
+  }],
+
   // ── ENGLISH ─────────────────────────────────────────────
 
   // Prop 1: "The world is everything that is the case."
