@@ -496,8 +496,8 @@ export default function Home() {
                   id={`prop-${proposition.id}`}
                   className="flex gap-4 group"
                 >
-                  <div className="shrink-0 w-8 flex flex-col items-center gap-1">
-                    <span className="font-mono text-xs text-zinc-600 pt-1">{proposition.id}</span>
+                  <div className="shrink-0 w-16 flex flex-col items-center gap-1">
+                    <span className="font-mono text-lg text-white pt-1">{proposition.id}</span>
                     {canCollapse && (
                       <button
                         onClick={() => toggleCollapse(proposition.id)}
