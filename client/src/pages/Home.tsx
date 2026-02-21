@@ -287,6 +287,44 @@ export default function Home() {
                 {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
               </span>
             </Link>
+
+            <div className="h-px w-8 bg-zinc-800 my-2"></div>
+
+            <button
+              onClick={async () => {
+                try {
+                  const response = await fetch('/api/download-project');
+                  const blob = await response.blob();
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'semantica-project.zip';
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                  URL.revokeObjectURL(url);
+                } catch (err) {
+                  console.error('Download failed:', err);
+                }
+              }}
+              className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors text-xs"
+              data-testid="btn-download-code"
+            >
+              <Code className="w-3.5 h-3.5" />
+              {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
+            </button>
+            <p className="text-xs text-zinc-600">
+              {language === 'en' ? 'Licensed under the' : 'Sous licence'}{' '}
+              <a
+                href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 hover:text-green-400 transition-colors underline underline-offset-2"
+                data-testid="link-license"
+              >
+                GNU General Public License v3.0
+              </a>
+            </p>
           </nav>
         </aside>
 
@@ -397,46 +435,6 @@ export default function Home() {
             })}
           </div>
 
-          <footer className="mt-24 mb-12 pt-8 border-t border-zinc-800/50">
-            <div className="flex flex-col gap-4 text-xs text-zinc-600">
-              <button
-                onClick={async () => {
-                  try {
-                    const response = await fetch('/api/download-project');
-                    const blob = await response.blob();
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'semantica-project.zip';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                  } catch (err) {
-                    console.error('Download failed:', err);
-                  }
-                }}
-                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors w-fit"
-                data-testid="btn-download-code"
-              >
-                <Code className="w-3.5 h-3.5" />
-                {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
-              </button>
-              <p>
-                {language === 'en' ? 'Licensed under the' : 'Sous licence'}{' '}
-                <a
-                  href="https://www.gnu.org/licenses/gpl-3.0.en.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 hover:text-green-400 transition-colors underline underline-offset-2"
-                  data-testid="link-license"
-                >
-                  GNU General Public License v3.0
-                </a>
-              </p>
-              <p className="text-zinc-700">Semantica &mdash; {language === 'en' ? 'An interactive reading of the Tractatus Logico-Philosophicus' : 'Une lecture interactive du Tractatus Logico-Philosophicus'}</p>
-            </div>
-          </footer>
         </main>
       </div>
     </div>
