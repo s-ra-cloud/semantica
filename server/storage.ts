@@ -94,6 +94,10 @@ export async function seedDatabaseIfEmpty() {
     { language: 'fr', words: ["d'états de choses", "de connexions d'objets"], type: 'semantic' },
     { language: 'fr', words: ['état de choses', "connexion d'objets"], type: 'semantic' },
     { language: 'fr', words: ["un état de choses", "une connexion d'objets"], type: 'semantic' },
+    { language: 'fr', words: ["l'état de choses", "la connexion d'objets"], type: 'semantic' },
+    { language: 'fr', words: ["d'un état de choses", "d'une connexion d'objets"], type: 'semantic' },
+    { language: 'fr', words: ["chaque état de choses", "chaque connexion d'objets"], type: 'semantic' },
+    { language: 'fr', words: ["autre état de choses", "autre connexion d'objets"], type: 'semantic' },
   ];
 
   const logicPairsEn: [string, string][] = [
