@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
-import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload, MessageSquare, X, LogIn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 export default function Editor() {
   const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch } = useSemantic();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [importStatus, setImportStatus] = useState<string | null>(null);
@@ -18,10 +19,16 @@ export default function Editor() {
     e.preventDefault();
     if (password === 'Trismegiste') {
       setIsAuthenticated(true);
+      setShowLoginModal(false);
       setError(false);
+      setPassword('');
     } else {
       setError(true);
     }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
   };
 
   const handleReset = () => {
@@ -80,50 +87,6 @@ export default function Editor() {
     setTimeout(() => setImportStatus(null), 4000);
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-black text-zinc-300 font-sans p-6 md:p-12 flex items-center justify-center selection:bg-green-500/30">
-        <div className="w-full max-w-sm p-8 border border-zinc-800 rounded-2xl bg-zinc-900/30 shadow-2xl">
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-12 h-12 bg-zinc-800/50 rounded-full flex items-center justify-center mb-4">
-              <Lock className="w-6 h-6 text-zinc-400" />
-            </div>
-            <h1 className="text-2xl font-display font-medium text-white">Database Access</h1>
-            <p className="text-zinc-500 text-sm mt-2 text-center">Enter the password to edit expressions</p>
-          </div>
-          
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setError(false);
-                }}
-                placeholder="Password"
-                className={`bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white h-12 ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : ''}`}
-                autoFocus
-              />
-              {error && <p className="text-red-400 text-xs mt-2">Incorrect password</p>}
-            </div>
-            <Button type="submit" className="w-full bg-white text-black hover:bg-zinc-200 h-12 text-sm font-medium">
-              Access Database
-            </Button>
-          </form>
-
-          <div className="mt-8 text-center">
-            <Link href="/">
-              <Button variant="ghost" className="text-zinc-500 hover:text-white">
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back to Tractatus
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-black text-zinc-300 flex items-center justify-center">
@@ -134,66 +97,214 @@ export default function Editor() {
 
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans p-6 md:p-12 selection:bg-green-500/30">
+      {showLoginModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}>
+          <div className="w-full max-w-sm p-8 border border-zinc-800 rounded-2xl bg-zinc-900/95 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-12 h-12 bg-zinc-800/50 rounded-full flex items-center justify-center mb-4">
+                <Lock className="w-6 h-6 text-zinc-400" />
+              </div>
+              <h2 className="text-2xl font-display font-medium text-white">Admin Access</h2>
+              <p className="text-zinc-500 text-sm mt-2 text-center">Enter the password to edit expressions</p>
+            </div>
+            
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError(false);
+                  }}
+                  placeholder="Password"
+                  className={`bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white h-12 ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : ''}`}
+                  autoFocus
+                  data-testid="input-admin-password"
+                />
+                {error && <p className="text-red-400 text-xs mt-2">Incorrect password</p>}
+              </div>
+              <Button type="submit" className="w-full bg-white text-black hover:bg-zinc-200 h-12 text-sm font-medium" data-testid="btn-admin-submit">
+                Access Database
+              </Button>
+            </form>
+
+            <button onClick={() => setShowLoginModal(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-white" data-testid="btn-close-login-modal">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link href="/">
             <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white"><ArrowLeft className="w-5 h-5" /></Button>
           </Link>
           <h1 className="text-3xl font-display font-medium text-white flex-1">Expression Database</h1>
-          <Button variant="outline" onClick={handleReset} className="border-zinc-800 text-zinc-400 hover:text-white bg-zinc-900/50">
-            <RotateCcw className="w-4 h-4 mr-2" /> Reset Defaults
-          </Button>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={handleReset} className="border-zinc-800 text-zinc-400 hover:text-white bg-zinc-900/50">
+                <RotateCcw className="w-4 h-4 mr-2" /> Reset Defaults
+              </Button>
+              <Button variant="ghost" onClick={handleLogout} className="text-zinc-500 hover:text-white" data-testid="btn-logout">
+                <LogOut className="w-4 h-4 mr-2" /> Log out
+              </Button>
+            </div>
+          ) : (
+            <Button variant="outline" onClick={() => setShowLoginModal(true)} className="border-zinc-800 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-login">
+              <LogIn className="w-4 h-4 mr-2" /> Admin
+            </Button>
+          )}
         </div>
         
         <p className="text-zinc-400 mb-6 max-w-2xl">
-          Define groups of interchangeable expressions. When any word in a group is found in the Tractatus text, it will become interactive and can be swapped with other words in the same group.
+          {isAuthenticated
+            ? 'Define groups of interchangeable expressions. When any word in a group is found in the Tractatus text, it will become interactive and can be swapped with other words in the same group.'
+            : 'Browse the groups of interchangeable expressions used in the Tractatus. You can send feedback about any entry.'
+          }
           <span className="text-zinc-500 ml-1" data-testid="text-total-expressions">({synonymGroups.length} expressions)</span>
         </p>
 
-        <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
-          <Button variant="outline" onClick={handleExport} className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-export-db">
-            <Download className="w-4 h-4 mr-2" /> Export DB
-          </Button>
-          <label>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".json"
-              onChange={handleImport}
-              className="hidden"
-              data-testid="input-import-file"
-            />
-            <Button variant="outline" className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50 cursor-pointer" onClick={() => fileInputRef.current?.click()} data-testid="btn-import-db">
-              <Upload className="w-4 h-4 mr-2" /> Import DB
+        {isAuthenticated && (
+          <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
+            <Button variant="outline" onClick={handleExport} className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-export-db">
+              <Download className="w-4 h-4 mr-2" /> Export DB
             </Button>
-          </label>
-          {importStatus && (
-            <span className={`text-xs ${importStatus.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
-              {importStatus}
-            </span>
-          )}
-        </div>
+            <label>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json"
+                onChange={handleImport}
+                className="hidden"
+                data-testid="input-import-file"
+              />
+              <Button variant="outline" className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50 cursor-pointer" onClick={() => fileInputRef.current?.click()} data-testid="btn-import-db">
+                <Upload className="w-4 h-4 mr-2" /> Import DB
+              </Button>
+            </label>
+            {importStatus && (
+              <span className={`text-xs ${importStatus.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
+                {importStatus}
+              </span>
+            )}
+          </div>
+        )}
 
         <div className="space-y-6">
           {synonymGroups.map(group => (
-            <GroupEditor 
-              key={group.id} 
-              group={group} 
-              onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words, type: g.type || 'semantic' })} 
-              onDelete={() => deleteGroup(group.id)} 
-            />
+            isAuthenticated ? (
+              <GroupEditor 
+                key={group.id} 
+                group={group} 
+                onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words, type: g.type || 'semantic' })} 
+                onDelete={() => deleteGroup(group.id)} 
+              />
+            ) : (
+              <GroupViewer key={group.id} group={group} />
+            )
           ))}
           
-          <Button 
-            onClick={async () => { await addGroup({ language: 'en', words: [''], type: 'semantic' }); setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500); }}
-            variant="outline" 
-            className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
-            data-testid="btn-add-group"
-          >
-            <Plus className="w-5 h-5 mr-2" /> Add New Expression Group
-          </Button>
+          {isAuthenticated && (
+            <Button 
+              onClick={async () => { await addGroup({ language: 'en', words: [''], type: 'semantic' }); setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500); }}
+              variant="outline" 
+              className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
+              data-testid="btn-add-group"
+            >
+              <Plus className="w-5 h-5 mr-2" /> Add New Expression Group
+            </Button>
+          )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function GroupViewer({ group }: { group: SynonymGroup }) {
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const [feedbackSending, setFeedbackSending] = useState(false);
+
+  const handleSendFeedback = async () => {
+    if (!feedbackText.trim()) return;
+    setFeedbackSending(true);
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          propositionId: `expression-group-${group.id}`,
+          language: group.language,
+          message: `[Expression Group #${group.id} — ${group.words.join(', ')}] ${feedbackText}`,
+        }),
+      });
+      setFeedbackSent(true);
+      setFeedbackText('');
+      setTimeout(() => { setFeedbackSent(false); setShowFeedback(false); }, 3000);
+    } catch {
+    } finally {
+      setFeedbackSending(false);
+    }
+  };
+
+  return (
+    <div className="p-6 border border-zinc-800 rounded-xl bg-zinc-900/30 shadow-lg" data-testid={`group-viewer-${group.id}`}>
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-4">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">{group.language === 'en' ? 'English' : 'French'}</span>
+          <span className="text-sm text-zinc-500 font-mono">ID: {group.id}</span>
+          <span className={`text-xs px-2 py-0.5 rounded-full ${group.type === 'math-logic' ? 'bg-purple-500/20 text-purple-400' : group.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
+            {group.type === 'math-logic' ? 'Math' : group.type === 'logic' ? 'Logic' : 'Semantic'}
+          </span>
+        </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => { setShowFeedback(!showFeedback); setFeedbackSent(false); }}
+          className="text-zinc-500 hover:text-amber-400 hover:bg-amber-400/10"
+          data-testid={`btn-feedback-group-${group.id}`}
+        >
+          <MessageSquare className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {group.words.filter(w => w.trim()).map((word, idx) => (
+          <span key={idx} className={`px-3 py-1.5 rounded-lg text-sm ${group.type === 'math-logic' ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20' : group.type === 'logic' ? 'bg-blue-500/10 text-blue-300 border border-blue-500/20' : 'bg-green-500/10 text-green-300 border border-green-500/20'}`}>
+            {word}
+          </span>
+        ))}
+      </div>
+
+      {showFeedback && (
+        <div className="mt-4 p-4 border border-zinc-700 rounded-lg bg-zinc-950/50">
+          {feedbackSent ? (
+            <p className="text-green-400 text-sm">Thank you for your feedback!</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <textarea
+                value={feedbackText}
+                onChange={(e) => setFeedbackText(e.target.value)}
+                placeholder="Say something about this entry..."
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 h-20 resize-none focus:outline-none focus:border-amber-500/50"
+                data-testid={`input-feedback-group-${group.id}`}
+              />
+              <Button
+                onClick={handleSendFeedback}
+                disabled={feedbackSending || !feedbackText.trim()}
+                size="sm"
+                className="self-end bg-amber-600 hover:bg-amber-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white text-xs"
+                data-testid={`btn-send-feedback-group-${group.id}`}
+              >
+                {feedbackSending ? 'Sending...' : 'Send Feedback'}
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
