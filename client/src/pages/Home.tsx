@@ -6,10 +6,12 @@ import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
-import { Database } from 'lucide-react';
+import { Database, ChevronDown } from 'lucide-react';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'fr'>('en');
+  const [showTeam, setShowTeam] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
   const { synonymGroups } = useSemantic();
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
@@ -61,11 +63,40 @@ export default function Home() {
             </button>
             
             <div className="h-px w-8 bg-zinc-800 my-2"></div>
-            
-            <a href="#" className="text-zinc-500 hover:text-white transition-colors">About</a>
-            <a href="#" className="text-zinc-500 hover:text-white transition-colors">Team</a>
-            <a href="#" className="text-zinc-500 hover:text-white transition-colors">Writing</a>
-            <a href="#" className="text-zinc-500 hover:text-white transition-colors">Products</a>
+
+            <button
+              onClick={() => { setShowTeam(!showTeam); setShowThanks(false); }}
+              className={`text-left transition-colors flex items-center gap-1 ${showTeam ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
+              data-testid="btn-team"
+            >
+              Team
+              <ChevronDown className={`w-3 h-3 transition-transform ${showTeam ? 'rotate-180' : ''}`} />
+            </button>
+            {showTeam && (
+              <div className="flex flex-col gap-2 pl-2 text-xs">
+                <a href="https://fr.linkedin.com/in/raphael-liogier-573573127" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-raphael">Raphaël Liogier</a>
+                <a href="https://fr.linkedin.com/in/sacha-raoult" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-sacha">Sacha Raoult</a>
+                <a href="https://www.linkedin.com/in/laura-duparc-52504b215" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-laura">Laura Duparc</a>
+                <a href="https://fr.linkedin.com/in/eric-parisot" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-eric">Eric Parisot</a>
+                <a href="https://www.linkedin.com/in/sofiane-baddag-743158145" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-sofiane">Sofiane Baddag</a>
+              </div>
+            )}
+
+            <button
+              onClick={() => { setShowThanks(!showThanks); setShowTeam(false); }}
+              className={`text-left transition-colors flex items-center gap-1 ${showThanks ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
+              data-testid="btn-thanks"
+            >
+              Thanks
+              <ChevronDown className={`w-3 h-3 transition-transform ${showThanks ? 'rotate-180' : ''}`} />
+            </button>
+            {showThanks && (
+              <div className="flex flex-col gap-2 pl-2 text-xs text-zinc-400">
+                <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-project">The Wittgenstein Project</a>
+                <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
+                <span className="text-zinc-500 leading-relaxed">The daughter of Gilles-Gaston Granger for the rights of the French translation</span>
+              </div>
+            )}
 
             <div className="h-px w-8 bg-zinc-800 my-2"></div>
 
@@ -76,15 +107,6 @@ export default function Home() {
               </span>
             </Link>
           </nav>
-
-          <div className="mt-auto pt-24 text-xs text-zinc-600 flex flex-col gap-2">
-            <div className="flex gap-3">
-              <a href="#" className="hover:text-zinc-400">X</a>
-              <a href="#" className="hover:text-zinc-400">Substack</a>
-              <a href="#" className="hover:text-zinc-400">Docs</a>
-            </div>
-            <a href="mailto:hello@semantica.xyz" className="hover:text-zinc-400">hello@semantica.xyz</a>
-          </div>
         </aside>
 
         {/* Main Content Area */}
