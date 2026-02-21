@@ -1702,7 +1702,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "6.02",
-    "content": "And thus we come to numbers: I define"
+    "content": "And thus we come to numbers: I define\n\nx = Ω0′x Def.\nΩ′Ων′x = Ων+1′x Def.\n\nAccording, then, to these symbolic rules we write the series x, Ω′x, Ω′Ω′x, Ω′Ω′Ω′x, ...\nas: Ω0′x, Ω0+1′x, Ω0+1+1′x, Ω0+1+1+1′x, ...\n\nTherefore I write in place of \"[x, ξ, Ω′ξ]\",\n\"[Ω0′x, Ων′x, Ων+1′x]\".\n\nAnd I define:\n0 + 1 = 1 Def.\n0 + 1 + 1 = 2 Def.\n0 + 1 + 1 + 1 = 3 Def.\nand so on."
   },
   {
     "id": "6.021",
@@ -3809,7 +3809,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.02",
-    "content": "Ainsi en venons-nous aux nombres : je définis"
+    "content": "Ainsi en venons-nous aux nombres : je définis\n\nx = Ω0′x Déf.\nΩ′Ων′x = Ων+1′x Déf.\n\nConformément à ces règles d’écriture, nous écrivons donc la série x, Ω′x, Ω′Ω′x, Ω′Ω′Ω′x, ...\nsous la forme : Ω0′x, Ω0+1′x, Ω0+1+1′x, Ω0+1+1+1′x, ...\n\nJ’écris donc, au lieu de « [x, ξ, Ω′ξ] »,\n« [Ω0′x, Ων′x, Ων+1′x] ».\n\nEt je définis :\n0 + 1 = 1 Déf.\n0 + 1 + 1 = 2 Déf.\n0 + 1 + 1 + 1 = 3 Déf.\net ainsi de suite."
   },
   {
     "id": "6.021",

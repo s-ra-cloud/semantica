@@ -20,7 +20,7 @@ export function MathText({ text }: { text: string }) {
 
   while ((match = mathRegex.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(<span key={lastIndex}>{text.substring(lastIndex, match.index)}</span>);
+      parts.push(<span key={lastIndex} className="whitespace-pre-line">{text.substring(lastIndex, match.index)}</span>);
     }
     const cleanLatex = match[1].replace(/\\displaystyle\s*/, '');
     parts.push(
@@ -34,11 +34,11 @@ export function MathText({ text }: { text: string }) {
   }
 
   if (lastIndex === 0) {
-    return <span>{text}</span>;
+    return <span className="whitespace-pre-line">{text}</span>;
   }
 
   if (lastIndex < text.length) {
-    parts.push(<span key={lastIndex}>{text.substring(lastIndex)}</span>);
+    parts.push(<span key={lastIndex} className="whitespace-pre-line">{text.substring(lastIndex)}</span>);
   }
 
   return <>{parts}</>;
