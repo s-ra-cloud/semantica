@@ -9,7 +9,7 @@ import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
-import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code } from 'lucide-react';
+import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen } from 'lucide-react';
 import { propositionDiagrams } from '@/components/TractatusDiagrams';
 import { ParsedText } from '@/components/ParsedText';
 import 'katex/dist/katex.min.css';
@@ -46,6 +46,7 @@ export default function Home() {
   const [feedbackSending, setFeedbackSending] = useState(false);
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackPropError, setFeedbackPropError] = useState('');
+  const [openAnnotation, setOpenAnnotation] = useState<string | null>(null);
   const { synonymGroups } = useSemantic();
 
   const rawData = language === 'en' ? tractatusEnglishRaw : tractatusFrenchRaw;
@@ -433,7 +434,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className="text-lg leading-relaxed text-zinc-300 transition-colors group-hover:text-white">
+                  <div className={`text-lg leading-relaxed transition-colors ${proposition.id === '6.36111' ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={proposition.id === '6.36111' ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === '6.36111' ? null : '6.36111'); } : undefined} data-testid={proposition.id === '6.36111' ? 'btn-annotation-6.36111' : undefined}>
                     {proposition.segments.map((segment, idx) => {
                       if (segment.type === 'text') {
                         return <MathText key={idx} text={segment.content} />;
@@ -477,6 +478,60 @@ export default function Home() {
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextEn!} />
                         )}
                       </>
+                    )}
+
+                    {proposition.id === '6.36111' && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === '6.36111' && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid="annotation-6.36111">
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>This passage has been noted as an explicit opposition to <a href="#kant-passage" onClick={(e) => { e.preventDefault(); document.getElementById('kant-passage')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-kant-prolegomena"><em>Prolegomena to All Future Metaphysics</em></a> by Immanuel Kant.</>
+                                    : <>Ce passage a été noté comme une opposition explicite aux <a href="#kant-passage" onClick={(e) => { e.preventDefault(); document.getElementById('kant-passage')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-kant-prolegomena"><em>Prolégomènes à toute métaphysique future</em></a> d'Immanuel Kant.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, University Mohammed VI Polytech, based on data collected by the Wittgenstein Archives.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Université Mohammed VI Polytechnique, sur la base des données collectées par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? <>You can discuss this connection and contribute to this collective work on the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website">LEGACY website</a>.</>
+                                    : <>Vous pouvez discuter de cette connexion et contribuer à ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website">site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+
+                              <div id="kant-passage" className="annotation-content mt-4 p-5 rounded-xl border border-purple-500/20 bg-purple-900/10 scroll-mt-24">
+                                <p className="text-xs text-purple-400/70 uppercase tracking-wider mb-2 font-medium">
+                                  {language === 'en' ? 'Immanuel Kant — Prolegomena to All Future Metaphysics' : 'Immanuel Kant — Prolégomènes à toute métaphysique future'}
+                                </p>
+                                <blockquote className="text-purple-200/80 text-sm leading-relaxed italic border-l-2 border-purple-500/30 pl-4">
+                                  {language === 'en'
+                                    ? 'What can be more similar in every respect and in every part more alike to my hand and to my ear, than their images in a mirror? And yet I cannot put such a hand as is seen in the glass in the place of its archetype; for if this is a right hand, that in the glass is a left one, and the image or reflexion of the right ear is a left one which never can serve as a substitute for the other. There are in this case no internal differences which our understanding could determine by thinking alone. Yet the differences are internal as the senses teach, for, notwithstanding their complete equality and similarity, the left hand cannot be enclosed in the same bounds as the right one (they are not congruent); the glove of one hand cannot be used for the other.'
+                                    : "Qu'y a-t-il de plus semblable à ma main ou à mon oreille, et de plus égal en toutes les parties, que leur image dans le miroir\u00a0? Et pourtant, je ne puis mettre à la place de l'original la main telle qu'elle se voit dans le miroir\u00a0; car si cette main est une main droite, la main du miroir est une main gauche, et l'image de l'oreille droite est une oreille gauche qui ne saurait jamais servir d'oreille droite. Il n'y a point en ce cas de différences internes qu'aucun entendement puisse penser\u00a0; et pourtant les différences sont internes autant que les sens l'enseignent, car malgré toute leur égalité et toute leur ressemblance réciproques, la main gauche ne peut être enfermée dans les mêmes limites que la main droite (elles ne sont pas congruentes), et le gant de l'une ne peut servir pour l'autre."
+                                  }
+                                </blockquote>
+                                <p className="text-xs text-purple-400/50 mt-2 text-right">
+                                  <a href="https://legacy-um6p.1337.ma/projects/library/w94c6luruazo6ipkpisvj4on-immanuel-kant/ji2ahv5fpzgfhs1cs99a27ab" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors underline underline-offset-2" data-testid="link-legacy-source">
+                                    {language === 'en' ? 'Source: LEGACY Library' : 'Source\u00a0: Bibliothèque LEGACY'}
+                                  </a>
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     )}
                   </div>
                 </motion.div>
