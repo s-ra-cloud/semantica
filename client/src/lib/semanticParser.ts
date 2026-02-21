@@ -90,24 +90,16 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
       });
     } else {
       const isCapitalized = match.word[0] === match.word[0].toUpperCase();
-      const otherMatchedWords = validMatches
-        .filter(m => m.matchType === 'semantic' && m.group.id === match.group.id && m !== match)
-        .map(m => m.word.toLowerCase());
       const alternatives = match.group.words
         .filter(w => w.toLowerCase() !== match.word.toLowerCase())
-        .filter(w => !otherMatchedWords.includes(w.toLowerCase()))
         .map(alt => isCapitalized ? alt.charAt(0).toUpperCase() + alt.slice(1) : alt.toLowerCase());
 
-      if (alternatives.length === 0) {
-        segments.push({ type: 'text', content: match.word });
-      } else {
-        segments.push({
-          type: 'semantic',
-          original: match.word,
-          alternatives,
-          groupId: match.group.id
-        });
-      }
+      segments.push({
+        type: 'semantic',
+        original: match.word,
+        alternatives,
+        groupId: match.group.id
+      });
     }
 
     lastIndex = match.index + match.length;
