@@ -273,11 +273,11 @@ export default function Home() {
                 <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-project">The Wittgenstein Project</a>
                 <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
                 <a href="https://www.cggg.fr/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-cggg">Centre Gilles-Gaston Granger</a>
-                <span className="text-zinc-500 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction française'}</span>
+                <span className="text-zinc-400 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction française'}</span>
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
-                <span className="text-zinc-500">SATT Sud Est</span>
-                <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
-                <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
+                <span className="text-zinc-400">SATT Sud Est</span>
+                <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
+                <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
               </div>
             )}
 
