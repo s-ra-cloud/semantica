@@ -211,15 +211,15 @@ export default function Home() {
       <div className="container mx-auto px-6 md:px-12 py-12 md:py-24 relative z-10 flex flex-col md:flex-row gap-16 md:gap-24 min-h-screen">
         
         <aside className="w-full md:w-48 flex flex-col shrink-0 md:fixed md:top-24 md:left-12 md:max-h-[calc(100vh-6rem)] md:overflow-y-auto">
-          <div className="mb-16">
-            <svg viewBox="0 0 40 40" className="w-8 h-8 text-white mb-2" fill="none" stroke="currentColor" strokeWidth="3">
+          <div className="mb-4">
+            <svg viewBox="0 0 40 40" className="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" strokeWidth="3">
               <path d="M10 20 L20 10 L30 20 L20 30 Z" />
               <path d="M5 25 L15 15" />
             </svg>
             <h1 className="font-display font-semibold text-white text-xl tracking-tight">Semantica</h1>
           </div>
 
-          <nav className="flex flex-col gap-4 font-medium text-sm">
+          <nav className="flex flex-col gap-2 font-medium text-sm">
             <button 
               onClick={() => setLanguage('en')}
               className={`text-left transition-colors ${language === 'en' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
@@ -240,8 +240,6 @@ export default function Home() {
             >
               Deutsch <span className="text-zinc-700 text-xs">(coming soon)</span>
             </span>
-            
-            <div className="h-px w-8 bg-zinc-800 my-2"></div>
 
             <button
               onClick={() => { setShowTeam(!showTeam); setShowThanks(false); }}
@@ -283,8 +281,6 @@ export default function Home() {
               </div>
             )}
 
-            <div className="h-px w-8 bg-zinc-800 my-2"></div>
-
             <div className="flex flex-col gap-1">
               <label className="text-zinc-500 text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
               <input
@@ -318,16 +314,12 @@ export default function Home() {
               />
             </div>
 
-            <div className="h-px w-8 bg-zinc-800 my-2"></div>
-
             <Link href="/editor">
               <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
                 {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
               </span>
             </Link>
-
-            <div className="h-px w-8 bg-zinc-800 my-2"></div>
 
             <button
               onClick={async () => {
