@@ -434,7 +434,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
+                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
                     {proposition.segments.map((segment, idx) => {
                       if (segment.type === 'text') {
                         return <MathText key={idx} text={segment.content} />;
@@ -596,6 +596,60 @@ export default function Home() {
                                 </blockquote>
                                 <p className="text-xs text-purple-400/50 mt-2 text-right">
                                   <a href="https://legacy-um6p.1337.ma/projects/library/u2okeerjjvq5vtxtsyvu1ptl-baruch-spinoza/uh2oonrmfp56dnl1tfjccs31" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors underline underline-offset-2" data-testid="link-legacy-source-spinoza">
+                                    {language === 'en' ? 'Source: LEGACY Library' : 'Source\u00a0: Bibliothèque LEGACY'}
+                                  </a>
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+
+                    {(proposition.id === '3.328' || proposition.id === '5.47321') && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === proposition.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid={`annotation-${proposition.id}`}>
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>This passage has been noted as an explicit agreement to <a href={`#occam-passage-${proposition.id}`} onClick={(e) => { e.preventDefault(); document.getElementById(`occam-passage-${proposition.id}`)?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid={`link-occam-${proposition.id}`}><em>Questions on the Sentences</em></a> by William of Occam.</>
+                                    : <>Ce passage a été noté comme un accord explicite avec les <a href={`#occam-passage-${proposition.id}`} onClick={(e) => { e.preventDefault(); document.getElementById(`occam-passage-${proposition.id}`)?.scrollIntoView({ behavior: 'smooth' }); }} className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid={`link-occam-${proposition.id}`}><em>Questions sur les Sentences</em></a> de Guillaume d'Occam.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, University Mohammed VI Polytech, based on data collected by the Wittgenstein Archives.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Université Mohammed VI Polytechnique, sur la base des données collectées par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? <>You can discuss this connection and contribute to this collective work on the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid={`link-legacy-website-occam-${proposition.id}`}>LEGACY website</a>.</>
+                                    : <>Vous pouvez discuter de cette connexion et contribuer à ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid={`link-legacy-website-occam-${proposition.id}`}>site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+
+                              <div id={`occam-passage-${proposition.id}`} className="annotation-content mt-4 p-5 rounded-xl border border-purple-500/20 bg-purple-900/10 scroll-mt-24">
+                                <p className="text-xs text-purple-400/70 uppercase tracking-wider mb-2 font-medium">
+                                  {language === 'en' ? 'William of Occam — Questions on the Sentences' : 'Guillaume d\u2019Occam — Questions sur les Sentences'}
+                                </p>
+                                <blockquote className="text-purple-200/80 text-sm leading-relaxed italic border-l-2 border-purple-500/30 pl-4">
+                                  {language === 'en'
+                                    ? 'Plurality is never to be posited without necessity.'
+                                    : 'La pluralité ne doit jamais être posée sans nécessité.'
+                                  }
+                                </blockquote>
+                                <p className="text-xs text-purple-400/50 mt-2 text-right">
+                                  <a href="https://legacy-um6p.1337.ma/projects/great-conversation/contribute/q1lw43yiq6rpaga2dwu2s2it-william-of-occam/qyun3usgm5xqxtmgel6qvhyd" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors underline underline-offset-2" data-testid={`link-legacy-source-occam-${proposition.id}`}>
                                     {language === 'en' ? 'Source: LEGACY Library' : 'Source\u00a0: Bibliothèque LEGACY'}
                                   </a>
                                 </p>
