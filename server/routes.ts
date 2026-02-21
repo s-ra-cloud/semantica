@@ -10,6 +10,45 @@ import crypto from "crypto";
 const activeSessions = new Map<string, { createdAt: number }>();
 const SESSION_TTL = 24 * 60 * 60 * 1000;
 
+const MAX_LOGIN_ATTEMPTS = 3;
+const BLOCK_DURATION = 15 * 60 * 1000;
+const failedAttempts = new Map<string, { count: number; blockedUntil: number | null }>();
+
+function getClientIp(req: Request): string {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    const first = Array.isArray(forwarded) ? forwarded[0] : forwarded.split(',')[0];
+    return first.trim();
+  }
+  return req.socket.remoteAddress || 'unknown';
+}
+
+function isIpBlocked(ip: string): boolean {
+  const record = failedAttempts.get(ip);
+  if (!record || !record.blockedUntil) return false;
+  if (Date.now() > record.blockedUntil) {
+    failedAttempts.delete(ip);
+    return false;
+  }
+  return true;
+}
+
+function recordFailedAttempt(ip: string): boolean {
+  const record = failedAttempts.get(ip) || { count: 0, blockedUntil: null };
+  record.count += 1;
+  if (record.count >= MAX_LOGIN_ATTEMPTS) {
+    record.blockedUntil = Date.now() + BLOCK_DURATION;
+    failedAttempts.set(ip, record);
+    return true;
+  }
+  failedAttempts.set(ip, record);
+  return false;
+}
+
+function clearFailedAttempts(ip: string) {
+  failedAttempts.delete(ip);
+}
+
 function cleanExpiredSessions() {
   const now = Date.now();
   const tokens = Array.from(activeSessions.keys());
@@ -44,14 +83,25 @@ export async function registerRoutes(
   setInterval(cleanExpiredSessions, 60 * 60 * 1000);
 
   app.post("/api/auth/login", (req, res) => {
+    const ip = getClientIp(req);
+
+    if (isIpBlocked(ip)) {
+      return res.status(429).json({ message: "Too many failed attempts. Please try again in 15 minutes." });
+    }
+
     const { password } = req.body;
     const adminPassword = process.env.ADMIN_PASSWORD;
     if (!adminPassword) {
       return res.status(500).json({ message: "Server configuration error" });
     }
     if (password !== adminPassword) {
+      const blocked = recordFailedAttempt(ip);
+      if (blocked) {
+        return res.status(429).json({ message: "Too many failed attempts. Please try again in 15 minutes." });
+      }
       return res.status(401).json({ message: "Invalid password" });
     }
+    clearFailedAttempts(ip);
     const token = crypto.randomBytes(32).toString('hex');
     activeSessions.set(token, { createdAt: Date.now() });
     res.json({ token });

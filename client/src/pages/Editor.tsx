@@ -10,7 +10,7 @@ export default function Editor() {
   const { synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch, authToken, setAuthToken } = useSemantic();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loginLoading, setLoginLoading] = useState(false);
   const [importStatus, setImportStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -40,13 +40,14 @@ export default function Editor() {
         const { token } = await res.json();
         setAuthToken(token);
         setShowLoginModal(false);
-        setError(false);
+        setErrorMessage(null);
         setPassword('');
       } else {
-        setError(true);
+        const data = await res.json().catch(() => ({}));
+        setErrorMessage(data.message || 'Incorrect password');
       }
     } catch {
-      setError(true);
+      setErrorMessage('Connection error');
     } finally {
       setLoginLoading(false);
     }
@@ -148,14 +149,14 @@ export default function Editor() {
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    setError(false);
+                    setErrorMessage(null);
                   }}
                   placeholder="Password"
-                  className={`bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white h-12 ${error ? 'border-red-500/50 focus-visible:ring-red-500/50' : ''}`}
+                  className={`bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white h-12 ${errorMessage ? 'border-red-500/50 focus-visible:ring-red-500/50' : ''}`}
                   autoFocus
                   data-testid="input-admin-password"
                 />
-                {error && <p className="text-red-400 text-xs mt-2">Incorrect password</p>}
+                {errorMessage && <p className="text-red-400 text-xs mt-2">{errorMessage}</p>}
               </div>
               <Button type="submit" className="w-full bg-white text-black hover:bg-zinc-200 h-12 text-sm font-medium" data-testid="btn-admin-submit">
                 Access Database
