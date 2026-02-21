@@ -11,6 +11,7 @@ import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
 import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code } from 'lucide-react';
 import { propositionDiagrams } from '@/components/TractatusDiagrams';
+import { ParsedText } from '@/components/ParsedText';
 import 'katex/dist/katex.min.css';
 
 function isChildOf(childId: string, parentId: string): boolean {
@@ -461,10 +462,10 @@ export default function Home() {
                       <>
                         {propositionDiagrams[proposition.id].diagram({ isFrench: language === 'fr' })}
                         {language === 'fr' && propositionDiagrams[proposition.id].afterTextFr && (
-                          <span className="whitespace-pre-line">{propositionDiagrams[proposition.id].afterTextFr}</span>
+                          <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextFr!} />
                         )}
                         {language === 'en' && propositionDiagrams[proposition.id].afterTextEn && (
-                          <span className="whitespace-pre-line">{propositionDiagrams[proposition.id].afterTextEn}</span>
+                          <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextEn!} />
                         )}
                       </>
                     )}

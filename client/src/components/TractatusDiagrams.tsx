@@ -1,4 +1,5 @@
 import React from 'react';
+import { ParsedText } from '@/components/ParsedText';
 
 export function NeckerCube() {
   return (
@@ -257,6 +258,29 @@ export function TruthTable5101({ isFrench }: { isFrench?: boolean }) {
   );
 }
 
+function DiagramText6_1203({ isFrench }: { isFrench?: boolean }) {
+  return (
+    <div className="my-4 space-y-4 text-sm text-zinc-300 font-serif">
+      <TautologyDiagram1 />
+      <p><ParsedText text={isFrench
+        ? 'et la coordination de la vérité ou de la fausseté de la proposition entière avec les combinaisons de vérité des arguments de vérité par des lignes de la manière suivante :'
+        : 'and the co-ordination of the truth or falsity of the whole proposition with the truth-combinations of the truth-arguments by lines in the following way:'} /></p>
+      <TautologyDiagram2 />
+      <p><ParsedText text={isFrench
+        ? 'Ce signe, par exemple, présenterait donc la proposition p ⊃ q. Je vais maintenant chercher si une proposition telle que ~(p . ~p) (la Loi de Contradiction) est une tautologie. La forme « ~ξ » s\'écrit dans notre notation :'
+        : 'This sign, for example, would therefore present the proposition p ⊃ q. Now I will proceed to inquire whether such a proposition as ~(p . ~p) (The Law of Contradiction) is a tautology. The form "~ξ" is written in our notation:'} /></p>
+      <TautologyDiagram3 />
+      <p><ParsedText text={isFrench ? 'la forme « ξ . η » ainsi :' : 'the form "ξ . η" thus:'} /></p>
+      <TautologyDiagram4 />
+      <p><ParsedText text={isFrench ? 'D\'où la proposition ~(p . ~q) se présente ainsi :' : 'Hence the proposition ~(p . ~q) runs thus:'} /></p>
+      <TautologyDiagram5 />
+      <p><ParsedText text={isFrench
+        ? 'Si ici nous mettons « p » au lieu de « q » et examinons la combinaison des T et F les plus extérieurs avec les plus intérieurs, on voit que la vérité de la proposition entière est coordonnée avec toutes les combinaisons de vérité de son argument, sa fausseté avec aucune des combinaisons de vérité.'
+        : 'If here we put "p" instead of "q" and examine the combination of the outermost T and F with the innermost, it is seen that the truth of the whole proposition is co-ordinated with all the truth-combinations of its argument, its falsity with none of the truth-combinations.'} /></p>
+    </div>
+  );
+}
+
 export const propositionDiagrams: Record<string, {
   diagram: (props: { isFrench?: boolean }) => React.ReactNode;
   afterTextEn?: string;
@@ -281,24 +305,7 @@ export const propositionDiagrams: Record<string, {
   },
   '6.1203': {
     diagram: ({ isFrench }) => (
-      <div className="my-4 space-y-4 text-sm text-zinc-300 font-serif">
-        <TautologyDiagram1 />
-        <p>{isFrench
-          ? 'et la coordination de la vérité ou de la fausseté de la proposition entière avec les combinaisons de vérité des arguments de vérité par des lignes de la manière suivante :'
-          : 'and the co-ordination of the truth or falsity of the whole proposition with the truth-combinations of the truth-arguments by lines in the following way:'}</p>
-        <TautologyDiagram2 />
-        <p>{isFrench
-          ? 'Ce signe, par exemple, présenterait donc la proposition p ⊃ q. Je vais maintenant chercher si une proposition telle que ~(p . ~p) (la Loi de Contradiction) est une tautologie. La forme « ~ξ » s\'écrit dans notre notation :'
-          : 'This sign, for example, would therefore present the proposition p ⊃ q. Now I will proceed to inquire whether such a proposition as ~(p . ~p) (The Law of Contradiction) is a tautology. The form "~ξ" is written in our notation:'}</p>
-        <TautologyDiagram3 />
-        <p>{isFrench ? 'la forme « ξ . η » ainsi :' : 'the form "ξ . η" thus:'}</p>
-        <TautologyDiagram4 />
-        <p>{isFrench ? 'D\'où la proposition ~(p . ~q) se présente ainsi :' : 'Hence the proposition ~(p . ~q) runs thus:'}</p>
-        <TautologyDiagram5 />
-        <p>{isFrench
-          ? 'Si ici nous mettons « p » au lieu de « q » et examinons la combinaison des T et F les plus extérieurs avec les plus intérieurs, on voit que la vérité de la proposition entière est coordonnée avec toutes les combinaisons de vérité de son argument, sa fausseté avec aucune des combinaisons de vérité.'
-          : 'If here we put "p" instead of "q" and examine the combination of the outermost T and F with the innermost, it is seen that the truth of the whole proposition is co-ordinated with all the truth-combinations of its argument, its falsity with none of the truth-combinations.'}</p>
-      </div>
+      <DiagramText6_1203 isFrench={isFrench} />
     ),
   },
   '6.36111': {
