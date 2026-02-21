@@ -41,6 +41,7 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackPropId, setFeedbackPropId] = useState('');
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [jumpTo, setJumpTo] = useState('');
   const [feedbackSending, setFeedbackSending] = useState(false);
   const [feedbackSent, setFeedbackSent] = useState(false);
   const { synonymGroups } = useSemantic();
@@ -281,6 +282,41 @@ export default function Home() {
 
             <div className="h-px w-8 bg-zinc-800 my-2"></div>
 
+            <div className="flex flex-col gap-1">
+              <label className="text-zinc-500 text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
+              <input
+                type="text"
+                value={jumpTo}
+                onChange={(e) => setJumpTo(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && jumpTo.trim()) {
+                    const el = document.getElementById(`prop-${jumpTo.trim()}`);
+                    if (el) {
+                      const newCollapsed = new Set(collapsed);
+                      const parts = jumpTo.trim().split('.');
+                      for (let i = 1; i < parts.length; i++) {
+                        const parentId = parts.slice(0, i).join('.');
+                        newCollapsed.delete(parentId);
+                      }
+                      const mainNum = parts[0];
+                      newCollapsed.delete(mainNum);
+                      setCollapsed(newCollapsed);
+                      setTimeout(() => {
+                        const target = document.getElementById(`prop-${jumpTo.trim()}`);
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }, 100);
+                    }
+                    setJumpTo('');
+                  }
+                }}
+                placeholder={language === 'en' ? 'e.g. 4.21' : 'ex. 4.21'}
+                className="bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 w-full"
+                data-testid="input-jump-to"
+              />
+            </div>
+
+            <div className="h-px w-8 bg-zinc-800 my-2"></div>
+
             <Link href="/editor">
               <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
@@ -363,7 +399,8 @@ export default function Home() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
-                  key={proposition.id} 
+                  key={proposition.id}
+                  id={`prop-${proposition.id}`}
                   className="flex gap-4 group"
                 >
                   <div className="shrink-0 w-8 flex flex-col items-center gap-1">
