@@ -9,7 +9,7 @@ import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
-import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code } from 'lucide-react';
 import 'katex/dist/katex.min.css';
 
 function isChildOf(childId: string, parentId: string): boolean {
@@ -374,7 +374,21 @@ export default function Home() {
           </div>
 
           <footer className="mt-24 mb-12 pt-8 border-t border-zinc-800/50">
-            <div className="flex flex-col gap-3 text-xs text-zinc-600">
+            <div className="flex flex-col gap-4 text-xs text-zinc-600">
+              <button
+                onClick={() => {
+                  const a = document.createElement('a');
+                  a.href = 'https://replit.com/@' + window.location.hostname.split('.')[0];
+                  a.target = '_blank';
+                  a.rel = 'noopener noreferrer';
+                  a.click();
+                }}
+                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors w-fit"
+                data-testid="btn-download-code"
+              >
+                <Code className="w-3.5 h-3.5" />
+                View Source Code
+              </button>
               <p>
                 Licensed under the{' '}
                 <a

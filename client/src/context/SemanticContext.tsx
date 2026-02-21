@@ -16,6 +16,7 @@ type SemanticContextType = {
   updateGroup: (id: number, group: Omit<SynonymGroup, 'id'>) => void;
   deleteGroup: (id: number) => void;
   resetDefaults: () => void;
+  refetch: () => void;
 };
 
 const SemanticContext = createContext<SemanticContextType | null>(null);
@@ -270,9 +271,10 @@ export const SemanticProvider = ({ children }: { children: React.ReactNode }) =>
   const updateGroup = (id: number, group: Omit<SynonymGroup, 'id'>) => updateMutation.mutate({ id, group });
   const deleteGroup = (id: number) => deleteMutation.mutate(id);
   const resetDefaults = () => resetMutation.mutate();
+  const refetch = () => queryClient.invalidateQueries({ queryKey: ['/api/synonym-groups'] });
 
   return (
-    <SemanticContext.Provider value={{ synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults }}>
+    <SemanticContext.Provider value={{ synonymGroups, isLoading, addGroup, updateGroup, deleteGroup, resetDefaults, refetch }}>
       {children}
     </SemanticContext.Provider>
   );

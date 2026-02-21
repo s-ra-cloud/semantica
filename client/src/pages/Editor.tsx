@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
-import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload, Code } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -30,8 +30,15 @@ export default function Editor() {
     }
   };
 
-  const handleExport = () => {
-    window.open('/api/synonym-groups/export', '_blank');
+  const handleExport = async () => {
+    const res = await fetch('/api/synonym-groups/export');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'semantica-expressions.json';
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,17 +166,6 @@ export default function Editor() {
               <Upload className="w-4 h-4 mr-2" /> Import DB
             </Button>
           </label>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-download-code" onClick={(e) => {
-              e.preventDefault();
-              const a = document.createElement('a');
-              a.href = '/api/synonym-groups/export';
-              a.download = 'semantica-expressions.json';
-              a.click();
-            }}>
-              <Code className="w-4 h-4 mr-2" /> Download Code
-            </Button>
-          </a>
           {importStatus && (
             <span className={`text-xs ${importStatus.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
               {importStatus}
