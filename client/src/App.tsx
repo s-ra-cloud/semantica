@@ -7,12 +7,14 @@ import { SemanticProvider } from "@/context/SemanticContext";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Editor from "@/pages/Editor";
+import Graph from "@/pages/Graph";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home}/>
       <Route path="/editor" component={Editor}/>
+      <Route path="/graph" component={Graph}/>
       <Route component={NotFound} />
     </Switch>
   );

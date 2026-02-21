@@ -9,7 +9,7 @@ import { tractatusEnglishRaw, tractatusFrenchRaw } from '@/data/tractatusRaw';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic } from '@/lib/semanticParser';
 import { Link } from 'wouter';
-import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen } from 'lucide-react';
+import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen, GitBranch } from 'lucide-react';
 import { propositionDiagrams } from '@/components/TractatusDiagrams';
 import { ParsedText } from '@/components/ParsedText';
 import 'katex/dist/katex.min.css';
@@ -347,6 +347,13 @@ export default function Home() {
               <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
                 {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
+              </span>
+            </Link>
+
+            <Link href="/graph">
+              <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer" data-testid="link-graph">
+                <GitBranch className="w-4 h-4" />
+                {language === 'en' ? 'Connexion Graph' : 'Graphe de connexions'}
               </span>
             </Link>
 
