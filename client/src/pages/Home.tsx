@@ -295,34 +295,34 @@ export default function Home() {
               <path d="M5 25 L15 15" />
             </svg>
             <h1 className="font-display font-semibold text-white text-xl tracking-tight">Semantica</h1>
-            <p className="text-zinc-500 text-xs leading-relaxed">{language === 'en' ? <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
+            <p className="text-white text-xs leading-relaxed">{language === 'en' ? <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
           </div>
 
           <nav className="flex flex-col gap-2 font-medium text-sm">
             <button 
               onClick={() => setLanguage('en')}
-              className={`text-left transition-colors ${language === 'en' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className={`text-left transition-colors ${language === 'en' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-lang-en"
             >
               English
             </button>
             <button 
               onClick={() => setLanguage('fr')}
-              className={`text-left transition-colors ${language === 'fr' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className={`text-left transition-colors ${language === 'fr' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-lang-fr"
             >
               Fran&ccedil;ais
             </button>
             <span
-              className="text-zinc-700 cursor-default"
+              className="text-zinc-500 cursor-default"
               data-testid="btn-lang-de"
             >
-              Deutsch <span className="text-zinc-700 text-xs">(coming soon)</span>
+              Deutsch <span className="text-zinc-500 text-xs">(coming soon)</span>
             </span>
 
             <button
               onClick={() => { setShowTeam(!showTeam); setShowThanks(false); }}
-              className={`text-left transition-colors flex items-center gap-1 ${showTeam ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
+              className={`text-left transition-colors flex items-center gap-1 ${showTeam ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-team"
             >
               {language === 'en' ? 'Team' : '\u00c9quipe'}
@@ -340,7 +340,7 @@ export default function Home() {
 
             <button
               onClick={() => { setShowThanks(!showThanks); setShowTeam(false); }}
-              className={`text-left transition-colors flex items-center gap-1 ${showThanks ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
+              className={`text-left transition-colors flex items-center gap-1 ${showThanks ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
               data-testid="btn-thanks"
             >
               {language === 'en' ? 'Thanks' : 'Remerciements'}
@@ -362,10 +362,10 @@ export default function Home() {
               </div>
             )}
 
-            <a href="https://www.wittgensteinproject.org/w/index.php/Blog:How_to_Keep_Track_of_the_Wittgensteinian_World" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors text-xs underline underline-offset-2" data-testid="link-wittgenstein-blog">{language === 'en' ? 'How to keep track of the Wittgenstein World' : 'Comment suivre le monde wittgensteinien'}</a>
+            <a href="https://www.wittgensteinproject.org/w/index.php/Blog:How_to_Keep_Track_of_the_Wittgensteinian_World" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors text-xs underline underline-offset-2" data-testid="link-wittgenstein-blog">{language === 'en' ? 'How to keep track of the Wittgenstein World' : 'Comment suivre le monde wittgensteinien'}</a>
 
             <div className="flex flex-col gap-1">
-              <label className="text-zinc-500 text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
+              <label className="text-white text-xs">{language === 'en' ? 'Jump to proposition' : 'Aller à la proposition'}</label>
               <input
                 type="text"
                 value={jumpTo}
@@ -398,14 +398,14 @@ export default function Home() {
             </div>
 
             <Link href="/editor">
-              <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
+              <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
                 {language === 'en' ? 'Expression DB' : 'Base d\u2019expressions'}
               </span>
             </Link>
 
             <Link href="/graph">
-              <span className="text-zinc-500 hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer" data-testid="link-graph">
+              <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer" data-testid="link-graph">
                 <GitBranch className="w-4 h-4" />
                 {language === 'en' ? 'Connexion Graph' : 'Graphe de connexions'}
               </span>
@@ -428,13 +428,13 @@ export default function Home() {
                   console.error('Download failed:', err);
                 }
               }}
-              className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors text-xs"
+              className="flex items-center gap-2 text-white hover:text-green-400 transition-colors text-xs"
               data-testid="btn-download-code"
             >
               <Code className="w-3.5 h-3.5" />
               {language === 'en' ? 'Download Source Code' : 'Télécharger le code source'}
             </button>
-            <p className="text-xs text-zinc-600 mb-1">
+            <p className="text-xs text-white mb-1">
               {language === 'en'
                 ? 'The first version of Semantica used an ad hoc BERT model and was registered IDDN FR.001.130034.000.S.C.2022.000.31235 on 23/05/2022. This version uses a completely new architecture and is published under the'
                 : 'La première version de Semantica utilisait un modèle BERT ad hoc et a été enregistrée IDDN FR.001.130034.000.S.C.2022.000.31235 le 23/05/2022. Cette version utilise une architecture entièrement nouvelle et est publiée sous la'}{' '}
@@ -442,7 +442,7 @@ export default function Home() {
                 href="https://www.gnu.org/licenses/gpl-3.0.en.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 hover:text-green-400 transition-colors underline underline-offset-2"
+                className="text-white hover:text-green-400 transition-colors underline underline-offset-2"
                 data-testid="link-license"
               >
                 GNU General Public License v3.0
@@ -456,17 +456,17 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-display font-medium text-white mb-2">
               Tractatus Logico-Philosophicus
             </h2>
-            <p className="text-zinc-400 text-sm mb-4">
+            <p className="text-white text-sm mb-4">
               {language === 'en' ? 'by Ludwig Wittgenstein' : 'par Ludwig Wittgenstein'}
             </p>
-            <p className="text-zinc-500 max-w-md text-sm leading-relaxed">
+            <p className="text-white max-w-md text-sm leading-relaxed">
               {language === 'en' ? 'Read the Tractatus in a new way. Click the highlighted expressions to explore the semantic structure of the propositions.' : 'Lisez le Tractatus d\u2019une nouvelle mani\u00e8re. Cliquez sur les expressions surlign\u00e9es pour explorer la structure s\u00e9mantique des propositions.'}
             </p>
             <div className="mt-3 flex items-start gap-2 text-amber-500/70 text-xs max-w-md">
               <Sparkles className="w-3.5 h-3.5 mt-0.5 shrink-0" />
               <p>{language === 'en' ? <>There may still be mistakes in the substitutions that you can signal with the feedback button (<MessageSquare className="w-3 h-3 inline" />). We're adding new connexions to external texts every week.</> : <>Il peut encore y avoir des erreurs dans les substitutions que vous pouvez signaler avec le bouton de retour (<MessageSquare className="w-3 h-3 inline" />). Nous ajoutons de nouvelles connexions à des textes externes chaque semaine.</>}</p>
             </div>
-            <div className="mt-4 text-zinc-600 text-xs leading-relaxed max-w-md italic">
+            <div className="mt-4 text-white text-xs leading-relaxed max-w-md italic">
               {language === 'en' ? (
                 <>
                   <p>C.K. Ogden and Ramsey translation (1922). We have replaced every occurrence of &ldquo;atomic fact&rdquo; with &ldquo;state of affairs&rdquo; to better reflect the original German &ldquo;Sachverhalt.&rdquo;</p>
