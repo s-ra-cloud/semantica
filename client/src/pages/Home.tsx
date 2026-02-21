@@ -255,7 +255,7 @@ export default function Home() {
                 <a href="https://fr.linkedin.com/in/raphael-liogier-573573127" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-raphael">Rapha&euml;l Liogier</a>
                 <a href="https://fr.linkedin.com/in/sacha-raoult" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-sacha">Sacha Raoult</a>
                 <a href="https://www.linkedin.com/in/laura-duparc-52504b215" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-laura">Laura Duparc</a>
-                <a href="https://fr.linkedin.com/in/eric-parisot" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-eric">Eric Parisot</a>
+                <a href="https://www.linkedin.com/in/eric-parisot-3719bb2a/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-eric">Eric Parisot</a>
                 <a href="https://www.linkedin.com/in/sofiane-baddag-743158145" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-sofiane">Sofiane Baddag</a>
               </div>
             )}
@@ -272,11 +272,12 @@ export default function Home() {
               <div className="flex flex-col gap-2 pl-2 text-xs text-zinc-400">
                 <a href="https://www.wittgensteinproject.org/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-project">The Wittgenstein Project</a>
                 <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-wittgenstein-archives">The Wittgenstein Archives</a>
-                <span className="text-zinc-500 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction fran\u00e7aise'}</span>
+                <a href="https://www.cggg.fr/" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors" data-testid="link-cggg">Centre Gilles-Gaston Granger</a>
+                <span className="text-zinc-500 leading-relaxed">{language === 'en' ? 'The daughter of Gilles-Gaston Granger for the rights of the French translation' : 'La fille de Gilles-Gaston Granger pour les droits de la traduction française'}</span>
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
                 <span className="text-zinc-500">SATT Sud Est</span>
-                <span className="text-zinc-500">Machina Research Network</span>
-                <span className="text-zinc-500">Chair of Transitions</span>
+                <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
+                <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
               </div>
             )}
 
