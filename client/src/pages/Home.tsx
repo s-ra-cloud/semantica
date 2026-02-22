@@ -363,7 +363,7 @@ export default function Home() {
                 <span className="text-zinc-500 italic">{language === 'fr' ? 'Avec l\'aide spéciale de :' : language === 'de' ? 'Mit besonderer Hilfe von:' : 'With the special help of:'}</span>
                 <span className="text-zinc-400">SATT Sud Est</span>
                 <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
-                <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-chair">Chair of Transitions</a>
+                <a href="https://www.iufrance.fr/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-iuf">Institut Universitaire de France</a>
                 <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-legacy-thanks">LEGACY project</a>
               </div>
             )}
