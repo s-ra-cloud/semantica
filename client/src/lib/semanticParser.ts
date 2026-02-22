@@ -90,9 +90,9 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     'thing': ['something', 'anything', 'nothing', 'everything'],
     'things': ['somethings'],
     'objects': ['combination of objects', 'combinations of objects'],
-    'forme': ['forme de l\'objet', 'sa forme'],
+    'forme': ['forme de l\'objet', 'sa forme', 'forme logique', 'forme de représentation', 'forme de figuration', 'forme de la réalité', 'la forme logique', 'la forme de la réalité'],
     'objet': ['forme de l\'objet'],
-    'form': ['form of the object', 'its form'],
+    'form': ['form of the object', 'its form', 'logical form', 'form of representation', 'form of depiction', 'form of reality', 'the logical form', 'the form of reality'],
     'object': ['form of the object'],
   };
 
@@ -178,6 +178,12 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
 
 const propositionExclusions: Record<string, string[]> = {
   'fr:2.0122': ['forme'],
+  'fr:2.0272': ['forme'],
+  'fr:4.063': ['forme'],
+  'en:2.0272': ['form'],
+  'en:4.063': ['form'],
+  'de:2.0272': ['Form'],
+  'de:4.063': ['Form'],
 };
 
 export function parseSemantic(text: string, groups: SynonymGroup[], propositionId?: string, language?: string): Segment[] {
