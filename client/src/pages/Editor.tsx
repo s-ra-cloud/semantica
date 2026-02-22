@@ -255,23 +255,25 @@ export default function Editor() {
                 const siblings = synonymGroups.filter(g => g.groupKey === group.groupKey);
                 siblings.forEach(s => rendered.add(s.id));
                 const borderColor = groupKeyColors[group.groupKey];
-                result.push(
-                  <div key={`gk-${group.groupKey}`} className={`border-l-4 ${borderColor} pl-4 space-y-3`}>
-                    <div className="text-xs text-zinc-500 font-mono mb-1">Group: {group.groupKey}</div>
-                    {siblings.map(s => (
-                      isAuthenticated ? (
+                if (isAuthenticated) {
+                  result.push(
+                    <div key={`gk-${group.groupKey}`} className={`border-l-4 ${borderColor} pl-4 space-y-3`}>
+                      <div className="text-xs text-zinc-500 font-mono mb-1">Group: {group.groupKey}</div>
+                      {siblings.map(s => (
                         <GroupEditor
                           key={s.id}
                           group={s}
                           onUpdate={(g) => updateGroup(s.id, { language: g.language, words: g.words, type: g.type || 'semantic', groupKey: g.groupKey, excludedPropositions: g.excludedPropositions })}
                           onDelete={() => deleteGroup(s.id)}
                         />
-                      ) : (
-                        <GroupViewer key={s.id} group={s} />
-                      )
-                    ))}
-                  </div>
-                );
+                      ))}
+                    </div>
+                  );
+                } else {
+                  result.push(
+                    <GroupViewerMerged key={`gk-${group.groupKey}`} groups={siblings} groupKey={group.groupKey} borderColor={borderColor} />
+                  );
+                }
               } else {
                 rendered.add(group.id);
                 result.push(
@@ -400,6 +402,114 @@ function GroupViewer({ group }: { group: SynonymGroup }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function GroupViewerMerged({ groups, groupKey, borderColor }: { groups: SynonymGroup[]; groupKey: string; borderColor: string }) {
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const [feedbackSending, setFeedbackSending] = useState(false);
+
+  const langLabel = (l: string) => l === 'en' ? 'EN' : l === 'fr' ? 'FR' : l === 'de' ? 'DE' : l.toUpperCase();
+  const first = groups[0];
+  const excludedProps = groups.find(g => g.excludedPropositions && g.excludedPropositions.length > 0)?.excludedPropositions;
+
+  const handleSendFeedback = async () => {
+    if (!feedbackText.trim()) return;
+    setFeedbackSending(true);
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          propositionId: `expression-group-key-${groupKey}`,
+          language: first.language,
+          message: `[Group "${groupKey}" — IDs: ${groups.map(g => g.id).join(', ')}] ${feedbackText}`,
+        }),
+      });
+      setFeedbackSent(true);
+      setFeedbackText('');
+      setTimeout(() => { setFeedbackSent(false); setShowFeedback(false); }, 3000);
+    } catch {
+    } finally {
+      setFeedbackSending(false);
+    }
+  };
+
+  return (
+    <div className={`border-l-4 ${borderColor} pl-4`}>
+      <div className="p-6 border border-zinc-800 rounded-xl bg-zinc-900/30 shadow-lg" data-testid={`group-viewer-merged-${groupKey}`}>
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex items-center gap-4">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 font-mono">{groupKey}</span>
+            <span className={`text-xs px-2 py-0.5 rounded-full ${first.type === 'math-logic' ? 'bg-purple-500/20 text-purple-400' : first.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
+              {first.type === 'math-logic' ? 'Math' : first.type === 'logic' ? 'Logic' : 'Semantic'}
+            </span>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => { setShowFeedback(!showFeedback); setFeedbackSent(false); }}
+            className="text-zinc-500 hover:text-amber-400 hover:bg-amber-400/10"
+            data-testid={`btn-feedback-merged-${groupKey}`}
+          >
+            <MessageSquare className="w-4 h-4" />
+          </Button>
+        </div>
+
+        <div className="space-y-3">
+          {groups.map(g => (
+            <div key={g.id}>
+              <div className="text-[10px] uppercase tracking-wider text-zinc-600 mb-1">{langLabel(g.language)}</div>
+              <div className="flex flex-wrap gap-1.5">
+                {g.words.filter(w => w.trim()).map((word, idx) => (
+                  <span key={idx} className={`px-2.5 py-1 rounded-lg text-sm ${first.type === 'math-logic' ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20' : first.type === 'logic' ? 'bg-blue-500/10 text-blue-300 border border-blue-500/20' : 'bg-green-500/10 text-green-300 border border-green-500/20'}`}>
+                    {word}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {excludedProps && excludedProps.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5 items-center">
+            <span className="text-xs text-zinc-500 mr-1">Excluded from:</span>
+            {excludedProps.map((p, idx) => (
+              <span key={idx} className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">{p}</span>
+            ))}
+          </div>
+        )}
+
+        {showFeedback && (
+          <div className="mt-4 p-4 border border-zinc-700 rounded-lg bg-zinc-950/50">
+            {feedbackSent ? (
+              <p className="text-green-400 text-sm">Thank you for your feedback!</p>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <textarea
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  placeholder="Say something about this entry..."
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 h-20 resize-none focus:outline-none focus:border-amber-500/50"
+                  data-testid={`input-feedback-merged-${groupKey}`}
+                />
+                <Button
+                  onClick={handleSendFeedback}
+                  disabled={feedbackSending || !feedbackText.trim()}
+                  size="sm"
+                  className="self-end bg-amber-600 hover:bg-amber-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white text-xs"
+                  data-testid={`btn-send-feedback-merged-${groupKey}`}
+                >
+                  {feedbackSending ? 'Sending...' : 'Send Feedback'}
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

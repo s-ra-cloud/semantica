@@ -1,33 +1,82 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useLocation } from 'wouter';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link, useLocation, useSearch } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+type Lang = 'en' | 'fr' | 'de';
 type ConnectionType = 'agreement' | 'disagreement' | 'neutral';
 
 interface ExternalSource {
   id: string;
   author: string;
-  title: string;
+  title: Record<Lang, string>;
   year: string;
   url: string;
 }
 
 interface Connection {
   propositionId: string;
-  propositionText: string;
+  propositionText: Record<Lang, string>;
   source: ExternalSource;
   type: ConnectionType;
 }
 
+const i18n: Record<Lang, {
+  title: string;
+  description: (links: { gc: React.ReactNode; legacy: React.ReactNode; archives: React.ReactNode }) => React.ReactNode;
+  addingNew: string;
+  agreement: string;
+  disagreement: string;
+  neutral: string;
+}> = {
+  en: {
+    title: 'Connexion Graph',
+    description: ({ gc, legacy, archives }) => (
+      <>This graph is a subset of {gc} graph published on the {legacy} and uses data from that project as well as from the {archives}.</>
+    ),
+    addingNew: 'We are adding new connexions every week.',
+    agreement: 'Agreement',
+    disagreement: 'Disagreement',
+    neutral: 'Neutral',
+  },
+  fr: {
+    title: 'Graphe de connexions',
+    description: ({ gc, legacy, archives }) => (
+      <>Ce graphe est un sous-ensemble du graphe {gc} publié sur le {legacy} et utilise des données de ce projet ainsi que des {archives}.</>
+    ),
+    addingNew: 'Nous ajoutons de nouvelles connexions chaque semaine.',
+    agreement: 'Accord',
+    disagreement: 'Désaccord',
+    neutral: 'Neutre',
+  },
+  de: {
+    title: 'Verbindungsgraph',
+    description: ({ gc, legacy, archives }) => (
+      <>Dieser Graph ist eine Teilmenge des {gc}-Graphen, veröffentlicht auf dem {legacy}, und verwendet Daten aus diesem Projekt sowie aus den {archives}.</>
+    ),
+    addingNew: 'Wir fügen jede Woche neue Verbindungen hinzu.',
+    agreement: 'Übereinstimmung',
+    disagreement: 'Widerspruch',
+    neutral: 'Neutral',
+  },
+};
+
 const connections: Connection[] = [
   {
     propositionId: '3.328',
-    propositionText: 'If a sign is not necessary then it is meaningless. That is the meaning of Occam\'s razor.',
+    propositionText: {
+      en: 'If a sign is not necessary then it is meaningless. That is the meaning of Occam\'s razor.',
+      fr: 'Si un signe n\'est pas nécessaire, il est dépourvu de signification. C\'est le sens du rasoir d\'Occam.',
+      de: 'Wenn ein Zeichen nicht notwendig ist, so ist es bedeutungslos. Das ist der Sinn von Occams Devise.',
+    },
     source: {
       id: 'occam',
       author: 'William of Occam',
-      title: 'Questions on the Sentences',
+      title: {
+        en: 'Questions on the Sentences',
+        fr: 'Questions sur les Sentences',
+        de: 'Fragen zu den Sentenzen',
+      },
       year: 'c. 1319',
       url: 'https://legacy-um6p.1337.ma/projects/great-conversation/contribute/q1lw43yiq6rpaga2dwu2s2it-william-of-occam/qyun3usgm5xqxtmgel6qvhyd',
     },
@@ -35,11 +84,19 @@ const connections: Connection[] = [
   },
   {
     propositionId: '4.0031',
-    propositionText: 'All philosophy is "Critique of language" (but not at all in Mauthner\'s sense).',
+    propositionText: {
+      en: 'All philosophy is "Critique of language" (but not at all in Mauthner\'s sense).',
+      fr: 'Toute la philosophie est « critique du langage » (mais nullement au sens de Mauthner).',
+      de: 'Alle Philosophie ist „Sprachkritik" (allerdings nicht im Sinne Mauthners).',
+    },
     source: {
       id: 'mauthner',
       author: 'Fritz Mauthner',
-      title: 'Contributions toward a Critique of Language',
+      title: {
+        en: 'Contributions toward a Critique of Language',
+        fr: 'Contributions à une critique du langage',
+        de: 'Beiträge zu einer Kritik der Sprache',
+      },
       year: '1901–1902',
       url: 'https://legacy-um6p.1337.ma/projects/library/y12qfjv0ujlf45gy3zyjxllk-fritz-mauthner/temo2e2k7tu732h3hydm76vn',
     },
@@ -47,11 +104,19 @@ const connections: Connection[] = [
   },
   {
     propositionId: '5.47321',
-    propositionText: 'Occam\'s razor is, of course, not an arbitrary rule nor one justified by its practical success.',
+    propositionText: {
+      en: 'Occam\'s razor is, of course, not an arbitrary rule nor one justified by its practical success.',
+      fr: 'Le rasoir d\'Occam n\'est naturellement pas une règle arbitraire, ni justifiée par son succès pratique.',
+      de: 'Occams Devise ist natürlich keine willkürliche, oder durch ihren praktischen Erfolg gerechtfertigte Regel.',
+    },
     source: {
       id: 'occam',
       author: 'William of Occam',
-      title: 'Questions on the Sentences',
+      title: {
+        en: 'Questions on the Sentences',
+        fr: 'Questions sur les Sentences',
+        de: 'Fragen zu den Sentenzen',
+      },
       year: 'c. 1319',
       url: 'https://legacy-um6p.1337.ma/projects/great-conversation/contribute/q1lw43yiq6rpaga2dwu2s2it-william-of-occam/qyun3usgm5xqxtmgel6qvhyd',
     },
@@ -59,11 +124,19 @@ const connections: Connection[] = [
   },
   {
     propositionId: '6.36111',
-    propositionText: 'The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane...',
+    propositionText: {
+      en: 'The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane...',
+      fr: 'Le problème kantien de la main droite et de la main gauche, que l\'on ne peut faire coïncider, existe déjà dans le plan...',
+      de: 'Das Kantsche Problem von der rechten und linken Hand, die man nicht zur Deckung bringen kann, besteht schon in der Ebene...',
+    },
     source: {
       id: 'kant',
       author: 'Immanuel Kant',
-      title: 'Critique of Pure Reason',
+      title: {
+        en: 'Critique of Pure Reason',
+        fr: 'Critique de la raison pure',
+        de: 'Kritik der reinen Vernunft',
+      },
       year: '1781',
       url: 'https://legacy-um6p.1337.ma/projects/library/q8kf9oc7o3dktg2a6x3s7h5c-immanuel-kant/qznk00j5qgpsc3hd2tfh2dg0',
     },
@@ -71,11 +144,19 @@ const connections: Connection[] = [
   },
   {
     propositionId: '6.45',
-    propositionText: 'The contemplation of the world sub specie aeterni is its contemplation as a limited whole.',
+    propositionText: {
+      en: 'The contemplation of the world sub specie aeterni is its contemplation as a limited whole.',
+      fr: 'La contemplation du monde sub specie aeterni est sa contemplation en tant que totalité bornée.',
+      de: 'Die Anschauung der Welt sub specie aeterni ist ihre Anschauung als – begrenztes – Ganzes.',
+    },
     source: {
       id: 'spinoza',
       author: 'Baruch Spinoza',
-      title: 'Ethics',
+      title: {
+        en: 'Ethics',
+        fr: 'Éthique',
+        de: 'Ethik',
+      },
       year: '1677',
       url: 'https://legacy-um6p.1337.ma/projects/library/u2okeerjjvq5vtxtsyvu1ptl-baruch-spinoza/uh2oonrmfp56dnl1tfjccs31',
     },
@@ -109,11 +190,24 @@ function getConnectionColor(type: ConnectionType): string {
 
 export default function Graph() {
   const [, navigate] = useLocation();
+  const searchString = useSearch();
+  const params = new URLSearchParams(searchString);
+  const initialLang = (['en', 'fr', 'de'].includes(params.get('lang') || '') ? params.get('lang') : 'en') as Lang;
+  const [language, setLanguageState] = useState<Lang>(initialLang);
+
+  const setLanguage = (l: Lang) => {
+    setLanguageState(l);
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', l);
+    window.history.replaceState({}, '', url.toString());
+  };
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animFrameRef = useRef<number>(0);
   const [hoveredConnection, setHoveredConnection] = useState<string | null>(null);
+
+  const t = i18n[language];
 
   const initParticles = useCallback((width: number, height: number) => {
     const particles: Particle[] = [];
@@ -174,6 +268,10 @@ export default function Graph() {
     }, 300);
   };
 
+  const gcLink = <a href="https://legacy-um6p.1337.ma/projects/great-conversation" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-great-conversation">The Great Conversation</a>;
+  const legacyLink = <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-legacy-graph">{language === 'fr' ? 'projet LEGACY' : language === 'de' ? 'LEGACY-Projekt' : 'LEGACY project'}</a>;
+  const archivesLink = <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-archives-graph">{language === 'fr' ? 'Archives Wittgenstein' : language === 'de' ? 'Wittgenstein-Archiven' : 'Wittgenstein Archives'}</a>;
+
   return (
     <div className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-green-500/30 relative">
       <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />
@@ -185,30 +283,37 @@ export default function Graph() {
               <ArrowLeft className="w-5 h-5" />
             </Button>
           </Link>
-          <h1 className="text-3xl font-display font-medium text-white flex-1">Connexion Graph</h1>
+          <h1 className="text-3xl font-display font-medium text-white flex-1">{t.title}</h1>
+          <div className="flex items-center gap-1.5">
+            {(['en', 'fr', 'de'] as Lang[]).map(l => (
+              <button
+                key={l}
+                onClick={() => setLanguage(l)}
+                className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border transition-colors font-medium ${language === l ? 'text-white border-white/30 bg-white/10' : 'text-zinc-500 border-zinc-700 hover:text-zinc-300'}`}
+                data-testid={`btn-graph-lang-${l}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="mb-10 p-5 rounded-xl border border-zinc-800 bg-zinc-900/40 text-sm text-zinc-400 leading-relaxed max-w-2xl">
           <p>
-            This graph is a subset of{' '}
-            <a href="https://legacy-um6p.1337.ma/projects/great-conversation" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-great-conversation">The Great Conversation</a>
-            {' '}graph published on the{' '}
-            <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-legacy-graph">LEGACY project</a>
-            {' '}and uses data from that project as well as from the{' '}
-            <a href="https://wab.uib.no/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline underline-offset-2 hover:text-white" data-testid="link-archives-graph">Wittgenstein Archives</a>.
-            {' '}We are adding new connexions every week.
+            {t.description({ gc: gcLink, legacy: legacyLink, archives: archivesLink })}
+            {' '}{t.addingNew}
           </p>
           <div className="flex items-center gap-6 mt-4 text-xs">
-            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-green-500 inline-block rounded"></span> Agreement</span>
-            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-red-500 inline-block rounded"></span> Disagreement</span>
-            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-zinc-500 inline-block rounded"></span> Neutral</span>
+            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-green-500 inline-block rounded"></span> {t.agreement}</span>
+            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-red-500 inline-block rounded"></span> {t.disagreement}</span>
+            <span className="flex items-center gap-2"><span className="w-6 h-0.5 bg-zinc-500 inline-block rounded"></span> {t.neutral}</span>
           </div>
         </div>
 
         <div className="relative">
           {sortedPropositions.map((propId, propIdx) => {
             const propConnections = connections.filter(c => c.propositionId === propId);
-            const propText = propConnections[0]?.propositionText || '';
+            const propText = propConnections[0]?.propositionText[language] || '';
             const leftSources = propConnections.filter((_, i) => i % 2 === 0);
             const rightSources = propConnections.filter((_, i) => i % 2 === 1);
 
@@ -224,6 +329,7 @@ export default function Graph() {
                       <SourceCard
                         key={`${conn.propositionId}-${conn.source.id}-left`}
                         conn={conn}
+                        language={language}
                         side="left"
                         isHovered={hoveredConnection === `${conn.propositionId}-${conn.source.id}`}
                         onHover={(h) => setHoveredConnection(h ? `${conn.propositionId}-${conn.source.id}` : null)}
@@ -245,6 +351,7 @@ export default function Graph() {
                       <SourceCard
                         key={`${conn.propositionId}-${conn.source.id}-right`}
                         conn={conn}
+                        language={language}
                         side="right"
                         isHovered={hoveredConnection === `${conn.propositionId}-${conn.source.id}`}
                         onHover={(h) => setHoveredConnection(h ? `${conn.propositionId}-${conn.source.id}` : null)}
@@ -261,8 +368,9 @@ export default function Graph() {
   );
 }
 
-function SourceCard({ conn, side, isHovered, onHover }: {
+function SourceCard({ conn, language, side, isHovered, onHover }: {
   conn: Connection;
+  language: Lang;
   side: 'left' | 'right';
   isHovered: boolean;
   onHover: (h: boolean) => void;
@@ -286,7 +394,7 @@ function SourceCard({ conn, side, isHovered, onHover }: {
         data-testid={`graph-source-${conn.source.id}-${conn.propositionId}`}
       >
         <div className="text-xs font-medium text-zinc-300 leading-snug">{conn.source.author}</div>
-        <div className="text-xs text-zinc-500 italic leading-snug mt-0.5">{conn.source.title}</div>
+        <div className="text-xs text-zinc-500 italic leading-snug mt-0.5">{conn.source.title[language]}</div>
         <div className="text-xs text-zinc-600 mt-0.5">{conn.source.year}</div>
       </a>
     </div>

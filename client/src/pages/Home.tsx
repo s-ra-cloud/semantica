@@ -410,7 +410,7 @@ export default function Home() {
               </span>
             </Link>
 
-            <Link href="/graph">
+            <Link href={`/graph?lang=${language}`}>
               <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer" data-testid="link-graph">
                 <GitBranch className="w-4 h-4" />
                 {language === 'fr' ? 'Graphe de connexions' : language === 'de' ? 'Verbindungsgraph' : 'Connexion Graph'}
