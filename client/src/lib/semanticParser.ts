@@ -90,9 +90,9 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     'thing': ['something', 'anything', 'nothing', 'everything'],
     'things': ['somethings'],
     'objects': ['combination of objects', 'combinations of objects'],
-    'forme': ['forme de l\'objet', 'sa forme', 'forme logique', 'forme de représentation', 'forme de figuration', 'forme de la réalité', 'la forme logique', 'la forme de la réalité'],
+    'forme': ['forme de l\'objet', 'sa forme', 'forme logique', 'forme de représentation', 'forme de figuration', 'forme de la réalité', 'la forme logique', 'la forme de la réalité', 'sa forme de représentation', 'sa forme de figuration', 'la forme logique de représentation', 'la forme générale'],
     'objet': ['forme de l\'objet'],
-    'form': ['form of the object', 'its form', 'logical form', 'form of representation', 'form of depiction', 'form of reality', 'the logical form', 'the form of reality'],
+    'form': ['form of the object', 'its form', 'logical form', 'form of representation', 'form of depiction', 'form of reality', 'the logical form', 'the form of reality', 'its form of representation', 'its form of depiction', 'the logical form of representation', 'the general form'],
     'object': ['form of the object'],
   };
 
@@ -176,15 +176,12 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
   return segments;
 }
 
-const propositionExclusions: Record<string, string[]> = {
-  'fr:2.0122': ['forme'],
-  'fr:2.0272': ['forme'],
-  'fr:4.063': ['forme'],
-  'en:2.0272': ['form'],
-  'en:4.063': ['form'],
-  'de:2.0272': ['Form'],
-  'de:4.063': ['Form'],
-};
+const formeExclusionProps = ['2.0122', '2.0272', '4.063', '5.451', '5.501', '5.5351', '5.5422', '5.5542', '5.562', '6.1201', '6.1203', '6.1264', '6.321', '6.34', '6.421', '6.342', '6.35', '6.422'];
+const propositionExclusions: Record<string, string[]> = Object.fromEntries([
+  ...formeExclusionProps.map(p => [`fr:${p}`, ['forme']]),
+  ...formeExclusionProps.map(p => [`en:${p}`, ['form']]),
+  ...formeExclusionProps.map(p => [`de:${p}`, ['Form']]),
+]);
 
 export function parseSemantic(text: string, groups: SynonymGroup[], propositionId?: string, language?: string): Segment[] {
   const normalizedText = text.replace(/\u00A0/g, ' ');
