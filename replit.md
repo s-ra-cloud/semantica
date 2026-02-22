@@ -36,7 +36,7 @@ Preferred communication style: Simple, everyday language.
 - **Storage Pattern**: Interface-based storage layer (`IStorage`) implemented by `DatabaseStorage` class
 
 ### Data Flow
-1. Tractatus text is stored as static TypeScript data files (`tractatusRaw.ts`) containing raw propositions scraped from the Wittgenstein Project
+1. Tractatus text is stored as static TypeScript data files (`tractatusRaw.ts`) containing raw propositions scraped from the Wittgenstein Project. **Edition sources**: EN uses Ogden-Ramsey translation (with deliberate "states of affairs" terminology from Pears-McGuinness); FR uses Granger translation (Gallimard 1993); DE uses the original German text
 2. Synonym groups are fetched from the database via the API
 3. The `semanticParser` function normalizes non-breaking spaces, splits at `[math]...[/math]` boundaries, then dynamically parses plain text against active synonym groups to produce interactive segments
 4. Groups are filtered by language to match the currently selected language
