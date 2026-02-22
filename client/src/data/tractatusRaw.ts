@@ -1574,7 +1574,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "5.5423",
-    "content": "To perceive a complex means to perceive that its constituents are combined in such and such a way.\n\nThis perhaps explains that the figure"
+    "content": "To perceive a complex means to perceive that its constituents are combined in such and such a way.\n\nThis perhaps explains that the figure can be seen in two ways as a cube; and all similar phenomena. For we really see two different facts.\n\n(If I fix my eyes first on the corners a and only glance at b, a appears in front and b behind, and vice versa.)"
   },
   {
     "id": "5.55",
@@ -1974,7 +1974,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "6.36111",
-    "content": "The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane, and even in one-dimensional space; where the two congruent figures a and b cannot be made to cover one another without"
+    "content": "The Kantian problem of the right and left hand which cannot be made to cover one another already exists in the plane, and even in one-dimensional space; where the two congruent figures a and b cannot be made to cover one another without moving them out of this space. The right and left hand are in fact completely congruent. And the fact that they cannot be made to cover one another has nothing to do with it.\n\nA right-hand glove could be put on the left hand if it could be turned round in four-dimensional space."
   },
   {
     "id": "6.362",
@@ -3681,7 +3681,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.5423",
-    "content": "Percevoir un complexe signifie percevoir que ses éléments sont dans tel ou tel rapport.\n\nCeci explique peut-être que la figure"
+    "content": "Percevoir un complexe signifie percevoir que ses éléments sont dans tel ou tel rapport.\n\nCeci explique bien aussi que l'on puisse voir de deux manières la figure comme un cube ; et de même pour tous les phénomènes analogues. Car nous voyons alors réellement deux faits distincts.\n\n(Si je regarde tout d'abord les sommets marqués a, et seulement marginalement les sommets marqués b, a paraît être en avant ; et inversement.)"
   },
   {
     "id": "5.55",
@@ -4081,7 +4081,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.36111",
-    "content": "Le problème kantien de la main droite et de la main gauche, que l'on ne peut faire se recouvrir, subsiste déjà dans le plan, et même dans un espace à une dimension ; où les deux figures congruentes a et b ne peuvent se recouvrir sans"
+    "content": "Le problème kantien de la main droite et de la main gauche, que l'on ne peut faire se recouvrir, subsiste déjà dans le plan, et même dans un espace à une dimension où l'on ne peut pas non plus faire se recouvrir les deux figures congruentes a et b sans les faire sortir de cet espace. Main droite et main gauche sont en fait parfaitement congruentes. Et que l'on ne puisse les faire se recouvrir n'a rien à y voir.\n\nOn pourrait enfiler un gant droit de la main gauche, si l'on pouvait le retourner dans un espace à quatre dimensions."
   },
   {
     "id": "6.362",
