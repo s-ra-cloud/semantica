@@ -96,6 +96,9 @@ export default function Home() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackPropId, setFeedbackPropId] = useState('');
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackName, setFeedbackName] = useState('');
+  const [feedbackEmail, setFeedbackEmail] = useState('');
+  const [feedbackMode, setFeedbackMode] = useState<'feedback' | 'contact'>('feedback');
   const [jumpTo, setJumpTo] = useState('');
   const [feedbackSending, setFeedbackSending] = useState(false);
   const [feedbackSent, setFeedbackSent] = useState(false);
@@ -130,7 +133,8 @@ export default function Home() {
 
   const handleFeedbackSubmit = async () => {
     if (!feedbackMessage.trim()) return;
-    if (feedbackPropId.trim() && !allIds.includes(feedbackPropId.trim())) {
+    if (feedbackMode === 'contact' && !feedbackEmail.trim()) return;
+    if (feedbackMode === 'feedback' && feedbackPropId.trim() && !allIds.includes(feedbackPropId.trim())) {
       if (feedbackPropId.trim() === '3.6') {
         setFeedbackPropError(
           language === 'fr'
@@ -157,9 +161,12 @@ export default function Home() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          propositionId: feedbackPropId || 'general',
+          propositionId: feedbackMode === 'feedback' ? (feedbackPropId || 'general') : 'contact',
           language,
           message: feedbackMessage.trim(),
+          name: feedbackName.trim() || null,
+          email: feedbackMode === 'contact' ? feedbackEmail.trim() : null,
+          type: feedbackMode,
         }),
       });
       setFeedbackSent(true);
@@ -167,6 +174,9 @@ export default function Home() {
         setShowFeedback(false);
         setFeedbackPropId('');
         setFeedbackMessage('');
+        setFeedbackName('');
+        setFeedbackEmail('');
+        setFeedbackMode('feedback');
         setFeedbackSent(false);
         setFeedbackPropError('');
       }, 2000);
@@ -247,7 +257,11 @@ export default function Home() {
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 max-w-md w-full"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-white font-display font-medium">{language === 'fr' ? 'Signaler une erreur' : language === 'de' ? 'Fehler melden' : 'Report a Mistake'}</h3>
+                <h3 className="text-white font-display font-medium">
+                  {feedbackMode === 'contact'
+                    ? (language === 'fr' ? 'Nous contacter' : language === 'de' ? 'Kontakt' : 'Contact Us')
+                    : (language === 'fr' ? 'Signaler une erreur' : language === 'de' ? 'Fehler melden' : 'Report a Mistake')}
+                </h3>
                 <button onClick={() => setShowFeedback(false)} className="text-zinc-500 hover:text-white" data-testid="btn-close-feedback">
                   <X className="w-4 h-4" />
                 </button>
@@ -256,21 +270,65 @@ export default function Home() {
                 <p className="text-green-400 text-sm py-4">{language === 'fr' ? 'Merci pour votre retour\u00a0!' : language === 'de' ? 'Vielen Dank für Ihr Feedback!' : 'Thank you for your feedback!'}</p>
               ) : (
                 <>
-                  <p className="text-zinc-500 text-xs mb-4">{language === 'fr' ? 'Vous avez trouvé une substitution manquante ou incorrecte\u00a0? Faites-le nous savoir.' : language === 'de' ? 'Eine fehlende oder falsche Substitution gefunden? Lassen Sie es uns wissen.' : "Found a missing or incorrect substitution? Let us know and we'll fix it."}</p>
+                  <div className="flex gap-2 mb-4">
+                    <button
+                      onClick={() => { setFeedbackMode('feedback'); setFeedbackPropError(''); }}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${feedbackMode === 'feedback' ? 'border-green-500/50 text-green-400 bg-green-500/10' : 'border-zinc-700 text-zinc-500 hover:text-zinc-300'}`}
+                      data-testid="btn-mode-feedback"
+                    >
+                      {language === 'fr' ? 'Signaler une erreur' : language === 'de' ? 'Fehler melden' : 'Report Issue'}
+                    </button>
+                    <button
+                      onClick={() => { setFeedbackMode('contact'); setFeedbackPropError(''); }}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${feedbackMode === 'contact' ? 'border-green-500/50 text-green-400 bg-green-500/10' : 'border-zinc-700 text-zinc-500 hover:text-zinc-300'}`}
+                      data-testid="btn-mode-contact"
+                    >
+                      {language === 'fr' ? 'Nous contacter' : language === 'de' ? 'Kontakt' : 'Contact Us'}
+                    </button>
+                  </div>
+                  {feedbackMode === 'feedback' ? (
+                    <p className="text-zinc-500 text-xs mb-4">{language === 'fr' ? 'Vous avez trouvé une substitution manquante ou incorrecte\u00a0? Faites-le nous savoir.' : language === 'de' ? 'Eine fehlende oder falsche Substitution gefunden? Lassen Sie es uns wissen.' : "Found a missing or incorrect substitution? Let us know and we'll fix it."}</p>
+                  ) : (
+                    <p className="text-zinc-500 text-xs mb-4">{language === 'fr' ? 'Envoyez-nous un message et nous vous répondrons.' : language === 'de' ? 'Senden Sie uns eine Nachricht und wir melden uns bei Ihnen.' : 'Send us a message and we\'ll get back to you.'}</p>
+                  )}
                   <input
                     type="text"
-                    placeholder={language === 'fr' ? "Numéro de proposition (ex. 3.141)" : language === 'de' ? "Satznummer (z.B. 3.141)" : "Proposition number (e.g. 3.141)"}
-                    value={feedbackPropId}
-                    onChange={(e) => { setFeedbackPropId(e.target.value); setFeedbackPropError(''); }}
-                    className={`w-full bg-zinc-800 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-1 focus:outline-none ${feedbackPropError ? 'border-red-500/70' : 'border-zinc-700 focus:border-green-500/50'}`}
-                    data-testid="input-feedback-prop"
+                    placeholder={language === 'fr' ? "Votre nom (affiché comme contributeur)" : language === 'de' ? "Ihr Name (wird als Mitwirkender angezeigt)" : "Your name (displayed as contributor)"}
+                    value={feedbackName}
+                    onChange={(e) => setFeedbackName(e.target.value)}
+                    className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-2 focus:outline-none focus:border-green-500/50"
+                    data-testid="input-feedback-name"
                   />
-                  {feedbackPropError && (
-                    <p className="text-red-400 text-xs mb-2 italic" data-testid="text-feedback-prop-error">{feedbackPropError}</p>
+                  {feedbackMode === 'contact' && (
+                    <input
+                      type="email"
+                      placeholder={language === 'fr' ? "Votre email" : language === 'de' ? "Ihre E-Mail" : "Your email"}
+                      value={feedbackEmail}
+                      onChange={(e) => setFeedbackEmail(e.target.value)}
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-2 focus:outline-none focus:border-green-500/50"
+                      data-testid="input-feedback-email"
+                    />
                   )}
-                  {!feedbackPropError && <div className="mb-2" />}
+                  {feedbackMode === 'feedback' && (
+                    <>
+                      <input
+                        type="text"
+                        placeholder={language === 'fr' ? "Numéro de proposition (ex. 3.141)" : language === 'de' ? "Satznummer (z.B. 3.141)" : "Proposition number (e.g. 3.141)"}
+                        value={feedbackPropId}
+                        onChange={(e) => { setFeedbackPropId(e.target.value); setFeedbackPropError(''); }}
+                        className={`w-full bg-zinc-800 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-1 focus:outline-none ${feedbackPropError ? 'border-red-500/70' : 'border-zinc-700 focus:border-green-500/50'}`}
+                        data-testid="input-feedback-prop"
+                      />
+                      {feedbackPropError && (
+                        <p className="text-red-400 text-xs mb-2 italic" data-testid="text-feedback-prop-error">{feedbackPropError}</p>
+                      )}
+                      {!feedbackPropError && <div className="mb-1" />}
+                    </>
+                  )}
                   <textarea
-                    placeholder={language === 'fr' ? "Décrivez le problème..." : language === 'de' ? "Beschreiben Sie das Problem..." : "Describe the issue..."}
+                    placeholder={feedbackMode === 'contact'
+                      ? (language === 'fr' ? "Votre message..." : language === 'de' ? "Ihre Nachricht..." : "Your message...")
+                      : (language === 'fr' ? "Décrivez le problème..." : language === 'de' ? "Beschreiben Sie das Problem..." : "Describe the issue...")}
                     value={feedbackMessage}
                     onChange={(e) => setFeedbackMessage(e.target.value)}
                     className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-600 mb-4 h-24 resize-none focus:outline-none focus:border-green-500/50"
@@ -278,11 +336,13 @@ export default function Home() {
                   />
                   <button
                     onClick={handleFeedbackSubmit}
-                    disabled={feedbackSending || !feedbackMessage.trim()}
+                    disabled={feedbackSending || !feedbackMessage.trim() || (feedbackMode === 'contact' && !feedbackEmail.trim())}
                     className="w-full bg-green-600 hover:bg-green-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white text-sm font-medium py-2 rounded-lg transition-colors"
                     data-testid="btn-submit-feedback"
                   >
-                    {feedbackSending ? (language === 'fr' ? 'Envoi...' : language === 'de' ? 'Wird gesendet...' : 'Sending...') : (language === 'fr' ? 'Envoyer' : language === 'de' ? 'Feedback senden' : 'Send Feedback')}
+                    {feedbackSending
+                      ? (language === 'fr' ? 'Envoi...' : language === 'de' ? 'Wird gesendet...' : 'Sending...')
+                      : (language === 'fr' ? 'Envoyer' : language === 'de' ? 'Senden' : 'Send')}
                   </button>
                 </>
               )}

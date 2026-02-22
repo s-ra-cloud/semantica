@@ -216,7 +216,7 @@ export async function registerRoutes(
     res.status(204).send();
   });
 
-  app.get("/api/feedback", async (_req, res) => {
+  app.get("/api/feedback", requireAuth, async (_req, res) => {
     const entries = await storage.getFeedback();
     res.json(entries);
   });

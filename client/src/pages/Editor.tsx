@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSemantic, SynonymGroup } from '@/context/SemanticContext';
 import { Link } from 'wouter';
-import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload, MessageSquare, X, LogIn, LogOut } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, RotateCcw, Lock, Download, Upload, MessageSquare, X, LogIn, LogOut, Mail, ChevronDown, ChevronUp, User } from 'lucide-react';
+import type { Feedback } from '@shared/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -13,6 +14,9 @@ export default function Editor() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loginLoading, setLoginLoading] = useState(false);
   const [importStatus, setImportStatus] = useState<string | null>(null);
+  const [feedbackEntries, setFeedbackEntries] = useState<Feedback[]>([]);
+  const [showMessages, setShowMessages] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isAuthenticated = !!authToken;
@@ -26,6 +30,27 @@ export default function Editor() {
       }).catch(() => setAuthToken(null));
     }
   }, []);
+
+  const loadFeedback = useCallback(async () => {
+    if (!authToken) return;
+    setFeedbackLoading(true);
+    try {
+      const res = await fetch('/api/feedback', {
+        headers: { 'Authorization': `Bearer ${authToken}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setFeedbackEntries(data);
+      }
+    } catch {}
+    setFeedbackLoading(false);
+  }, [authToken]);
+
+  useEffect(() => {
+    if (isAuthenticated && showMessages) {
+      loadFeedback();
+    }
+  }, [isAuthenticated, showMessages, loadFeedback]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -222,6 +247,70 @@ export default function Editor() {
               <span className={`text-xs ${importStatus.startsWith('Error') ? 'text-red-400' : 'text-green-400'}`}>
                 {importStatus}
               </span>
+            )}
+          </div>
+        )}
+
+        {isAuthenticated && (
+          <div className="mb-8">
+            <button
+              onClick={() => setShowMessages(!showMessages)}
+              className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors mb-4"
+              data-testid="btn-toggle-messages"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Messages & Feedback
+              {showMessages ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+              {feedbackEntries.length > 0 && showMessages && (
+                <span className="text-xs text-zinc-500">({feedbackEntries.length})</span>
+              )}
+            </button>
+            {showMessages && (
+              <div className="border border-zinc-800 rounded-xl bg-zinc-900/30 overflow-hidden">
+                {feedbackLoading ? (
+                  <p className="text-zinc-500 text-sm p-4">Loading...</p>
+                ) : feedbackEntries.length === 0 ? (
+                  <p className="text-zinc-500 text-sm p-4">No messages yet.</p>
+                ) : (
+                  <div className="divide-y divide-zinc-800/50 max-h-[500px] overflow-y-auto">
+                    {feedbackEntries.map(entry => (
+                      <div key={entry.id} className="p-4 hover:bg-zinc-800/20" data-testid={`feedback-entry-${entry.id}`}>
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-medium ${
+                              entry.type === 'contact'
+                                ? 'text-blue-400 border border-blue-500/30 bg-blue-500/10'
+                                : 'text-green-400 border border-green-500/30 bg-green-500/10'
+                            }`}>
+                              {entry.type === 'contact' ? 'Contact' : 'Feedback'}
+                            </span>
+                            <span className="text-[10px] uppercase tracking-wider text-zinc-600">{entry.language}</span>
+                            {entry.propositionId !== 'contact' && entry.propositionId !== 'general' && (
+                              <span className="text-[10px] text-zinc-500">§{entry.propositionId}</span>
+                            )}
+                          </div>
+                          <span className="text-[10px] text-zinc-600 whitespace-nowrap">
+                            {new Date(entry.createdAt).toLocaleDateString()} {new Date(entry.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                          </span>
+                        </div>
+                        {entry.name && (
+                          <div className="flex items-center gap-1.5 mb-1.5">
+                            <User className="w-3 h-3 text-zinc-500" />
+                            <span className="text-xs text-zinc-400">{entry.name}</span>
+                          </div>
+                        )}
+                        {entry.email && (
+                          <div className="flex items-center gap-1.5 mb-1.5">
+                            <Mail className="w-3 h-3 text-zinc-500" />
+                            <a href={`mailto:${entry.email}`} className="text-xs text-blue-400 hover:text-blue-300">{entry.email}</a>
+                          </div>
+                        )}
+                        <p className="text-sm text-zinc-300 whitespace-pre-wrap">{entry.message}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}

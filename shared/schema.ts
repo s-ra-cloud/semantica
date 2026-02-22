@@ -21,6 +21,9 @@ export const feedback = pgTable("feedback", {
   propositionId: text("proposition_id").notNull(),
   language: text("language").notNull().default("en"),
   message: text("message").notNull(),
+  name: text("name"),
+  email: text("email"),
+  type: text("type").notNull().default("feedback"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
