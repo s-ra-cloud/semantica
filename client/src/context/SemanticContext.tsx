@@ -7,6 +7,8 @@ export type SynonymGroup = {
   language: string;
   words: string[];
   type: string;
+  groupKey: string | null;
+  excludedPropositions: string[] | null;
 };
 
 type SemanticContextType = {

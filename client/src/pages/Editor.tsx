@@ -227,22 +227,74 @@ export default function Editor() {
         )}
 
         <div className="space-y-6">
-          {synonymGroups.map(group => (
-            isAuthenticated ? (
-              <GroupEditor 
-                key={group.id} 
-                group={group} 
-                onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words, type: g.type || 'semantic' })} 
-                onDelete={() => deleteGroup(group.id)} 
-              />
-            ) : (
-              <GroupViewer key={group.id} group={group} />
-            )
-          ))}
+          {(() => {
+            const groupKeyColors: Record<string, string> = {};
+            const colorPalette = [
+              'border-l-emerald-500/60', 'border-l-blue-500/60', 'border-l-purple-500/60',
+              'border-l-amber-500/60', 'border-l-rose-500/60', 'border-l-cyan-500/60',
+              'border-l-orange-500/60', 'border-l-pink-500/60', 'border-l-teal-500/60',
+              'border-l-indigo-500/60', 'border-l-lime-500/60', 'border-l-fuchsia-500/60',
+              'border-l-sky-500/60', 'border-l-violet-500/60', 'border-l-red-500/60',
+              'border-l-yellow-500/60', 'border-l-green-500/60',
+            ];
+            let colorIndex = 0;
+            synonymGroups.forEach(g => {
+              if (g.groupKey && !groupKeyColors[g.groupKey]) {
+                groupKeyColors[g.groupKey] = colorPalette[colorIndex % colorPalette.length];
+                colorIndex++;
+              }
+            });
+
+            const rendered = new Set<number>();
+            const result: React.ReactNode[] = [];
+
+            synonymGroups.forEach(group => {
+              if (rendered.has(group.id)) return;
+
+              if (group.groupKey) {
+                const siblings = synonymGroups.filter(g => g.groupKey === group.groupKey);
+                siblings.forEach(s => rendered.add(s.id));
+                const borderColor = groupKeyColors[group.groupKey];
+                result.push(
+                  <div key={`gk-${group.groupKey}`} className={`border-l-4 ${borderColor} pl-4 space-y-3`}>
+                    <div className="text-xs text-zinc-500 font-mono mb-1">Group: {group.groupKey}</div>
+                    {siblings.map(s => (
+                      isAuthenticated ? (
+                        <GroupEditor
+                          key={s.id}
+                          group={s}
+                          onUpdate={(g) => updateGroup(s.id, { language: g.language, words: g.words, type: g.type || 'semantic', groupKey: g.groupKey, excludedPropositions: g.excludedPropositions })}
+                          onDelete={() => deleteGroup(s.id)}
+                        />
+                      ) : (
+                        <GroupViewer key={s.id} group={s} />
+                      )
+                    ))}
+                  </div>
+                );
+              } else {
+                rendered.add(group.id);
+                result.push(
+                  isAuthenticated ? (
+                    <GroupEditor
+                      key={group.id}
+                      group={group}
+                      onUpdate={(g) => updateGroup(group.id, { language: g.language, words: g.words, type: g.type || 'semantic', groupKey: g.groupKey, excludedPropositions: g.excludedPropositions })}
+                      onDelete={() => deleteGroup(group.id)}
+                    />
+                  ) : (
+                    <GroupViewer key={group.id} group={group} />
+                  )
+                );
+              }
+            });
+
+            return result;
+          })()}
           
           {isAuthenticated && (
             <Button 
-              onClick={async () => { await addGroup({ language: 'en', words: [''], type: 'semantic' }); setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500); }}
+              onClick={async () => { await addGroup({ language: 'en', words: [''], type: 'semantic', groupKey: null, excludedPropositions: null }); setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 500); }}
               variant="outline" 
               className="w-full h-16 border-dashed border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 bg-transparent hover:bg-zinc-900/30"
               data-testid="btn-add-group"
@@ -288,7 +340,7 @@ function GroupViewer({ group }: { group: SynonymGroup }) {
     <div className="p-6 border border-zinc-800 rounded-xl bg-zinc-900/30 shadow-lg" data-testid={`group-viewer-${group.id}`}>
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-4">
-          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">{group.language === 'en' ? 'English' : 'French'}</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">{group.language === 'en' ? 'English' : group.language === 'fr' ? 'French' : group.language === 'de' ? 'German' : group.language}</span>
           <span className="text-sm text-zinc-500 font-mono">ID: {group.id}</span>
           <span className={`text-xs px-2 py-0.5 rounded-full ${group.type === 'math-logic' ? 'bg-purple-500/20 text-purple-400' : group.type === 'logic' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
             {group.type === 'math-logic' ? 'Math' : group.type === 'logic' ? 'Logic' : 'Semantic'}
@@ -312,6 +364,15 @@ function GroupViewer({ group }: { group: SynonymGroup }) {
           </span>
         ))}
       </div>
+
+      {group.excludedPropositions && group.excludedPropositions.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-1.5 items-center">
+          <span className="text-xs text-zinc-500 mr-1">Excluded from:</span>
+          {group.excludedPropositions.map((p, idx) => (
+            <span key={idx} className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">{p}</span>
+          ))}
+        </div>
+      )}
 
       {showFeedback && (
         <div className="mt-4 p-4 border border-zinc-700 rounded-lg bg-zinc-950/50">
@@ -346,12 +407,24 @@ function GroupViewer({ group }: { group: SynonymGroup }) {
 function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpdate: (g: SynonymGroup) => void, onDelete: () => void }) {
   const [localWords, setLocalWords] = useState<string[]>(group.words);
   const [localLang, setLocalLang] = useState(group.language);
+  const [localGroupKey, setLocalGroupKey] = useState(group.groupKey || '');
+  const [localExcluded, setLocalExcluded] = useState((group.excludedPropositions || []).join(', '));
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setLocalWords(group.words);
     setLocalLang(group.language);
+    setLocalGroupKey(group.groupKey || '');
+    setLocalExcluded((group.excludedPropositions || []).join(', '));
   }, [group.id]);
+
+  const currentGroup = () => ({
+    ...group,
+    language: localLang,
+    words: localWords,
+    groupKey: localGroupKey.trim() || null,
+    excludedPropositions: localExcluded.trim() ? localExcluded.split(',').map(s => s.trim()).filter(Boolean) : null,
+  });
 
   const saveDebounced = useCallback((updated: SynonymGroup) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -364,24 +437,35 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
     const newWords = [...localWords];
     newWords[idx] = val;
     setLocalWords(newWords);
-    saveDebounced({ ...group, language: localLang, words: newWords });
+    saveDebounced({ ...currentGroup(), words: newWords });
   };
   
   const removeWord = (idx: number) => {
     const newWords = localWords.filter((_, i) => i !== idx);
     setLocalWords(newWords);
-    onUpdate({ ...group, language: localLang, words: newWords });
+    onUpdate({ ...currentGroup(), words: newWords });
   };
 
   const addWord = () => {
     const newWords = [...localWords, ''];
     setLocalWords(newWords);
-    onUpdate({ ...group, language: localLang, words: newWords });
+    onUpdate({ ...currentGroup(), words: newWords });
   };
 
   const handleLangChange = (val: string) => {
     setLocalLang(val);
-    onUpdate({ ...group, language: val, words: localWords });
+    onUpdate({ ...currentGroup(), language: val });
+  };
+
+  const handleGroupKeyChange = (val: string) => {
+    setLocalGroupKey(val);
+    saveDebounced({ ...currentGroup(), groupKey: val.trim() || null });
+  };
+
+  const handleExcludedChange = (val: string) => {
+    setLocalExcluded(val);
+    const parsed = val.trim() ? val.split(',').map(s => s.trim()).filter(Boolean) : null;
+    saveDebounced({ ...currentGroup(), excludedPropositions: parsed });
   };
 
   return (
@@ -398,6 +482,7 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
             <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-300">
               <SelectItem value="en">English</SelectItem>
               <SelectItem value="fr">French</SelectItem>
+              <SelectItem value="de">German</SelectItem>
             </SelectContent>
           </Select>
           <div className="text-sm text-zinc-500 font-mono">ID: {group.id}</div>
@@ -427,6 +512,27 @@ function GroupEditor({ group, onUpdate, onDelete }: { group: SynonymGroup, onUpd
         <Button variant="ghost" size="sm" onClick={addWord} className="text-zinc-400 hover:text-green-400 mt-4">
           <Plus className="w-4 h-4 mr-2" /> Add synonym
         </Button>
+      </div>
+
+      <div className="mt-4 pt-4 border-t border-zinc-800 space-y-3">
+        <div className="flex items-center gap-3">
+          <label className="text-xs text-zinc-500 w-24 shrink-0">Group Key</label>
+          <Input
+            value={localGroupKey}
+            onChange={e => handleGroupKeyChange(e.target.value)}
+            placeholder="e.g. world, form, thought..."
+            className="bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white text-sm h-8"
+          />
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="text-xs text-zinc-500 w-24 shrink-0">Excluded Props</label>
+          <Input
+            value={localExcluded}
+            onChange={e => handleExcludedChange(e.target.value)}
+            placeholder="e.g. 2.0122, 4.012, 5.451..."
+            className="bg-zinc-950 border-zinc-800 focus-visible:ring-green-500/50 text-white text-sm h-8"
+          />
+        </div>
       </div>
     </div>
   );

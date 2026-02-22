@@ -32,7 +32,7 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Express.js running on Node.js with TypeScript (via tsx)
 - **API**: RESTful CRUD endpoints under `/api/synonym-groups` for managing synonym/expression groups; `/api/feedback` for user feedback submissions
 - **Database**: PostgreSQL via `pg` driver, with Drizzle ORM for query building and schema management
-- **Schema**: Two tables — `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en', 'fr', or 'de'), `words` (text array), `type` (text, 'semantic' or 'logic'); `feedback` with columns: `id` (serial PK), `proposition_id` (text), `language` (text), `message` (text), `created_at` (timestamp)
+- **Schema**: Two tables — `synonym_groups` with columns: `id` (serial PK), `language` (text, 'en', 'fr', or 'de'), `words` (text array), `type` (text, 'semantic' or 'logic'), `group_key` (text, nullable — links related groups across languages), `excluded_propositions` (text array, nullable — proposition IDs where this group is neutralized); `feedback` with columns: `id` (serial PK), `proposition_id` (text), `language` (text), `message` (text), `created_at` (timestamp)
 - **Storage Pattern**: Interface-based storage layer (`IStorage`) implemented by `DatabaseStorage` class
 
 ### Data Flow

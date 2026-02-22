@@ -176,21 +176,15 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
   return segments;
 }
 
-const formeExclusionProps = ['2.0122', '2.0272', '4.063', '5.451', '5.501', '5.5351', '5.5422', '5.5542', '5.562', '6.1201', '6.1203', '6.1264', '6.321', '6.34', '6.421', '6.342', '6.35', '6.422'];
-const propositionExclusions: Record<string, string[]> = Object.fromEntries([
-  ...formeExclusionProps.map(p => [`fr:${p}`, ['forme']]),
-  ...formeExclusionProps.map(p => [`en:${p}`, ['form']]),
-  ...formeExclusionProps.map(p => [`de:${p}`, ['Form']]),
-]);
-
 export function parseSemantic(text: string, groups: SynonymGroup[], propositionId?: string, language?: string): Segment[] {
   const normalizedText = text.replace(/\u00A0/g, ' ');
-  const semanticGroups = groups.filter(g => g.type === 'semantic');
-  const logicGroups = groups.filter(g => g.type === 'logic');
-  const mathLogicGroups = groups.filter(g => g.type === 'math-logic');
-
-  const excludeKey = propositionId && language ? `${language}:${propositionId}` : undefined;
-  const excludedWords = excludeKey ? propositionExclusions[excludeKey] : undefined;
+  const filteredGroups = propositionId
+    ? groups.filter(g => !g.excludedPropositions || !g.excludedPropositions.includes(propositionId))
+    : groups;
+  const semanticGroups = filteredGroups.filter(g => g.type === 'semantic');
+  const logicGroups = filteredGroups.filter(g => g.type === 'logic');
+  const mathLogicGroups = filteredGroups.filter(g => g.type === 'math-logic');
+  const excludedWords = undefined;
 
   const chunks = splitMathBlocks(normalizedText);
   const segments: Segment[] = [];
