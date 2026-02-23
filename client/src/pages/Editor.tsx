@@ -94,15 +94,8 @@ export default function Editor() {
     }
   };
 
-  const handleExport = async () => {
-    const res = await fetch('/api/synonym-groups/export');
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'semantica-expressions.json';
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleExport = () => {
+    window.open('/api/synonym-groups/export', '_blank');
   };
 
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
