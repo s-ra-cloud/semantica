@@ -6,6 +6,7 @@ import { LogicWord } from '@/components/LogicWord';
 import { MathLogicWord } from '@/components/MathLogicWord';
 import { MathText } from '@/components/MathText';
 import { tractatusEnglishRaw, tractatusFrenchRaw, tractatusGermanRaw } from '@/data/tractatusRaw';
+import { prefaceEN, prefaceFR, prefaceDE, type PrefaceData } from '@/data/prefaceData';
 import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic, Segment } from '@/lib/semanticParser';
 import { applyGrammarAdaptations } from '@/lib/grammarAdaptations';
@@ -104,8 +105,10 @@ export default function Home() {
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackPropError, setFeedbackPropError] = useState('');
   const [openAnnotation, setOpenAnnotation] = useState<string | null>(null);
+  const [showPreface, setShowPreface] = useState(false);
   const { synonymGroups } = useSemantic();
 
+  const preface: PrefaceData = language === 'en' ? prefaceEN : language === 'de' ? prefaceDE : prefaceFR;
   const rawData = language === 'en' ? tractatusEnglishRaw : language === 'de' ? tractatusGermanRaw : tractatusFrenchRaw;
   const activeGroups = useMemo(() => synonymGroups.filter(g => g.language === language), [synonymGroups, language]);
   const allIds = useMemo(() => rawData?.map(p => p.id) || [], [rawData]);
@@ -558,6 +561,61 @@ export default function Home() {
                 </>
               )}
             </div>
+          </div>
+
+          <div className="mb-8" key={`preface-${language}`}>
+            <div className="flex gap-4 group">
+              <div className="shrink-0 w-16" />
+              <div>
+                <h3 className="text-lg font-display text-white mb-3">{preface.prefaceLabel}</h3>
+                <button
+                  onClick={() => setShowPreface(!showPreface)}
+                  className="text-xs px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
+                  data-testid="btn-toggle-preface"
+                >
+                  {showPreface ? preface.hideButton : preface.showButton}
+                </button>
+              </div>
+            </div>
+            <AnimatePresence>
+              {showPreface && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex gap-4 mt-6">
+                    <div className="shrink-0 w-16" />
+                    <div className="text-lg leading-relaxed text-zinc-300 space-y-8">
+                      <div className="text-center space-y-1">
+                        <p className="text-xs uppercase tracking-widest text-zinc-500 mb-3">{preface.dedicationLabel}</p>
+                        {preface.dedication.map((line, i) => (
+                          <p key={i} className={line === 'DAVID H. PINSENT' ? 'font-display text-white tracking-wide' : 'text-zinc-400 text-base'}>{line}</p>
+                        ))}
+                      </div>
+
+                      <div className="text-center">
+                        <p className="text-xs uppercase tracking-widest text-zinc-500 mb-3">{preface.mottoLabel}</p>
+                        <blockquote className="text-zinc-400 text-base italic border-l-2 border-zinc-700 pl-4 text-left">
+                          <p>{preface.motto}</p>
+                          <p className="mt-2 text-zinc-500 not-italic text-sm">{preface.mottoAuthor}</p>
+                        </blockquote>
+                      </div>
+
+                      <div className="border-t border-zinc-800 pt-6">
+                        {preface.prefaceParagraphs.map((para, i) => (
+                          <p key={i} className="text-zinc-300 text-base leading-relaxed mb-4">{para}</p>
+                        ))}
+                        <p className="text-zinc-400 text-base mt-6">{preface.signature}</p>
+                        <p className="text-zinc-500 text-sm italic">{preface.location}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="space-y-8" key={language}>
