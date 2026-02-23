@@ -47,12 +47,12 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
       deps: [{
         find: ', non des ',
         replacements: {
-          'le monde': ', non le ',
+          'le monde': ', non les ',
           'la totalité des faits': ', non des ',
           'tout ce qui a lieu': ', non les ',
           'tous les faits': ', non les ',
           'les faits dans l\'espace logique': ', non les ',
-          'la totalité de la réalité': ', non la ',
+          'la totalité de la réalité': ', non les ',
         }
       }]
     }
