@@ -68,29 +68,23 @@
   position: relative;
   display: inline;
   color: #4ade80; /* Tailwind green-400 */
-  text-decoration: underline;
-  text-decoration-color: #4ade80;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .semantic-word:hover {
   color: #22c55e; /* Tailwind green-500 */
-  text-decoration-color: #22c55e;
   background-color: rgba(34, 197, 94, 0.1);
   border-radius: 2px;
 }
 
 .semantic-word-changed {
   color: #fb923c; /* Tailwind orange-400 */
-  text-decoration-color: #fb923c;
 }
 
 .semantic-word-changed:hover {
   color: #f97316; /* Tailwind orange-500 */
-  text-decoration-color: #f97316;
   background-color: rgba(249, 115, 22, 0.1);
 }
 
@@ -99,28 +93,22 @@
   display: inline;
   color: #60a5fa; /* Tailwind blue-400 */
   cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: rgba(96, 165, 250, 0.4);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .logic-word:hover {
   color: #3b82f6; /* Tailwind blue-500 */
-  text-decoration-color: #3b82f6;
   background-color: rgba(59, 130, 246, 0.1);
   border-radius: 2px;
 }
 
 .logic-word-translated {
   color: #67e8f9; /* Tailwind cyan-300 */
-  text-decoration-color: #67e8f9;
 }
 
 .logic-word-translated:hover {
   color: #22d3ee; /* Tailwind cyan-400 */
-  text-decoration-color: #22d3ee;
   background-color: rgba(34, 211, 238, 0.1);
 }
 
