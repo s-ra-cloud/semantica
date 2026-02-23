@@ -1666,7 +1666,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "5.633",
-    "content": "Where in the world is a metaphysical subject to be noted?"
+    "content": "Where in the world is a metaphysical subject to be noted?\n\nYou say that this case is altogether like that of the eye and the field of sight. But you do not really see the eye.\n\nAnd from nothing in the field of sight can it be concluded that it is seen from an eye."
   },
   {
     "id": "5.6331",
@@ -3773,7 +3773,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.633",
-    "content": "Où, dans le monde, un sujet métaphysique peut-il être discerné ?"
+    "content": "Où, dans le monde, un sujet métaphysique peut-il être discerné ?\n\nTu réponds qu’il en est ici tout à fait comme de l’œil et du champ visuel. Mais l’œil, en réalité, tu ne le vois pas.\n\nEt rien dans le champ visuel ne permet de conclure qu’il est vu par un œil."
   },
   {
     "id": "5.6331",
