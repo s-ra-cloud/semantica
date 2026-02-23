@@ -27,10 +27,10 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   }],
 
   // Prop 1.1: "Le monde est la totalité des faits, non des choses."
-  'fr:1.1': [{
-    trigger: 'le monde',
-    deps: [
-      {
+  'fr:1.1': [
+    {
+      trigger: 'le monde',
+      deps: [{
         find: ' est ',
         replacements: {
           'le monde': ' est ',
@@ -40,8 +40,11 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
           'les faits dans l\'espace logique': ' sont ',
           'la totalité de la réalité': ' est ',
         }
-      },
-      {
+      }]
+    },
+    {
+      trigger: 'la totalité des faits',
+      deps: [{
         find: ', non des ',
         replacements: {
           'le monde': ', non le ',
@@ -51,9 +54,9 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
           'les faits dans l\'espace logique': ', non les ',
           'la totalité de la réalité': ', non la ',
         }
-      }
-    ]
-  }],
+      }]
+    }
+  ],
 
   // Prop 1.11: "Le monde est déterminé par les faits, et par ceci qu'ils sont tous les faits."
   'fr:1.11': [{
@@ -161,10 +164,10 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   }],
 
   // Prop 1.1: "The world is the totality of facts, not of things."
-  'en:1.1': [{
-    trigger: 'the world',
-    deps: [
-      {
+  'en:1.1': [
+    {
+      trigger: 'the world',
+      deps: [{
         find: ' is ',
         replacements: {
           'the world': ' is ',
@@ -174,8 +177,11 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
           'all the facts': ' are ',
           'the facts in logical space': ' are ',
         }
-      },
-      {
+      }]
+    },
+    {
+      trigger: 'the totality of facts',
+      deps: [{
         find: ', not of ',
         replacements: {
           'the world': ', not the ',
@@ -186,9 +192,9 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
           'the facts in logical space': ', not the ',
           'the totality of reality': ', not the ',
         }
-      }
-    ]
-  }],
+      }]
+    }
+  ],
 
   // Prop 1.11: "The world is determined by the facts, and by these being all the facts."
   'en:1.11': [{
