@@ -119,6 +119,20 @@ export async function registerRoutes(
     res.json({ authenticated: true });
   });
 
+  app.get("/api/settings/:key", async (req, res) => {
+    const value = await storage.getSetting(req.params.key);
+    res.json({ key: req.params.key, value });
+  });
+
+  app.put("/api/settings/:key", requireAuth, async (req, res) => {
+    const { value } = req.body;
+    if (typeof value !== 'string') {
+      return res.status(400).json({ message: "Value must be a string" });
+    }
+    await storage.setSetting(req.params.key, value);
+    res.json({ key: req.params.key, value });
+  });
+
   app.get("/api/synonym-groups/export", async (_req, res) => {
     const groups = await storage.getSynonymGroups();
     const exportData = groups.map(({ id, ...rest }) => rest);
@@ -170,6 +184,9 @@ export async function registerRoutes(
 
       const feedback = await storage.getFeedback();
       archive.append(JSON.stringify(feedback, null, 2), { name: 'database/feedback.json' });
+
+      const verifiedUpTo = await storage.getSetting('verified_up_to');
+      archive.append(JSON.stringify({ verified_up_to: verifiedUpTo }, null, 2), { name: 'database/settings.json' });
 
       await archive.finalize();
     } catch (err) {

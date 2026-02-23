@@ -16,6 +16,13 @@ export const insertSynonymGroupSchema = createInsertSchema(synonymGroups).omit({
 export type InsertSynonymGroup = z.infer<typeof insertSynonymGroupSchema>;
 export type SynonymGroup = typeof synonymGroups.$inferSelect;
 
+export const appSettings = pgTable("app_settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+});
+
+export type AppSetting = typeof appSettings.$inferSelect;
+
 export const feedback = pgTable("feedback", {
   id: serial("id").primaryKey(),
   propositionId: text("proposition_id").notNull(),

@@ -1,4 +1,4 @@
-import { type SynonymGroup, type InsertSynonymGroup, synonymGroups, type Feedback, type InsertFeedback, feedback } from "@shared/schema";
+import { type SynonymGroup, type InsertSynonymGroup, synonymGroups, type Feedback, type InsertFeedback, feedback, appSettings, type AppSetting } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
 
@@ -11,6 +11,8 @@ export interface IStorage {
   replaceAllSynonymGroups(groups: InsertSynonymGroup[]): Promise<SynonymGroup[]>;
   getFeedback(): Promise<Feedback[]>;
   createFeedback(entry: InsertFeedback): Promise<Feedback>;
+  getSetting(key: string): Promise<string | null>;
+  setSetting(key: string, value: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -53,6 +55,18 @@ export class DatabaseStorage implements IStorage {
   async createFeedback(entry: InsertFeedback): Promise<Feedback> {
     const [created] = await db.insert(feedback).values(entry).returning();
     return created;
+  }
+
+  async getSetting(key: string): Promise<string | null> {
+    const [row] = await db.select().from(appSettings).where(eq(appSettings.key, key));
+    return row?.value ?? null;
+  }
+
+  async setSetting(key: string, value: string): Promise<void> {
+    await db.insert(appSettings).values({ key, value }).onConflictDoUpdate({
+      target: appSettings.key,
+      set: { value },
+    });
   }
 }
 

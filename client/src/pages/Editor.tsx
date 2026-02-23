@@ -18,6 +18,8 @@ export default function Editor() {
   const [showMessages, setShowMessages] = useState(false);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [verifiedUpTo, setVerifiedUpTo] = useState('');
+  const [verifiedSaving, setVerifiedSaving] = useState(false);
 
   const isAuthenticated = !!authToken;
 
@@ -30,6 +32,28 @@ export default function Editor() {
       }).catch(() => setAuthToken(null));
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch('/api/settings/verified_up_to')
+        .then(r => r.json())
+        .then(data => { if (data.value) setVerifiedUpTo(data.value); })
+        .catch(() => {});
+    }
+  }, [isAuthenticated]);
+
+  const saveVerifiedUpTo = async () => {
+    if (!authToken || !verifiedUpTo.trim()) return;
+    setVerifiedSaving(true);
+    try {
+      await fetch('/api/settings/verified_up_to', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+        body: JSON.stringify({ value: verifiedUpTo.trim() }),
+      });
+    } catch {}
+    setVerifiedSaving(false);
+  };
 
   const loadFeedback = useCallback(async () => {
     if (!authToken) return;
@@ -245,6 +269,29 @@ export default function Editor() {
           </>
           )}
         </div>
+
+        {isAuthenticated && (
+          <div className="mb-6 flex items-center gap-3">
+            <label className="text-sm text-zinc-400 whitespace-nowrap">Verified up to proposition:</label>
+            <Input
+              value={verifiedUpTo}
+              onChange={(e) => setVerifiedUpTo(e.target.value)}
+              className="w-24 bg-zinc-900/50 border-zinc-700 text-white text-sm"
+              placeholder="e.g. 2.01"
+              data-testid="input-verified-up-to"
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={saveVerifiedUpTo}
+              disabled={verifiedSaving}
+              className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50"
+              data-testid="btn-save-verified"
+            >
+              {verifiedSaving ? 'Saving...' : 'Save'}
+            </Button>
+          </div>
+        )}
 
         {isAuthenticated && (
           <div className="mb-8">
