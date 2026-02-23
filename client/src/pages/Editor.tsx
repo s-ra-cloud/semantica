@@ -225,11 +225,12 @@ export default function Editor() {
           <span className="text-zinc-500 ml-1" data-testid="text-total-expressions">({synonymGroups.length} expressions)</span>
         </p>
 
-        {isAuthenticated && (
-          <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
-            <Button variant="outline" onClick={handleExport} className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-export-db">
-              <Download className="w-4 h-4 mr-2" /> Export DB
-            </Button>
+        <div className="flex flex-wrap items-center gap-3 mb-8 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20">
+          <Button variant="outline" onClick={handleExport} className="border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50" data-testid="btn-export-db">
+            <Download className="w-4 h-4 mr-2" /> Export DB
+          </Button>
+          {isAuthenticated && (
+            <>
             <label>
               <input
                 ref={fileInputRef}
@@ -248,8 +249,9 @@ export default function Editor() {
                 {importStatus}
               </span>
             )}
-          </div>
-        )}
+          </>
+          )}
+        </div>
 
         {isAuthenticated && (
           <div className="mb-8">
