@@ -787,7 +787,7 @@ export default function Home() {
                     />
                     {propositionDiagrams[proposition.id] && (
                       <>
-                        {propositionDiagrams[proposition.id].diagram({ isFrench: language === 'fr' })}
+                        {propositionDiagrams[proposition.id].diagram({ isFrench: language === 'fr', isGerman: language === 'de' })}
                         {language === 'fr' && propositionDiagrams[proposition.id].afterTextFr && (
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextFr!} />
                         )}

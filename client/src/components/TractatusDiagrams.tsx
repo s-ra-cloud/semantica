@@ -16,12 +16,15 @@ export function NeckerCube() {
   );
 }
 
-export function VisualFieldEye() {
+export function VisualFieldEye({ isFrench, isGerman }: { isFrench?: boolean; isGerman?: boolean }) {
+  const label = isFrench ? 'Œil' : isGerman ? 'Auge' : 'Eye';
+  const labelX = isFrench ? 52 : isGerman ? 48 : 56;
   return (
-    <svg viewBox="0 0 220 120" className="w-56 h-32 my-4" fill="none" stroke="white" strokeWidth="1.5">
-      <ellipse cx="100" cy="60" rx="95" ry="50" />
-      <circle cx="55" cy="60" r="12" />
-      <text x="48" y="64" fill="white" stroke="none" fontSize="11" fontFamily="serif">Eye</text>
+    <svg viewBox="0 0 260 140" className="w-64 h-36 my-4" fill="none" stroke="white" strokeWidth="2">
+      <path d="M 60 70 Q 100 5, 200 15 Q 225 18, 228 70 Q 225 122, 200 125 Q 100 135, 60 70 Z" />
+      <circle cx="60" cy="70" r="3.5" fill="white" stroke="none" />
+      <line x1="22" y1="70" x2="56" y2="70" strokeWidth="1.5" />
+      <text x={labelX} y="66" fill="white" stroke="none" fontSize="13" fontFamily="serif" textAnchor="end">{label}</text>
     </svg>
   );
 }
@@ -282,7 +285,7 @@ function DiagramText6_1203({ isFrench }: { isFrench?: boolean }) {
 }
 
 export const propositionDiagrams: Record<string, {
-  diagram: (props: { isFrench?: boolean }) => React.ReactNode;
+  diagram: (props: { isFrench?: boolean; isGerman?: boolean }) => React.ReactNode;
   afterTextEn?: string;
   afterTextFr?: string;
 }> = {
@@ -301,7 +304,7 @@ export const propositionDiagrams: Record<string, {
     afterTextFr: 'peut être vue de deux façons comme un cube ; et tous les phénomènes semblables. Car nous voyons réellement deux faits différents.\n\n(Si je fixe d\'abord les yeux sur les coins a et ne fais que jeter un coup d\'œil sur b, a apparaît devant et b derrière, et vice versa.)',
   },
   '5.6331': {
-    diagram: () => <VisualFieldEye />,
+    diagram: ({ isFrench, isGerman }: { isFrench?: boolean; isGerman?: boolean }) => <VisualFieldEye isFrench={isFrench} isGerman={isGerman} />,
   },
   '6.1203': {
     diagram: ({ isFrench }) => (
