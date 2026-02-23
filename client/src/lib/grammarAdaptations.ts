@@ -29,17 +29,30 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   // Prop 1.1: "Le monde est la totalité des faits, non des choses."
   'fr:1.1': [{
     trigger: 'le monde',
-    deps: [{
-      find: ' est ',
-      replacements: {
-        'le monde': ' est ',
-        'la totalité des faits': ' est ',
-        'tout ce qui a lieu': ' est ',
-        'tous les faits': ' sont ',
-        'les faits dans l\'espace logique': ' sont ',
-        'la totalité de la réalité': ' est ',
+    deps: [
+      {
+        find: ' est ',
+        replacements: {
+          'le monde': ' est ',
+          'la totalité des faits': ' est ',
+          'tout ce qui a lieu': ' est ',
+          'tous les faits': ' sont ',
+          'les faits dans l\'espace logique': ' sont ',
+          'la totalité de la réalité': ' est ',
+        }
+      },
+      {
+        find: ', non des ',
+        replacements: {
+          'le monde': ', non le ',
+          'la totalité des faits': ', non des ',
+          'tout ce qui a lieu': ', non les ',
+          'tous les faits': ', non les ',
+          'les faits dans l\'espace logique': ', non les ',
+          'la totalité de la réalité': ', non la ',
+        }
       }
-    }]
+    ]
   }],
 
   // Prop 1.11: "Le monde est déterminé par les faits, et par ceci qu'ils sont tous les faits."
@@ -150,17 +163,31 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   // Prop 1.1: "The world is the totality of facts, not of things."
   'en:1.1': [{
     trigger: 'the world',
-    deps: [{
-      find: ' is ',
-      replacements: {
-        'the world': ' is ',
-        'the totality of facts': ' is ',
-        'everything that is the case': ' is ',
-        'all that is the case': ' is ',
-        'all the facts': ' are ',
-        'the facts in logical space': ' are ',
+    deps: [
+      {
+        find: ' is ',
+        replacements: {
+          'the world': ' is ',
+          'the totality of facts': ' is ',
+          'everything that is the case': ' is ',
+          'all that is the case': ' is ',
+          'all the facts': ' are ',
+          'the facts in logical space': ' are ',
+        }
+      },
+      {
+        find: ', not of ',
+        replacements: {
+          'the world': ', not the ',
+          'the totality of facts': ', not of ',
+          'everything that is the case': ', not ',
+          'all that is the case': ', not ',
+          'all the facts': ', not the ',
+          'the facts in logical space': ', not the ',
+          'the totality of reality': ', not the ',
+        }
       }
-    }]
+    ]
   }],
 
   // Prop 1.11: "The world is determined by the facts, and by these being all the facts."
