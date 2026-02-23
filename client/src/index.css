@@ -66,7 +66,7 @@
 
 .semantic-word {
   position: relative;
-  display: inline-block;
+  display: inline;
   color: #4ade80; /* Tailwind green-400 */
   text-decoration: underline;
   text-decoration-color: #4ade80;
@@ -96,7 +96,7 @@
 
 .logic-word {
   position: relative;
-  display: inline-block;
+  display: inline;
   color: #60a5fa; /* Tailwind blue-400 */
   cursor: pointer;
   text-decoration: underline;
