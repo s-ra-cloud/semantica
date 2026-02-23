@@ -50,7 +50,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0121",
-    "content": "It would, so to speak, appear as an accident, when to a thing that could exist alone on its own account, subsequently a state of affairs could be made to fit.\n\nIf things can occur in atomic facts, this possibility must already lie in them.\n\n(A logical entity cannot be merely possible. Logic treats of every possibility, and all possibilities are its facts.)\n\nJust as we cannot think of spatial objects at all apart from space, or temporal objects apart from time, so we cannot think of any object apart from the possibility of its connexion with other things.\n\nIf I can think of an object in the context of an atomic fact, I cannot think of it apart from the possibility of this context."
+    "content": "It would, so to speak, appear as an accident, when to a thing that could exist alone on its own account, subsequently a state of affairs could be made to fit.\n\nIf things can occur in states of affairs, this possibility must already lie in them.\n\n(A logical entity cannot be merely possible. Logic treats of every possibility, and all possibilities are its facts.)\n\nJust as we cannot think of spatial objects at all apart from space, or temporal objects apart from time, so we cannot think of any object apart from the possibility of its connexion with other things.\n\nIf I can think of an object in the context of a state of affairs, I cannot think of it apart from the possibility of this context."
   },
   {
     "id": "2.0122",
@@ -58,7 +58,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.0123",
-    "content": "If I know an object, then I also know all the possibilities of its occurrence in atomic facts.\n\n(Every such possibility must lie in the nature of the object.)\n\nA new possibility cannot subsequently be found."
+    "content": "If I know an object, then I also know all the possibilities of its occurrence in states of affairs.\n\n(Every such possibility must lie in the nature of the object.)\n\nA new possibility cannot subsequently be found."
   },
   {
     "id": "2.01231",
@@ -186,7 +186,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "2.06",
-    "content": "The existence and non-existence of atomic facts is the reality.\n\n(The existence of atomic facts we also call a positive fact, their non-existence a negative fact.)"
+    "content": "The existence and non-existence of states of affairs is the reality.\n\n(The existence of states of affairs we also call a positive fact, their non-existence a negative fact.)"
   },
   {
     "id": "2.061",
@@ -858,7 +858,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.122",
-    "content": "We can speak in a certain sense of formal properties of objects and atomic facts, or of properties of the structure of facts, and in the same sense of formal relations and relations of structures.\n\n(Instead of property of the structure I also say “internal property”; instead of relation of structures “internal relation”.\n\nI introduce these expressions in order to show the reason for the confusion, very widespread among philosophers, between internal relations and proper (external) relations.)\n\nThe holding of such internal properties and relations cannot, however, be asserted by propositions, but it shows itself in the propositions, which present the facts and treat of the objects in question."
+    "content": "We can speak in a certain sense of formal properties of objects and states of affairs, or of properties of the structure of facts, and in the same sense of formal relations and relations of structures.\n\n(Instead of property of the structure I also say “internal property”; instead of relation of structures “internal relation”.\n\nI introduce these expressions in order to show the reason for the confusion, very widespread among philosophers, between internal relations and proper (external) relations.)\n\nThe holding of such internal properties and relations cannot, however, be asserted by propositions, but it shows itself in the propositions, which present the facts and treat of the objects in question."
   },
   {
     "id": "4.1221",
@@ -974,7 +974,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.27",
-    "content": "With regard to the existence of n atomic facts there are [math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math] possibilities.\n\nIt is possible for all combinations of atomic facts to exist, and the others not to exist."
+    "content": "With regard to the existence of n states of affairs there are [math]\\displaystyle{ K_n = \\sum_{\\nu=0}^n \\binom{n}{\\nu} }[/math] possibilities.\n\nIt is possible for all combinations of states of affairs to exist, and the others not to exist."
   },
   {
     "id": "4.28",

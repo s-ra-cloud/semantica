@@ -1,0 +1,23 @@
+1. Who are you?
+We are a research team affiliated with the Chair of Transitions at Mohammed VI Polytechnic University (link) and the Machina Research Network (link). Our work focuses on the intersections between philosophy, epistemology, and the digital and computational humanities.
+
+2. What is Semantica?
+Semantica is a new way of reading philosophy. It transforms complex philosophical texts into interactive environments equipped with tools that support both readers and researchers in deep textual analysis.
+* When the author defines an equivalence between two terms, those terms appear in green and can be substituted for one another.
+* When the author uses formal mathematical or logical expressions, these appear in blue and can be translated into more accessible language.
+* When the author refers to an external text, the reference appears in purple and can be displayed directly.
+The goal is to make difficult philosophical works more navigable without reducing their conceptual rigor.
+
+3. How is this information constructed?
+Substitutable expressions are developed through a hybrid process:
+* Manually by the project’s editorial team
+* With assistance from language models that generate suggestions, which are then reviewed and validated by the team
+* Through participatory contributions from users, who can propose synonyms or equivalent expressions via the feedback button
+Artificial intelligence is used at certain stages, but all outputs are validated by human experts before integration.
+Connections to other works are established on the basis of philological research and are not automated. These philological sources are acknowledged in the project’s credits, particularly the Wittgenstein Archives and the Legacy Project.
+
+4. How can I contribute?
+You can contribute by using the feedback button to contact us and propose suggestions or improvements. We credit all contributors.
+
+5. Is this an open-source project?
+Yes. The Semantica project is fully open source. You can download both the code and the database. The project is released under the GNU 3.0 license.

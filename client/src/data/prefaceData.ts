@@ -22,7 +22,7 @@ export const prefaceEN: PrefaceData = {
   mottoLabel: 'Motto',
   motto: '\u2026 und alles, was man weiss, nicht bloss rauschen und brausen geh\u00f6rt hat, l\u00e4sst sich in drei Worten sagen.',
   mottoAuthor: 'K\u00fcrnberger',
-  prefaceLabel: 'Preface',
+  prefaceLabel: 'Foreword',
   prefaceParagraphs: [
     'This book will perhaps only be understood by those who have themselves already thought the thoughts which are expressed in it\u2014or similar thoughts. It is therefore not a text-book. Its object would be attained if there were one person who read it with understanding and to whom it afforded pleasure.',
     'The book deals with the problems of philosophy and shows, as I believe, that the method of formulating these problems rests on the misunderstanding of the logic of our language. Its whole meaning could be summed up somewhat as follows: What can be said at all can be said clearly; and whereof one cannot speak thereof one must be silent.',
@@ -35,8 +35,8 @@ export const prefaceEN: PrefaceData = {
   ],
   signature: 'L.W.',
   location: 'Vienna, 1918.',
-  showButton: 'Show Preface',
-  hideButton: 'Hide Preface',
+  showButton: 'Show Foreword',
+  hideButton: 'Hide Foreword',
 };
 
 export const prefaceFR: PrefaceData = {

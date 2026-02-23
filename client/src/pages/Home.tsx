@@ -11,7 +11,7 @@ import { useSemantic } from '@/context/SemanticContext';
 import { parseSemantic, Segment } from '@/lib/semanticParser';
 import { applyGrammarAdaptations } from '@/lib/grammarAdaptations';
 import { Link } from 'wouter';
-import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen, GitBranch } from 'lucide-react';
+import { Database, ChevronDown, MessageSquare, X, Sparkles, Eye, EyeOff, Code, BookOpen, GitBranch, HelpCircle } from 'lucide-react';
 import { propositionDiagrams } from '@/components/TractatusDiagrams';
 import { ParsedText } from '@/components/ParsedText';
 import 'katex/dist/katex.min.css';
@@ -106,6 +106,7 @@ export default function Home() {
   const [feedbackPropError, setFeedbackPropError] = useState('');
   const [openAnnotation, setOpenAnnotation] = useState<string | null>(null);
   const [showPreface, setShowPreface] = useState(false);
+  const [showFaq, setShowFaq] = useState(false);
   const { synonymGroups } = useSemantic();
 
   const preface: PrefaceData = language === 'en' ? prefaceEN : language === 'de' ? prefaceDE : prefaceFR;
@@ -466,6 +467,15 @@ export default function Home() {
               />
             </div>
 
+            <button
+              onClick={() => setShowFaq(!showFaq)}
+              className={`text-left transition-colors flex items-center gap-2 ${showFaq ? 'text-green-400' : 'text-zinc-400 hover:text-white'}`}
+              data-testid="btn-faq"
+            >
+              <HelpCircle className="w-4 h-4" />
+              FAQ
+            </button>
+
             <Link href="/editor">
               <span className="text-white hover:text-green-400 transition-colors flex items-center gap-2 cursor-pointer">
                 <Database className="w-4 h-4" />
@@ -523,6 +533,124 @@ export default function Home() {
         </aside>
 
         <main className="flex-1 max-w-2xl md:ml-72">
+          {showFaq ? (
+            <div className="mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-medium text-white mb-6">
+                {language === 'fr' ? 'Foire Aux Questions' : language === 'de' ? 'Häufig gestellte Fragen' : 'Frequently Asked Questions'}
+              </h2>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-white font-display font-medium text-lg mb-2" data-testid="faq-q1">
+                    {language === 'fr' ? 'Qui êtes-vous\u00a0?' : language === 'de' ? 'Wer seid ihr?' : 'Who are you?'}
+                  </h3>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    {language === 'fr'
+                      ? <>Nous sommes une équipe de recherche affiliée à la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> de l'Université Mohammed VI Polytechnique et au <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a>. Nos travaux portent sur les intersections entre philosophie, épistémologie, et les humanités numériques et computationnelles.</>
+                      : language === 'de'
+                      ? <>Wir sind ein Forschungsteam, das mit dem <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> der Mohammed VI Polytechnic University und dem <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a> verbunden ist. Unsere Arbeit konzentriert sich auf die Schnittstellen zwischen Philosophie, Epistemologie und den digitalen und computerbasierten Geisteswissenschaften.</>
+                      : <>We are a research team affiliated with the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> at Mohammed VI Polytechnic University and the <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a>. Our work focuses on the intersections between philosophy, epistemology, and the digital and computational humanities.</>
+                    }
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-display font-medium text-lg mb-2" data-testid="faq-q2">
+                    {language === 'fr' ? 'Qu\'est-ce que Semantica\u00a0?' : language === 'de' ? 'Was ist Semantica?' : 'What is Semantica?'}
+                  </h3>
+                  <div className="text-zinc-300 text-sm leading-relaxed space-y-2">
+                    <p>
+                      {language === 'fr'
+                        ? 'Semantica est une nouvelle façon de lire la philosophie. Elle transforme des textes philosophiques complexes en environnements interactifs équipés d\'outils qui aident lecteurs et chercheurs dans l\'analyse textuelle approfondie.'
+                        : language === 'de'
+                        ? 'Semantica ist eine neue Art, Philosophie zu lesen. Es verwandelt komplexe philosophische Texte in interaktive Umgebungen mit Werkzeugen, die sowohl Leser als auch Forscher bei der tiefgehenden Textanalyse unterstützen.'
+                        : 'Semantica is a new way of reading philosophy. It transforms complex philosophical texts into interactive environments equipped with tools that support both readers and researchers in deep textual analysis.'}
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 text-zinc-400">
+                      <li>{language === 'fr' ? <>Quand l'auteur définit une équivalence entre deux termes, ceux-ci apparaissent en <span className="text-green-400">vert</span> et peuvent être substitués l'un à l'autre.</> : language === 'de' ? <>Wenn der Autor eine Äquivalenz zwischen zwei Begriffen definiert, erscheinen diese in <span className="text-green-400">Grün</span> und können gegeneinander ausgetauscht werden.</> : <>When the author defines an equivalence between two terms, those terms appear in <span className="text-green-400">green</span> and can be substituted for one another.</>}</li>
+                      <li>{language === 'fr' ? <>Quand l'auteur utilise des expressions mathématiques ou logiques formelles, celles-ci apparaissent en <span className="text-blue-400">bleu</span> et peuvent être traduites dans un langage plus accessible.</> : language === 'de' ? <>Wenn der Autor formale mathematische oder logische Ausdrücke verwendet, erscheinen diese in <span className="text-blue-400">Blau</span> und können in verständlichere Sprache übersetzt werden.</> : <>When the author uses formal mathematical or logical expressions, these appear in <span className="text-blue-400">blue</span> and can be translated into more accessible language.</>}</li>
+                      <li>{language === 'fr' ? <>Quand l'auteur fait référence à un texte externe, la référence apparaît en <span className="text-purple-400">violet</span> et peut être affichée directement.</> : language === 'de' ? <>Wenn der Autor auf einen externen Text verweist, erscheint die Referenz in <span className="text-purple-400">Violett</span> und kann direkt angezeigt werden.</> : <>When the author refers to an external text, the reference appears in <span className="text-purple-400">purple</span> and can be displayed directly.</>}</li>
+                    </ul>
+                    <p className="text-zinc-400">
+                      {language === 'fr'
+                        ? 'L\'objectif est de rendre les œuvres philosophiques difficiles plus navigables sans réduire leur rigueur conceptuelle.'
+                        : language === 'de'
+                        ? 'Das Ziel ist es, schwierige philosophische Werke zugänglicher zu machen, ohne ihre konzeptuelle Strenge zu reduzieren.'
+                        : 'The goal is to make difficult philosophical works more navigable without reducing their conceptual rigor.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-display font-medium text-lg mb-2" data-testid="faq-q3">
+                    {language === 'fr' ? 'Comment cette information est-elle construite\u00a0?' : language === 'de' ? 'Wie werden diese Informationen erstellt?' : 'How is this information constructed?'}
+                  </h3>
+                  <div className="text-zinc-300 text-sm leading-relaxed space-y-2">
+                    <p>
+                      {language === 'fr'
+                        ? 'Les expressions substituables sont développées par un processus hybride\u00a0:'
+                        : language === 'de'
+                        ? 'Substituierbare Ausdrücke werden durch einen hybriden Prozess entwickelt:'
+                        : 'Substitutable expressions are developed through a hybrid process:'}
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 text-zinc-400">
+                      <li>{language === 'fr' ? 'Manuellement par l\'équipe éditoriale du projet' : language === 'de' ? 'Manuell durch das Redaktionsteam des Projekts' : 'Manually by the project\'s editorial team'}</li>
+                      <li>{language === 'fr' ? 'Avec l\'aide de modèles de langage qui génèrent des suggestions, ensuite revues et validées par l\'équipe' : language === 'de' ? 'Mit Unterstützung von Sprachmodellen, die Vorschläge generieren, die dann vom Team überprüft und validiert werden' : 'With assistance from language models that generate suggestions, which are then reviewed and validated by the team'}</li>
+                      <li>{language === 'fr' ? 'Par des contributions participatives des utilisateurs, qui peuvent proposer des synonymes ou expressions équivalentes via le bouton de retour' : language === 'de' ? 'Durch partizipative Beiträge von Nutzern, die über den Feedback-Button Synonyme oder äquivalente Ausdrücke vorschlagen können' : 'Through participatory contributions from users, who can propose synonyms or equivalent expressions via the feedback button'}</li>
+                    </ul>
+                    <p className="text-zinc-400">
+                      {language === 'fr'
+                        ? 'L\'intelligence artificielle est utilisée à certaines étapes, mais tous les résultats sont validés par des experts humains avant intégration.'
+                        : language === 'de'
+                        ? 'Künstliche Intelligenz wird in bestimmten Phasen eingesetzt, aber alle Ergebnisse werden vor der Integration von menschlichen Experten validiert.'
+                        : 'Artificial intelligence is used at certain stages, but all outputs are validated by human experts before integration.'}
+                    </p>
+                    <p className="text-zinc-400">
+                      {language === 'fr'
+                        ? 'Les connexions à d\'autres œuvres sont établies sur la base de recherches philologiques et ne sont pas automatisées. Ces sources philologiques sont mentionnées dans les crédits du projet, notamment les Archives Wittgenstein et le projet LEGACY.'
+                        : language === 'de'
+                        ? 'Verbindungen zu anderen Werken werden auf der Grundlage philologischer Forschung hergestellt und sind nicht automatisiert. Diese philologischen Quellen werden in den Projektcredits anerkannt, insbesondere die Wittgenstein-Archive und das LEGACY-Projekt.'
+                        : 'Connections to other works are established on the basis of philological research and are not automated. These philological sources are acknowledged in the project\'s credits, particularly the Wittgenstein Archives and the Legacy Project.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-display font-medium text-lg mb-2" data-testid="faq-q4">
+                    {language === 'fr' ? 'Comment puis-je contribuer\u00a0?' : language === 'de' ? 'Wie kann ich beitragen?' : 'How can I contribute?'}
+                  </h3>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    {language === 'fr'
+                      ? 'Vous pouvez contribuer en utilisant le bouton de retour pour nous contacter et proposer des suggestions ou des améliorations. Nous créditons tous les contributeurs.'
+                      : language === 'de'
+                      ? 'Sie können beitragen, indem Sie den Feedback-Button verwenden, um uns zu kontaktieren und Vorschläge oder Verbesserungen vorzuschlagen. Wir würdigen alle Mitwirkenden.'
+                      : 'You can contribute by using the feedback button to contact us and propose suggestions or improvements. We credit all contributors.'}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-display font-medium text-lg mb-2" data-testid="faq-q5">
+                    {language === 'fr' ? 'Est-ce un projet open source\u00a0?' : language === 'de' ? 'Ist dies ein Open-Source-Projekt?' : 'Is this an open-source project?'}
+                  </h3>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    {language === 'fr'
+                      ? 'Oui. Le projet Semantica est entièrement open source. Vous pouvez télécharger à la fois le code et la base de données. Le projet est publié sous la licence GNU 3.0.'
+                      : language === 'de'
+                      ? 'Ja. Das Semantica-Projekt ist vollständig Open Source. Sie können sowohl den Code als auch die Datenbank herunterladen. Das Projekt wird unter der GNU 3.0 Lizenz veröffentlicht.'
+                      : 'Yes. The Semantica project is fully open source. You can download both the code and the database. The project is released under the GNU 3.0 license.'}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowFaq(false)}
+                className="mt-8 text-sm text-green-400 hover:text-green-300 transition-colors underline underline-offset-2"
+                data-testid="btn-back-to-tractatus"
+              >
+                {language === 'fr' ? '\u2190 Retour au Tractatus' : language === 'de' ? '\u2190 Zurück zum Tractatus' : '\u2190 Back to the Tractatus'}
+              </button>
+            </div>
+          ) : (
+          <>
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-medium text-white mb-2">
               Tractatus Logico-Philosophicus
@@ -890,7 +1018,8 @@ export default function Home() {
               );
             })}
           </div>
-
+          </>
+          )}
         </main>
       </div>
     </div>
