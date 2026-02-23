@@ -469,7 +469,7 @@ export default function Home() {
 
             <button
               onClick={() => setShowFaq(!showFaq)}
-              className={`text-left transition-colors flex items-center gap-2 ${showFaq ? 'text-green-400' : 'text-zinc-400 hover:text-white'}`}
+              className={`text-left transition-colors flex items-center gap-2 ${showFaq ? 'text-green-400' : 'text-white hover:text-green-400'}`}
               data-testid="btn-faq"
             >
               <HelpCircle className="w-4 h-4" />
