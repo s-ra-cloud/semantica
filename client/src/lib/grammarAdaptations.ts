@@ -175,6 +175,19 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     ]
   }],
 
+  // Prop 2.0123: "...inhérente à la nature de cet objet..."
+  'fr:2.0123': [{
+    trigger: 'objet',
+    deps: [{
+      find: 'cet ',
+      replacements: {
+        'objet': 'cet ',
+        'chose': 'cette ',
+        'entité': 'cette ',
+      }
+    }]
+  }],
+
   // ── ENGLISH ─────────────────────────────────────────────
 
   // Prop 1: "The world is everything that is the case."
@@ -274,6 +287,32 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  // Prop 2.0123: "If I know an object..."
+  'en:2.0123': [{
+    trigger: 'object',
+    deps: [{
+      find: 'know an ',
+      replacements: {
+        'object': 'know an ',
+        'thing': 'know a ',
+        'entity': 'know an ',
+      }
+    }]
+  }],
+
+  // Prop 2.01231: "In order to know an object..."
+  'en:2.01231': [{
+    trigger: 'object',
+    deps: [{
+      find: 'know an ',
+      replacements: {
+        'object': 'know an ',
+        'thing': 'know a ',
+        'entity': 'know an ',
+      }
+    }]
+  }],
+
   // Prop 2.0121: "...when to a thing that could exist alone on its own account..."
   'en:2.0121': [
     {
@@ -303,6 +342,68 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   // Prop 2.063: "The total reality is the world." — "total reality" not in group, skip
 
   // ── GERMAN ──────────────────────────────────────────────
+
+  // Prop 2.0123: "Wenn ich den Gegenstand kenne..."
+  'de:2.0123': [{
+    trigger: 'gegenstand',
+    deps: [
+      {
+        find: 'ich den ',
+        replacements: {
+          'gegenstand': 'ich den ',
+          'ding': 'ich das ',
+          'sache': 'ich die ',
+        }
+      },
+      {
+        find: 'seines Vorkommens',
+        replacements: {
+          'gegenstand': 'seines Vorkommens',
+          'ding': 'seines Vorkommens',
+          'sache': 'ihres Vorkommens',
+        }
+      },
+      {
+        find: 'des Gegenstandes',
+        replacements: {
+          'gegenstand': 'des Gegenstandes',
+          'ding': 'des Dinges',
+          'sache': 'der Sache',
+        }
+      }
+    ]
+  }],
+
+  // Prop 2.01231: "Um einen Gegenstand zu kennen..."
+  'de:2.01231': [{
+    trigger: 'gegenstand',
+    deps: [
+      {
+        find: 'einen ',
+        replacements: {
+          'gegenstand': 'einen ',
+          'ding': 'ein ',
+          'sache': 'eine ',
+        }
+      },
+      {
+        find: 'seine externen',
+        replacements: {
+          'gegenstand': 'seine externen',
+          'ding': 'seine externen',
+          'sache': 'ihre externen',
+        }
+      },
+      {
+        find: 'seine internen',
+        replacements: {
+          'gegenstand': 'seine internen',
+          'ding': 'seine internen',
+          'sache': 'ihre internen',
+        }
+      }
+    ]
+  }],
 
   // Prop 2.0121: "...wenn dem Ding, das allein für sich bestehen könnte..."
   'de:2.0121': [
