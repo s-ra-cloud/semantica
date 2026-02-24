@@ -122,6 +122,36 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  // Prop 2.0121: "...qu'à une chose qui pourrait subsister seule en elle-même..."
+  'fr:2.0121': [
+    {
+      trigger: 'une chose',
+      deps: [
+        {
+          find: 'seule en elle-même',
+          replacements: {
+            'une chose': 'seule en elle-même',
+            'un objet': 'seul en lui-même',
+            'une entité': 'seule en elle-même',
+          }
+        }
+      ]
+    },
+    {
+      trigger: 'choses',
+      deps: [
+        {
+          find: 'celles-ci',
+          replacements: {
+            'choses': 'celles-ci',
+            'objets': 'ceux-ci',
+            'entités': 'celles-ci',
+          }
+        }
+      ]
+    }
+  ],
+
   // Prop 2.0122: "La chose est indépendante, en tant qu'elle peut se présenter..."
   'fr:2.0122': [{
     trigger: 'la chose',
@@ -244,7 +274,89 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  // Prop 2.0121: "...when to a thing that could exist alone on its own account..."
+  'en:2.0121': [
+    {
+      trigger: 'thing',
+      deps: [{
+        find: 'to a ',
+        replacements: {
+          'thing': 'to a ',
+          'object': 'to an ',
+          'entity': 'to an ',
+        }
+      }]
+    },
+    {
+      trigger: 'object',
+      deps: [{
+        find: 'think of an ',
+        replacements: {
+          'object': 'think of an ',
+          'thing': 'think of a ',
+          'entity': 'think of an ',
+        }
+      }]
+    }
+  ],
+
   // Prop 2.063: "The total reality is the world." — "total reality" not in group, skip
+
+  // ── GERMAN ──────────────────────────────────────────────
+
+  // Prop 2.0121: "...wenn dem Ding, das allein für sich bestehen könnte..."
+  'de:2.0121': [
+    {
+      trigger: 'ding',
+      deps: [
+        {
+          find: 'wenn dem ',
+          replacements: {
+            'ding': 'wenn dem ',
+            'gegenstand': 'wenn dem ',
+            'sache': 'wenn der ',
+          }
+        },
+        {
+          find: ', das allein',
+          replacements: {
+            'ding': ', das allein',
+            'gegenstand': ', der allein',
+            'sache': ', die allein',
+          }
+        }
+      ]
+    },
+    {
+      trigger: 'gegenstand',
+      deps: [
+        {
+          find: 'uns keinen ',
+          replacements: {
+            'gegenstand': 'uns keinen ',
+            'ding': 'uns kein ',
+            'sache': 'uns keine ',
+          }
+        },
+        {
+          find: 'mir den ',
+          replacements: {
+            'gegenstand': 'mir den ',
+            'ding': 'mir das ',
+            'sache': 'mir die ',
+          }
+        },
+        {
+          find: 'seiner Verbindung',
+          replacements: {
+            'gegenstand': 'seiner Verbindung',
+            'ding': 'seiner Verbindung',
+            'sache': 'ihrer Verbindung',
+          }
+        }
+      ]
+    }
+  ],
 };
 
 export function applyGrammarAdaptations(
