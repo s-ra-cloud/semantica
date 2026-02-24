@@ -607,10 +607,10 @@ export default function Home() {
                     </ul>
                     <p className="text-white">
                       {language === 'fr'
-                        ? 'L\'intelligence artificielle est utilisée à certaines étapes, mais tous les résultats sont validés par des experts humains avant intégration.'
+                        ? <>L'intelligence artificielle est utilisée à certaines étapes, mais tous les résultats ont été validés par des experts humains jusqu'à la proposition {verifiedUpTo}.</>
                         : language === 'de'
-                        ? 'Künstliche Intelligenz wird in bestimmten Phasen eingesetzt, aber alle Ergebnisse werden vor der Integration von menschlichen Experten validiert.'
-                        : 'Artificial intelligence is used at certain stages, but all outputs are validated by human experts before integration.'}
+                        ? <>Künstliche Intelligenz wird in bestimmten Phasen eingesetzt, aber alle Ergebnisse wurden von menschlichen Experten bis Satz {verifiedUpTo} validiert.</>
+                        : <>Artificial intelligence is used at certain stages, but all outputs have been validated by human experts up to proposition {verifiedUpTo}.</>}
                     </p>
                     <p className="text-white">
                       {language === 'fr'
