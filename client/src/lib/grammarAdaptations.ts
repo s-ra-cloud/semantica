@@ -458,6 +458,42 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
       ]
     }
   ],
+
+  // Prop 2.0211 EN: "If the world had no substance" → "had nothing which subsists..."
+  'en:2.0211': [{
+    trigger: 'substance',
+    deps: [{
+      find: 'had no ',
+      replacements: {
+        'substance': 'had no ',
+        'that which subsists independently of what is the case': 'had ',
+      }
+    }]
+  }],
+
+  // Prop 2.0211 FR: "n'avait pas de substance" → "n'avait pas ce qui subsiste..."
+  'fr:2.0211': [{
+    trigger: 'la substance',
+    deps: [{
+      find: 'pas de ',
+      replacements: {
+        'la substance': 'pas de ',
+        'ce qui subsiste indépendamment de ce qui a lieu': 'pas ',
+      }
+    }]
+  }],
+
+  // Prop 2.0211 DE: "keine Substanz" → "nicht das, was unabhängig..."
+  'de:2.0211': [{
+    trigger: 'die substanz',
+    deps: [{
+      find: 'keine ',
+      replacements: {
+        'die substanz': 'keine ',
+        'das, was unabhängig von dem was der fall ist, besteht': 'nicht ',
+      }
+    }]
+  }],
 };
 
 export function applyGrammarAdaptations(
