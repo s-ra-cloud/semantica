@@ -372,7 +372,7 @@ export default function Home() {
               <path d="M5 25 L15 15" />
             </svg>
             <h1 className="font-display font-semibold text-white text-xl tracking-tight">Semantica</h1>
-            <p className="text-white text-xs leading-relaxed">{language === 'fr' ? <>Un projet en Humanités Computationnelles de la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : language === 'de' ? <>Ein Projekt der Computational Humanities vom <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></> : <>A project in Computational Humanities by the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 transition-colors underline underline-offset-2" data-testid="link-chair-subtitle">Chair of Transitions</a></>}</p>
+            <p className="text-white text-xs leading-relaxed">{language === 'fr' ? <>Un projet en Humanités Computationnelles de la Chair of Transitions</> : language === 'de' ? <>Ein Projekt der Computational Humanities vom Chair of Transitions</> : <>A project in Computational Humanities by the Chair of Transitions</>}</p>
           </div>
 
           <nav className="flex flex-col gap-2 font-medium text-sm">
@@ -435,7 +435,7 @@ export default function Home() {
                 <div className="h-px w-6 bg-zinc-800 my-1"></div>
                 <span className="text-zinc-500 italic">{language === 'fr' ? 'Avec l\'aide spéciale de :' : language === 'de' ? 'Mit besonderer Hilfe von:' : 'With the special help of:'}</span>
                 <span className="text-zinc-400">SATT Sud Est</span>
-                <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-machina">Machina Research Network</a>
+                <span className="text-zinc-400" data-testid="link-machina">Machina Research Network</span>
                 <a href="https://www.iufrance.fr/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-iuf">Institut Universitaire de France</a>
                 <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-legacy-thanks">LEGACY project</a>
               </div>
@@ -554,10 +554,10 @@ export default function Home() {
                   </h3>
                   <p className="text-white text-sm leading-relaxed">
                     {language === 'fr'
-                      ? <>Nous sommes une équipe de recherche affiliée à la <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> de l'Université Mohammed VI Polytechnique et au <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a>. Nos travaux portent sur les intersections entre philosophie, épistémologie, et les humanités numériques et computationnelles.</>
+                      ? <>Nous sommes une équipe de recherche affiliée à la Chair of Transitions de l'Université Mohammed VI Polytechnique et au Machina Research Network. Nos travaux portent sur les intersections entre philosophie, épistémologie, et les humanités numériques et computationnelles.</>
                       : language === 'de'
-                      ? <>Wir sind ein Forschungsteam, das mit dem <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> der Mohammed VI Polytechnic University und dem <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a> verbunden ist. Unsere Arbeit konzentriert sich auf die Schnittstellen zwischen Philosophie, Epistemologie und den digitalen und computerbasierten Geisteswissenschaften.</>
-                      : <>We are a research team affiliated with the <a href="https://chairtransitions.com/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Chair of Transitions</a> at Mohammed VI Polytechnic University and the <a href="https://machina.rn" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 underline underline-offset-2">Machina Research Network</a>. Our work focuses on the intersections between philosophy, epistemology, and the digital and computational humanities.</>
+                      ? <>Wir sind ein Forschungsteam, das mit dem Chair of Transitions der Mohammed VI Polytechnic University und dem Machina Research Network verbunden ist. Unsere Arbeit konzentriert sich auf die Schnittstellen zwischen Philosophie, Epistemologie und den digitalen und computerbasierten Geisteswissenschaften.</>
+                      : <>We are a research team affiliated with the Chair of Transitions at Mohammed VI Polytechnic University and the Machina Research Network. Our work focuses on the intersections between philosophy, epistemology, and the digital and computational humanities.</>
                     }
                   </p>
                 </div>
