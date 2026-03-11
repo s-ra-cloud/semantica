@@ -19,6 +19,7 @@ interface Connection {
   propositionText: Record<Lang, string>;
   source: ExternalSource;
   type: ConnectionType;
+  contributor?: string;
 }
 
 const i18n: Record<Lang, {
@@ -161,6 +162,27 @@ const connections: Connection[] = [
       url: 'https://legacy-um6p.1337.ma/projects/library/u2okeerjjvq5vtxtsyvu1ptl-baruch-spinoza/uh2oonrmfp56dnl1tfjccs31',
     },
     type: 'agreement',
+  },
+  {
+    propositionId: '4.1122',
+    propositionText: {
+      en: 'The Darwinian theory has no more to do with philosophy than has any other hypothesis of natural science.',
+      fr: 'La th\u00e9orie de Darwin n\'a pas plus \u00e0 voir avec la philosophie que n\'importe quelle autre hypoth\u00e8se des sciences de la nature.',
+      de: 'Die Darwinsche Theorie hat mit der Philosophie nicht mehr zu schaffen, als irgend eine andere Hypothese der Naturwissenschaft.',
+    },
+    source: {
+      id: 'darwin',
+      author: 'Charles Darwin',
+      title: {
+        en: 'On the Origin of Species',
+        fr: 'L\'Origine des esp\u00e8ces',
+        de: '\u00dcber die Entstehung der Arten',
+      },
+      year: '1859',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+    contributor: 'Laura Duparc, Mohammed VI Polytechnic University, based on data collected by the Wittgenstein Archives',
   },
 ];
 
@@ -397,6 +419,9 @@ function SourceCard({ conn, language, side, isHovered, onHover }: {
         <div className="text-xs text-zinc-500 italic leading-snug mt-0.5">{conn.source.title[language]}</div>
         <div className="text-xs text-zinc-600 mt-0.5">{conn.source.year}</div>
       </a>
+      {conn.contributor && (
+        <div className="text-[10px] text-zinc-600 mt-1 leading-snug">{conn.contributor}</div>
+      )}
     </div>
   );
 }
