@@ -238,48 +238,74 @@ export function TruthTable4442({ isFrench }: { isFrench?: boolean }) {
   );
 }
 
-export function TruthTable5101({ isFrench }: { isFrench?: boolean }) {
-  const T = isFrench ? 'V' : 'T';
-  const F = isFrench ? 'F' : 'F';
-  const headers = ['(TTTT)(p,q)', '(FTTT)(p,q)', '(TFTT)(p,q)', '(TTFT)(p,q)', '(TTTF)(p,q)'];
-  const names = isFrench
-    ? ['Tautologie', 'en mots: Non p et non q. (p|q ni p ni q)', 'en mots: Si q alors p. (q⊃p)', 'en mots: Si p alors q. (p⊃q)', 'en mots: p ou q. (p∨q)']
-    : ['Tautology', 'in words: Not p and not q. (p|q neither p nor q)', 'in words: If q then p. (q⊃p)', 'in words: If p then q. (p⊃q)', 'in words: p or q. (p∨q)'];
-
-  const rows = [
-    { p: T, q: T, vals: [T, F, T, T, T] },
-    { p: F, q: T, vals: [T, T, F, T, T] },
-    { p: T, q: F, vals: [T, T, T, F, T] },
-    { p: F, q: F, vals: [T, T, T, T, F] },
+export function TruthTable5101({ isFrench, isGerman }: { isFrench?: boolean; isGerman?: boolean }) {
+  const ditto = isFrench ? '\u00ab' : isGerman ? '\u201e \u201e' : '\u201c \u201d';
+  const rows = isFrench ? [
+    { pattern: '(VVVV)(p, q)', label: 'Tautologie', desc: '(si p alors p ; et si q alors q.) (p \u2283 p . q \u2283 q)' },
+    { pattern: '(FVVV)(p, q)', label: 'soit :', desc: 'pas \u00e0 la fois p et q. (~(p . q))' },
+    { pattern: '(VFVV)(p, q)', label: ditto, desc: 'si q alors p. (q \u2283 p)' },
+    { pattern: '(VVFV)(p, q)', label: ditto, desc: 'si p alors q. (p \u2283 q)' },
+    { pattern: '(VVVF)(p, q)', label: ditto, desc: 'p ou q. (p \u2228 q)' },
+    { pattern: '(FFVV)(p, q)', label: ditto, desc: 'non q. ~q' },
+    { pattern: '(FVFV)(p, q)', label: ditto, desc: 'non p. ~p' },
+    { pattern: '(FVVF)(p, q)', label: ditto, desc: 'p ou q, mais pas les deux. (p . ~q : \u2228 : q . ~p)' },
+    { pattern: '(VFFV)(p, q)', label: ditto, desc: 'si p alors q ; et si q alors p. (p \u2261 q)' },
+    { pattern: '(VFVF)(p, q)', label: ditto, desc: 'p' },
+    { pattern: '(VVFF)(p, q)', label: ditto, desc: 'q' },
+    { pattern: '(FFFV)(p, q)', label: ditto, desc: 'ni p ni q. (~p . ~q) ou (p | q)' },
+    { pattern: '(FFVF)(p, q)', label: ditto, desc: 'p et non q. (p . ~q)' },
+    { pattern: '(FVFF)(p, q)', label: ditto, desc: 'q et non p. (q . ~p)' },
+    { pattern: '(VFFF)(p, q)', label: ditto, desc: 'q et p. (q . p)' },
+    { pattern: '(FFFF)(p, q)', label: 'Contradiction', desc: '(p et non p ; et q et non q.) (p . ~p . q . ~q)' },
+  ] : isGerman ? [
+    { pattern: '(WWWW)(p, q)', label: 'Tautologie', desc: '(Wenn p, so p; und wenn q, so q.) (p \u2283 p . q \u2283 q)' },
+    { pattern: '(FWWW)(p, q)', label: 'in Worten:', desc: 'Nicht beides p und q. (\u223c(p . q))' },
+    { pattern: '(WFWW)(p, q)', label: ditto, desc: 'Wenn q, so p. (q \u2283 p)' },
+    { pattern: '(WWFW)(p, q)', label: ditto, desc: 'Wenn p, so q. (p \u2283 q)' },
+    { pattern: '(WWWF)(p, q)', label: ditto, desc: 'p oder q. (p \u2228 q)' },
+    { pattern: '(FFWW)(p, q)', label: ditto, desc: 'Nicht q. \u223cq' },
+    { pattern: '(FWFW)(p, q)', label: ditto, desc: 'Nicht p. \u223cp' },
+    { pattern: '(FWWF)(p, q)', label: ditto, desc: 'p oder q, aber nicht beide. (p . \u223cq : \u2228 : q . \u223cp)' },
+    { pattern: '(WFFW)(p, q)', label: ditto, desc: 'Wenn p, so q; und wenn q, so p. (p \u2261 q)' },
+    { pattern: '(WFWF)(p, q)', label: ditto, desc: 'p' },
+    { pattern: '(WWFF)(p, q)', label: ditto, desc: 'q' },
+    { pattern: '(FFFW)(p, q)', label: ditto, desc: 'Weder p noch q. (\u223cp . \u223cq) oder (p | q)' },
+    { pattern: '(FFWF)(p, q)', label: ditto, desc: 'p und nicht q. (p . \u223cq)' },
+    { pattern: '(FWFF)(p, q)', label: ditto, desc: 'q und nicht p. (q . \u223cp)' },
+    { pattern: '(WFFF)(p, q)', label: ditto, desc: 'q und p. (q . p)' },
+    { pattern: '(FFFF)(p, q)', label: 'Kontradiktion', desc: '(p und nicht p; und q und nicht q.) (p . \u223cp . q . \u223cq)' },
+  ] : [
+    { pattern: '(TTTT)(p, q)', label: 'Tautology', desc: '(if p then p, and if q then q.) [p \u2283 p . q \u2283 q]' },
+    { pattern: '(FTTT)(p, q)', label: 'in words:', desc: 'Not both p and q. [~(p . q)]' },
+    { pattern: '(TFTT)(p, q)', label: ditto, desc: 'If q then p. [q \u2283 p]' },
+    { pattern: '(TTFT)(p, q)', label: ditto, desc: 'If p then q. [p \u2283 q]' },
+    { pattern: '(TTTF)(p, q)', label: ditto, desc: 'p or q. [p \u2228 q]' },
+    { pattern: '(FFTT)(p, q)', label: ditto, desc: 'Not q. ~q' },
+    { pattern: '(FTFT)(p, q)', label: ditto, desc: 'Not p. ~p' },
+    { pattern: '(FTTF)(p, q)', label: ditto, desc: 'p or q, but not both. [p . ~q : \u2228 : q . ~p]' },
+    { pattern: '(TFFT)(p, q)', label: ditto, desc: 'If p, then q; and if q, then p. [p \u2261 q]' },
+    { pattern: '(TFTF)(p, q)', label: ditto, desc: 'p' },
+    { pattern: '(TTFF)(p, q)', label: ditto, desc: 'q' },
+    { pattern: '(FFFT)(p, q)', label: ditto, desc: 'Neither p nor q. [~p . ~q or p | q]' },
+    { pattern: '(FFTF)(p, q)', label: ditto, desc: 'p and not q. [p . ~q]' },
+    { pattern: '(FTFF)(p, q)', label: ditto, desc: 'q and not p. [q . ~p]' },
+    { pattern: '(TFFF)(p, q)', label: ditto, desc: 'q and p. [q . p]' },
+    { pattern: '(FFFF)(p, q)', label: 'Contradiction', desc: '(p and not p; and q and not q.) [p . ~p . q . ~q]' },
   ];
 
   return (
-    <div className="my-4 overflow-x-auto">
-      <table className="border-collapse text-xs font-serif">
-        <thead>
-          <tr>
-            <th className="border border-zinc-700 px-2 py-1 text-zinc-400">p</th>
-            <th className="border border-zinc-700 px-2 py-1 text-zinc-400">q</th>
-            {headers.map((h, i) => (
-              <th key={i} className="border border-zinc-700 px-2 py-1 text-zinc-500 font-normal text-[10px]">{h}</th>
-            ))}
-          </tr>
-        </thead>
+    <div className="my-6 overflow-x-auto">
+      <table className="text-sm font-serif">
         <tbody>
-          {rows.map((row, ri) => (
-            <tr key={ri}>
-              <td className="border border-zinc-700 px-2 py-1 text-center">{row.p}</td>
-              <td className="border border-zinc-700 px-2 py-1 text-center">{row.q}</td>
-              {row.vals.map((v, vi) => (
-                <td key={vi} className="border border-zinc-700 px-2 py-1 text-center">{v}</td>
-              ))}
+          {rows.map((row, i) => (
+            <tr key={i}>
+              <td className="pr-4 py-0.5 text-zinc-400 whitespace-nowrap align-top">{row.pattern}</td>
+              <td className="pr-4 py-0.5 text-zinc-400 whitespace-nowrap align-top">{row.label}</td>
+              <td className="py-0.5 text-zinc-300 align-top">{row.desc}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className="text-zinc-500 text-xs mt-2 italic">
-        {isFrench ? '(Les premières 5 des 16 fonctions de vérité)' : '(First 5 of the 16 truth-functions)'}
-      </p>
     </div>
   );
 }
@@ -319,7 +345,7 @@ export const propositionDiagrams: Record<string, {
     diagram: ({ isFrench }) => <TruthTable4442 isFrench={isFrench} />,
   },
   '5.101': {
-    diagram: ({ isFrench }) => <TruthTable5101 isFrench={isFrench} />,
+    diagram: ({ isFrench, isGerman }) => <TruthTable5101 isFrench={isFrench} isGerman={isGerman} />,
   },
   '5.5423': {
     diagram: () => <NeckerCube />,

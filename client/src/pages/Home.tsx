@@ -127,6 +127,16 @@ export default function Home() {
     
     const contentTransforms: Record<string, (text: string) => string> = {
       '4.31': (text) => text.replace(/\n\np\n\nq\n\nr[\s\S]*$/, ''),
+      '5.101': (text) => {
+        const marker = text.indexOf('\n\n(');
+        if (marker === -1) return text;
+        const afterText = language === 'fr'
+          ? '\n\nÀ ces possibilités de vérité de ses arguments de vérité qui vérifient une proposition, je donnerai le nom de fondements de vérité de cette proposition.'
+          : language === 'de'
+          ? '\n\nDiejenigen Wahrheitsmöglichkeiten seiner Wahrheitsargumente, welche den Satz bewahrheiten, will ich seine Wahrheitsgründe nennen.'
+          : '\n\nThose truth-possibilities of its truth-arguments, which verify the proposition, I shall call its truth-grounds.';
+        return text.substring(0, marker) + afterText;
+      },
     };
 
     return rawData.map(prop => {
