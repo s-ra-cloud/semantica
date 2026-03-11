@@ -75,7 +75,7 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     const expression = group.words[0];
     if (!expression) return;
     const escaped = expression.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(?<![a-zA-Zàâäéèêëïîôùûüÿçæœ])${escaped}(?![a-zA-Zàâäéèêëïîôùûüÿçæœ])`, 'g');
+    const regex = new RegExp(`(?<![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])${escaped}(?![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])`, 'g');
     let m;
     while ((m = regex.exec(text)) !== null) {
       matches.push({ index: m.index, length: m[0].length, word: m[0], group, matchType: 'logic' });
@@ -101,13 +101,7 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
       const trimmed = word.trim();
       if (!trimmed) return;
       const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const hasApostrophe = trimmed.includes("'") || trimmed.includes("\u2019");
-      let regex: RegExp;
-      if (hasApostrophe) {
-        regex = new RegExp(`(?<![a-zA-Zàâäéèêëïîôùûüÿçæœ])${escaped}(?![a-zA-Zàâäéèêëïîôùûüÿçæœ])`, 'gi');
-      } else {
-        regex = new RegExp(`\\b(${escaped})\\b`, 'gi');
-      }
+      const regex = new RegExp(`(?<![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])${escaped}(?![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])`, 'gi');
       let m;
       while ((m = regex.exec(text)) !== null) {
         const lowerWord = trimmed.toLowerCase();
