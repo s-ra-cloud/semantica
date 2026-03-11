@@ -224,6 +224,26 @@ const connections: Connection[] = [
     },
     type: 'neutral',
   },
+  {
+    propositionId: '3.331',
+    propositionText: {
+      en: 'From this observation we get a further view\u2014into Russell\u2019s Theory of Types. Russell\u2019s error is shown by the fact that in drawing up his symbolic rules he has to speak about the things his signs mean.',
+      fr: '\u00c0 partir de cette remarque, examinons la \u00ab\u00a0th\u00e9orie des types\u00a0\u00bb de Russell\u00a0: l\u2019erreur de Russell se manifeste en ceci qu\u2019il lui faille parler de la signification des signes pour \u00e9tablir leur syntaxe.',
+      de: 'Von dieser Bemerkung sehen wir in Russell\u2019s \u201eTheory of types\u201c hin\u00fcber: Der Irrtum Russell\u2019s zeigt sich darin, dass er bei der Aufstellung der Zeichenregeln von der Bedeutung der Zeichen reden musste.',
+    },
+    source: {
+      id: 'principia-types',
+      author: 'Alfred North Whitehead & Bertrand Russell',
+      title: {
+        en: 'Principia Mathematica',
+        fr: 'Principia Mathematica',
+        de: 'Principia Mathematica',
+      },
+      year: '1910\u20131913',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'opposition',
+  },
 ];
 
 const sortedPropositions = Array.from(new Set(connections.map(c => c.propositionId))).sort((a, b) => {
