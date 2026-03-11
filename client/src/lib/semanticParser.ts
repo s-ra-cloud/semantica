@@ -123,13 +123,21 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
   });
 
   const validMatches = [];
-  let currentEnd = 0;
-  for (const match of matches) {
-    if (match.index >= currentEnd) {
+  const sortedByLengthFirst = [...matches].sort((a, b) => b.length - a.length);
+  const consumed = new Set<number>();
+  for (const match of sortedByLengthFirst) {
+    let dominated = false;
+    for (let i = match.index; i < match.index + match.length; i++) {
+      if (consumed.has(i)) { dominated = true; break; }
+    }
+    if (!dominated) {
       validMatches.push(match);
-      currentEnd = match.index + match.length;
+      for (let i = match.index; i < match.index + match.length; i++) {
+        consumed.add(i);
+      }
     }
   }
+  validMatches.sort((a, b) => a.index - b.index);
 
   const segments: Segment[] = [];
   let lastIndex = 0;
