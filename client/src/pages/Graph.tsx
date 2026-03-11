@@ -184,6 +184,26 @@ const connections: Connection[] = [
     type: 'neutral',
     contributor: 'Laura Duparc, Mohammed VI Polytechnic University, based on data collected by the Wittgenstein Archives',
   },
+  {
+    propositionId: '5.452',
+    propositionText: {
+      en: 'The introduction of a new expedient in the symbolism of logic must always be an event full of consequences. No new symbol may be introduced in logic in brackets or in the margin\u2014with, so to speak, an entirely innocent face.',
+      fr: 'L\u2019introduction d\u2019un exp\u00e9dient nouveau dans le symbolisme logique est n\u00e9cessairement un \u00e9v\u00e9nement lourd de cons\u00e9quences. Aucun exp\u00e9dient nouveau ne devrait en logique \u00eatre introduit, pour ainsi dire, avec des airs innocents, comme parenth\u00e8se ou comme note.',
+      de: 'Die Einf\u00fchrung eines neuen Behelfes in den Symbolismus der Logik muss immer ein folgenschweres Ereignis sein. Kein neuer Behelf darf in die Logik \u2013 sozusagen, mit ganz unschuldiger Miene \u2013 in Klammern oder unter dem Striche eingef\u00fchrt werden.',
+    },
+    source: {
+      id: 'principia',
+      author: 'Alfred North Whitehead & Bertrand Russell',
+      title: {
+        en: 'Principia Mathematica',
+        fr: 'Principia Mathematica',
+        de: 'Principia Mathematica',
+      },
+      year: '1910\u20131913',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'opposition',
+  },
 ];
 
 const sortedPropositions = Array.from(new Set(connections.map(c => c.propositionId))).sort((a, b) => {
