@@ -125,10 +125,18 @@ export default function Home() {
   const parsedData = useMemo(() => {
     if (!rawData) return [];
     
-    return rawData.map(prop => ({
-      ...prop,
-      segments: parseSemantic(prop.content, activeGroups, prop.id, language)
-    }));
+    const contentTransforms: Record<string, (text: string) => string> = {
+      '4.31': (text) => text.replace(/\n\np\n\nq\n\nr[\s\S]*$/, ''),
+    };
+
+    return rawData.map(prop => {
+      const transform = contentTransforms[prop.id];
+      const content = transform ? transform(prop.content) : prop.content;
+      return {
+        ...prop,
+        segments: parseSemantic(content, activeGroups, prop.id, language)
+      };
+    });
   }, [rawData, activeGroups, language]);
 
   const toggleCollapse = (id: string) => {

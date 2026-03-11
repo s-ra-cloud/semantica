@@ -163,23 +163,46 @@ export function TautologyDiagram5() {
   );
 }
 
-export function TruthTable431({ isFrench }: { isFrench?: boolean }) {
-  const T = isFrench ? 'V' : 'T';
-  const F = isFrench ? 'F' : 'F';
+export function TruthTable431({ isFrench, isGerman }: { isFrench?: boolean; isGerman?: boolean }) {
+  const T = isFrench ? 'V' : isGerman ? 'W' : 'T';
+  const F = 'F';
+  const th = "border border-zinc-700 px-3 py-1 text-zinc-400";
+  const td = "border border-zinc-700 px-3 py-1 text-center";
   return (
-    <div className="my-4 overflow-x-auto">
+    <div className="my-6 flex flex-wrap items-start gap-8">
       <table className="border-collapse text-sm font-serif">
         <thead>
-          <tr>
-            <th className="border border-zinc-700 px-3 py-1 text-zinc-400">p</th>
-            <th className="border border-zinc-700 px-3 py-1 text-zinc-400">q</th>
-          </tr>
+          <tr><th className={th}>p</th><th className={th}>q</th><th className={th}>r</th></tr>
         </thead>
         <tbody>
-          <tr><td className="border border-zinc-700 px-3 py-1 text-center">{T}</td><td className="border border-zinc-700 px-3 py-1 text-center">{T}</td></tr>
-          <tr><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td><td className="border border-zinc-700 px-3 py-1 text-center">{T}</td></tr>
-          <tr><td className="border border-zinc-700 px-3 py-1 text-center">{T}</td><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td></tr>
-          <tr><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td></tr>
+          <tr><td className={td}>{T}</td><td className={td}>{T}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{T}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{T}</td><td className={td}>{F}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{T}</td><td className={td}>{T}</td><td className={td}>{F}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{F}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{T}</td><td className={td}>{F}</td></tr>
+          <tr><td className={td}>{T}</td><td className={td}>{F}</td><td className={td}>{F}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{F}</td><td className={td}>{F}</td></tr>
+        </tbody>
+      </table>
+      <table className="border-collapse text-sm font-serif">
+        <thead>
+          <tr><th className={th}>p</th><th className={th}>q</th></tr>
+        </thead>
+        <tbody>
+          <tr><td className={td}>{T}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{T}</td><td className={td}>{F}</td></tr>
+          <tr><td className={td}>{F}</td><td className={td}>{F}</td></tr>
+        </tbody>
+      </table>
+      <table className="border-collapse text-sm font-serif">
+        <thead>
+          <tr><th className={th}>p</th></tr>
+        </thead>
+        <tbody>
+          <tr><td className={td}>{T}</td></tr>
+          <tr><td className={td}>{F}</td></tr>
         </tbody>
       </table>
     </div>
@@ -290,7 +313,7 @@ export const propositionDiagrams: Record<string, {
   afterTextFr?: string;
 }> = {
   '4.31': {
-    diagram: ({ isFrench }) => <TruthTable431 isFrench={isFrench} />,
+    diagram: ({ isFrench, isGerman }) => <TruthTable431 isFrench={isFrench} isGerman={isGerman} />,
   },
   '4.442': {
     diagram: ({ isFrench }) => <TruthTable4442 isFrench={isFrench} />,
