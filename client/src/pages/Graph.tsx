@@ -264,6 +264,26 @@ const connections: Connection[] = [
     },
     type: 'neutral',
   },
+  {
+    propositionId: '4.04',
+    propositionText: {
+      en: 'They must both possess the same logical (mathematical) multiplicity (cf. Hertz\u2019s Mechanics, on Dynamic Models).',
+      fr: 'Toutes deux doivent poss\u00e9der le m\u00eame degr\u00e9 de multiplicit\u00e9 logique (math\u00e9matique). (Comparez avec la \u00ab\u00a0M\u00e9canique\u00a0\u00bb de Herz, \u00e0 propos des mod\u00e8les dynamiques.)',
+      de: 'Die beiden m\u00fcssen die gleiche logische (mathematische) Mannigfaltigkeit besitzen. (Vergleiche Hertz\u2019s Mechanik, \u00fcber Dynamische Modelle.)',
+    },
+    source: {
+      id: 'hertz-mechanik',
+      author: 'Heinrich Hertz',
+      title: {
+        en: 'The Principles of Mechanics Presented in a New Form',
+        fr: 'Les Principes de la m\u00e9canique expos\u00e9s dans un ordre nouveau',
+        de: 'Die Prinzipien der Mechanik in neuem Zusammenhange dargestellt',
+      },
+      year: '1894',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
 ];
 
 const sortedPropositions = Array.from(new Set(connections.map(c => c.propositionId))).sort((a, b) => {
