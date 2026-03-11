@@ -209,16 +209,19 @@ export function TruthTable431({ isFrench, isGerman }: { isFrench?: boolean; isGe
   );
 }
 
-export function TruthTable4442({ isFrench }: { isFrench?: boolean }) {
-  const T = isFrench ? 'V' : 'T';
-  const F = isFrench ? 'F' : 'F';
+export function TruthTable4442({ isFrench, isGerman }: { isFrench?: boolean; isGerman?: boolean }) {
+  const T = isFrench ? 'V' : isGerman ? 'W' : 'T';
+  const F = 'F';
+  const quote = isFrench ? '\u00ab' : isGerman ? '\u201e' : '\u201c';
+  const quoteEnd = isFrench ? '\u00bb' : isGerman ? '\u201c' : '\u201d';
   return (
-    <div className="my-4 overflow-x-auto">
+    <div className="my-4 flex items-center gap-2">
+      <span className="text-zinc-400 text-lg font-serif">{quote}</span>
       <table className="border-collapse text-sm font-serif">
         <thead>
           <tr>
-            <th className="border border-zinc-700 px-3 py-1 text-zinc-400">p</th>
-            <th className="border border-zinc-700 px-3 py-1 text-zinc-400">q</th>
+            <th className="border border-zinc-700 px-3 py-1 text-zinc-400 font-bold">p</th>
+            <th className="border border-zinc-700 px-3 py-1 text-zinc-400 font-bold">q</th>
             <th className="border border-zinc-700 px-3 py-1 text-zinc-400"> </th>
           </tr>
         </thead>
@@ -229,11 +232,7 @@ export function TruthTable4442({ isFrench }: { isFrench?: boolean }) {
           <tr><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td><td className="border border-zinc-700 px-3 py-1 text-center">{F}</td><td className="border border-zinc-700 px-3 py-1 text-center">{T}</td></tr>
         </tbody>
       </table>
-      <p className="text-zinc-500 text-sm mt-2 italic font-serif">
-        {isFrench
-          ? '(Si la dernière colonne ne contient que des « V », le fait est une tautologie.)'
-          : '(If the last column consists entirely of T\'s, it is a tautology.)'}
-      </p>
+      <span className="text-zinc-400 text-lg font-serif">{quoteEnd}</span>
     </div>
   );
 }
@@ -342,7 +341,7 @@ export const propositionDiagrams: Record<string, {
     diagram: ({ isFrench, isGerman }) => <TruthTable431 isFrench={isFrench} isGerman={isGerman} />,
   },
   '4.442': {
-    diagram: ({ isFrench }) => <TruthTable4442 isFrench={isFrench} />,
+    diagram: ({ isFrench, isGerman }) => <TruthTable4442 isFrench={isFrench} isGerman={isGerman} />,
   },
   '5.101': {
     diagram: ({ isFrench, isGerman }) => <TruthTable5101 isFrench={isFrench} isGerman={isGerman} />,

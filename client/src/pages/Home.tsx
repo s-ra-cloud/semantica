@@ -127,6 +127,12 @@ export default function Home() {
     
     const contentTransforms: Record<string, (text: string) => string> = {
       '4.31': (text) => text.replace(/\n\np\n\nq\n\nr[\s\S]*$/, ''),
+      '4.442': (text) => {
+        const tableStart = text.indexOf('\n\n\u201e') !== -1 ? text.indexOf('\n\n\u201e') : text.indexOf('\n\n\u00ab') !== -1 ? text.indexOf('\n\n\u00ab') : text.indexOf('\n\n"');
+        const afterTable = text.indexOf('est un signe propositionnel') !== -1 ? text.indexOf('est un signe propositionnel') : text.indexOf('ein Satzzeichen') !== -1 ? text.indexOf('ein Satzzeichen') : text.indexOf('is a propositional sign');
+        if (tableStart === -1 || afterTable === -1) return text;
+        return text.substring(0, tableStart) + '\n\n' + text.substring(afterTable);
+      },
       '5.101': (text) => {
         const marker = text.indexOf('\n\n(');
         if (marker === -1) return text;
