@@ -855,7 +855,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
+                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
                     <PropositionSegments
                       segments={proposition.segments}
                       propositionId={proposition.id}
@@ -1167,6 +1167,49 @@ export default function Home() {
                                     : language === 'de'
                                     ? <>Sie k{'\u00f6'}nnen diese Verbindung diskutieren und zu dieser kollektiven Arbeit auf der <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-principia">LEGACY-Website</a> beitragen.</>
                                     : <>Vous pouvez discuter de cette connexion et contribuer {'\u00e0'} ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-principia">site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+
+                    {proposition.id === '5.4541' && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === proposition.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid="annotation-5.4541">
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>The Latin phrase <em>simplex sigillum veri</em> ("simplicity is the seal of truth") is most commonly associated with the Dutch physician and scientist <strong>Hermann Boerhaave</strong> (1668{'\u2013'}1738), though it was widely used in the intellectual culture of the time. There is no explicit reference to Boerhaave in the <em>Nachlass</em>.</>
+                                    : language === 'de'
+                                    ? <>Der lateinische Satz <em>simplex sigillum veri</em> ({'\u201e'}Einfachheit ist das Siegel der Wahrheit{'\u201c'}) wird am h{'\u00e4'}ufigsten mit dem niederl{'\u00e4'}ndischen Arzt und Wissenschaftler <strong>Hermann Boerhaave</strong> (1668{'\u2013'}1738) in Verbindung gebracht, obwohl er in der intellektuellen Kultur der Zeit weit verbreitet war. Es gibt keinen expliziten Verweis auf Boerhaave im <em>Nachlass</em>.</>
+                                    : <>La formule latine <em>simplex sigillum veri</em> ({'\u00ab'}{'\u00a0'}la simplicit{'\u00e9'} est le sceau de la v{'\u00e9'}rit{'\u00e9'}{'\u00a0'}{'\u00bb'}) est le plus souvent associ{'\u00e9'}e au m{'\u00e9'}decin et scientifique n{'\u00e9'}erlandais <strong>Hermann Boerhaave</strong> (1668{'\u2013'}1738), bien qu{'\u2019'}elle ait {'\u00e9'}t{'\u00e9'} largement utilis{'\u00e9'}e dans la culture intellectuelle de l{'\u2019'}{'\u00e9'}poque. Il n{'\u2019'}y a pas de r{'\u00e9'}f{'\u00e9'}rence explicite {'\u00e0'} Boerhaave dans le <em>Nachlass</em>.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, Mohammed VI Polytechnic University, based on data collected by the Wittgenstein Archives.'
+                                    : language === 'de'
+                                    ? 'Beitragende: Laura Duparc, Mohammed VI Polytechnic University, basierend auf Daten der Wittgenstein-Archive.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Universit\u00e9 Mohammed VI Polytechnique, sur la base des donn\u00e9es collect\u00e9es par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? <>You can discuss this connection and contribute to this collective work on the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-boerhaave">LEGACY website</a>.</>
+                                    : language === 'de'
+                                    ? <>Sie k{'\u00f6'}nnen diese Verbindung diskutieren und zu dieser kollektiven Arbeit auf der <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-boerhaave">LEGACY-Website</a> beitragen.</>
+                                    : <>Vous pouvez discuter de cette connexion et contribuer {'\u00e0'} ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-boerhaave">site LEGACY</a>.</>
                                   }
                                 </p>
                               </div>

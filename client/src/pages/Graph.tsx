@@ -204,6 +204,26 @@ const connections: Connection[] = [
     },
     type: 'opposition',
   },
+  {
+    propositionId: '5.4541',
+    propositionText: {
+      en: 'A sphere in which the proposition, simplex sigillum veri, is valid.',
+      fr: 'Un domaine o\u00f9 vaut la proposition : Simplex sigillum veri.',
+      de: 'Ein Gebiet, in dem der Satz gilt: simplex sigillum veri.',
+    },
+    source: {
+      id: 'boerhaave',
+      author: 'Hermann Boerhaave (attr.)',
+      title: {
+        en: 'Simplex sigillum veri',
+        fr: 'Simplex sigillum veri',
+        de: 'Simplex sigillum veri',
+      },
+      year: 'c. 1668\u20131738',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
 ];
 
 const sortedPropositions = Array.from(new Set(connections.map(c => c.propositionId))).sort((a, b) => {
