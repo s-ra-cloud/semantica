@@ -188,6 +188,18 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  'fr:2.032': [{
+    trigger: 'objets',
+    deps: [{
+      find: 'les uns aux autres',
+      replacements: {
+        'objets': 'les uns aux autres',
+        'entités': 'les unes aux autres',
+        'choses': 'les unes aux autres',
+      }
+    }]
+  }],
+
   // ── ENGLISH ─────────────────────────────────────────────
 
   // Prop 1: "The world is everything that is the case."
