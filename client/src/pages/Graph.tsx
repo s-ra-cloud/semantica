@@ -244,6 +244,26 @@ const connections: Connection[] = [
     },
     type: 'opposition',
   },
+  {
+    propositionId: '4.014',
+    propositionText: {
+      en: '(Like the two youths, their two horses and their lilies in the story. They are all in a certain sense one.)',
+      fr: '(Comme dans le conte, les deux jeunes gens, leurs deux chevaux et leurs lis. Ils sont tous en un certain sens un.)',
+      de: '(Wie im M\u00e4rchen die zwei J\u00fcnglinge, ihre zwei Pferde und ihre Lilien. Sie sind alle in gewissem Sinne Eins.)',
+    },
+    source: {
+      id: 'grimm-goldkinder',
+      author: 'Jacob Grimm & Wilhelm Grimm',
+      title: {
+        en: 'The Golden Children (Die Goldkinder)',
+        fr: 'Les Enfants d\u2019or (Die Goldkinder)',
+        de: 'Die Goldkinder',
+      },
+      year: '1812',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
 ];
 
 const sortedPropositions = Array.from(new Set(connections.map(c => c.propositionId))).sort((a, b) => {

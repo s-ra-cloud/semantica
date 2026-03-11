@@ -855,7 +855,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
+                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
                     <PropositionSegments
                       segments={proposition.segments}
                       propositionId={proposition.id}
@@ -1253,6 +1253,49 @@ export default function Home() {
                                     : language === 'de'
                                     ? <>Sie k{'\u00f6'}nnen diese Verbindung diskutieren und zu dieser kollektiven Arbeit auf der <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-russell-types">LEGACY-Website</a> beitragen.</>
                                     : <>Vous pouvez discuter de cette connexion et contribuer {'\u00e0'} ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-russell-types">site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+
+                    {proposition.id === '4.014' && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === proposition.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid="annotation-4.014">
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>The story referenced here is <em>Die Goldkinder</em> (<em>The Golden Children</em>), a fairy tale collected by <strong>Jacob and Wilhelm Grimm</strong> in their <em>Kinder- und Hausm{'\u00e4'}rchen</em>. In the tale, two golden children, their two golden horses, and two golden lilies are mystically linked{'\u2014'}what happens to one is reflected in the others, illustrating the idea of a shared logical structure.</>
+                                    : language === 'de'
+                                    ? <>Das hier erw{'\u00e4'}hnte M{'\u00e4'}rchen ist <em>Die Goldkinder</em>, ein M{'\u00e4'}rchen aus den <em>Kinder- und Hausm{'\u00e4'}rchen</em> von <strong>Jacob und Wilhelm Grimm</strong>. In der Geschichte sind zwei goldene Kinder, ihre zwei goldenen Pferde und zwei goldene Lilien auf mystische Weise miteinander verbunden{'\u2014'}was dem einen geschieht, spiegelt sich in den anderen wider, und veranschaulicht so die Idee einer gemeinsamen logischen Struktur.</>
+                                    : <>Le conte {'\u00e9'}voqu{'\u00e9'} ici est <em>Die Goldkinder</em> (<em>Les Enfants d{'\u2019'}or</em>), un conte recueilli par <strong>Jacob et Wilhelm Grimm</strong> dans leurs <em>Kinder- und Hausm{'\u00e4'}rchen</em>. Dans ce r{'\u00e9'}cit, deux enfants d{'\u2019'}or, leurs deux chevaux d{'\u2019'}or et deux lis d{'\u2019'}or sont mystiquement li{'\u00e9'}s{'\u2014'}ce qui arrive {'\u00e0'} l{'\u2019'}un se refl{'\u00e8'}te dans les autres, illustrant l{'\u2019'}id{'\u00e9'}e d{'\u2019'}une structure logique commune.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, Mohammed VI Polytechnic University, based on data collected by the Wittgenstein Archives.'
+                                    : language === 'de'
+                                    ? 'Beitragende: Laura Duparc, Mohammed VI Polytechnic University, basierend auf Daten der Wittgenstein-Archive.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Universit\u00e9 Mohammed VI Polytechnique, sur la base des donn\u00e9es collect\u00e9es par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? <>You can discuss this connection and contribute to this collective work on the <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-grimm">LEGACY website</a>.</>
+                                    : language === 'de'
+                                    ? <>Sie k{'\u00f6'}nnen diese Verbindung diskutieren und zu dieser kollektiven Arbeit auf der <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-grimm">LEGACY-Website</a> beitragen.</>
+                                    : <>Vous pouvez discuter de cette connexion et contribuer {'\u00e0'} ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-grimm">site LEGACY</a>.</>
                                   }
                                 </p>
                               </div>
