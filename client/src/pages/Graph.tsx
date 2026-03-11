@@ -419,9 +419,6 @@ function SourceCard({ conn, language, side, isHovered, onHover }: {
         <div className="text-xs text-zinc-500 italic leading-snug mt-0.5">{conn.source.title[language]}</div>
         <div className="text-xs text-zinc-600 mt-0.5">{conn.source.year}</div>
       </a>
-      {conn.contributor && (
-        <div className="text-[10px] text-zinc-600 mt-1 leading-snug">{conn.contributor}</div>
-      )}
     </div>
   );
 }
