@@ -64,6 +64,66 @@ const i18n: Record<Lang, {
 
 const connections: Connection[] = [
   {
+    propositionId: '3.031',
+    propositionText: {
+      en: 'It used to be said that God could create everything, except what was contrary to the laws of logic.',
+      fr: 'On a dit que Dieu pouvait tout cr\u00e9er, sauf seulement ce qui contredirait aux lois de la logique.',
+      de: 'Man sagte einmal, dass Gott alles schaffen k\u00f6nne, nur nichts, was den logischen Gesetzen zuwider w\u00e4re.',
+    },
+    source: {
+      id: 'aquinas-summa',
+      author: 'Thomas Aquinas',
+      title: {
+        en: 'Summa Theologiae',
+        fr: 'Somme th\u00e9ologique',
+        de: 'Summa Theologiae',
+      },
+      year: '1266\u20131272',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
+  {
+    propositionId: '3.031',
+    propositionText: {
+      en: 'It used to be said that God could create everything, except what was contrary to the laws of logic.',
+      fr: 'On a dit que Dieu pouvait tout cr\u00e9er, sauf seulement ce qui contredirait aux lois de la logique.',
+      de: 'Man sagte einmal, dass Gott alles schaffen k\u00f6nne, nur nichts, was den logischen Gesetzen zuwider w\u00e4re.',
+    },
+    source: {
+      id: 'leibniz-theodicy',
+      author: 'Gottfried Wilhelm Leibniz',
+      title: {
+        en: 'Theodicy',
+        fr: 'Th\u00e9odic\u00e9e',
+        de: 'Theodizee',
+      },
+      year: '1710',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
+  {
+    propositionId: '3.031',
+    propositionText: {
+      en: 'It used to be said that God could create everything, except what was contrary to the laws of logic.',
+      fr: 'On a dit que Dieu pouvait tout cr\u00e9er, sauf seulement ce qui contredirait aux lois de la logique.',
+      de: 'Man sagte einmal, dass Gott alles schaffen k\u00f6nne, nur nichts, was den logischen Gesetzen zuwider w\u00e4re.',
+    },
+    source: {
+      id: 'kant-cpr',
+      author: 'Immanuel Kant',
+      title: {
+        en: 'Critique of Pure Reason',
+        fr: 'Critique de la raison pure',
+        de: 'Kritik der reinen Vernunft',
+      },
+      year: '1781',
+      url: 'https://legacy-um6p.1337.ma/projects/library',
+    },
+    type: 'neutral',
+  },
+  {
     propositionId: '3.328',
     propositionText: {
       en: 'If a sign is not necessary then it is meaningless. That is the meaning of Occam\'s razor.',

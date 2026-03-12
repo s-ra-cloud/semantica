@@ -856,7 +856,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
+                  <div className={`text-lg leading-relaxed transition-colors ${['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04', '3.031'].includes(proposition.id) ? 'text-purple-200 border border-purple-500/40 bg-purple-500/10 rounded-xl p-4 cursor-pointer hover:bg-purple-500/15 hover:border-purple-500/50' : 'text-zinc-300 group-hover:text-white'}`} onClick={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04', '3.031'].includes(proposition.id) ? (e) => { if ((e.target as HTMLElement).closest('a, .annotation-content')) return; setOpenAnnotation(openAnnotation === proposition.id ? null : proposition.id); } : undefined} data-testid={['6.36111', '6.45', '3.328', '5.47321', '4.0031', '4.1122', '5.452', '5.4541', '3.331', '4.014', '4.04', '3.031'].includes(proposition.id) ? `btn-annotation-${proposition.id}` : undefined}>
                     <PropositionSegments
                       segments={proposition.segments}
                       propositionId={proposition.id}
@@ -1303,6 +1303,49 @@ export default function Home() {
                                     : language === 'de'
                                     ? <>Sie k{'\u00f6'}nnen diese Verbindung diskutieren und zu dieser kollektiven Arbeit auf der <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-grimm">LEGACY-Website</a> beitragen.</>
                                     : <>Vous pouvez discuter de cette connexion et contribuer {'\u00e0'} ce travail collectif sur le <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300" data-testid="link-legacy-website-grimm">site LEGACY</a>.</>
+                                  }
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+
+                    {proposition.id === '3.031' && (
+                      <div className="mt-4">
+                        <AnimatePresence>
+                          {openAnnotation === proposition.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="annotation-content mt-3 p-5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-sm leading-relaxed" data-testid="annotation-3.031">
+                                <p className="text-purple-200 mb-3">
+                                  {language === 'en'
+                                    ? <>This passage does not refer to a specific author, but the two most famous defences of divine omnipotence constrained by logic in the philosophical tradition are <strong>Thomas Aquinas</strong> in <em>Summa Theologiae</em> (1266{'\u2013'}1272), Part I, q.25, a.3, <strong>Leibniz</strong> in <em>Theodicy</em>, Part I, {'\u00a7'}173 (1710), and <strong>Kant</strong> in the <em>Critique of Pure Reason</em> (1781), A592{'\u2009'}/{'\u2009'}B620.</>
+                                    : language === 'de'
+                                    ? <>Diese Passage bezieht sich nicht auf einen bestimmten Autor, aber die beiden ber{'\u00fc'}hmtesten Verteidigungen der g{'\u00f6'}ttlichen Allmacht, die durch die Logik eingeschr{'\u00e4'}nkt wird, in der philosophischen Tradition stammen von <strong>Thomas von Aquin</strong> in der <em>Summa Theologiae</em> (1266{'\u2013'}1272), Teil I, q.25, a.3, <strong>Leibniz</strong> in der <em>Theodizee</em>, Teil I, {'\u00a7'}173 (1710), und <strong>Kant</strong> in der <em>Kritik der reinen Vernunft</em> (1781), A592{'\u2009'}/{'\u2009'}B620.</>
+                                    : <>Ce passage ne fait pas r{'\u00e9'}f{'\u00e9'}rence {'\u00e0'} un auteur sp{'\u00e9'}cifique, mais les deux d{'\u00e9'}fenses les plus c{'\u00e9'}l{'\u00e8'}bres de l{'\u2019'}omnipotence divine contrainte par la logique dans la tradition philosophique sont celles de <strong>Thomas d{'\u2019'}Aquin</strong> dans la <em>Somme th{'\u00e9'}ologique</em> (1266{'\u2013'}1272), I, q.25, a.3, de <strong>Leibniz</strong> dans la <em>Th{'\u00e9'}odic{'\u00e9'}e</em>, Partie I, {'\u00a7'}173 (1710), et de <strong>Kant</strong> dans la <em>Critique de la raison pure</em> (1781), A592{'\u2009'}/{'\u2009'}B620.</>
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs mb-3">
+                                  {language === 'en'
+                                    ? 'Contributor: Laura Duparc, Mohammed VI Polytechnic University, based on data collected by the Wittgenstein Archives.'
+                                    : language === 'de'
+                                    ? 'Beitragende: Laura Duparc, Mohammed VI Polytechnic University, basierend auf Daten der Wittgenstein-Archive.'
+                                    : 'Contributrice\u00a0: Laura Duparc, Universit\u00e9 Mohammed VI Polytechnique, sur la base des donn\u00e9es collect\u00e9es par les Archives Wittgenstein.'
+                                  }
+                                </p>
+                                <p className="text-purple-300/70 text-xs">
+                                  {language === 'en'
+                                    ? 'Type: Neutral \u2014 this annotation identifies a relevant philosophical tradition without implying Wittgenstein\u2019s agreement or disagreement.'
+                                    : language === 'de'
+                                    ? 'Typ: Neutral \u2014 diese Anmerkung identifiziert eine relevante philosophische Tradition, ohne Wittgensteins Zustimmung oder Ablehnung zu implizieren.'
+                                    : 'Type\u00a0: Neutre \u2014 cette annotation identifie une tradition philosophique pertinente sans impliquer l\u2019accord ou le d\u00e9saccord de Wittgenstein.'
                                   }
                                 </p>
                               </div>
