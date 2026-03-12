@@ -687,21 +687,21 @@ export default function Home() {
                     <ul className="list-disc list-inside space-y-1">
                       <li>
                         {language === 'fr'
-                          ? <>Le mot «\u00a0<span className="text-green-400">pensée</span>\u00a0» est défini comme «\u00a0l'image logique des faits\u00a0» (3), mais dans l'Avant-propos, Wittgenstein écrit «\u00a0la vérité des pensées\u00a0» dans un sens plus général et philosophiquement courant.</>
+                          ? <>Le mot {'\u00ab\u00a0'}<span className="text-green-400">pensée</span>{'\u00a0\u00bb'} est défini comme {'\u00ab\u00a0'}l'image logique des faits{'\u00a0\u00bb'} (3), mais dans l'Avant-propos, Wittgenstein écrit {'\u00ab\u00a0'}la vérité des pensées{'\u00a0\u00bb'} dans un sens plus général et philosophiquement courant.</>
                           : language === 'de'
                           ? <>Das Wort «<span className="text-green-400">Gedanke</span>» wird als «das logische Bild der Tatsachen» definiert (3), aber im Vorwort schreibt Wittgenstein «die Wahrheit der Gedanken» in einem allgemeineren, philosophisch gebräuchlichen Sinn.</>
                           : <>The word "<span className="text-green-400">thought</span>" is defined as "the logical picture of the facts" (3), but in the Foreword, Wittgenstein writes "the truth of the thoughts" in a more general, philosophically common sense.</>}
                       </li>
                       <li>
                         {language === 'fr'
-                          ? <>Le mot «\u00a0<span className="text-green-400">mot</span>\u00a0» est synonyme de «\u00a0nom\u00a0» ou «\u00a0signe simple\u00a0» dans le Tractatus, mais en 3.323, Wittgenstein l'emploie dans son sens courant pour décrire comment «\u00a0le même mot désigne de deux manières différentes\u00a0».</>
+                          ? <>Le mot {'\u00ab\u00a0'}<span className="text-green-400">mot</span>{'\u00a0\u00bb'} est synonyme de {'\u00ab\u00a0'}nom{'\u00a0\u00bb'} ou {'\u00ab\u00a0'}signe simple{'\u00a0\u00bb'} dans le Tractatus, mais en 3.323, Wittgenstein l'emploie dans son sens courant pour décrire comment {'\u00ab\u00a0'}le même mot désigne de deux manières différentes{'\u00a0\u00bb'}.</>
                           : language === 'de'
                           ? <>Das Wort «<span className="text-green-400">Wort</span>» ist im Tractatus gleichbedeutend mit «Name» oder «einfaches Zeichen», aber in 3.323 verwendet Wittgenstein es im alltäglichen Sinn, um zu beschreiben, wie «dasselbe Wort auf verschiedene Art und Weise bezeichnet».</>
                           : <>The word "<span className="text-green-400">word</span>" is synonymous with "name" or "simple sign" in the Tractatus, but in 3.323, Wittgenstein uses it in its ordinary sense to describe how "the same word signifies in two different ways".</>}
                       </li>
                       <li>
                         {language === 'fr'
-                          ? <>De même, «\u00a0<span className="text-green-400">langue</span>\u00a0» est défini comme «\u00a0la totalité des propositions\u00a0» (4.001), mais en 3.323, il désigne simplement «\u00a0la langue de tous les jours\u00a0» au sens habituel du terme.</>
+                          ? <>De même, {'\u00ab\u00a0'}<span className="text-green-400">langue</span>{'\u00a0\u00bb'} est défini comme {'\u00ab\u00a0'}la totalité des propositions{'\u00a0\u00bb'} (4.001), mais en 3.323, il désigne simplement {'\u00ab\u00a0'}la langue de tous les jours{'\u00a0\u00bb'} au sens habituel du terme.</>
                           : language === 'de'
                           ? <>Ebenso wird «<span className="text-green-400">Sprache</span>» als «die Gesamtheit der Sätze» definiert (4.001), aber in 3.323 bezeichnet es einfach die «Umgangssprache» im üblichen Sinne.</>
                           : <>Similarly, "<span className="text-green-400">language</span>" is defined as "the totality of propositions" (4.001), but in 3.323, it simply means "the language of everyday life" in the ordinary sense.</>}
