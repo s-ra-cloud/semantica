@@ -78,6 +78,7 @@ function parsePlainText(text: string, offset: number, semanticGroups: SynonymGro
     const regex = new RegExp(`(?<![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])${escaped}(?![a-zA-ZàâäéèêëïîôùûüÿçæœÀÂÄÉÈÊËÏÎÔÙÛÜŸÇÆŒß])`, 'g');
     let m;
     while ((m = regex.exec(text)) !== null) {
+      if (expression.length === 1 && m.index + 1 < text.length && text[m.index + 1] === '(') continue;
       matches.push({ index: m.index, length: m[0].length, word: m[0], group, matchType: 'logic' });
     }
   });
