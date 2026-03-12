@@ -128,10 +128,11 @@ export default function Home() {
     const contentTransforms: Record<string, (text: string) => string> = {
       '4.31': (text) => text.replace(/\n\np\n\nq\n\nr[\s\S]*$/, ''),
       '4.442': (text) => {
-        const tableStart = text.indexOf('\n\n\u201e') !== -1 ? text.indexOf('\n\n\u201e') : text.indexOf('\n\n\u00ab') !== -1 ? text.indexOf('\n\n\u00ab') : text.indexOf('\n\n"');
-        const afterTable = text.indexOf('est un signe propositionnel') !== -1 ? text.indexOf('est un signe propositionnel') : text.indexOf('ein Satzzeichen') !== -1 ? text.indexOf('ein Satzzeichen') : text.indexOf('is a propositional sign');
-        if (tableStart === -1 || afterTable === -1) return text;
-        return text.substring(0, tableStart) + '\n\n' + text.substring(afterTable);
+        const markers = ['\n\n\u201c\n', '\n\n\u201e', '\n\n\u00ab\n', '\n\n"\n'];
+        let tableStart = -1;
+        for (const m of markers) { tableStart = text.indexOf(m); if (tableStart !== -1) break; }
+        if (tableStart === -1) return text;
+        return text.substring(0, tableStart);
       },
       '5.101': (text) => {
         const marker = text.indexOf('\n\n(');
@@ -867,7 +868,13 @@ export default function Home() {
                         {language === 'fr' && propositionDiagrams[proposition.id].afterTextFr && (
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextFr!} />
                         )}
-                        {(language === 'en' || language === 'de') && propositionDiagrams[proposition.id].afterTextEn && (
+                        {language === 'de' && propositionDiagrams[proposition.id].afterTextDe && (
+                          <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextDe!} />
+                        )}
+                        {language === 'en' && propositionDiagrams[proposition.id].afterTextEn && (
+                          <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextEn!} />
+                        )}
+                        {language === 'de' && !propositionDiagrams[proposition.id].afterTextDe && propositionDiagrams[proposition.id].afterTextEn && (
                           <ParsedText className="whitespace-pre-line" text={propositionDiagrams[proposition.id].afterTextEn!} />
                         )}
                       </>
