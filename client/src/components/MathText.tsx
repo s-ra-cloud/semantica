@@ -15,8 +15,12 @@ function renderMath(latex: string): string {
 const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'N', 'R', 'Ln', 'ab']);
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
-const BOUNDARY_BEFORE = new Set([' ', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
-const BOUNDARY_AFTER = new Set([' ', ',', ';', ':', '.', ')', '\u2013', '\u2014', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+const BOUNDARY_BEFORE = new Set([' ', '\u00a0', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+const BOUNDARY_AFTER = new Set([' ', '\u00a0', ',', ';', ':', '.', ')', '\u2013', '\u2014', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+
+function wrapGuillemets(text: string): string {
+  return text.replace(/\u00ab\s+(.*?)\s+\u00bb/g, '\u00ab\u00a0$1\u00a0\u00bb');
+}
 
 function highlightLogicTerms(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
@@ -77,14 +81,15 @@ function highlightLogicTerms(text: string): React.ReactNode[] {
 }
 
 export function MathText({ text }: { text: string }) {
+  const processed = wrapGuillemets(text);
   const mathRegex = /\[math\](.*?)\[\/math\]/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
   let match;
 
-  while ((match = mathRegex.exec(text)) !== null) {
+  while ((match = mathRegex.exec(processed)) !== null) {
     if (match.index > lastIndex) {
-      const plain = text.substring(lastIndex, match.index);
+      const plain = processed.substring(lastIndex, match.index);
       parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
     }
     const cleanLatex = match[1].replace(/\\displaystyle\s*/, '');
@@ -99,11 +104,11 @@ export function MathText({ text }: { text: string }) {
   }
 
   if (lastIndex === 0) {
-    return <span className="whitespace-pre-line">{highlightLogicTerms(text)}</span>;
+    return <span className="whitespace-pre-line">{highlightLogicTerms(processed)}</span>;
   }
 
-  if (lastIndex < text.length) {
-    const plain = text.substring(lastIndex);
+  if (lastIndex < processed.length) {
+    const plain = processed.substring(lastIndex);
     parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
   }
 
