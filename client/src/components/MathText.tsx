@@ -12,7 +12,7 @@ function renderMath(latex: string): string {
   }
 }
 
-const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'y', 'z', 'T', 'F', 'W', 'V', 'N', 'R', 'Ln', 'ab']);
+const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'T', 'F', 'W', 'V', 'N', 'R', 'Ln', 'ab']);
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
 const BOUNDARY_BEFORE = new Set([' ', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
