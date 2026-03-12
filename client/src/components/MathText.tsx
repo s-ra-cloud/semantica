@@ -12,6 +12,70 @@ function renderMath(latex: string): string {
   }
 }
 
+const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'y', 'z', 'T', 'F', 'W', 'V', 'N', 'R', 'Ln', 'ab']);
+const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
+const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
+const BOUNDARY_BEFORE = new Set([' ', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+const BOUNDARY_AFTER = new Set([' ', ',', ';', ':', '.', ')', '\u2013', '\u2014', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+
+function highlightLogicTerms(text: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  let i = 0;
+  let lastPlain = 0;
+
+  while (i < text.length) {
+    const isBoundaryBefore = i === 0 || BOUNDARY_BEFORE.has(text[i - 1]);
+    if (!isBoundaryBefore) { i++; continue; }
+
+    let openQ = '';
+    let pos = i;
+    if (OPEN_QUOTES.has(text[pos])) {
+      openQ = text[pos];
+      pos++;
+    }
+
+    let term = '';
+    if (pos + 1 < text.length && text[pos] === 'L' && text[pos + 1] === 'n') {
+      term = 'Ln';
+    } else if (pos + 1 < text.length && text[pos] === 'a' && text[pos + 1] === 'b') {
+      term = 'ab';
+    } else if (pos < text.length && LOGIC_TERMS.has(text[pos])) {
+      term = text[pos];
+    }
+
+    if (!term) { i++; continue; }
+
+    let endPos = pos + term.length;
+    let closeQ = '';
+    if (openQ && endPos < text.length && CLOSE_QUOTES.has(text[endPos])) {
+      closeQ = text[endPos];
+      endPos++;
+    }
+
+    const isBoundaryAfter = endPos >= text.length || BOUNDARY_AFTER.has(text[endPos]);
+    if (!isBoundaryAfter) { i++; continue; }
+    if (openQ && !closeQ) { i++; continue; }
+    if (!openQ && closeQ) { i++; continue; }
+
+    if (i > lastPlain) {
+      parts.push(text.substring(lastPlain, i));
+    }
+    parts.push(
+      <span key={i} className="text-blue-400">
+        {openQ}{term}{closeQ}
+      </span>
+    );
+    lastPlain = endPos;
+    i = endPos;
+  }
+
+  if (parts.length === 0) return [text];
+  if (lastPlain < text.length) {
+    parts.push(text.substring(lastPlain));
+  }
+  return parts;
+}
+
 export function MathText({ text }: { text: string }) {
   const mathRegex = /\[math\](.*?)\[\/math\]/g;
   const parts: React.ReactNode[] = [];
@@ -20,7 +84,8 @@ export function MathText({ text }: { text: string }) {
 
   while ((match = mathRegex.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(<span key={lastIndex} className="whitespace-pre-line">{text.substring(lastIndex, match.index)}</span>);
+      const plain = text.substring(lastIndex, match.index);
+      parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
     }
     const cleanLatex = match[1].replace(/\\displaystyle\s*/, '');
     parts.push(
@@ -34,11 +99,12 @@ export function MathText({ text }: { text: string }) {
   }
 
   if (lastIndex === 0) {
-    return <span className="whitespace-pre-line">{text}</span>;
+    return <span className="whitespace-pre-line">{highlightLogicTerms(text)}</span>;
   }
 
   if (lastIndex < text.length) {
-    parts.push(<span key={lastIndex} className="whitespace-pre-line">{text.substring(lastIndex)}</span>);
+    const plain = text.substring(lastIndex);
+    parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
   }
 
   return <>{parts}</>;
