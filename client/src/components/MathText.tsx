@@ -12,7 +12,10 @@ function renderMath(latex: string): string {
   }
 }
 
-const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'N', 'R', 'Ln', 'ab']);
+const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'b', 'N', 'R', 'Ln', 'ab']);
+const PROP_SPECIFIC_LOGIC_TERMS: Record<string, Set<string>> = {
+  '3.1432': new Set(['a']),
+};
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
 const BOUNDARY_BEFORE = new Set([' ', '\u00a0', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
@@ -22,7 +25,8 @@ function wrapGuillemets(text: string): string {
   return text.replace(/\u00ab\s+(.*?)\s+\u00bb/g, '\u00ab\u00a0$1\u00a0\u00bb');
 }
 
-function highlightLogicTerms(text: string): React.ReactNode[] {
+function highlightLogicTerms(text: string, propositionId?: string): React.ReactNode[] {
+  const extraTerms = propositionId ? PROP_SPECIFIC_LOGIC_TERMS[propositionId] : undefined;
   const parts: React.ReactNode[] = [];
   let i = 0;
   let lastPlain = 0;
@@ -43,7 +47,7 @@ function highlightLogicTerms(text: string): React.ReactNode[] {
       term = 'Ln';
     } else if (pos + 1 < text.length && text[pos] === 'a' && text[pos + 1] === 'b') {
       term = 'ab';
-    } else if (pos < text.length && LOGIC_TERMS.has(text[pos])) {
+    } else if (pos < text.length && (LOGIC_TERMS.has(text[pos]) || (extraTerms && extraTerms.has(text[pos])))) {
       term = text[pos];
     }
 
@@ -80,7 +84,7 @@ function highlightLogicTerms(text: string): React.ReactNode[] {
   return parts;
 }
 
-export function MathText({ text }: { text: string }) {
+export function MathText({ text, propositionId }: { text: string; propositionId?: string }) {
   const processed = wrapGuillemets(text);
   const mathRegex = /\[math\](.*?)\[\/math\]/g;
   const parts: React.ReactNode[] = [];
@@ -90,7 +94,7 @@ export function MathText({ text }: { text: string }) {
   while ((match = mathRegex.exec(processed)) !== null) {
     if (match.index > lastIndex) {
       const plain = processed.substring(lastIndex, match.index);
-      parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
+      parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId)}</span>);
     }
     const cleanLatex = match[1].replace(/\\displaystyle\s*/, '');
     parts.push(
@@ -104,12 +108,12 @@ export function MathText({ text }: { text: string }) {
   }
 
   if (lastIndex === 0) {
-    return <span className="whitespace-pre-line">{highlightLogicTerms(processed)}</span>;
+    return <span className="whitespace-pre-line">{highlightLogicTerms(processed, propositionId)}</span>;
   }
 
   if (lastIndex < processed.length) {
     const plain = processed.substring(lastIndex);
-    parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain)}</span>);
+    parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId)}</span>);
   }
 
   return <>{parts}</>;

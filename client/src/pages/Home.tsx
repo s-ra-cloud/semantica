@@ -52,7 +52,7 @@ function PropositionSegments({ segments, propositionId, language }: { segments: 
       {segments.map((segment, idx) => {
         if (segment.type === 'text') {
           const adapted = applyGrammarAdaptations(segment.content, propositionId, language, swaps);
-          return <MathText key={idx} text={adapted} />;
+          return <MathText key={idx} text={adapted} propositionId={propositionId} />;
         } else if (segment.type === 'semantic') {
           return (
             <SemanticWord
