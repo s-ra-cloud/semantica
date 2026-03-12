@@ -2509,7 +2509,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.13",
-    "content": "À la proposition appartient tout ce qui appartient à la projection ; mais non pas le projeté.\n\nDonc la possibilité du projeté, non le projeté lui-même.\n\nDans la proposition, le sens n'est donc pas encore contenu, mais seulement la possibilité de l'exprimer.\n\n(« Le contenu de la proposition » signifie le contenu de la proposition pourvue de sens.)\n\nDans la proposition, est contenue la forme de son sens, mais non pas le contenu de celui-ci."
+    "content": "À la proposition appartient tout ce qui appartient à la projection ; mais non pas le projeté.\n\nDonc la possibilité du projeté, non le projeté lui-même.\n\nDans la proposition, le sens n'est donc pas encore contenu, mais seulement la possibilité de l'exprimer.\n\n(« Le contenu de la proposition » signifie le contenu de la proposition pourvue de sens.)\n\nDans la proposition, est contenue la forme de son sens, mais non pas le contenu de celui-ci."
   },
   {
     "id": "3.14",
@@ -2617,7 +2617,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.313",
-    "content": "L'expression sera donc figurée au moyen d'une variable, dont les valeurs sont les propositions qui contiennent cette expression.\n\n(À la limite, la variable devient une constante, l'expression une proposition.)\n\nJ'appelle une telle variable « variable propositionnelle »."
+    "content": "L'expression sera donc figurée au moyen d'une variable, dont les valeurs sont les propositions qui contiennent cette expression.\n\n(À la limite, la variable devient une constante, l'expression une proposition.)\n\nJ'appelle une telle variable « variable propositionnelle »."
   },
   {
     "id": "3.314",
@@ -2653,7 +2653,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.323",
-    "content": "Dans la langue usuelle il arrive fort souvent que le même mot dénote de plusieurs manières différentes – et appartienne donc à des symboles différents –, ou bien que deux mots, qui dénotent de manières différentes, sont en apparence employés dans la proposition de la même manière.\n\nAinsi le mot « est » apparaît comme copule, comme signe d'égalité et comme expression de l'existence ; « exister » comme verbe intransitif, à la façon d'« aller » ; « identique » comme adjectif qualificatif ; nous parlons « de quelque chose », mais disons aussi que « quelque chose » arrive.\n\n(Dans la proposition « Brun est brun » – où le premier mot est un nom de personne, le dernier un adjectif qualificatif –, ces deux mots n'ont pas simplement des significations différentes, ce sont des symboles différents.)"
+    "content": "Dans la langue usuelle il arrive fort souvent que le même mot dénote de plusieurs manières différentes – et appartienne donc à des symboles différents –, ou bien que deux mots, qui dénotent de manières différentes, sont en apparence employés dans la proposition de la même manière.\n\nAinsi le mot « est » apparaît comme copule, comme signe d'égalité et comme expression de l'existence ; « exister » comme verbe intransitif, à la façon d'« aller » ; « identique » comme adjectif qualificatif ; nous parlons « de quelque chose », mais disons aussi que « quelque chose » arrive.\n\n(Dans la proposition « Brun est brun » – où le premier mot est un nom de personne, le dernier un adjectif qualificatif –, ces deux mots n'ont pas simplement des significations différentes, ce sont des symboles différents.)"
   },
   {
     "id": "3.324",
@@ -2689,7 +2689,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.333",
-    "content": "Une fonction ne saurait par conséquent être son propre argument, puisque le signe de fonction contient déjà l'image primitive de son argument, et ne peut se contenir lui-même.\n\nSupposons, par exemple, que la fonction F(fx) puisse être son propre argument ; il y aurait donc alors une proposition « F(F(fx)) », dans laquelle la fonction externe F et la fonction interne F devraient avoir des significations différentes, car la fonction interne est de la forme φ(fx), l'externe ψ(φ(fx)). Seule est commune aux deux fonctions la lettre F, mais qui en elle-même ne dénote rien.\n\nCeci s'éclaire immédiatement si, au lieu de « F(F(u)) », nous écrivons : « (∃φ) : F(φu) . φu = Fu ».\n\nAinsi se trouve éliminé le paradoxe de Russell."
+    "content": "Une fonction ne saurait par conséquent être son propre argument, puisque le signe de fonction contient déjà l'image primitive de son argument, et ne peut se contenir lui-même.\n\nSupposons, par exemple, que la fonction F(fx) puisse être son propre argument ; il y aurait donc alors une proposition « F(F(fx)) », dans laquelle la fonction externe F et la fonction interne F devraient avoir des significations différentes, car la fonction interne est de la forme φ(fx), l'externe ψ(φ(fx)). Seule est commune aux deux fonctions la lettre F, mais qui en elle-même ne dénote rien.\n\nCeci s'éclaire immédiatement si, au lieu de « F(F(u)) », nous écrivons : « (∃φ) : F(φu) . φu = Fu ».\n\nAinsi se trouve éliminé le paradoxe de Russell."
   },
   {
     "id": "3.334",
@@ -2725,7 +2725,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.3441",
-    "content": "On peut, par exemple, exprimer ainsi ce qui est commun à toutes les notations des fonctions de vérité : il leur est commun de pouvoir toutes être remplacées en utilisant – par exemple – la notation « ~p » (« non p ») et « p ∨ q » (« p ou q »).\n\n(Ce qui nous fait connaître la manière dont une notation particulière possible peut nous donner une information générale.)"
+    "content": "On peut, par exemple, exprimer ainsi ce qui est commun à toutes les notations des fonctions de vérité : il leur est commun de pouvoir toutes être remplacées en utilisant – par exemple – la notation « ~p » (« non p ») et « p ∨ q » (« p ou q »).\n\n(Ce qui nous fait connaître la manière dont une notation particulière possible peut nous donner une information générale.)"
   },
   {
     "id": "3.3442",
@@ -2849,15 +2849,15 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.0312",
-    "content": "La possibilité de la proposition repose sur le principe de la position de signes comme représentants des objets.\n\nMa pensée fondamentale est que les « constantes logiques » ne sont les représentants de rien. Que la logique des faits ne peut elle-même avoir de représentant."
+    "content": "La possibilité de la proposition repose sur le principe de la position de signes comme représentants des objets.\n\nMa pensée fondamentale est que les « constantes logiques » ne sont les représentants de rien. Que la logique des faits ne peut elle-même avoir de représentant."
   },
   {
     "id": "4.032",
-    "content": "La proposition est une image d'une situation dans la mesure seulement où elle est logiquement segmentée.\n\n(Même la proposition « ambulo » est composée, car son radical accompagné d'une autre terminaison et sa terminaison accompagnant un autre radical donnent un autre sens.)"
+    "content": "La proposition est une image d'une situation dans la mesure seulement où elle est logiquement segmentée.\n\n(Même la proposition « ambulo » est composée, car son radical accompagné d'une autre terminaison et sa terminaison accompagnant un autre radical donnent un autre sens.)"
   },
   {
     "id": "4.04",
-    "content": "Dans la proposition, il doit y avoir exactement autant d'éléments distincts que dans la situation qu'elle présente.\n\nToutes deux doivent posséder le même degré de multiplicité logique (mathématique). (Comparez avec la « Mécanique » de Herz, à propos des modèles dynamiques.)"
+    "content": "Dans la proposition, il doit y avoir exactement autant d'éléments distincts que dans la situation qu'elle présente.\n\nToutes deux doivent posséder le même degré de multiplicité logique (mathématique). (Comparez avec la « Mécanique » de Herz, à propos des modèles dynamiques.)"
   },
   {
     "id": "4.041",
@@ -2865,7 +2865,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.0411",
-    "content": "Si nous voulions, par exemple, exprimer au moyen d'un indice préfixé, tel que « Gén.fx », ce que l'on exprime par « (x)fx », cela ne serait pas suffisant, car nous ne saurions pas ce qui est généralisé. Si nous voulions l'exprimer par un indice suffixé « α », tel que : « f(xα) », ce ne serait pas non plus suffisant, car nous ne saurions pas quelle est la portée de la notation de généralisation.\n\nSi nous voulions essayer de l'exprimer en introduisant une marque aux places des arguments, comme par exemple : « (G,G) . F(G,G) », cela ne suffirait pas, car nous ne pourrions fixer l'identité des variables. Etc.\n\nTous ces modes de dénotation sont insuffisants, en ce qu'ils ne possèdent pas le degré nécessaire de multiplicité mathématique."
+    "content": "Si nous voulions, par exemple, exprimer au moyen d'un indice préfixé, tel que « Gén.fx », ce que l'on exprime par « (x)fx », cela ne serait pas suffisant, car nous ne saurions pas ce qui est généralisé. Si nous voulions l'exprimer par un indice suffixé « α », tel que : « f(xα) », ce ne serait pas non plus suffisant, car nous ne saurions pas quelle est la portée de la notation de généralisation.\n\nSi nous voulions essayer de l'exprimer en introduisant une marque aux places des arguments, comme par exemple : « (G,G) . F(G,G) », cela ne suffirait pas, car nous ne pourrions fixer l'identité des variables. Etc.\n\nTous ces modes de dénotation sont insuffisants, en ce qu'ils ne possèdent pas le degré nécessaire de multiplicité mathématique."
   },
   {
     "id": "4.0412",
@@ -2881,19 +2881,19 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.061",
-    "content": "Si l'on ne considère pas que le sens de la proposition est indépendant des faits, on peut facilement croire que le vrai et le faux sont, au même titre, des relations des signes au dénoté.\n\nOn pourrait dire alors, par exemple, que « p » dénote selon la vérité, ce que « ~p » dénote selon la fausseté, etc."
+    "content": "Si l'on ne considère pas que le sens de la proposition est indépendant des faits, on peut facilement croire que le vrai et le faux sont, au même titre, des relations des signes au dénoté.\n\nOn pourrait dire alors, par exemple, que « p » dénote selon la vérité, ce que « ~p » dénote selon la fausseté, etc."
   },
   {
     "id": "4.062",
-    "content": "Ne peut-on se faire comprendre au moyen de propositions fausses, comme on l'a fait jusqu'à présent avec des vraies ?\n\nPourvu que l'on sache seulement qu'elles sont entendues comme fausses. Non ! car une proposition est vraie si les états de choses sont tels que nous le disons par son moyen ; et si par « p » nous voulons dire ~p, et qu'il en soit ainsi que nous le disons, « p » est alors, dans la nouvelle conception, une proposition vraie et non une fausse."
+    "content": "Ne peut-on se faire comprendre au moyen de propositions fausses, comme on l'a fait jusqu'à présent avec des vraies ?\n\nPourvu que l'on sache seulement qu'elles sont entendues comme fausses. Non ! car une proposition est vraie si les états de choses sont tels que nous le disons par son moyen ; et si par « p » nous voulons dire ~p, et qu'il en soit ainsi que nous le disons, « p » est alors, dans la nouvelle conception, une proposition vraie et non une fausse."
   },
   {
     "id": "4.0621",
-    "content": "Mais que les signes « p » et « ~p » puissent dire la même chose est important. Car cela montre que, dans la réalité, rien ne correspond au signe « ~ ».\n\nQue dans une proposition la négation apparaisse ne caractérise encore pas son sens (~~p = p).\n\nLes propositions « p » et « ~p » ont un sens opposé, mais il leur correspond une seule et même réalité."
+    "content": "Mais que les signes « p » et « ~p » puissent dire la même chose est important. Car cela montre que, dans la réalité, rien ne correspond au signe « ~ ».\n\nQue dans une proposition la négation apparaisse ne caractérise encore pas son sens (~~p = p).\n\nLes propositions « p » et « ~p » ont un sens opposé, mais il leur correspond une seule et même réalité."
   },
   {
     "id": "4.063",
-    "content": "Une image pour expliquer le concept de vérité : une tache noire sur un papier blanc ; la forme de la tache peut être décrite en disant pour chaque point de la feuille s'il est blanc ou noir. Le fait qu'un point soit noir correspond à un fait positif – le fait qu'un point soit blanc (non noir) à un fait négatif. Si j'indique un point de la surface (une valeur de vérité frégéenne), ceci correspond à une hypothèse proposée à un jugement, etc., etc.\n\nMais pour pouvoir dire qu'un point est noir ou blanc, il me faut tout d'abord savoir quand un point sera dit blanc et quand il sera dit noir ; pour pouvoir dire « p » est vrai (ou faux), il me faut avoir déterminé en quelles circonstances j'appelle « p » vraie, et par là je détermine le sens de la proposition.\n\nLe point où la métaphore cloche c'est alors celui-ci : nous pouvons montrer un point de la feuille de papier sans savoir s'il est blanc ou noir ; tandis qu'une proposition détachée de son sens ne correspond à rien, car elle ne dénote aucune chose (valeur de vérité) dont les qualités puissent être dites vraies ou fausses ; le verbe d'une proposition n'est pas « est vrai » ou « est faux », comme le croyait Frege, – mais il faut que ce qui « est vrai » contienne déjà le verbe."
+    "content": "Une image pour expliquer le concept de vérité : une tache noire sur un papier blanc ; la forme de la tache peut être décrite en disant pour chaque point de la feuille s'il est blanc ou noir. Le fait qu'un point soit noir correspond à un fait positif – le fait qu'un point soit blanc (non noir) à un fait négatif. Si j'indique un point de la surface (une valeur de vérité frégéenne), ceci correspond à une hypothèse proposée à un jugement, etc., etc.\n\nMais pour pouvoir dire qu'un point est noir ou blanc, il me faut tout d'abord savoir quand un point sera dit blanc et quand il sera dit noir ; pour pouvoir dire « p » est vrai (ou faux), il me faut avoir déterminé en quelles circonstances j'appelle « p » vraie, et par là je détermine le sens de la proposition.\n\nLe point où la métaphore cloche c'est alors celui-ci : nous pouvons montrer un point de la feuille de papier sans savoir s'il est blanc ou noir ; tandis qu'une proposition détachée de son sens ne correspond à rien, car elle ne dénote aucune chose (valeur de vérité) dont les qualités puissent être dites vraies ou fausses ; le verbe d'une proposition n'est pas « est vrai » ou « est faux », comme le croyait Frege, – mais il faut que ce qui « est vrai » contienne déjà le verbe."
   },
   {
     "id": "4.064",
@@ -2913,11 +2913,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.111",
-    "content": "La philosophie n'est pas une science de la nature.\n\n(Le mot « philosophie » doit signifier quelque chose qui est au-dessus ou au-dessous des sciences de la nature, mais pas à leur côté.)"
+    "content": "La philosophie n'est pas une science de la nature.\n\n(Le mot « philosophie » doit signifier quelque chose qui est au-dessus ou au-dessous des sciences de la nature, mais pas à leur côté.)"
   },
   {
     "id": "4.112",
-    "content": "Le but de la philosophie est la clarification logique des pensées.\n\nLa philosophie n'est pas une théorie mais une activité.\n\nUne œuvre philosophique se compose essentiellement d'éclaircissements.\n\nLe résultat de la philosophie n'est pas de produire des « propositions philosophiques », mais de rendre claires les propositions.\n\nLa philosophie doit rendre claires, et nettement délimitées, les propositions qui autrement sont, pour ainsi dire, troubles et confuses."
+    "content": "Le but de la philosophie est la clarification logique des pensées.\n\nLa philosophie n'est pas une théorie mais une activité.\n\nUne œuvre philosophique se compose essentiellement d'éclaircissements.\n\nLe résultat de la philosophie n'est pas de produire des « propositions philosophiques », mais de rendre claires les propositions.\n\nLa philosophie doit rendre claires, et nettement délimitées, les propositions qui autrement sont, pour ainsi dire, troubles et confuses."
   },
   {
     "id": "4.1121",
@@ -2953,7 +2953,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.1211",
-    "content": "C'est ainsi que la proposition « fa » montre que dans son sens l'objet a apparaît ; les deux propositions « fa » et « ga » montrent que dans toutes les deux il est question du même objet a.\n\nSi deux propositions sont contradictoires, leur structure le montre ; de même si l'une est la conséquence de l'autre, etc."
+    "content": "C'est ainsi que la proposition « fa » montre que dans son sens l'objet a apparaît ; les deux propositions « fa » et « ga » montrent que dans toutes les deux il est question du même objet a.\n\nSi deux propositions sont contradictoires, leur structure le montre ; de même si l'une est la conséquence de l'autre, etc."
   },
   {
     "id": "4.1212",
@@ -2965,7 +2965,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.122",
-    "content": "Nous pouvons en un certain sens parler de propriétés formelles des objets et des états de choses, et respectivement des propriétés de structure des faits, et dans le même sens de relations formelles et de relations entre structures.\n\n(Au lieu de propriété d'une structure, je parle aussi de « propriété interne » ; au lieu de relation des structures, « relation interne ».\n\nJ'introduis ces expressions en vue de montrer la raison de la confusion largement répandue chez les philosophes entre les relations internes et les relations proprement dites (externes).)\n\nLa subsistance de telles propriétés et relations internes ne peut cependant pas être affirmée dans des propositions, mais elle se montre dans les propositions qui figurent ces états de choses et traitent de ces objets."
+    "content": "Nous pouvons en un certain sens parler de propriétés formelles des objets et des états de choses, et respectivement des propriétés de structure des faits, et dans le même sens de relations formelles et de relations entre structures.\n\n(Au lieu de propriété d'une structure, je parle aussi de « propriété interne » ; au lieu de relation des structures, « relation interne ».\n\nJ'introduis ces expressions en vue de montrer la raison de la confusion largement répandue chez les philosophes entre les relations internes et les relations proprement dites (externes).)\n\nLa subsistance de telles propriétés et relations internes ne peut cependant pas être affirmée dans des propositions, mais elle se montre dans les propositions qui figurent ces états de choses et traitent de ces objets."
   },
   {
     "id": "4.1221",
@@ -2973,7 +2973,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.123",
-    "content": "Une propriété est interne quand il est impensable que son objet ne la possède pas.\n\n(Cette nuance de bleu et cette autre sont ipso facto dans une relation interne de plus clair à plus foncé. Il est impensable que ces deux objets ne soient pas dans cette relation.)\n\n(Ici, à l'usage incertain des mots « propriété » et « relation » correspond l'usage incertain du mot « objet ».)"
+    "content": "Une propriété est interne quand il est impensable que son objet ne la possède pas.\n\n(Cette nuance de bleu et cette autre sont ipso facto dans une relation interne de plus clair à plus foncé. Il est impensable que ces deux objets ne soient pas dans cette relation.)\n\n(Ici, à l'usage incertain des mots « propriété » et « relation » correspond l'usage incertain du mot « objet ».)"
   },
   {
     "id": "4.124",
@@ -2993,7 +2993,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.1252",
-    "content": "Les séries qui sont ordonnées par des relations internes, je les nomme séries de formes.\n\nLa série des nombres n'est pas ordonnée par une relation externe, mais par une relation interne.\n\nDe même la série des propositions\n\n« aRb », « (∃ x) : aRx . xRb », « (∃ x,y) : aRx . xRy . yRb », etc.\n\n(Si b est dans une de ces relations avec a, je nomme b un successeur de a.)"
+    "content": "Les séries qui sont ordonnées par des relations internes, je les nomme séries de formes.\n\nLa série des nombres n'est pas ordonnée par une relation externe, mais par une relation interne.\n\nDe même la série des propositions\n\n« aRb », « (∃ x) : aRx . xRb », « (∃ x,y) : aRx . xRy . yRb », etc.\n\n(Si b est dans une de ces relations avec a, je nomme b un successeur de a.)"
   },
   {
     "id": "4.126",
@@ -3009,7 +3009,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.1272",
-    "content": "Ainsi le nom variable « x » est le signe propre du pseudo-concept objet.\n\nChaque fois que le mot « objet » (« chose », « entité », etc.) est correctement employé, il est exprimé dans l'idéographie par le moyen du nom variable.\n\nPar exemple dans la proposition : « Il y a deux objets qui... », au moyen de « (∃ x,y)... »\n\nChaque fois qu'il en est autrement, qu'il est donc utilisé comme nom de concept propre, naissent des pseudo-propositions dépourvues de sens.\n\nAinsi ne peut-on dire : « Il y a des objets », comme on dit par exemple : « Il y a des livres. » Et encore moins : « Il y a 100 objets » ; ou : « Il y a ℵ0 objets. »\n\nEt il est dépourvu de sens de parler du nombre de tous les objets.\n\nIl en est de même pour les mots « complexe », « fait », « fonction », « nombre », etc.\n\nTous dénotent des concepts formels et sont présentés dans l'idéographie par des variables, et non par des fonctions ou des classes. (Comme le croyaient Frege et Russell.)\n\nDes expressions comme : « 1 est un nombre », « Il n'y a qu'un seul zéro », et toutes celles du même genre sont dépourvues de sens.\n\n(Il est tout aussi dépourvu de sens de dire : « Il n'y a qu'un seul 1 » qu'il serait dépourvu de sens de dire : « 2 + 2 est, à 3 heures, égal à 4. »)"
+    "content": "Ainsi le nom variable « x » est le signe propre du pseudo-concept objet.\n\nChaque fois que le mot « objet » (« chose », « entité », etc.) est correctement employé, il est exprimé dans l'idéographie par le moyen du nom variable.\n\nPar exemple dans la proposition : « Il y a deux objets qui... », au moyen de « (∃ x,y)... »\n\nChaque fois qu'il en est autrement, qu'il est donc utilisé comme nom de concept propre, naissent des pseudo-propositions dépourvues de sens.\n\nAinsi ne peut-on dire : « Il y a des objets », comme on dit par exemple : « Il y a des livres. » Et encore moins : « Il y a 100 objets » ; ou : « Il y a ℵ0 objets. »\n\nEt il est dépourvu de sens de parler du nombre de tous les objets.\n\nIl en est de même pour les mots « complexe », « fait », « fonction », « nombre », etc.\n\nTous dénotent des concepts formels et sont présentés dans l'idéographie par des variables, et non par des fonctions ou des classes. (Comme le croyaient Frege et Russell.)\n\nDes expressions comme : « 1 est un nombre », « Il n'y a qu'un seul zéro », et toutes celles du même genre sont dépourvues de sens.\n\n(Il est tout aussi dépourvu de sens de dire : « Il n'y a qu'un seul 1 » qu'il serait dépourvu de sens de dire : « 2 + 2 est, à 3 heures, égal à 4. »)"
   },
   {
     "id": "4.12721",
@@ -3017,11 +3017,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.1273",
-    "content": "Si nous voulons exprimer dans l'idéographie la proposition générale : « b est un successeur de a », nous avons alors besoin d'une expression pour le terme général de la série de formes :\n\naRb, (∃x) : aRx . xRb, (∃ x,y) : aRx . xRy . yRb... Le terme général d'une série de formes ne peut être exprimé que par une variable, car le concept de terme de cette série de formes est un concept formel. (Ce qui a échappé à Frege et Russell ; la manière dont ils veulent exprimer des propositions générales comme celles de l'exemple ci-dessus est par conséquent fausse ; elle renferme un cercle vicieux.)\n\nNous pouvons déterminer le terme général d'une série de formes en donnant son premier terme et la forme générale de l'opération qui produit le terme suivant à partir de la proposition précédente."
+    "content": "Si nous voulons exprimer dans l'idéographie la proposition générale : « b est un successeur de a », nous avons alors besoin d'une expression pour le terme général de la série de formes :\n\naRb, (∃x) : aRx . xRb, (∃ x,y) : aRx . xRy . yRb... Le terme général d'une série de formes ne peut être exprimé que par une variable, car le concept de terme de cette série de formes est un concept formel. (Ce qui a échappé à Frege et Russell ; la manière dont ils veulent exprimer des propositions générales comme celles de l'exemple ci-dessus est par conséquent fausse ; elle renferme un cercle vicieux.)\n\nNous pouvons déterminer le terme général d'une série de formes en donnant son premier terme et la forme générale de l'opération qui produit le terme suivant à partir de la proposition précédente."
   },
   {
     "id": "4.1274",
-    "content": "La question de l'existence d'un concept formel est dépourvue de sens car aucune proposition ne peut répondre à une telle question.\n\n(On ne peut donc demander, par exemple : « Y a-t-il des propositions de la forme sujet-prédicat qui soient non analysables ? »)"
+    "content": "La question de l'existence d'un concept formel est dépourvue de sens car aucune proposition ne peut répondre à une telle question.\n\n(On ne peut donc demander, par exemple : « Y a-t-il des propositions de la forme sujet-prédicat qui soient non analysables ? »)"
   },
   {
     "id": "4.128",
@@ -3057,11 +3057,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.24",
-    "content": "Les noms sont les symboles simples, je les indique par des lettres simples (« x », « y », « z »).\n\nJ'écris la proposition élémentaire comme fonction de noms, sous la forme : « fx », « φ(x,y) », etc.\n\nOu bien je l'indique au moyen des lettres p, q, r."
+    "content": "Les noms sont les symboles simples, je les indique par des lettres simples (« x », « y », « z »).\n\nJ'écris la proposition élémentaire comme fonction de noms, sous la forme : « fx », « φ(x,y) », etc.\n\nOu bien je l'indique au moyen des lettres p, q, r."
   },
   {
     "id": "4.241",
-    "content": "Si j'utilise deux signes pour une même signification, j'exprime ceci en posant entre les deux le signe « = ».\n\n« a = b » veut donc dire : le signe « a » peut être remplacé par le signe « b ».\n\n(Si j'introduis par le moyen d'une équation un nouveau signe « b », en déterminant qu'il doit remplacer un signe « a » déjà connu, j'écris alors l'égalité – une définition – (comme Russell) sous la forme : « a = b Déf. ». La définition est une règle concernant les signes.)"
+    "content": "Si j'utilise deux signes pour une même signification, j'exprime ceci en posant entre les deux le signe « = ».\n\n« a = b » veut donc dire : le signe « a » peut être remplacé par le signe « b ».\n\n(Si j'introduis par le moyen d'une équation un nouveau signe « b », en déterminant qu'il doit remplacer un signe « a » déjà connu, j'écris alors l'égalité – une définition – (comme Russell) sous la forme : « a = b Déf. ». La définition est une règle concernant les signes.)"
   },
   {
     "id": "4.242",
@@ -3069,7 +3069,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.243",
-    "content": "Pouvons-nous comprendre deux noms sans savoir s'ils désignent la même chose ou deux choses différentes ? – Pouvons-nous comprendre une proposition où apparaissent deux noms, sans savoir s'ils ont même signification ou des significations différentes ?\n\nSi je connais la signification d'un mot anglais et de son équivalent allemand, il est impossible que je ne sache pas qu'ils sont équivalents ; il est impossible que je ne puisse les traduire l'un par l'autre.\n\nDes expressions comme « a = a », ou celles qui en dérivent, ne sont ni des propositions élémentaires, ni même des signes pourvus de sens. (Ceci se montrera plus tard.)"
+    "content": "Pouvons-nous comprendre deux noms sans savoir s'ils désignent la même chose ou deux choses différentes ? – Pouvons-nous comprendre une proposition où apparaissent deux noms, sans savoir s'ils ont même signification ou des significations différentes ?\n\nSi je connais la signification d'un mot anglais et de son équivalent allemand, il est impossible que je ne sache pas qu'ils sont équivalents ; il est impossible que je ne puisse les traduire l'un par l'autre.\n\nDes expressions comme « a = a », ou celles qui en dérivent, ne sont ni des propositions élémentaires, ni même des signes pourvus de sens. (Ceci se montrera plus tard.)"
   },
   {
     "id": "4.25",
@@ -3093,7 +3093,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.31",
-    "content": "On peut figurer les possibilités de vérité au moyen de schémas du type suivant (« V » signifie « vrai », « F » signifie « faux » ; les lignes de « V » et de « F » sous la ligne de propositions élémentaires signifient, selon un symbolisme facile à comprendre, leurs possibilités de vérité) :\n\np\n\nq\n\nr\n\nV V V\n\nF V V\n\nV F V\n\nV V F\n\nF F V\n\nF V F\n\nV F F\n\nF F F\n\np\n\nq\n\nV V\n\nF V\n\nV F\n\nF F\n\np\n\nV\n\nF"
+    "content": "On peut figurer les possibilités de vérité au moyen de schémas du type suivant (« V » signifie « vrai », « F » signifie « faux » ; les lignes de « V » et de « F » sous la ligne de propositions élémentaires signifient, selon un symbolisme facile à comprendre, leurs possibilités de vérité) :\n\np\n\nq\n\nr\n\nV V V\n\nF V V\n\nV F V\n\nV V F\n\nF F V\n\nF V F\n\nV F F\n\nF F F\n\np\n\nq\n\nV V\n\nF V\n\nV F\n\nF F\n\np\n\nV\n\nF"
   },
   {
     "id": "4.4",
@@ -3113,11 +3113,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.43",
-    "content": "L'accord avec les possibilités de vérité peut être exprimé en adjoignant à celles-ci, dans le schéma, par exemple la marque « V » (vrai).\n\nL'absence de cette marque signifie la non-concordance."
+    "content": "L'accord avec les possibilités de vérité peut être exprimé en adjoignant à celles-ci, dans le schéma, par exemple la marque « V » (vrai).\n\nL'absence de cette marque signifie la non-concordance."
   },
   {
     "id": "4.431",
-    "content": "L'expression de l'accord et du désaccord avec les possibilités de vérité des propositions élémentaires exprime les conditions de vérité d'une proposition.\n\nLa proposition est l'expression de ses conditions de vérité. (Frege a donc eu tout à fait raison de les faire précéder par l'explication des signes de sa langue symbolique. Seulement l'explication du concept de vérité est chez Frege erronée : si « le vrai » et « le faux » étaient réellement des objets, et les arguments dans ~p etc., alors le sens de « ~p » ne serait en aucune manière déterminé par la détermination de Frege.)"
+    "content": "L'expression de l'accord et du désaccord avec les possibilités de vérité des propositions élémentaires exprime les conditions de vérité d'une proposition.\n\nLa proposition est l'expression de ses conditions de vérité. (Frege a donc eu tout à fait raison de les faire précéder par l'explication des signes de sa langue symbolique. Seulement l'explication du concept de vérité est chez Frege erronée : si « le vrai » et « le faux » étaient réellement des objets, et les arguments dans ~p etc., alors le sens de « ~p » ne serait en aucune manière déterminé par la détermination de Frege.)"
   },
   {
     "id": "4.44",
@@ -3125,11 +3125,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "4.441",
-    "content": "Il est clair qu'au complexe des signes « F » et « V » aucun objet (ou complexe d'objets) ne correspond ; pas plus qu'aux traits horizontaux ou aux traits verticaux ou aux parenthèses. – Il n'y a pas d'« objets logiques ».\n\nIl en est naturellement de même pour tous les signes qui expriment la même chose que les schémas des « V » et des « F »."
+    "content": "Il est clair qu'au complexe des signes « F » et « V » aucun objet (ou complexe d'objets) ne correspond ; pas plus qu'aux traits horizontaux ou aux traits verticaux ou aux parenthèses. – Il n'y a pas d'« objets logiques ».\n\nIl en est naturellement de même pour tous les signes qui expriment la même chose que les schémas des « V » et des « F »."
   },
   {
     "id": "4.442",
-    "content": "Par exemple :\n\n«\n\np\n\nq\n\nV V\n\nV\n\nF V\n\nV\n\nV F\n\nF F\n\nV\n\n»\n\nest un signe propositionnel.\n\n(Le « signe de jugement » frégéen « [math]\\displaystyle{ \\vdash }[/math] » est dépourvu de signification logique ; il montre simplement chez Frege (et Russell) que ces auteurs tiennent pour vraies les propositions ainsi désignées. « [math]\\displaystyle{ \\vdash }[/math] » n'appartient donc pas davantage à la construction propositionnelle que, par exemple, son numéro. Il n'est pas possible qu'une proposition dise d'elle-même qu'elle est vraie.)\n\nSi la suite des possibilités de vérité dans le schéma est une fois pour toute fixée par une règle de combinaison, la dernière colonne suffit à exprimer les conditions de vérité. En écrivant cette colonne sous forme de ligne, le signe propositionnel devient : « (VV–V) (p,q) » ou plus clairement : « (VVFV) (p,q) ». (Le nombre des places dans les parenthèses de gauche est déterminé par le nombre des membres dans celles de droite.)"
+    "content": "Par exemple :\n\n«\n\np\n\nq\n\nV V\n\nV\n\nF V\n\nV\n\nV F\n\nF F\n\nV\n\n»\n\nest un signe propositionnel.\n\n(Le « signe de jugement » frégéen « [math]\\displaystyle{ \\vdash }[/math] » est dépourvu de signification logique ; il montre simplement chez Frege (et Russell) que ces auteurs tiennent pour vraies les propositions ainsi désignées. « [math]\\displaystyle{ \\vdash }[/math] » n'appartient donc pas davantage à la construction propositionnelle que, par exemple, son numéro. Il n'est pas possible qu'une proposition dise d'elle-même qu'elle est vraie.)\n\nSi la suite des possibilités de vérité dans le schéma est une fois pour toute fixée par une règle de combinaison, la dernière colonne suffit à exprimer les conditions de vérité. En écrivant cette colonne sous forme de ligne, le signe propositionnel devient : « (VV–V) (p,q) » ou plus clairement : « (VVFV) (p,q) ». (Le nombre des places dans les parenthèses de gauche est déterminé par le nombre des membres dans celles de droite.)"
   },
   {
     "id": "4.45",
@@ -3197,7 +3197,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.02",
-    "content": "Il est facile de confondre les arguments des fonctions avec les indices des noms. Je reconnais en effet aussi bien sur un argument que sur un indice la signification du signe qui les contient.\n\nChez Russell « c » dans « +c » est un indice qui montre que le signe dans son ensemble est le symbole de l'addition pour les cardinaux. Mais cette dénotation repose sur une convention arbitraire, et l'on pourrait, au lieu de « +c », choisir un signe simple ; dans « ~p » au contraire, « p » n'est pas un indice mais un argument : le sens de « ~p » ne peut pas être compris sans qu'ait été compris auparavant le sens de « p ». (Dans le nom Julius Caesar, Julius est un indice. L'indice est toujours une partie de la description de l'objet au nom duquel nous l'apposons. Par exemple : le Caesar parmi les membres de la gens Julia.)\n\nC'est la confusion de l'argument et de l'indice qui est à la base, si je ne me trompe, de la théorie de Frege sur la signification des propositions et des fonctions. Pour Frege, les propositions de la logique étaient des noms, et leurs arguments des indices de ces noms."
+    "content": "Il est facile de confondre les arguments des fonctions avec les indices des noms. Je reconnais en effet aussi bien sur un argument que sur un indice la signification du signe qui les contient.\n\nChez Russell « c » dans « +c » est un indice qui montre que le signe dans son ensemble est le symbole de l'addition pour les cardinaux. Mais cette dénotation repose sur une convention arbitraire, et l'on pourrait, au lieu de « +c », choisir un signe simple ; dans « ~p » au contraire, « p » n'est pas un indice mais un argument : le sens de « ~p » ne peut pas être compris sans qu'ait été compris auparavant le sens de « p ». (Dans le nom Julius Caesar, Julius est un indice. L'indice est toujours une partie de la description de l'objet au nom duquel nous l'apposons. Par exemple : le Caesar parmi les membres de la gens Julia.)\n\nC'est la confusion de l'argument et de l'indice qui est à la base, si je ne me trompe, de la théorie de Frege sur la signification des propositions et des fonctions. Pour Frege, les propositions de la logique étaient des noms, et leurs arguments des indices de ces noms."
   },
   {
     "id": "5.1",
@@ -3233,7 +3233,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.1241",
-    "content": "« p . q » est l'une des propositions qui affirment « p » et en même temps l'une des propositions qui affirment « q ».\n\nDeux propositions sont opposées l'une à l'autre s'il n'y a pas de proposition pourvue de sens qui les affirme toutes deux.\n\nToute proposition qui en contredit une autre la nie."
+    "content": "« p . q » est l'une des propositions qui affirment « p » et en même temps l'une des propositions qui affirment « q ».\n\nDeux propositions sont opposées l'une à l'autre s'il n'y a pas de proposition pourvue de sens qui les affirme toutes deux.\n\nToute proposition qui en contredit une autre la nie."
   },
   {
     "id": "5.13",
@@ -3245,11 +3245,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.1311",
-    "content": "Quand nous déduisons q de p v q et ~p, la relation entre les formes des propositions « p v q » et « ~p » est masquée par le mode de description. Mais si nous écrivons, par exemple, au lieu de « p v q », « p | q .|. p | q », et au lieu de « ~p », « p | p » (p | q = ni p ni q), alors l'interdépendance interne devient évidente.\n\n(Que l'on puisse déduire fa de (x). fx montre que la généralité est déjà comprise dans le symbole « (x). fx ».)"
+    "content": "Quand nous déduisons q de p v q et ~p, la relation entre les formes des propositions « p v q » et « ~p » est masquée par le mode de description. Mais si nous écrivons, par exemple, au lieu de « p v q », « p | q .|. p | q », et au lieu de « ~p », « p | p » (p | q = ni p ni q), alors l'interdépendance interne devient évidente.\n\n(Que l'on puisse déduire fa de (x). fx montre que la généralité est déjà comprise dans le symbole « (x). fx ».)"
   },
   {
     "id": "5.132",
-    "content": "Si p suit de q, je puis déduire p de q, tirer de q la conséquence p.\n\nLa manière de déduire ne peut être tirée que des deux propositions.\n\nElles seules peuvent justifier la déduction.\n\nDes « lois de la déduction », qui – comme chez Frege et Russell – doivent justifier les déductions, sont vides de sens, et seraient superflues."
+    "content": "Si p suit de q, je puis déduire p de q, tirer de q la conséquence p.\n\nLa manière de déduire ne peut être tirée que des deux propositions.\n\nElles seules peuvent justifier la déduction.\n\nDes « lois de la déduction », qui – comme chez Frege et Russell – doivent justifier les déductions, sont vides de sens, et seraient superflues."
   },
   {
     "id": "5.133",
@@ -3273,7 +3273,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.1362",
-    "content": "Le libre arbitre consiste en ce que nous ne pouvons connaître maintenant les actions futures. Nous ne pourrions les connaître que si la causalité était une nécessité interne, comme celle de la déduction logique. L'interdépendance du connaître et de ce qui est connu est celle de la nécessité logique.\n\n(« A sait que p a lieu » est vide de sens, si p est une tautologie.)"
+    "content": "Le libre arbitre consiste en ce que nous ne pouvons connaître maintenant les actions futures. Nous ne pourrions les connaître que si la causalité était une nécessité interne, comme celle de la déduction logique. L'interdépendance du connaître et de ce qui est connu est celle de la nécessité logique.\n\n(« A sait que p a lieu » est vide de sens, si p est une tautologie.)"
   },
   {
     "id": "5.1363",
@@ -3309,7 +3309,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.152",
-    "content": "Les propositions qui n'ont en commun aucun argument de vérité nous les nommerons mutuellement indépendantes.\n\nDeux propositions élémentaires se confèrent mutuellement la probabilité 1/2.\n\nSi p suit de q, la proposition « q » confère à la proposition « p » la probabilité 1. La certitude de la déduction logique est un cas limite de la probabilité.\n\n(Application à la tautologie et à la contradiction.)"
+    "content": "Les propositions qui n'ont en commun aucun argument de vérité nous les nommerons mutuellement indépendantes.\n\nDeux propositions élémentaires se confèrent mutuellement la probabilité 1/2.\n\nSi p suit de q, la proposition « q » confère à la proposition « p » la probabilité 1. La certitude de la déduction logique est un cas limite de la probabilité.\n\n(Application à la tautologie et à la contradiction.)"
   },
   {
     "id": "5.153",
@@ -3389,7 +3389,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.2521",
-    "content": "L'application itérée d'une opération à son propre résultat, je l'appelle son application successive (« O'O'O'a » est le résultat de trois applications successives de « O'ξ » à « a ».)\n\nEn un sens semblable je parle des applications successives de plusieurs opérations à un certain nombre de propositions."
+    "content": "L'application itérée d'une opération à son propre résultat, je l'appelle son application successive (« O'O'O'a » est le résultat de trois applications successives de « O'ξ » à « a ».)\n\nEn un sens semblable je parle des applications successives de plusieurs opérations à un certain nombre de propositions."
   },
   {
     "id": "5.2522",
@@ -3429,15 +3429,15 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.42",
-    "content": "Il est évident que ∨, ⊃, etc., ne sont pas des relations au sens de : à droite de, à gauche de, etc.\n\nLa possibilité des définitions réciproques des signes logiques « primitifs » de Frege et Russell montre déjà que ce ne sont pas des signes primitifs, et encore mieux qu'ils ne désignent aucune relation.\n\nEt il est patent que le « ⊃ » que nous définissons au moyen de « ~ » et de « ∨ » est identique à celui au moyen duquel nous définissons « ∨ » en usant de « ~ », et que ce « ∨ » est identique au premier. Et ainsi de suite."
+    "content": "Il est évident que ∨, ⊃, etc., ne sont pas des relations au sens de : à droite de, à gauche de, etc.\n\nLa possibilité des définitions réciproques des signes logiques « primitifs » de Frege et Russell montre déjà que ce ne sont pas des signes primitifs, et encore mieux qu'ils ne désignent aucune relation.\n\nEt il est patent que le « ⊃ » que nous définissons au moyen de « ~ » et de « ∨ » est identique à celui au moyen duquel nous définissons « ∨ » en usant de « ~ », et que ce « ∨ » est identique au premier. Et ainsi de suite."
   },
   {
     "id": "5.43",
-    "content": "Qu'à partir du fait p doivent s'ensuivre une infinité d'autres faits, à savoir ~~p, ~~~~p, etc., voilà qui est au premier abord à peine croyable. Et il n'est pas moins remarquable que le nombre infini des propositions de la logique (de la mathématique) suivent d'une demi-douzaine de « lois fondamentales ».\n\nMais toutes les propositions de la logique disent la même chose. A savoir : rien."
+    "content": "Qu'à partir du fait p doivent s'ensuivre une infinité d'autres faits, à savoir ~~p, ~~~~p, etc., voilà qui est au premier abord à peine croyable. Et il n'est pas moins remarquable que le nombre infini des propositions de la logique (de la mathématique) suivent d'une demi-douzaine de « lois fondamentales ».\n\nMais toutes les propositions de la logique disent la même chose. A savoir : rien."
   },
   {
     "id": "5.44",
-    "content": "Les fonctions de vérité ne sont pas des fonctions matérielles.\n\nSi l'on peut, par exemple, engendrer une affirmation par une double négation, la négation est-elle donc alors en un certain sens contenue dans l'affirmation ? « ~~p » nie-t-il ~p, ou affirme-t-il p ; ou les deux à la fois ?\n\nLa proposition « ~~p » ne traite pas la négation comme un objet ; mais la possibilité de la négation est assurément présupposée dans l'affirmation.\n\nEt s'il y avait un objet nommé « ~ », « ~~p » devrait dire autre chose que « p ». Car l'une des deux propositions traiterait justement de ~, et l'autre point."
+    "content": "Les fonctions de vérité ne sont pas des fonctions matérielles.\n\nSi l'on peut, par exemple, engendrer une affirmation par une double négation, la négation est-elle donc alors en un certain sens contenue dans l'affirmation ? « ~~p » nie-t-il ~p, ou affirme-t-il p ; ou les deux à la fois ?\n\nLa proposition « ~~p » ne traite pas la négation comme un objet ; mais la possibilité de la négation est assurément présupposée dans l'affirmation.\n\nEt s'il y avait un objet nommé « ~ », « ~~p » devrait dire autre chose que « p ». Car l'une des deux propositions traiterait justement de ~, et l'autre point."
   },
   {
     "id": "5.441",
@@ -3453,7 +3453,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.451",
-    "content": "Si la logique a des concepts fondamentaux, ils doivent être mutuellement indépendants. Si un concept fondamental est introduit, il doit être introduit dans toutes les connexions dans lesquelles il peut apparaître. On ne peut donc l'introduire d'abord pour l'une d'elles, puis de nouveau pour une autre. Par exemple, si la négation est introduite, nous devons alors la comprendre dans des propositions de la forme « ~p » aussi bien que dans « ~(p ∨ q) », « (∃x) . ~fx », etc. Nous n'avons pas le droit de l'introduire d'abord pour une classe de cas, puis pour les autres, car il demeurerait alors douteux si sa signification dans les deux cas est la même, et l'on ne disposerait d' aucune raison d'user dans les deux cas du même mode de connexion des signes.\n\n(En bref, pour l'introduction de signes primitifs, vaut mutatis mutandis ce que dit Frege (Lois fondamentales de l'arithmétique) de l'introduction des signes au moyen de définitions.)"
+    "content": "Si la logique a des concepts fondamentaux, ils doivent être mutuellement indépendants. Si un concept fondamental est introduit, il doit être introduit dans toutes les connexions dans lesquelles il peut apparaître. On ne peut donc l'introduire d'abord pour l'une d'elles, puis de nouveau pour une autre. Par exemple, si la négation est introduite, nous devons alors la comprendre dans des propositions de la forme « ~p » aussi bien que dans « ~(p ∨ q) », « (∃x) . ~fx », etc. Nous n'avons pas le droit de l'introduire d'abord pour une classe de cas, puis pour les autres, car il demeurerait alors douteux si sa signification dans les deux cas est la même, et l'on ne disposerait d' aucune raison d'user dans les deux cas du même mode de connexion des signes.\n\n(En bref, pour l'introduction de signes primitifs, vaut mutatis mutandis ce que dit Frege (Lois fondamentales de l'arithmétique) de l'introduction des signes au moyen de définitions.)"
   },
   {
     "id": "5.452",
@@ -3485,7 +3485,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.47",
-    "content": "Il est clair que ce qui peut simplement être dit par avance de la forme de toutes les propositions, doit pouvoir se dire en une seule fois.\n\nToutes les opérations logiques sont déjà contenues dans les propositions élémentaires. Car « fa » dit la même chose que : « (∃fx) . fx . x = a ».\n\nLà où il y a composition, il y a argument et fonction, et avec eux sont présentes toutes les constantes logiques.\n\nOn pourrait dire que la constante logique unique est ce que toutes les propositions, de par leur nature, ont en commun.\n\nMais cela, c'est la forme générale de la proposition."
+    "content": "Il est clair que ce qui peut simplement être dit par avance de la forme de toutes les propositions, doit pouvoir se dire en une seule fois.\n\nToutes les opérations logiques sont déjà contenues dans les propositions élémentaires. Car « fa » dit la même chose que : « (∃fx) . fx . x = a ».\n\nLà où il y a composition, il y a argument et fonction, et avec eux sont présentes toutes les constantes logiques.\n\nOn pourrait dire que la constante logique unique est ce que toutes les propositions, de par leur nature, ont en commun.\n\nMais cela, c'est la forme générale de la proposition."
   },
   {
     "id": "5.471",
@@ -3501,7 +3501,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.473",
-    "content": "La logique doit prendre soin d'elle-même.\n\nSi un signe est possible, il est aussi capable de dénoter. En logique, tout ce qui est possible est aussi permis. (« Socrate est identique » ne veut rien dire parce qu'il n'y a aucune propriété appelée « identique ». La proposition est dépourvue de sens, parce que nous n'avons pas effectué une détermination arbitraire, mais non pas parce que le symbole serait illégitime en soi et par soi.)\n\nEn un certain sens, nous ne pouvons nous tromper en logique."
+    "content": "La logique doit prendre soin d'elle-même.\n\nSi un signe est possible, il est aussi capable de dénoter. En logique, tout ce qui est possible est aussi permis. (« Socrate est identique » ne veut rien dire parce qu'il n'y a aucune propriété appelée « identique ». La proposition est dépourvue de sens, parce que nous n'avons pas effectué une détermination arbitraire, mais non pas parce que le symbole serait illégitime en soi et par soi.)\n\nEn un certain sens, nous ne pouvons nous tromper en logique."
   },
   {
     "id": "5.4731",
@@ -3517,7 +3517,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.4733",
-    "content": "Frege dit : toute proposition construite selon les règles doit avoir un sens ; et je dis : toute proposition possible est construite selon les règles, et si elle n'a pas de sens, ce ne peut être que parce que l'on n'a pas donné de signification à certains de ses éléments.\n\n(Même si nous croyons l'avoir fait.)\n\nAinsi « Socrate est identique » ne dit rien, parce que le mot « identique » n'a pas reçu de signification en tant qu'adjectif. Car lorsqu'il intervient comme signe d'égalité il symbolise de toute autre manière – sa relation de dénotation est autre –, de sorte que dans les deux cas le symbole est tout à fait différent ; les deux symboles n'ont en commun que le signe, accidentellement."
+    "content": "Frege dit : toute proposition construite selon les règles doit avoir un sens ; et je dis : toute proposition possible est construite selon les règles, et si elle n'a pas de sens, ce ne peut être que parce que l'on n'a pas donné de signification à certains de ses éléments.\n\n(Même si nous croyons l'avoir fait.)\n\nAinsi « Socrate est identique » ne dit rien, parce que le mot « identique » n'a pas reçu de signification en tant qu'adjectif. Car lorsqu'il intervient comme signe d'égalité il symbolise de toute autre manière – sa relation de dénotation est autre –, de sorte que dans les deux cas le symbole est tout à fait différent ; les deux symboles n'ont en commun que le signe, accidentellement."
   },
   {
     "id": "5.474",
@@ -3537,11 +3537,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.501",
-    "content": "Une expression entre parenthèses, dont les membres sont des propositions dont l'ordre est arbitraire, je la note par un signe de la forme « [math]\\displaystyle{ ( \\bar{\\xi} ) }[/math] ». « ξ » est une variable dont les valeurs sont les membres de l'expression entre parenthèses ; et la barre au-dessus de la variable note que celle-ci représente l'ensemble de ses valeurs dans les parenthèses.\n\n(Si par exemple ξ a les trois valeurs P,Q,R :\n\n[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math] = (P,Q,R).)\n\nLes valeurs des variables sont fixées. On les fixe en décrivant les propositions dont la variable tient lieu.\n\nLe mode de description des membres de l'expression entre parenthèses n'est pas essentiel.\n\nNous pouvons distinguer trois espèces de description : 1. L'énumération directe. En ce cas, nous pouvons, au lieu de la variable, poser simplement ses valeurs constantes. 2. La donnée d'une fonction fx, dont les valeurs pour toutes les valeurs de x sont les propositions à décrire. 3. La donnée d'une loi formelle, selon laquelle ces propositions sont construites. En ce cas, les membres de l'expression entre parenthèses sont l'ensemble des membres d'une série de formes."
+    "content": "Une expression entre parenthèses, dont les membres sont des propositions dont l'ordre est arbitraire, je la note par un signe de la forme « [math]\\displaystyle{ ( \\bar{\\xi} ) }[/math] ». « ξ » est une variable dont les valeurs sont les membres de l'expression entre parenthèses ; et la barre au-dessus de la variable note que celle-ci représente l'ensemble de ses valeurs dans les parenthèses.\n\n(Si par exemple ξ a les trois valeurs P,Q,R :\n\n[math]\\displaystyle{ ( \\bar{\\xi} ) }[/math] = (P,Q,R).)\n\nLes valeurs des variables sont fixées. On les fixe en décrivant les propositions dont la variable tient lieu.\n\nLe mode de description des membres de l'expression entre parenthèses n'est pas essentiel.\n\nNous pouvons distinguer trois espèces de description : 1. L'énumération directe. En ce cas, nous pouvons, au lieu de la variable, poser simplement ses valeurs constantes. 2. La donnée d'une fonction fx, dont les valeurs pour toutes les valeurs de x sont les propositions à décrire. 3. La donnée d'une loi formelle, selon laquelle ces propositions sont construites. En ce cas, les membres de l'expression entre parenthèses sont l'ensemble des membres d'une série de formes."
   },
   {
     "id": "5.502",
-    "content": "J'écris donc, au lieu de « (– – – – – V) (ξ,....) », « [math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] ».\n\n[math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] est la négation de l'ensemble des valeurs de la variable propositionnelle ξ."
+    "content": "J'écris donc, au lieu de « (– – – – – V) (ξ,....) », « [math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] ».\n\n[math]\\displaystyle{ N ( \\bar{\\xi} ) }[/math] est la négation de l'ensemble des valeurs de la variable propositionnelle ξ."
   },
   {
     "id": "5.503",
@@ -3557,11 +3557,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.512",
-    "content": "« ~p » est vraie si « p » est fausse. Par conséquent, dans la proposition vraie « ~p », « p » est une proposition fausse. Comment le trait « ~ » peut-il la rendre conforme à la réalité ?\n\nCe qui nie dans « ~p » ce n'est pas le « ~ », mais ce qui est commun à tous les signes de cette notation qui nient p.\n\nEt par conséquent la règle commune selon laquelle sont construits « ~ p », « ~~~p », « ~p ∨ ~p », « ~p . ~p », etc. (ad inf.). Et ce qui est commun est le reflet répété de la négation."
+    "content": "« ~p » est vraie si « p » est fausse. Par conséquent, dans la proposition vraie « ~p », « p » est une proposition fausse. Comment le trait « ~ » peut-il la rendre conforme à la réalité ?\n\nCe qui nie dans « ~p » ce n'est pas le « ~ », mais ce qui est commun à tous les signes de cette notation qui nient p.\n\nEt par conséquent la règle commune selon laquelle sont construits « ~ p », « ~~~p », « ~p ∨ ~p », « ~p . ~p », etc. (ad inf.). Et ce qui est commun est le reflet répété de la négation."
   },
   {
     "id": "5.513",
-    "content": "On pourrait dire : ce qui est commun à tous les symboles qui affirment à la fois p et q, c'est la proposition « p . q ». Ce qui est commun à tous les symboles qui affirment p ou q, c'est la proposition « p ∨ q ».\n\nEt ainsi pourrait-on dire : deux propositions sont opposées quand elles n'ont rien en commun ; et : à chaque proposition correspond une seule négation, parce qu'il n'y a qu'une seule proposition qui lui soit complètement extérieure.\n\nDans la notation de Russell, se montre également que « q : p ∨ ~p » dit la même chose que « q » ; que « p ∨ ~p » ne dit rien."
+    "content": "On pourrait dire : ce qui est commun à tous les symboles qui affirment à la fois p et q, c'est la proposition « p . q ». Ce qui est commun à tous les symboles qui affirment p ou q, c'est la proposition « p ∨ q ».\n\nEt ainsi pourrait-on dire : deux propositions sont opposées quand elles n'ont rien en commun ; et : à chaque proposition correspond une seule négation, parce qu'il n'y a qu'une seule proposition qui lui soit complètement extérieure.\n\nDans la notation de Russell, se montre également que « q : p ∨ ~p » dit la même chose que « q » ; que « p ∨ ~p » ne dit rien."
   },
   {
     "id": "5.514",
@@ -3569,11 +3569,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.515",
-    "content": "Il doit se montrer dans nos symboles que ce qui est combiné par « ∨ », « . », etc., ce doit être des propositions.\n\nEt c'est en effet le cas, car le symbole « p » et le symbole « q » présupposent d'eux-mêmes les « ∨ », « ~ », etc. Si le signe « p » dans « p ∨ q » ne tient pas lieu d'un signe complexe, il ne peut avoir de sens pris isolément ; et les signes « p ∨ p », « p . p » équivalents à « p » ne peuvent non plus avoir aucun sens. Mais si « p ∨ p » n'a aucun sens, « p ∨ q » ne peut en avoir un."
+    "content": "Il doit se montrer dans nos symboles que ce qui est combiné par « ∨ », « . », etc., ce doit être des propositions.\n\nEt c'est en effet le cas, car le symbole « p » et le symbole « q » présupposent d'eux-mêmes les « ∨ », « ~ », etc. Si le signe « p » dans « p ∨ q » ne tient pas lieu d'un signe complexe, il ne peut avoir de sens pris isolément ; et les signes « p ∨ p », « p . p » équivalents à « p » ne peuvent non plus avoir aucun sens. Mais si « p ∨ p » n'a aucun sens, « p ∨ q » ne peut en avoir un."
   },
   {
     "id": "5.5151",
-    "content": "Le signe de la proposition négative doit-il être construit à partir du signe de la proposition positive ? Pourquoi ne devrait-on pas pouvoir exprimer la proposition négative au moyen d'un fait négatif ? (Par exemple : que « a » ne soit pas dans une certaine relation avec « b » pourrait exprimer que aRb n'a pas lieu.)\n\nMais alors la proposition négative est encore indirectement construite au moyen de la positive.\n\nLa proposition positive doit présupposer l'existence de la proposition négative, et vice versa."
+    "content": "Le signe de la proposition négative doit-il être construit à partir du signe de la proposition positive ? Pourquoi ne devrait-on pas pouvoir exprimer la proposition négative au moyen d'un fait négatif ? (Par exemple : que « a » ne soit pas dans une certaine relation avec « b » pourrait exprimer que aRb n'a pas lieu.)\n\nMais alors la proposition négative est encore indirectement construite au moyen de la positive.\n\nLa proposition positive doit présupposer l'existence de la proposition négative, et vice versa."
   },
   {
     "id": "5.52",
@@ -3581,7 +3581,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.521",
-    "content": "Je sépare le concept tous de la fonction de vérité.\n\nFrege et Russell ont introduit la généralisation en connexion avec le produit ou la somme logique. Il était dès lors difficile de comprendre les propositions « (∃x) . fx » et « (x) . fx », dans lesquelles les deux idées sont impliquées."
+    "content": "Je sépare le concept tous de la fonction de vérité.\n\nFrege et Russell ont introduit la généralisation en connexion avec le produit ou la somme logique. Il était dès lors difficile de comprendre les propositions « (∃x) . fx » et « (x) . fx », dans lesquelles les deux idées sont impliquées."
   },
   {
     "id": "5.522",
@@ -3597,11 +3597,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.525",
-    "content": "Il est incorrect de traduire en mots, comme l'a fait Russell, la proposition « (∃x) . fx » par « fx est possible ».\n\nLa certitude, la possibilité, ou l'impossibilité d'une situation ne s'expriment pas au moyen d'une proposition, mais par ceci qu'une expression est une tautologie, une proposition pourvue de sens ou une contradiction.\n\nCette circonstance préliminaire, à laquelle on voudrait toujours faire appel, doit déjà être présente dans les symboles mêmes."
+    "content": "Il est incorrect de traduire en mots, comme l'a fait Russell, la proposition « (∃x) . fx » par « fx est possible ».\n\nLa certitude, la possibilité, ou l'impossibilité d'une situation ne s'expriment pas au moyen d'une proposition, mais par ceci qu'une expression est une tautologie, une proposition pourvue de sens ou une contradiction.\n\nCette circonstance préliminaire, à laquelle on voudrait toujours faire appel, doit déjà être présente dans les symboles mêmes."
   },
   {
     "id": "5.526",
-    "content": "On peut décrire complètement le monde au moyen de propositions totalement généralisées, c'est-à-dire, par conséquent, sans coordonner par avance aucun nom à un objet déterminé.\n\nPour passer alors au mode d'expression usuel il suffit, après une expression comme : « il y a un x et un seulement tel que... », d'ajouter : et cet x est a."
+    "content": "On peut décrire complètement le monde au moyen de propositions totalement généralisées, c'est-à-dire, par conséquent, sans coordonner par avance aucun nom à un objet déterminé.\n\nPour passer alors au mode d'expression usuel il suffit, après une expression comme : « il y a un x et un seulement tel que... », d'ajouter : et cet x est a."
   },
   {
     "id": "5.5261",
@@ -3633,11 +3633,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.532",
-    "content": "Et de même, non pas « (∃x,y) . f(x,y) . x = y » mais « (∃x) . f(x,x) » ; ni « (∃x,y) . f(x,y) . ~x = y) », mais « (∃x,y) . f(x,y) ».\n\n(Donc, au lieu de la formule de Russell « (∃x,y) . f(x,y) », j'écris « (∃x,y) . f(x,y) . ∨ . (∃x) . f(x,x) ».)"
+    "content": "Et de même, non pas « (∃x,y) . f(x,y) . x = y » mais « (∃x) . f(x,x) » ; ni « (∃x,y) . f(x,y) . ~x = y) », mais « (∃x,y) . f(x,y) ».\n\n(Donc, au lieu de la formule de Russell « (∃x,y) . f(x,y) », j'écris « (∃x,y) . f(x,y) . ∨ . (∃x) . f(x,x) ».)"
   },
   {
     "id": "5.5321",
-    "content": "Au lieu de « (x) : fx ⊃ x = a », nous écrivons donc par exemple « (∃x) . fx . ⊃ . fa : ~(∃x,y) . fx . fy ».\n\nEt la proposition : « Il y a seulement un x qui satisfait f( ) » se formule : « (∃x) . fx : ~(∃x,y) . fx . fy »."
+    "content": "Au lieu de « (x) : fx ⊃ x = a », nous écrivons donc par exemple « (∃x) . fx . ⊃ . fa : ~(∃x,y) . fx . fy ».\n\nEt la proposition : « Il y a seulement un x qui satisfait f( ) » se formule : « (∃x) . fx : ~(∃x,y) . fx . fy »."
   },
   {
     "id": "5.533",
@@ -3649,11 +3649,11 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.535",
-    "content": "Par là sont aussi réglés tous les problèmes liés à de telles pseudo-propositions.\n\nTous les problèmes introduits par l'« axiome de l'infini » de Russell trouvent alors ici une solution.\n\nCe que doit dire l'axiome de l'infini pourrait s'exprimer dans la langue par ceci, qu'il y a une infinité de noms avec des significations différentes."
+    "content": "Par là sont aussi réglés tous les problèmes liés à de telles pseudo-propositions.\n\nTous les problèmes introduits par l'« axiome de l'infini » de Russell trouvent alors ici une solution.\n\nCe que doit dire l'axiome de l'infini pourrait s'exprimer dans la langue par ceci, qu'il y a une infinité de noms avec des significations différentes."
   },
   {
     "id": "5.5351",
-    "content": "Dans certains cas, on se trouve tenté d'utiliser des expressions de la forme : « a = a » ou « p ⊃ p » et d'autres du même genre. Ceci arrive en fait lorsque l'on voudrait parler d'une image primitive : proposition, chose, etc. Ainsi Russell dans les Principles of mathematics a rendu l'expression dépourvue de sens « p est une proposition » en symboles par : « p ⊃ p », et l'a posée comme hypothèse précédant certaines propositions, afin que leurs arguments ne puissent y être occupés que par des propositions.\n\n(Il est déjà dépourvu de sens de placer l'hypothèse « p ⊃ p » devant une proposition pour lui garantir des arguments ayant la forme correcte, parce que l'hypothèse, pour un argument non propositionnel, ne devient pas fausseté, mais perd son sens, et comme la proposition elle-même est transformée en expression dépourvue de sens par l'espèce incorrecte d'arguments, elle se garde aussi bien, ou aussi mal, des arguments incorrects que l'hypothèse vide de sens qu'on lui adjoint à cet effet.)"
+    "content": "Dans certains cas, on se trouve tenté d'utiliser des expressions de la forme : « a = a » ou « p ⊃ p » et d'autres du même genre. Ceci arrive en fait lorsque l'on voudrait parler d'une image primitive : proposition, chose, etc. Ainsi Russell dans les Principles of mathematics a rendu l'expression dépourvue de sens « p est une proposition » en symboles par : « p ⊃ p », et l'a posée comme hypothèse précédant certaines propositions, afin que leurs arguments ne puissent y être occupés que par des propositions.\n\n(Il est déjà dépourvu de sens de placer l'hypothèse « p ⊃ p » devant une proposition pour lui garantir des arguments ayant la forme correcte, parce que l'hypothèse, pour un argument non propositionnel, ne devient pas fausseté, mais perd son sens, et comme la proposition elle-même est transformée en expression dépourvue de sens par l'espèce incorrecte d'arguments, elle se garde aussi bien, ou aussi mal, des arguments incorrects que l'hypothèse vide de sens qu'on lui adjoint à cet effet.)"
   },
   {
     "id": "5.5352",
@@ -3665,7 +3665,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.541",
-    "content": "À première vue, il semble qu'une proposition puisse apparaître aussi dans une autre proposition d'une autre manière.\n\nParticulièrement dans certaines formes propositionnelles de la psychologie, telles que « A croit que p a lieu », ou « A pense p », etc.\n\nCar superficiellement, il semble qu'ici la proposition p ait une espèce de relation avec un objet A.\n\n(Et dans la théorie moderne de la connaissance (Russell, Moore, etc.) ces propositions sont conçues de cette manière.)"
+    "content": "À première vue, il semble qu'une proposition puisse apparaître aussi dans une autre proposition d'une autre manière.\n\nParticulièrement dans certaines formes propositionnelles de la psychologie, telles que « A croit que p a lieu », ou « A pense p », etc.\n\nCar superficiellement, il semble qu'ici la proposition p ait une espèce de relation avec un objet A.\n\n(Et dans la théorie moderne de la connaissance (Russell, Moore, etc.) ces propositions sont conçues de cette manière.)"
   },
   {
     "id": "5.542",
@@ -3789,7 +3789,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.641",
-    "content": "Il y a donc réellement un sens selon lequel il peut être question en philosophie d'un je, non psychologiquement.\n\nLe je fait son entrée dans la philosophie grâce à ceci : que « le monde est mon monde ».\n\nLe je philosophique n'est ni l'être humain, ni le corps humain, ni l'âme humaine dont s'occupe la psychologie, mais c'est le sujet métaphysique, qui est frontière – et non partie – du monde."
+    "content": "Il y a donc réellement un sens selon lequel il peut être question en philosophie d'un je, non psychologiquement.\n\nLe je fait son entrée dans la philosophie grâce à ceci : que « le monde est mon monde ».\n\nLe je philosophique n'est ni l'être humain, ni le corps humain, ni l'âme humaine dont s'occupe la psychologie, mais c'est le sujet métaphysique, qui est frontière – et non partie – du monde."
   },
   {
     "id": "6",
@@ -3809,7 +3809,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.02",
-    "content": "Ainsi en venons-nous aux nombres : je définis\n\n[math]\\displaystyle{ x = \\Omega^{0 \\prime} x \\text{ Déf.} }[/math] et\n\n[math]\\displaystyle{ \\Omega^{\\prime} \\Omega^{ \\nu \\prime} x = \\Omega^{ \\nu + 1 \\prime} x \\text{ Déf.} }[/math]\n\nConformément à ces règles de signes nous écrivons donc la série [math]\\displaystyle{ x, \\Omega ' x, \\Omega ' \\Omega ' x, \\Omega ' \\Omega ' \\Omega ' x, ... }[/math]\n\nde cette manière : [math]\\displaystyle{ \\Omega^{0 \\prime} x, \\Omega^{0+1 \\prime} x, \\Omega^{0 + 1 + 1 \\prime} x, \\Omega^{0 + 1 + 1 + 1 \\prime} x, ... }[/math]\n\nJ'écris donc, au lieu de « [math]\\displaystyle{ [ x, \\xi, \\Omega ' \\xi ] }[/math] » :\n\n« [math]\\displaystyle{ [ \\Omega^{0 \\prime} x, \\Omega^{ \\nu \\prime} x, \\Omega^{ \\nu + 1 \\prime} x ] }[/math] ».\n\nEt je définis :\n\n[math]\\displaystyle{ 0 + 1 = 1 \\text{ Déf.} }[/math] [math]\\displaystyle{ 0 + 1 + 1 = 2 \\text{ Déf.} }[/math] [math]\\displaystyle{ 0 + 1 + 1 + 1 = 3 \\text{ Déf.} }[/math] (etc.)"
+    "content": "Ainsi en venons-nous aux nombres : je définis\n\n[math]\\displaystyle{ x = \\Omega^{0 \\prime} x \\text{ Déf.} }[/math] et\n\n[math]\\displaystyle{ \\Omega^{\\prime} \\Omega^{ \\nu \\prime} x = \\Omega^{ \\nu + 1 \\prime} x \\text{ Déf.} }[/math]\n\nConformément à ces règles de signes nous écrivons donc la série [math]\\displaystyle{ x, \\Omega ' x, \\Omega ' \\Omega ' x, \\Omega ' \\Omega ' \\Omega ' x, ... }[/math]\n\nde cette manière : [math]\\displaystyle{ \\Omega^{0 \\prime} x, \\Omega^{0+1 \\prime} x, \\Omega^{0 + 1 + 1 \\prime} x, \\Omega^{0 + 1 + 1 + 1 \\prime} x, ... }[/math]\n\nJ'écris donc, au lieu de « [math]\\displaystyle{ [ x, \\xi, \\Omega ' \\xi ] }[/math] » :\n\n« [math]\\displaystyle{ [ \\Omega^{0 \\prime} x, \\Omega^{ \\nu \\prime} x, \\Omega^{ \\nu + 1 \\prime} x ] }[/math] ».\n\nEt je définis :\n\n[math]\\displaystyle{ 0 + 1 = 1 \\text{ Déf.} }[/math] [math]\\displaystyle{ 0 + 1 + 1 = 2 \\text{ Déf.} }[/math] [math]\\displaystyle{ 0 + 1 + 1 + 1 = 3 \\text{ Déf.} }[/math] (etc.)"
   },
   {
     "id": "6.021",
@@ -3861,7 +3861,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.1203",
-    "content": "Pour reconnaître une tautologie comme telle, on peut dans les cas où aucun signe de généralisation n'y apparaît, se servir de la méthode intuitive suivante : j'écris, au lieu de « p », « q », « r », etc., « VpF », « VqF », « VrF », etc. J'exprime les combinaisons de vérité au moyen d'accolades, par exemple :\n\net la correspondance de la vérité ou de la fausseté de la proposition entière, et des combinaisons de vérité de ses arguments de vérité, au moyen de traits de la manière suivante :\n\nCe signe, par exemple, figurerait donc la proposition p ⊃ q. Supposons maintenant que je veuille vérifier si, par exemple, la proposition ~(p. ~p) (loi de contradiction) est une tautologie.\n\nLa forme « ~ξ » sera dans notre notation écrite :\n\nLa forme « ξ . η » :\n\nLa proposition ~(p.~q) s'écrira par conséquent :\n\nRemplaçons maintenant « q » par « p » et examinons la connexion des V et F les plus externes avec les internes ; il en résulte que la vérité de la proposition entière correspond à toutes les combinaisons de vérité de son argument, et sa fausseté à aucune."
+    "content": "Pour reconnaître une tautologie comme telle, on peut dans les cas où aucun signe de généralisation n'y apparaît, se servir de la méthode intuitive suivante : j'écris, au lieu de « p », « q », « r », etc., « VpF », « VqF », « VrF », etc. J'exprime les combinaisons de vérité au moyen d'accolades, par exemple :\n\net la correspondance de la vérité ou de la fausseté de la proposition entière, et des combinaisons de vérité de ses arguments de vérité, au moyen de traits de la manière suivante :\n\nCe signe, par exemple, figurerait donc la proposition p ⊃ q. Supposons maintenant que je veuille vérifier si, par exemple, la proposition ~(p. ~p) (loi de contradiction) est une tautologie.\n\nLa forme « ~ξ » sera dans notre notation écrite :\n\nLa forme « ξ . η » :\n\nLa proposition ~(p.~q) s'écrira par conséquent :\n\nRemplaçons maintenant « q » par « p » et examinons la connexion des V et F les plus externes avec les internes ; il en résulte que la vérité de la proposition entière correspond à toutes les combinaisons de vérité de son argument, et sa fausseté à aucune."
   },
   {
     "id": "6.121",
@@ -3873,7 +3873,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.1221",
-    "content": "Si, par exemple, des deux propositions « p » et « q » dans leur connexion « p ⊃ q » une tautologie résulte, il est alors clair que q suit de p.\n\nQue par exemple « q » suive de « p ⊃ q . p » nous le voyons sur ces deux propositions mêmes, en les liant dans « p ⊃ q . p : ⊃ : q », et montrant alors que c'est là une tautologie."
+    "content": "Si, par exemple, des deux propositions « p » et « q » dans leur connexion « p ⊃ q » une tautologie résulte, il est alors clair que q suit de p.\n\nQue par exemple « q » suive de « p ⊃ q . p » nous le voyons sur ces deux propositions mêmes, en les liant dans « p ⊃ q . p : ⊃ : q », et montrant alors que c'est là une tautologie."
   },
   {
     "id": "6.1222",
@@ -3889,7 +3889,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.123",
-    "content": "Il est clair que les lois logiques ne doivent pas elles-mêmes se soumettre derechef à des lois logiques.\n\n(Il n'y a pas, comme le voulait Russell, pour chaque « type » une loi de contradiction particulière, mais une seule suffit, parce qu'elle ne s'applique pas à elle-même.)"
+    "content": "Il est clair que les lois logiques ne doivent pas elles-mêmes se soumettre derechef à des lois logiques.\n\n(Il n'y a pas, comme le voulait Russell, pour chaque « type » une loi de contradiction particulière, mais une seule suffit, parce qu'elle ne s'applique pas à elle-même.)"
   },
   {
     "id": "6.1231",
@@ -3917,7 +3917,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.126",
-    "content": "On peut calculer si une proposition appartient à la logique en calculant les propriétés logiques du symbole.\n\nEt c'est ce que nous faisons lorsque nous « démontrons » une proposition logique. Car, sans nous préoccuper de son sens ou de sa signification, nous construisons la proposition logique à partir d'autres propositions au moyen de règles portant seulement sur les signes.\n\nLa démonstration des propositions logiques consiste en ce que nous l'engendrons à partir d'autres propositions logiques par applications successives d'opérations déterminées, lesquelles produisent toujours de nouvelles tautologies à partir des premières. (Car d'une tautologie ne suivent que des tautologies.)\n\nNaturellement, cette façon de montrer que les propositions de la logique sont des tautologies ne lui est en aucune manière essentielle. Ne fût-ce que parce que les propositions dont part la démonstration doivent assurément montrer sans démonstration qu'elles sont des tautologies."
+    "content": "On peut calculer si une proposition appartient à la logique en calculant les propriétés logiques du symbole.\n\nEt c'est ce que nous faisons lorsque nous « démontrons » une proposition logique. Car, sans nous préoccuper de son sens ou de sa signification, nous construisons la proposition logique à partir d'autres propositions au moyen de règles portant seulement sur les signes.\n\nLa démonstration des propositions logiques consiste en ce que nous l'engendrons à partir d'autres propositions logiques par applications successives d'opérations déterminées, lesquelles produisent toujours de nouvelles tautologies à partir des premières. (Car d'une tautologie ne suivent que des tautologies.)\n\nNaturellement, cette façon de montrer que les propositions de la logique sont des tautologies ne lui est en aucune manière essentielle. Ne fût-ce que parce que les propositions dont part la démonstration doivent assurément montrer sans démonstration qu'elles sont des tautologies."
   },
   {
     "id": "6.1261",
@@ -3961,7 +3961,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.211",
-    "content": "Dans la vie, ce n'est pas de propositions mathématiques dont nous avons besoin, mais nous usons de la proposition mathématique, pour déduire, de propositions qui n'appartiennent pas à la mathématique, d'autres propositions, qui ne lui appartiennent pas non plus.\n\n(En philosophie la question : « À quoi proprement nous sert ce mot, cette proposition ? » conduit toujours à des intuitions précieuses.)"
+    "content": "Dans la vie, ce n'est pas de propositions mathématiques dont nous avons besoin, mais nous usons de la proposition mathématique, pour déduire, de propositions qui n'appartiennent pas à la mathématique, d'autres propositions, qui ne lui appartiennent pas non plus.\n\n(En philosophie la question : « À quoi proprement nous sert ce mot, cette proposition ? » conduit toujours à des intuitions précieuses.)"
   },
   {
     "id": "6.22",
@@ -3973,7 +3973,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.231",
-    "content": "C'est une propriété de l'affirmation que l'on puisse la concevoir comme double négation.\n\nC'est une propriété de « 1+1+1+1 » que l'on puisse le concevoir comme « (1+1) + (1+1) »."
+    "content": "C'est une propriété de l'affirmation que l'on puisse la concevoir comme double négation.\n\nC'est une propriété de « 1+1+1+1 » que l'on puisse le concevoir comme « (1+1) + (1+1) »."
   },
   {
     "id": "6.232",
