@@ -13,8 +13,8 @@ function renderMath(latex: string): string {
 }
 
 const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'b', 'N', 'R', 'Ln', 'ab']);
-const PROP_SPECIFIC_LOGIC_TERMS: Record<string, Set<string>> = {
-  '3.1432': new Set(['a']),
+const PROP_LANG_SPECIFIC_LOGIC_TERMS: Record<string, Record<string, Set<string>>> = {
+  '3.1432': { 'fr': new Set(['a']) },
 };
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
@@ -25,8 +25,9 @@ function wrapGuillemets(text: string): string {
   return text.replace(/\u00ab\s+(.*?)\s+\u00bb/g, '\u00ab\u00a0$1\u00a0\u00bb');
 }
 
-function highlightLogicTerms(text: string, propositionId?: string): React.ReactNode[] {
-  const extraTerms = propositionId ? PROP_SPECIFIC_LOGIC_TERMS[propositionId] : undefined;
+function highlightLogicTerms(text: string, propositionId?: string, language?: string): React.ReactNode[] {
+  const propEntry = propositionId ? PROP_LANG_SPECIFIC_LOGIC_TERMS[propositionId] : undefined;
+  const extraTerms = propEntry && language ? propEntry[language] : undefined;
   const parts: React.ReactNode[] = [];
   let i = 0;
   let lastPlain = 0;
@@ -84,7 +85,7 @@ function highlightLogicTerms(text: string, propositionId?: string): React.ReactN
   return parts;
 }
 
-export function MathText({ text, propositionId }: { text: string; propositionId?: string }) {
+export function MathText({ text, propositionId, language }: { text: string; propositionId?: string; language?: string }) {
   const processed = wrapGuillemets(text);
   const mathRegex = /\[math\](.*?)\[\/math\]/g;
   const parts: React.ReactNode[] = [];
@@ -94,7 +95,7 @@ export function MathText({ text, propositionId }: { text: string; propositionId?
   while ((match = mathRegex.exec(processed)) !== null) {
     if (match.index > lastIndex) {
       const plain = processed.substring(lastIndex, match.index);
-      parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId)}</span>);
+      parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId, language)}</span>);
     }
     const cleanLatex = match[1].replace(/\\displaystyle\s*/, '');
     parts.push(
@@ -108,12 +109,12 @@ export function MathText({ text, propositionId }: { text: string; propositionId?
   }
 
   if (lastIndex === 0) {
-    return <span className="whitespace-pre-line">{highlightLogicTerms(processed, propositionId)}</span>;
+    return <span className="whitespace-pre-line">{highlightLogicTerms(processed, propositionId, language)}</span>;
   }
 
   if (lastIndex < processed.length) {
     const plain = processed.substring(lastIndex);
-    parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId)}</span>);
+    parts.push(<span key={lastIndex} className="whitespace-pre-line">{highlightLogicTerms(plain, propositionId, language)}</span>);
   }
 
   return <>{parts}</>;
