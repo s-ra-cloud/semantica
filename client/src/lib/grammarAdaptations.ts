@@ -200,6 +200,18 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     }]
   }],
 
+  'fr:3.321': [{
+    trigger: 'symboles différents',
+    deps: [{
+      find: ' ils dénotent',
+      replacements: {
+        'symboles différents': ' ils dénotent',
+        'expressions différentes': ' elles dénotent',
+        'différentes parties de la proposition qui caractérisent son sens': ' elles dénotent',
+      }
+    }]
+  }],
+
   // ── ENGLISH ─────────────────────────────────────────────
 
   // Prop 1: "The world is everything that is the case."
