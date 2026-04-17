@@ -14,6 +14,9 @@ function renderMath(latex: string): string {
 
 const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'b', 'N', 'R', 'Ln', 'ab', '\u03D5', '\u03C6', '\u03C8', '\u03BE', '\u03B7']);
 const MULTI_CHAR_TERMS: string[] = ['Ln', 'ab'];
+function langSet(terms: string[]): Record<string, Set<string>> {
+  return { en: new Set(terms), fr: new Set(terms), de: new Set(terms) };
+}
 const PROP_LANG_SPECIFIC_LOGIC_TERMS: Record<string, Record<string, Set<string>>> = {
   '3.1432': { 'fr': new Set(['a']) },
   '3.333': {
@@ -21,11 +24,20 @@ const PROP_LANG_SPECIFIC_LOGIC_TERMS: Record<string, Record<string, Set<string>>
     'fr': new Set(['F', 'u', 'fx', 'Fu', '\u03C6u']),
     'de': new Set(['F', 'u', 'fx', 'Fu', '\u03D5u']),
   },
+  '4.0411': langSet(['F', 'G', 'g', 'fx', 'xg']),
+  '4.1211': langSet(['a', 'fa', 'ga']),
+  '4.1252': langSet(['a', 'y', 'aRb', 'aRx', 'xRb', 'xRy', 'yRb']),
+  '4.1272': langSet(['y']),
+  '4.1273': langSet(['a', 'y', 'aRb', 'aRx', 'xRb', 'xRy', 'yRb']),
+  '4.24': langSet(['y', 'fx']),
+  '4.241': langSet(['a']),
+  '4.242': langSet(['a']),
+  '4.243': langSet(['a']),
 };
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
-const BOUNDARY_BEFORE = new Set([' ', '\u00a0', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
-const BOUNDARY_AFTER = new Set([' ', '\u00a0', ',', ';', ':', '.', ')', '\u2013', '\u2014', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t']);
+const BOUNDARY_BEFORE = new Set([' ', '\u00a0', ',', ';', ':', '(', ')', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t', '~', '\u223C', '\u00AC', '\u2228', '\u2227', '\u2283', '\u2261', '\u2192', '|', '\u22A2', '.']);
+const BOUNDARY_AFTER = new Set([' ', '\u00a0', ',', ';', ':', '.', ')', '\u2013', '\u2014', '\u00ab', '\u00bb', '\u201c', '\u201d', '\u201e', '\n', '\t', '~', '\u223C', '\u00AC', '\u2228', '\u2227', '\u2283', '\u2261', '\u2192', '|', '\u22A2']);
 
 function wrapGuillemets(text: string): string {
   return text.replace(/\u00ab\s+(.*?)\s+\u00bb/g, '\u00ab\u00a0$1\u00a0\u00bb');
