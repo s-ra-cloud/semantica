@@ -12,9 +12,15 @@ function renderMath(latex: string): string {
   }
 }
 
-const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'b', 'N', 'R', 'Ln', 'ab']);
+const LOGIC_TERMS = new Set(['p', 'q', 'r', 'n', 'x', 'z', 'b', 'N', 'R', 'Ln', 'ab', '\u03D5', '\u03C6', '\u03C8', '\u03BE', '\u03B7']);
+const MULTI_CHAR_TERMS: string[] = ['Ln', 'ab'];
 const PROP_LANG_SPECIFIC_LOGIC_TERMS: Record<string, Record<string, Set<string>>> = {
   '3.1432': { 'fr': new Set(['a']) },
+  '3.333': {
+    'en': new Set(['F', 'u', 'fx', 'Fu', '\u03D5u']),
+    'fr': new Set(['F', 'u', 'fx', 'Fu', '\u03C6u']),
+    'de': new Set(['F', 'u', 'fx', 'Fu', '\u03D5u']),
+  },
 };
 const OPEN_QUOTES = new Set(['"', '\u201c', '\u201e', '\u00ab']);
 const CLOSE_QUOTES = new Set(['"', '\u201d', '\u201c', '\u00bb']);
@@ -44,11 +50,18 @@ function highlightLogicTerms(text: string, propositionId?: string, language?: st
     }
 
     let term = '';
-    if (pos + 1 < text.length && text[pos] === 'L' && text[pos + 1] === 'n') {
-      term = 'Ln';
-    } else if (pos + 1 < text.length && text[pos] === 'a' && text[pos + 1] === 'b') {
-      term = 'ab';
-    } else if (pos < text.length && (LOGIC_TERMS.has(text[pos]) || (extraTerms && extraTerms.has(text[pos])))) {
+    const allMulti: string[] = [...MULTI_CHAR_TERMS];
+    if (extraTerms) {
+      extraTerms.forEach(t => { if (t.length > 1) allMulti.push(t); });
+    }
+    allMulti.sort((a, b) => b.length - a.length);
+    for (const m of allMulti) {
+      if (text.substr(pos, m.length) === m) {
+        term = m;
+        break;
+      }
+    }
+    if (!term && pos < text.length && (LOGIC_TERMS.has(text[pos]) || (extraTerms && extraTerms.has(text[pos])))) {
       term = text[pos];
     }
 
