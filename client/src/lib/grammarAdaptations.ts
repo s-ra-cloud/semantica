@@ -498,21 +498,34 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   // ── FRENCH (props ≥ 3.324) ──────────────────────────────
 
   // Prop 4.2211: "Même si le monde est infiniment complexe..."
-  'fr:4.2211': [{
-    trigger: 'le monde',
-    deps: [{
-      find: ' est infiniment complexe',
-      replacements: {
-        'le monde': ' est infiniment complexe',
-        'la totalité des faits': ' est infiniment complexe',
-        'tout ce qui a lieu': ' est infiniment complexe',
-        'tous les faits': ' sont infiniment complexes',
-        'les faits dans l\'espace logique': ' sont infiniment complexes',
-        'la totalité de la réalité': ' est infiniment complexe',
-        'la totalité des états de choses subsistants': ' est infiniment complexe',
-      }
-    }]
-  }],
+  'fr:4.2211': [
+    {
+      trigger: 'le monde',
+      deps: [{
+        find: ' est infiniment complexe',
+        replacements: {
+          'le monde': ' est infiniment complexe',
+          'la totalité des faits': ' est infiniment complexe',
+          'tout ce qui a lieu': ' est infiniment complexe',
+          'tous les faits': ' sont infiniment complexes',
+          'les faits dans l\'espace logique': ' sont infiniment complexes',
+          'la totalité de la réalité': ' est infiniment complexe',
+          'la totalité des états de choses subsistants': ' est infiniment complexe',
+        }
+      }]
+    },
+    {
+      // "...chaque état de choses soit composé d'une infinité d'objets..."
+      trigger: 'chaque état de choses',
+      deps: [{
+        find: ' soit composé ',
+        replacements: {
+          'chaque état de choses': ' soit composé ',
+          "chaque connexion d'objets": ' soit composée ',
+        }
+      }]
+    }
+  ],
 
   // Prop 4.26: "...décrit complètement le monde. Le monde est complètement décrit..."
   'fr:4.26': [{
@@ -771,27 +784,41 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   }],
 
   // Prop 4.126: "...comme l'un de ses objets ne peut être exprimé par une proposition."
-  'fr:4.126': [{
-    trigger: 'objets',
-    deps: [
-      {
-        find: 'l\'un de ses ',
-        replacements: {
-          'objets': 'l\'un de ses ',
-          'entités': 'l\'une de ses ',
-          'choses': 'l\'une de ses ',
+  // Also "...dans le signe même de cet objet."
+  'fr:4.126': [
+    {
+      trigger: 'objets',
+      deps: [
+        {
+          find: 'l\'un de ses ',
+          replacements: {
+            'objets': 'l\'un de ses ',
+            'entités': 'l\'une de ses ',
+            'choses': 'l\'une de ses ',
+          }
+        },
+        {
+          find: ' ne peut être exprimé ',
+          replacements: {
+            'objets': ' ne peut être exprimé ',
+            'entités': ' ne peut être exprimée ',
+            'choses': ' ne peut être exprimée ',
+          }
         }
-      },
-      {
-        find: ' ne peut être exprimé ',
+      ]
+    },
+    {
+      trigger: 'objet',
+      deps: [{
+        find: 'de cet ',
         replacements: {
-          'objets': ' ne peut être exprimé ',
-          'entités': ' ne peut être exprimée ',
-          'choses': ' ne peut être exprimée ',
+          'objet': 'de cet ',
+          'entité': 'de cette ',
+          'chose': 'de cette ',
         }
-      }
-    ]
-  }],
+      }]
+    }
+  ],
 
   // Prop 4.1272: "...parler du nombre de tous les objets."
   'fr:4.1272': [{
@@ -807,17 +834,30 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
   }],
 
   // Prop 4.243: "...la même chose ou deux choses différentes ?"
-  'fr:4.243': [{
-    trigger: 'choses',
-    deps: [{
-      find: ' différentes',
-      replacements: {
-        'objets': ' différents',
-        'entités': ' différentes',
-        'choses': ' différentes',
-      }
-    }]
-  }],
+  'fr:4.243': [
+    {
+      trigger: 'choses',
+      deps: [{
+        find: ' différentes',
+        replacements: {
+          'objets': ' différents',
+          'entités': ' différentes',
+          'choses': ' différentes',
+        }
+      }]
+    },
+    {
+      trigger: 'chose',
+      deps: [{
+        find: 'la même ',
+        replacements: {
+          'chose': 'la même ',
+          'objet': 'le même ',
+          'entité': 'la même ',
+        }
+      }]
+    }
+  ],
 
   // Prop 5.4733: "...dans les deux cas le symbole est tout à fait différent..."
   'fr:5.4733': [{
@@ -999,6 +1039,58 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
     ]
   }],
 
+  // Prop 4.12721: "Le concept formel est immédiatement donné avec un objet qui tombe sous lui."
+  'fr:4.12721': [{
+    trigger: 'objet',
+    deps: [{
+      find: 'avec un ',
+      replacements: {
+        'objet': 'avec un ',
+        'entité': 'avec une ',
+        'chose': 'avec une ',
+      }
+    }]
+  }],
+
+  // Prop 5.5303: "...dire d'une chose qu'elle est identique à elle-même c'est ne rien dire du tout."
+  'fr:5.5303': [{
+    trigger: "d'une chose",
+    deps: [{
+      find: " qu'elle est identique à elle-même",
+      replacements: {
+        "d'une chose": " qu'elle est identique à elle-même",
+        "d'un objet": " qu'il est identique à lui-même",
+        "d'une entité": " qu'elle est identique à elle-même",
+      }
+    }]
+  }],
+
+  // Prop 5.5352: "...exprimer qu'« il n'y a aucune chose »... que ces choses ne fussent pas identiques à elles-mêmes ?"
+  'fr:5.5352': [
+    {
+      trigger: 'chose',
+      deps: [{
+        find: 'aucune ',
+        replacements: {
+          'chose': 'aucune ',
+          'objet': 'aucun ',
+          'entité': 'aucune ',
+        }
+      }]
+    },
+    {
+      trigger: 'choses',
+      deps: [{
+        find: 'à elles-mêmes',
+        replacements: {
+          'choses': 'à elles-mêmes',
+          'objets': 'à eux-mêmes',
+          'entités': 'à elles-mêmes',
+        }
+      }]
+    }
+  ],
+
   // ── GERMAN (props ≥ 3.324) ──────────────────────────────
 
   // Prop 4.022: "Der Satz zeigt ... wenn er wahr ist. Und er sagt..."
@@ -1138,6 +1230,42 @@ export const grammarAdaptations: Record<string, GrammarRule[]> = {
         'gegenstand': ', der „',
         'sache': ', die „',
         'ding': ', das „',
+      }
+    }]
+  }],
+
+  // Prop 4.126: "...dass er einen Gegenstand bezeichnet... an dem Zeichen dieses Gegenstandes selbst."
+  'de:4.126': [{
+    trigger: 'gegenstand',
+    deps: [
+      {
+        find: 'einen ',
+        replacements: {
+          'gegenstand': 'einen ',
+          'ding': 'ein ',
+          'sache': 'eine ',
+        }
+      },
+      {
+        find: 'dieses Gegenstandes',
+        replacements: {
+          'gegenstand': 'dieses Gegenstandes',
+          'ding': 'dieses Dinges',
+          'sache': 'dieser Sache',
+        }
+      }
+    ]
+  }],
+
+  // Prop 4.441: "...kein Gegenstand (oder Komplex von Gegenständen) entspricht..."
+  'de:4.441': [{
+    trigger: 'gegenstand',
+    deps: [{
+      find: 'kein ',
+      replacements: {
+        'gegenstand': 'kein ',
+        'ding': 'kein ',
+        'sache': 'keine ',
       }
     }]
   }],
