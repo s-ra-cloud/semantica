@@ -714,7 +714,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.024",
-    "content": "To understand a proposition means to know what is the case, if it is true.\n\n(One can therefore understand it without knowing whether it is true or not.)\n\nOne understands it if one understands it constituent parts."
+    "content": "To understand a proposition means to know what is the case, if it is true.\n\n(One can therefore understand it without knowing whether it is true or not.)\n\nOne understands it if one understands its constituent parts."
   },
   {
     "id": "4.025",
@@ -750,7 +750,7 @@ export const tractatusEnglishRaw: RawProposition[] = [
   },
   {
     "id": "4.04",
-    "content": "In the proposition there must be exactly as many thing distinguishable as there are in the state of affairs, which it represents.\n\nThey must both possess the same logical (mathematical) multiplicity (cf. Hertz’s Mechanics, on Dynamic Models)."
+    "content": "In the proposition there must be exactly as many things distinguishable as there are in the state of affairs, which it represents.\n\nThey must both possess the same logical (mathematical) multiplicity (cf. Hertz’s Mechanics, on Dynamic Models)."
   },
   {
     "id": "4.041",
@@ -2141,7 +2141,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "2",
-    "content": "Ce qui a lieu, le fait, est la subsistance d'états de chose."
+    "content": "Ce qui a lieu, le fait, est la subsistance d'états de choses."
   },
   {
     "id": "2.01",
@@ -2533,7 +2533,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "3.1432",
-    "content": "Non pas : « le signe complexe aRb dit que a est dans la relation R avec b », mais bien : que « a » soit dans une relation determinée avec « b » dit que aRb."
+    "content": "Non pas : « le signe complexe aRb dit que a est dans la relation R avec b », mais bien : que « a » soit dans une relation déterminée avec « b » dit que aRb."
   },
   {
     "id": "3.144",
@@ -3317,7 +3317,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "5.154",
-    "content": "Soient dans une urne autant de boules blanches de que boules noires (et nulles autres). Je tire une boule après l'autre et les remets dans l'urne. Je puis alors, par cette épreuve, établir que les nombres de boules noires et de boules blanches tirées se rapprochent à mesure que l'on poursuit le tirage.\n\nIl ne s'agit donc pas là d'une propriété mathématique.\n\nSi maintenant je dis : il est également probable que je tirerai une boule blanche ou une boule noire, cela signifie : toutes les circonstances de moi connues (y compris les lois de la nature prises comme hypothèses) ne confèrent pas à la production de l'un de ces événements plus de probabilité qu'à la production de l'autre. C'est-à-dire qu'elles donnent à chacun – comme on le conclut aisément des explications précédentes – la probabilité 1/2.\n\nCe que je confirme par cette épreuve, c'est que la production des deux événements est indépendante des circonstances que je ne connais pas plus exactement."
+    "content": "Soient dans une urne autant de boules blanches que de boules noires (et nulles autres). Je tire une boule après l'autre et les remets dans l'urne. Je puis alors, par cette épreuve, établir que les nombres de boules noires et de boules blanches tirées se rapprochent à mesure que l'on poursuit le tirage.\n\nIl ne s'agit donc pas là d'une propriété mathématique.\n\nSi maintenant je dis : il est également probable que je tirerai une boule blanche ou une boule noire, cela signifie : toutes les circonstances de moi connues (y compris les lois de la nature prises comme hypothèses) ne confèrent pas à la production de l'un de ces événements plus de probabilité qu'à la production de l'autre. C'est-à-dire qu'elles donnent à chacun – comme on le conclut aisément des explications précédentes – la probabilité 1/2.\n\nCe que je confirme par cette épreuve, c'est que la production des deux événements est indépendante des circonstances que je ne connais pas plus exactement."
   },
   {
     "id": "5.155",
@@ -4193,7 +4193,7 @@ export const tractatusFrenchRaw: RawProposition[] = [
   },
   {
     "id": "6.52",
-    "content": "Nous sentons que, à supposer même que toutes les questions scientifiques possibles soient résolues, les problèmes de notre vie demeurent encore intacts. A vrai dire, il ne reste plus alors aucune question ; et cela même est la réponse."
+    "content": "Nous sentons que, à supposer même que toutes les questions scientifiques possibles soient résolues, les problèmes de notre vie demeurent encore intacts. À vrai dire, il ne reste plus alors aucune question ; et cela même est la réponse."
   },
   {
     "id": "6.521",
