@@ -464,6 +464,7 @@ export default function Home() {
                 <span className="text-zinc-400" data-testid="link-machina">Machina Research Network</span>
                 <a href="https://www.iufrance.fr/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-iuf">Institut Universitaire de France</a>
                 <a href="https://legacy-um6p.1337.ma/home" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-green-400 transition-colors" data-testid="link-legacy-thanks">LEGACY project</a>
+                <span className="text-zinc-400" data-testid="link-computational-humanities-lab">Computational Humanities Lab (Oxford University)</span>
               </div>
             )}
 
