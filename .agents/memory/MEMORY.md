@@ -1,0 +1,1 @@
+- [External citation validation](external-citation-validation.md) — LEGACY can return HTTP 200 for loading-only pages; verify the rendered author and work, not just status codes.
