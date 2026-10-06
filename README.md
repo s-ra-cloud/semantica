@@ -2,13 +2,13 @@
 
 **A new way of reading philosophy.**
 
-Semantica turns difficult philosophical texts into interactive reading environments, with tools for both readers and researchers doing close textual analysis. The first text available is Ludwig Wittgenstein's *Tractatus Logico-Philosophicus*, in **English, French and German**.
+Semantica turns difficult philosophical texts into interactive reading environments, with tools for both readers and researchers doing close textual analysis. The first text available is Ludwig Wittgenstein's *Tractatus Logico-Philosophicus*, in **English, French and German**. 
 
 > A project in Computational Humanities by the **Chair of Transitions** (Mohammed VI Polytechnic University).
 
 📦 **Source:** https://github.com/s-ra-cloud/semantica
 
-> **Status: Beta.** Some substitutions are still wrong or missing. The editorial team has verified them up to a given proposition (shown on the site). New connections to external texts are added every week. The **German version has not been proofread yet.**
+> **Status: Beta.** Some substitutions are still wrong or missing. The editorial team has verified them up to a given proposition (shown on the site). New connections to external texts are added every week. The **German version has not been proofread yet.** The website is live at https://semantica.ai/
 
 ---
 
@@ -128,7 +128,7 @@ With thanks also to the [Centre Gilles-Gaston Granger](https://www.cggg.fr/) and
 
 - SATT Sud Est
 - [Institut Universitaire de France](https://www.iufrance.fr/)
-- Computational Humanities Lab, University of Oxford
+- Computational Humanities Lab, University of Oxford is joining us starting in October 2026.
 
 ---
 
